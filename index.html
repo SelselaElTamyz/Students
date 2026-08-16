@@ -1,95 +1,317 @@
-    font-size:17px;
-    text-align:center;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سلسلة التميز</title>
+
+<style>
+* {
+    box-sizing: border-box;
 }
 
-button{
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:10px;
-    background:#1976d2;
-    color:white;
-    font-size:18px;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f5f9;
 }
 
-#result{
-    display:none;
-    margin-top:25px;
-    text-align:right;
-    border-top:1px solid #ddd;
-    padding-top:15px;
+.container {
+    width: 92%;
+    max-width: 430px;
+    margin: 60px auto;
 }
 
-.error{
-    color:#d32f2f;
-    margin-top:15px;
+.card {
+    background: white;
+    padding: 30px 22px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+h1 {
+    margin: 0 0 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.parent {
+    background: #1976d2;
+}
+
+.teacher {
+    background: #2e7d32;
+}
+
+.back {
+    background: #777;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.result {
+    display: none;
+    margin-top: 20px;
+    text-align: right;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.error {
+    color: #d32f2f;
+    margin-top: 12px;
+}
+
+.success {
+    color: #2e7d32;
+    margin-top: 12px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h1>⭐ سلسلة التميز</h1>
+<!-- الصفحة الرئيسية -->
+<div id="home" class="card page active">
 
-<p>الاستعلام عن الطالب</p>
+    <h1>⭐ سلسلة التميز</h1>
 
-<input id="code" type="text" placeholder="أدخل كود الطالب">
+    <p class="subtitle">
+        نظام متابعة واستعلام الطلاب
+    </p>
 
-<button onclick="searchStudent()">🔎 استعلام</button>
+    <button class="parent" onclick="showPage('parentPage')">
+        👨‍👩‍👧 صفحة ولي الأمر
+    </button>
 
-<div id="error" class="error"></div>
+    <button class="teacher" onclick="showPage('teacherPage')">
+        👨‍🏫 صفحة المعلم
+    </button>
 
-<div id="result">
+</div>
 
-<p><strong>اسم الطالب:</strong> <span id="name"></span></p>
 
-<p><strong>الصف:</strong> <span id="grade"></span></p>
+<!-- صفحة ولي الأمر -->
+<div id="parentPage" class="card page">
 
-<p><strong>النتيجة:</strong> <span id="status"></span></p>
+    <h1>👨‍👩‍👧 ولي الأمر</h1>
+
+    <p class="subtitle">
+        الاستعلام عن بيانات الطالب
+    </p>
+
+    <input
+        id="studentCode"
+        type="text"
+        placeholder="أدخل كود الطالب"
+    >
+
+    <button class="parent" onclick="searchStudent()">
+        🔎 استعلام
+    </button>
+
+    <div id="error" class="error"></div>
+
+    <div id="result" class="result">
+
+        <p>
+            <strong>اسم الطالب:</strong>
+            <span id="studentName"></span>
+        </p>
+
+        <p>
+            <strong>الصف:</strong>
+            <span id="studentGrade"></span>
+        </p>
+
+        <p>
+            <strong>النتيجة:</strong>
+            <span id="studentStatus"></span>
+        </p>
+
+    </div>
+
+    <button class="back" onclick="showPage('home')">
+        ↩️ رجوع
+    </button>
+
+</div>
+
+
+<!-- صفحة المعلم -->
+<div id="teacherPage" class="card page">
+
+    <h1>👨‍🏫 صفحة المعلم</h1>
+
+    <p class="subtitle">
+        الدخول إلى لوحة المعلم
+    </p>
+
+    <input
+        id="teacherPassword"
+        type="password"
+        placeholder="كلمة مرور المعلم"
+    >
+
+    <button class="teacher" onclick="teacherLogin()">
+        🔐 دخول
+    </button>
+
+    <div id="teacherMessage"></div>
+
+    <button class="back" onclick="showPage('home')">
+        ↩️ رجوع
+    </button>
 
 </div>
 
 </div>
+
 
 <script>
 
+/* بيانات تجريبية */
 const students = {
+
     "1001": {
-        name:"أحمد محمد",
-        grade:"الصف الخامس",
-        status:"ناجح"
+        name: "أحمد محمد",
+        grade: "الصف الخامس الابتدائي",
+        status: "ناجح"
     },
 
     "1002": {
-        name:"محمد علي",
-        grade:"الصف السادس",
-        status:"ناجح"
+        name: "محمد علي",
+        grade: "الصف السادس الابتدائي",
+        status: "ناجح"
+    },
+
+    "1003": {
+        name: "مريم أحمد",
+        grade: "الصف الرابع الابتدائي",
+        status: "ناجح"
     }
+
 };
 
-function searchStudent(){
 
-    const code = document.getElementById("code").value.trim();
-    const result = document.getElementById("result");
-    const error = document.getElementById("error");
+/* التنقل بين الصفحات */
+function showPage(pageId) {
 
-    if(students[code]){
+    const pages = document.querySelectorAll(".page");
 
-        document.getElementById("name").textContent = students[code].name;
-        document.getElementById("grade").textContent = students[code].grade;
-        document.getElementById("status").textContent = students[code].status;
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
 
-        error.textContent = "";
-        result.style.display = "block";
+    document.getElementById(pageId).classList.add("active");
 
-    }else{
+    window.scrollTo(0, 0);
+}
+
+
+/* استعلام الطالب */
+function searchStudent() {
+
+    const code =
+        document.getElementById("studentCode").value.trim();
+
+    const result =
+        document.getElementById("result");
+
+    const error =
+        document.getElementById("error");
+
+    if (code === "") {
+
+        error.textContent =
+            "من فضلك أدخل كود الطالب.";
 
         result.style.display = "none";
-        error.textContent = "كود الطالب غير موجود.";
 
+        return;
     }
+
+    const student = students[code];
+
+    if (!student) {
+
+        error.textContent =
+            "كود الطالب غير موجود.";
+
+        result.style.display = "none";
+
+        return;
+    }
+
+    error.textContent = "";
+
+    document.getElementById("studentName").textContent =
+        student.name;
+
+    document.getElementById("studentGrade").textContent =
+        student.grade;
+
+    document.getElementById("studentStatus").textContent =
+        student.status;
+
+    result.style.display = "block";
+}
+
+
+/* دخول المعلم */
+function teacherLogin() {
+
+    const password =
+        document.getElementById("teacherPassword").value;
+
+    const message =
+        document.getElementById("teacherMessage");
+
+    if (password === "") {
+
+        message.className = "error";
+        message.textContent =
+            "من فضلك أدخل كلمة المرور.";
+
+        return;
+    }
+
+    message.className = "success";
+    message.textContent =
+        "تم تسجيل الدخول تجريبيًا.";
 }
 
 </script>
