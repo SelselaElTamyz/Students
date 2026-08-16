@@ -5,96 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>سلسلة التميز</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{box-sizing:border-box}
-
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f1f5f9;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  margin:0;
+  padding:20px;
 }
-
 .container{
-width:94%;
-max-width:650px;
-margin:25px auto;
-background:white;
-padding:20px;
-border-radius:18px;
-box-shadow:0 4px 15px rgba(0,0,0,.15);
+  max-width:750px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:15px;
 }
-
-.page{display:none}
-.page.active{display:block}
-
-h1,h2,h3{text-align:center}
-
-p{color:#555}
-
-input,select{
-width:100%;
-padding:13px;
-margin:7px 0;
-border:1px solid #ccc;
-border-radius:9px;
-font-size:16px;
+h1,h2{text-align:center}
+input,button{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  box-sizing:border-box;
+  border-radius:8px;
+  font-size:16px;
 }
-
+input{border:1px solid #ccc}
 button{
-width:100%;
-padding:13px;
-margin:7px 0;
-border:none;
-border-radius:9px;
-color:white;
-font-size:17px;
-cursor:pointer;
+  border:0;
+  cursor:pointer;
+  background:#333;
+  color:white;
 }
-
-.blue{background:#1976d2}
-.green{background:#2e7d32}
-.red{background:#c62828}
-.gray{background:#777}
-.orange{background:#ef6c00}
-
-.message{
-text-align:center;
-font-weight:bold;
-margin:10px;
+.student{
+  background:#f8f8f8;
+  padding:15px;
+  border-radius:10px;
+  margin-top:15px;
 }
-
-.success{color:green}
-.error{color:red}
-
-.card{
-background:#f8fafc;
-border:1px solid #ddd;
-border-radius:12px;
-padding:14px;
-margin:10px 0;
+.error{color:red;text-align:center}
+.success{color:green;text-align:center}
+.evaluations{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
-
-.evaluation{
-display:flex;
-gap:8px;
-align-items:center;
-margin:8px 0;
-}
-
-.evaluation strong{
-width:110px;
-}
-
-.evaluation select{
-flex:1;
-margin:0;
-}
-
-hr{
-border:none;
-border-top:1px solid #ddd;
-margin:20px 0;
-}
+hr{margin:25px 0}
 </style>
 </head>
 
@@ -102,643 +58,274 @@ margin:20px 0;
 
 <div class="container">
 
-<!-- الصفحة الرئيسية -->
+<h1>سلسلة التميز</h1>
 
-<div id="home" class="page active">
+<h2>استعلام ولي الأمر</h2>
 
-<h1>⭐ سلسلة التميز</h1>
+<input id="searchCode" placeholder="اكتب كود الطالب">
+<button onclick="searchStudent()">بحث</button>
 
-<p style="text-align:center;">
-نظام متابعة الطلاب
-</p>
-
-<button class="blue" onclick="showPage('parent')">
-👨‍👩‍👧 صفحة ولي الأمر
-</button>
-
-<button class="green" onclick="showPage('teacherLogin')">
-👨‍🏫 صفحة المعلم
-</button>
-
-</div>
-
-
-<!-- دخول المعلم -->
-
-<div id="teacherLogin" class="page">
-
-<h2>👨‍🏫 دخول المعلم</h2>
-
-<input
-id="teacherPassword"
-type="password"
-placeholder="أدخل كلمة السر">
-
-<button class="green" onclick="loginTeacher()">
-🔐 دخول
-</button>
-
-<div id="loginMessage" class="message"></div>
-
-<button class="gray" onclick="showPage('home')">
-↩️ رجوع
-</button>
-
-</div>
-
-
-<!-- صفحة المعلم -->
-
-<div id="teacher" class="page">
-
-<h2>👨‍🏫 صفحة المعلم</h2>
-
-<p style="text-align:center;">
-إضافة وتعديل بيانات الطلاب
-</p>
-
-<input
-id="studentName"
-type="text"
-placeholder="اسم الطالب">
-
-<select id="studentGrade">
-
-<option value="">اختر الصف الدراسي</option>
-
-<option>الصف الأول الابتدائي</option>
-<option>الصف الثاني الابتدائي</option>
-<option>الصف الثالث الابتدائي</option>
-<option>الصف الرابع الابتدائي</option>
-<option>الصف الخامس الابتدائي</option>
-<option>الصف السادس الابتدائي</option>
-
-<option>الصف الأول الإعدادي</option>
-<option>الصف الثاني الإعدادي</option>
-<option>الصف الثالث الإعدادي</option>
-
-<option>الصف الأول الثانوي</option>
-<option>الصف الثاني الثانوي</option>
-<option>الصف الثالث الثانوي</option>
-
-</select>
-
-<input
-id="studentCode"
-type="text"
-placeholder="كود الطالب">
-
-<h3>📊 التقييمات من 1 إلى 15</h3>
-
-<p style="text-align:center;">
-اختر الدرجة من 0 إلى 10 أو اختر غاب
-</p>
-
-<div id="evaluationInputs"></div>
-
-<button class="green" onclick="saveStudent()">
-💾 حفظ بيانات الطالب
-</button>
-
-<button class="orange" onclick="newStudent()">
-➕ طالب جديد
-</button>
-
-<div id="saveMessage" class="message"></div>
+<div id="searchResult"></div>
 
 <hr>
 
-<h3>👨‍🎓 الطلاب المسجلون</h3>
+<h2>إدارة الطلاب</h2>
 
-<div id="studentsList"></div>
+<input id="teacherCode" placeholder="كود الطالب">
+<input id="teacherName" placeholder="اسم الطالب">
+<input id="teacherGrade" placeholder="الصف الدراسي">
 
-<button class="gray" onclick="showPage('home')">
-↩️ الصفحة الرئيسية
-</button>
-
+<div class="evaluations">
+<input id="e1" placeholder="التقييم 1">
+<input id="e2" placeholder="التقييم 2">
+<input id="e3" placeholder="التقييم 3">
+<input id="e4" placeholder="التقييم 4">
+<input id="e5" placeholder="التقييم 5">
+<input id="e6" placeholder="التقييم 6">
+<input id="e7" placeholder="التقييم 7">
+<input id="e8" placeholder="التقييم 8">
+<input id="e9" placeholder="التقييم 9">
+<input id="e10" placeholder="التقييم 10">
+<input id="e11" placeholder="التقييم 11">
+<input id="e12" placeholder="التقييم 12">
+<input id="e13" placeholder="التقييم 13">
+<input id="e14" placeholder="التقييم 14">
+<input id="e15" placeholder="التقييم 15">
 </div>
 
+<button onclick="addStudent()">إضافة طالب</button>
+<button onclick="updateStudent()">تعديل طالب</button>
 
-<!-- صفحة ولي الأمر -->
-
-<div id="parent" class="page">
-
-<h2>👨‍👩‍👧 صفحة ولي الأمر</h2>
-
-<p style="text-align:center;">
-الاستعلام عن الطالب
-</p>
-
-<input
-id="parentCode"
-type="text"
-placeholder="أدخل كود الطالب">
-
-<button class="blue" onclick="searchStudent()">
-🔎 استعلام
-</button>
-
-<div id="parentMessage" class="message"></div>
-
-<div id="parentResult"></div>
-
-<button class="gray" onclick="showPage('home')">
-↩️ رجوع
-</button>
+<div id="message"></div>
 
 </div>
-
-</div>
-
 
 <script>
 
-/* إنشاء التقييمات */
+const SUPABASE_URL =
+"https://jdpppofgbthxagbpldrb.supabase.co";
 
-var evaluationBox =
-document.getElementById("evaluationInputs");
+const SUPABASE_KEY =
+"sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
 
-for(var i=1;i<=15;i++){
-
-evaluationBox.innerHTML +=
-
-'<div class="evaluation">' +
-
-'<strong>التقييم ' + i + '</strong>' +
-
-'<select id="evaluation' + i + '">' +
-
-'<option value="">لم يتم التقييم</option>' +
-
-'<option value="غاب">غاب</option>' +
-
-'<option value="0">0</option>' +
-'<option value="1">1</option>' +
-'<option value="2">2</option>' +
-'<option value="3">3</option>' +
-'<option value="4">4</option>' +
-'<option value="5">5</option>' +
-'<option value="6">6</option>' +
-'<option value="7">7</option>' +
-'<option value="8">8</option>' +
-'<option value="9">9</option>' +
-'<option value="10">10</option>' +
-
-'</select>' +
-
-'</div>';
-
-}
-
-
-/* تحميل بيانات الطلاب */
-
-var students =
-JSON.parse(
-localStorage.getItem("studentsData") || "{}"
+const db = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
+async function searchStudent(){
 
-/* تغيير الصفحة */
+const code =
+document.getElementById("searchCode").value.trim();
 
-function showPage(pageId){
+const result =
+document.getElementById("searchResult");
 
-var pages =
-document.querySelectorAll(".page");
-
-pages.forEach(function(page){
-page.classList.remove("active");
-});
-
-document.getElementById(pageId)
-.classList.add("active");
-
+if(!code){
+result.innerHTML='<div class="error">اكتب كود الطالب</div>';
+return;
 }
 
+const {data,error}=await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
 
-/* دخول المعلم */
-
-function loginTeacher(){
-
-var password =
-document.getElementById("teacherPassword").value;
-
-var message =
-document.getElementById("loginMessage");
-
-if(password === "00XM123"){
-
-message.innerHTML="";
-
-document.getElementById(
-"teacherPassword"
-).value="";
-
-showPage("teacher");
-
-displayStudents();
-
-}else{
-
-message.innerHTML=
-"❌ كلمة السر غير صحيحة.";
-
-message.className=
-"message error";
-
+if(error){
+result.innerHTML=
+'<div class="error">حدث خطأ أثناء البحث</div>';
+return;
 }
 
+if(!data){
+result.innerHTML=
+'<div class="error">لم يتم العثور على الطالب</div>';
+return;
 }
 
+let evaluations="";
 
-/* حفظ بيانات الطالب */
+for(let i=1;i<=15;i++){
 
-function saveStudent(){
+evaluations+=`
+<p>
+<strong>التقييم ${i}:</strong>
+${escapeHtml(data["evaluation_"+i]||"")}
+</p>
+`;
+}
 
-var name =
-document.getElementById("studentName")
-.value.trim();
+result.innerHTML=`
+<div class="student">
 
-var grade =
-document.getElementById("studentGrade")
-.value;
+<h3>${escapeHtml(data.student_name)}</h3>
 
-var code =
-document.getElementById("studentCode")
-.value.trim();
+<p>
+<strong>كود الطالب:</strong>
+${escapeHtml(data.student_code)}
+</p>
 
-var message =
-document.getElementById("saveMessage");
+<p>
+<strong>الصف:</strong>
+${escapeHtml(data.grade||"")}
+</p>
 
-if(name === "" ||
-grade === "" ||
-code === ""){
+<hr>
 
-message.innerHTML=
-"❌ اكتب اسم الطالب والصف والكود.";
+${evaluations}
 
-message.className=
-"message error";
+</div>
+`;
+}
+
+async function addStudent(){
+
+const row=getFormData();
+
+if(!row.student_code||!row.student_name){
+
+showMessage(
+"اكتب كود الطالب واسم الطالب",
+"error"
+);
 
 return;
-
 }
 
+const {error}=await db
+.from("students")
+.insert([row]);
 
-var evaluations={};
+if(error){
 
-for(var i=1;i<=15;i++){
+showMessage(
+"حدث خطأ: "+error.message,
+"error"
+);
 
-var value =
-document.getElementById(
-"evaluation"+i
-).value;
-
-if(value !== ""){
-
-evaluations[i]=value;
-
+return;
 }
 
+showMessage(
+"تمت إضافة الطالب بنجاح",
+"success"
+);
+
+clearForm();
 }
 
+async function updateStudent(){
 
-students[code]={
+const code=
+document.getElementById("teacherCode")
+.value.trim();
 
-name:name,
-grade:grade,
-evaluations:evaluations
+if(!code){
+
+showMessage(
+"اكتب كود الطالب",
+"error"
+);
+
+return;
+}
+
+const {data:student,error:findError}=
+await db
+.from("students")
+.select("id")
+.eq("student_code",code)
+.maybeSingle();
+
+if(findError||!student){
+
+showMessage(
+"الطالب غير موجود",
+"error"
+);
+
+return;
+}
+
+const row=getFormData();
+
+const {error}=await db
+.from("students")
+.update(row)
+.eq("id",student.id);
+
+if(error){
+
+showMessage(
+"حدث خطأ: "+error.message,
+"error"
+);
+
+return;
+}
+
+showMessage(
+"تم تعديل بيانات الطالب بنجاح",
+"success"
+);
+}
+
+function getFormData(){
+
+const row={
+
+student_code:
+document.getElementById("teacherCode")
+.value.trim(),
+
+student_name:
+document.getElementById("teacherName")
+.value.trim(),
+
+grade:
+document.getElementById("teacherGrade")
+.value.trim()
 
 };
 
+for(let i=1;i<=15;i++){
 
-localStorage.setItem(
-"studentsData",
-JSON.stringify(students)
-);
-
-
-message.innerHTML=
-"✅ تم حفظ بيانات الطالب بنجاح.";
-
-message.className=
-"message success";
-
-displayStudents();
+row["evaluation_"+i]=
+document.getElementById("e"+i)
+.value.trim();
 
 }
 
-
-/* عرض الطلاب */
-
-function displayStudents(){
-
-var list =
-document.getElementById(
-"studentsList"
-);
-
-list.innerHTML="";
-
-var codes =
-Object.keys(students);
-
-if(codes.length === 0){
-
-list.innerHTML=
-"<p style='text-align:center'>لا يوجد طلاب مسجلون.</p>";
-
-return;
-
+return row;
 }
 
+function clearForm(){
 
-codes.forEach(function(code){
-
-var student =
-students[code];
-
-var div =
-document.createElement("div");
-
-div.className="card";
-
-div.innerHTML=
-
-"<strong>👨‍🎓 "+
-student.name+
-"</strong>"+
-
-"<p>الصف: "+
-student.grade+
-"</p>"+
-
-"<p>الكود: "+
-code+
-"</p>"+
-
-"<button class='blue' "+
-"onclick=\"editStudent('"+
-code+
-"')\">"+
-"✏️ تعديل الطالب"+
-"</button>"+
-
-"<button class='red' "+
-"onclick=\"deleteStudent('"+
-code+
-"')\">"+
-"🗑️ حذف الطالب"+
-"</button>";
-
-list.appendChild(div);
-
+document.querySelectorAll("input")
+.forEach(input=>{
+input.value="";
 });
 
 }
 
+function showMessage(message,type){
 
-/* تعديل الطالب */
+const element=
+document.getElementById("message");
 
-function editStudent(code){
-
-var student =
-students[code];
-
-if(!student)return;
-
-document.getElementById(
-"studentName"
-).value=student.name;
-
-document.getElementById(
-"studentGrade"
-).value=student.grade;
-
-document.getElementById(
-"studentCode"
-).value=code;
-
-
-for(var i=1;i<=15;i++){
-
-var value="";
-
-if(
-student.evaluations &&
-student.evaluations[i]
-){
-
-value=
-student.evaluations[i];
-
+element.className=type;
+element.textContent=message;
 }
 
-document.getElementById(
-"evaluation"+i
-).value=value;
-
-}
-
-
-document.getElementById(
-"saveMessage"
-).innerHTML=
-"✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
-
-document.getElementById(
-"saveMessage"
-).className=
-"message success";
-
-window.scrollTo(0,0);
-
-}
-
-
-/* طالب جديد */
-
-function newStudent(){
-
-document.getElementById(
-"studentName"
-).value="";
-
-document.getElementById(
-"studentGrade"
-).value="";
-
-document.getElementById(
-"studentCode"
-).value="";
-
-
-for(var i=1;i<=15;i++){
-
-document.getElementById(
-"evaluation"+i
-).value="";
-
-}
-
-document.getElementById(
-"saveMessage"
-).innerHTML="";
-
-}
-
-
-/* حذف الطالب */
-
-function deleteStudent(code){
-
-if(!confirm(
-"هل تريد حذف هذا الطالب؟"
-))return;
-
-delete students[code];
-
-localStorage.setItem(
-"studentsData",
-JSON.stringify(students)
-);
-
-displayStudents();
-
-}
-
-
-/* استعلام ولي الأمر */
-
-function searchStudent(){
-
-var code =
-document.getElementById(
-"parentCode"
-).value.trim();
-
-var message =
-document.getElementById(
-"parentMessage"
-);
-
-var result =
-document.getElementById(
-"parentResult"
-);
-
-
-if(code === ""){
-
-message.innerHTML=
-"❌ اكتب كود الطالب.";
-
-message.className=
-"message error";
-
-result.innerHTML="";
-
-return;
-
-}
-
-
-var student =
-students[code];
-
-
-if(!student){
-
-message.innerHTML=
-"❌ كود الطالب غير موجود.";
-
-message.className=
-"message error";
-
-result.innerHTML="";
-
-return;
-
-}
-
-
-message.innerHTML="";
-
-
-var html=
-
-"<div class='card'>"+
-
-"<h3>📋 بيانات الطالب</h3>"+
-
-"<p><strong>اسم الطالب:</strong> "+
-student.name+
-"</p>"+
-
-"<p><strong>الصف:</strong> "+
-student.grade+
-"</p>"+
-
-"<p><strong>الكود:</strong> "+
-code+
-"</p>"+
-
-"<hr>"+
-
-"<h3>📊 التقييمات</h3>";
-
-
-var evaluations =
-student.evaluations || {};
-
-var hasEvaluation=false;
-
-
-for(var i=1;i<=15;i++){
-
-if(evaluations[i]){
-
-hasEvaluation=true;
-
-var displayValue;
-
-
-if(evaluations[i] === "غاب"){
-
-displayValue="غياب";
-
-}else{
-
-displayValue=
-evaluations[i]+"/10";
-
-}
-
-
-html +=
-
-"<p><strong>التقييم "+
-i+
-":</strong> "+
-displayValue+
-"</p>";
-
-}
-
-}
-
-
-if(!hasEvaluation){
-
-html +=
-"<p>لا توجد تقييمات مسجلة حتى الآن.</p>";
-
-}
-
-
-html += "</div>";
-
-result.innerHTML=html;
+function escapeHtml(value){
+
+return String(value)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
