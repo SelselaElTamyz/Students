@@ -38,6 +38,10 @@ h1, h2, h3 {
     text-align: center;
 }
 
+p {
+    color: #555;
+}
+
 input, select {
     width: 100%;
     padding: 13px;
@@ -58,11 +62,25 @@ button {
     cursor: pointer;
 }
 
-.blue { background: #1976d2; }
-.green { background: #2e7d32; }
-.red { background: #c62828; }
-.gray { background: #777; }
-.orange { background: #ef6c00; }
+.blue {
+    background: #1976d2;
+}
+
+.green {
+    background: #2e7d32;
+}
+
+.red {
+    background: #c62828;
+}
+
+.gray {
+    background: #777;
+}
+
+.orange {
+    background: #ef6c00;
+}
 
 .message {
     text-align: center;
@@ -82,7 +100,7 @@ button {
     background: #f8fafc;
     border: 1px solid #ddd;
     border-radius: 12px;
-    padding: 12px;
+    padding: 14px;
     margin: 10px 0;
 }
 
@@ -90,14 +108,15 @@ button {
     display: flex;
     gap: 8px;
     align-items: center;
-    margin: 7px 0;
+    margin: 8px 0;
 }
 
 .evaluation strong {
     width: 110px;
 }
 
-.evaluation input {
+.evaluation select {
+    flex: 1;
     margin: 0;
 }
 
@@ -106,6 +125,10 @@ hr {
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
+
+.grade-box {
+    margin-top: 15px;
+}
 </style>
 </head>
 
@@ -113,13 +136,13 @@ hr {
 
 <div class="container">
 
-<!-- الرئيسية -->
+<!-- ================= الصفحة الرئيسية ================= -->
 
 <div id="home" class="page active">
 
 <h1>⭐ سلسلة التميز</h1>
 
-<p style="text-align:center">
+<p style="text-align:center;">
 نظام متابعة الطلاب
 </p>
 
@@ -134,16 +157,16 @@ hr {
 </div>
 
 
-<!-- دخول المعلم -->
+<!-- ================= دخول المعلم ================= -->
 
 <div id="teacherLogin" class="page">
 
 <h2>👨‍🏫 دخول المعلم</h2>
 
 <input
-id="teacherPassword"
-type="password"
-placeholder="أدخل كلمة السر">
+    id="teacherPassword"
+    type="password"
+    placeholder="أدخل كلمة السر">
 
 <button class="green" onclick="loginTeacher()">
 🔐 دخول
@@ -158,20 +181,20 @@ placeholder="أدخل كلمة السر">
 </div>
 
 
-<!-- صفحة المعلم -->
+<!-- ================= صفحة المعلم ================= -->
 
 <div id="teacher" class="page">
 
 <h2>👨‍🏫 صفحة المعلم</h2>
 
-<p style="text-align:center">
+<p style="text-align:center;">
 إضافة وتعديل بيانات الطلاب
 </p>
 
 <input
-id="studentName"
-type="text"
-placeholder="اسم الطالب">
+    id="studentName"
+    type="text"
+    placeholder="اسم الطالب">
 
 <select id="studentGrade">
 
@@ -195,16 +218,22 @@ placeholder="اسم الطالب">
 </select>
 
 <input
-id="studentCode"
-type="text"
-placeholder="كود الطالب">
+    id="studentCode"
+    type="text"
+    placeholder="كود الطالب">
 
-<h3>📊 التقييمات من 1 إلى 15</h3>
+
+<h3>📊 التقييمات</h3>
+
+<p style="text-align:center;">
+اختر درجة التقييم من 0 إلى 10 أو اختر غاب
+</p>
 
 <div id="evaluationInputs"></div>
 
+
 <button class="green" onclick="saveStudent()">
-💾 حفظ البيانات
+💾 حفظ بيانات الطالب
 </button>
 
 <button class="orange" onclick="newStudent()">
@@ -226,20 +255,20 @@ placeholder="كود الطالب">
 </div>
 
 
-<!-- ولي الأمر -->
+<!-- ================= صفحة ولي الأمر ================= -->
 
 <div id="parent" class="page">
 
 <h2>👨‍👩‍👧 صفحة ولي الأمر</h2>
 
-<p style="text-align:center">
+<p style="text-align:center;">
 الاستعلام عن الطالب
 </p>
 
 <input
-id="parentCode"
-type="text"
-placeholder="أدخل كود الطالب">
+    id="parentCode"
+    type="text"
+    placeholder="أدخل كود الطالب">
 
 <button class="blue" onclick="searchStudent()">
 🔎 استعلام
@@ -260,9 +289,9 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
-/* =========================
-   إنشاء خانات التقييمات
-========================= */
+/* =====================================================
+   إنشاء خانات التقييمات من 1 إلى 15
+===================================================== */
 
 var evaluationBox =
 document.getElementById("evaluationInputs");
@@ -270,26 +299,48 @@ document.getElementById("evaluationInputs");
 for (var i = 1; i <= 15; i++) {
 
     evaluationBox.innerHTML +=
-    '<div class="evaluation">' +
-    '<strong>التقييم ' + i + '</strong>' +
-    '<input id="evaluation' + i +
-    '" type="text" placeholder="الدرجة أو الملاحظة">' +
-    '</div>';
 
+    '<div class="evaluation">' +
+
+    '<strong>التقييم ' + i + '</strong>' +
+
+    '<select id="evaluation' + i + '">' +
+
+    '<option value="">لم يتم التقييم</option>' +
+
+    '<option value="غاب">غاب</option>' +
+
+    '<option value="0">0</option>' +
+    '<option value="1">1</option>' +
+    '<option value="2">2</option>' +
+    '<option value="3">3</option>' +
+    '<option value="4">4</option>' +
+    '<option value="5">5</option>' +
+    '<option value="6">6</option>' +
+    '<option value="7">7</option>' +
+    '<option value="8">8</option>' +
+    '<option value="9">9</option>' +
+    '<option value="10">10</option>' +
+
+    '</select>' +
+
+    '</div>';
 }
 
 
-/* =========================
-   بيانات الطلاب
-========================= */
+/* =====================================================
+   تحميل بيانات الطلاب
+===================================================== */
 
 var students =
-JSON.parse(localStorage.getItem("studentsData") || "{}");
+JSON.parse(
+    localStorage.getItem("studentsData") || "{}"
+);
 
 
-/* =========================
+/* =====================================================
    تغيير الصفحة
-========================= */
+===================================================== */
 
 function showPage(pageId) {
 
@@ -297,18 +348,20 @@ function showPage(pageId) {
     document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
+
         page.classList.remove("active");
+
     });
 
-    document.getElementById(pageId)
+    document
+    .getElementById(pageId)
     .classList.add("active");
-
 }
 
 
-/* =========================
+/* =====================================================
    دخول المعلم
-========================= */
+===================================================== */
 
 function loginTeacher() {
 
@@ -318,51 +371,67 @@ function loginTeacher() {
     var message =
     document.getElementById("loginMessage");
 
+
     if (password === "00XM123") {
 
         message.innerHTML = "";
 
-        document.getElementById("teacherPassword").value = "";
+        document.getElementById(
+            "teacherPassword"
+        ).value = "";
 
         showPage("teacher");
 
         displayStudents();
 
-    } else {
+    }
+
+    else {
 
         message.innerHTML =
         "❌ كلمة السر غير صحيحة.";
 
         message.className =
         "message error";
-
     }
-
 }
 
 
-/* =========================
-   حفظ البيانات
-========================= */
+/* =====================================================
+   حفظ الطالب
+===================================================== */
 
 function saveStudent() {
 
     var name =
-    document.getElementById("studentName").value.trim();
+    document.getElementById(
+        "studentName"
+    ).value.trim();
+
 
     var grade =
-    document.getElementById("studentGrade").value;
+    document.getElementById(
+        "studentGrade"
+    ).value;
+
 
     var code =
-    document.getElementById("studentCode").value.trim();
+    document.getElementById(
+        "studentCode"
+    ).value.trim();
+
 
     var message =
-    document.getElementById("saveMessage");
+    document.getElementById(
+        "saveMessage"
+    );
 
 
-    if (name === "" ||
+    if (
+        name === "" ||
         grade === "" ||
-        code === "") {
+        code === ""
+    ) {
 
         message.innerHTML =
         "❌ اكتب اسم الطالب والصف والكود.";
@@ -376,13 +445,25 @@ function saveStudent() {
 
     var evaluations = {};
 
+
     for (var i = 1; i <= 15; i++) {
 
-        evaluations[i] =
+        var value =
         document.getElementById(
             "evaluation" + i
-        ).value.trim();
+        ).value;
 
+
+        /*
+          لا نحفظ التقييم إذا كان
+          لم يتم التقييم
+        */
+
+        if (value !== "") {
+
+            evaluations[i] = value;
+
+        }
     }
 
 
@@ -393,7 +474,6 @@ function saveStudent() {
         grade: grade,
 
         evaluations: evaluations
-
     };
 
 
@@ -411,18 +491,19 @@ function saveStudent() {
 
 
     displayStudents();
-
 }
 
 
-/* =========================
+/* =====================================================
    عرض الطلاب
-========================= */
+===================================================== */
 
 function displayStudents() {
 
     var list =
-    document.getElementById("studentsList");
+    document.getElementById(
+        "studentsList"
+    );
 
     list.innerHTML = "";
 
@@ -434,7 +515,7 @@ function displayStudents() {
     if (codes.length === 0) {
 
         list.innerHTML =
-        "<p style='text-align:center'>لا يوجد طلاب.</p>";
+        "<p style='text-align:center;'>لا يوجد طلاب مسجلون.</p>";
 
         return;
     }
@@ -448,6 +529,7 @@ function displayStudents() {
 
         var div =
         document.createElement("div");
+
 
         div.className = "card";
 
@@ -470,27 +552,30 @@ function displayStudents() {
         "onclick=\"editStudent('" +
         code +
         "')\">" +
+
         "✏️ تعديل الطالب" +
+
         "</button>" +
 
         "<button class='red' " +
         "onclick=\"deleteStudent('" +
         code +
         "')\">" +
+
         "🗑️ حذف الطالب" +
+
         "</button>";
 
 
         list.appendChild(div);
 
     });
-
 }
 
 
-/* =========================
-   تعديل طالب
-========================= */
+/* =====================================================
+   تعديل الطالب
+===================================================== */
 
 function editStudent(code) {
 
@@ -499,56 +584,86 @@ function editStudent(code) {
 
 
     if (!student) {
+
         return;
     }
 
 
-    document.getElementById("studentName").value =
+    document.getElementById(
+        "studentName"
+    ).value =
     student.name;
 
-    document.getElementById("studentGrade").value =
+
+    document.getElementById(
+        "studentGrade"
+    ).value =
     student.grade;
 
-    document.getElementById("studentCode").value =
+
+    document.getElementById(
+        "studentCode"
+    ).value =
     code;
 
 
     for (var i = 1; i <= 15; i++) {
 
+        var value = "";
+
+
+        if (
+            student.evaluations &&
+            student.evaluations[i]
+        ) {
+
+            value =
+            student.evaluations[i];
+
+        }
+
+
         document.getElementById(
             "evaluation" + i
         ).value =
-        student.evaluations &&
-        student.evaluations[i]
-        ? student.evaluations[i]
-        : "";
-
+        value;
     }
 
 
-    document.getElementById("saveMessage").innerHTML =
-    "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
+    document.getElementById(
+        "saveMessage"
+    ).innerHTML =
+    "✏️ تم تحميل بيانات الطالب. عدّل البيانات ثم اضغط حفظ.";
 
-    document.getElementById("saveMessage").className =
+    document.getElementById(
+        "saveMessage"
+    ).className =
     "message success";
 
 
-    window.scrollTo(0,0);
-
+    window.scrollTo(0, 0);
 }
 
 
-/* =========================
+/* =====================================================
    طالب جديد
-========================= */
+===================================================== */
 
 function newStudent() {
 
-    document.getElementById("studentName").value = "";
+    document.getElementById(
+        "studentName"
+    ).value = "";
 
-    document.getElementById("studentGrade").value = "";
 
-    document.getElementById("studentCode").value = "";
+    document.getElementById(
+        "studentGrade"
+    ).value = "";
+
+
+    document.getElementById(
+        "studentCode"
+    ).value = "";
 
 
     for (var i = 1; i <= 15; i++) {
@@ -556,26 +671,27 @@ function newStudent() {
         document.getElementById(
             "evaluation" + i
         ).value = "";
-
     }
 
 
-    document.getElementById("saveMessage").innerHTML = "";
-
+    document.getElementById(
+        "saveMessage"
+    ).innerHTML = "";
 }
 
 
-/* =========================
-   حذف طالب
-========================= */
+/* =====================================================
+   حذف الطالب
+===================================================== */
 
 function deleteStudent(code) {
 
-    var answer =
-    confirm("هل تريد حذف هذا الطالب؟");
+    if (
+        !confirm(
+            "هل تريد حذف هذا الطالب؟"
+        )
+    ) {
 
-
-    if (!answer) {
         return;
     }
 
@@ -590,27 +706,31 @@ function deleteStudent(code) {
 
 
     displayStudents();
-
 }
 
 
-/* =========================
+/* =====================================================
    استعلام ولي الأمر
-========================= */
+===================================================== */
 
 function searchStudent() {
 
     var code =
-    document.getElementById("parentCode")
-    .value.trim();
+    document.getElementById(
+        "parentCode"
+    ).value.trim();
 
 
     var message =
-    document.getElementById("parentMessage");
+    document.getElementById(
+        "parentMessage"
+    );
 
 
     var result =
-    document.getElementById("parentResult");
+    document.getElementById(
+        "parentResult"
+    );
 
 
     if (code === "") {
@@ -645,11 +765,7 @@ function searchStudent() {
     }
 
 
-    message.innerHTML =
-    "✅ تم العثور على الطالب.";
-
-    message.className =
-    "message success";
+    message.innerHTML = "";
 
 
     var html =
@@ -675,24 +791,66 @@ function searchStudent() {
     "<h3>📊 التقييمات</h3>";
 
 
+    var evaluations =
+    student.evaluations || {};
+
+
+    var hasEvaluation = false;
+
+
+    /*
+       إظهار التقييمات المسجلة فقط
+    */
+
     for (var i = 1; i <= 15; i++) {
 
-        var value =
-        student.evaluations &&
-        student.evaluations[i]
-        ? student.evaluations[i]
-        : "لم يتم التسجيل";
+        if (evaluations[i]) {
 
+            hasEvaluation = true;
+
+
+            var displayValue;
+
+
+            if (
+                evaluations[i] === "غاب"
+            ) {
+
+                displayValue =
+                "غياب";
+
+            }
+
+            else {
+
+                displayValue =
+                evaluations[i] + "/10";
+            }
+
+
+            html +=
+
+            "<p>" +
+
+            "<strong>التقييم " +
+            i +
+            ":</strong> " +
+
+            displayValue +
+
+            "</p>";
+        }
+    }
+
+
+    /*
+       لو لا يوجد أي تقييم
+    */
+
+    if (!hasEvaluation) {
 
         html +=
-
-        "<p>" +
-        "<strong>التقييم " +
-        i +
-        ":</strong> " +
-        value +
-        "</p>";
-
+        "<p>لا توجد تقييمات مسجلة حتى الآن.</p>";
     }
 
 
@@ -700,7 +858,6 @@ function searchStudent() {
 
 
     result.innerHTML = html;
-
 }
 
 </script>
