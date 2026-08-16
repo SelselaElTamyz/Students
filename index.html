@@ -3,54 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>سلسلة التميز</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 body{
-  font-family:Arial,sans-serif;
-  background:#f4f6f8;
-  margin:0;
-  padding:20px;
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+margin:0;
+padding:20px;
 }
+
 .container{
-  max-width:750px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:15px;
+max-width:750px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:15px;
 }
-h1,h2{text-align:center}
+
+h1,h2{
+text-align:center;
+}
+
 input,button{
-  width:100%;
-  padding:12px;
-  margin:7px 0;
-  box-sizing:border-box;
-  border-radius:8px;
-  font-size:16px;
+width:100%;
+padding:12px;
+margin:7px 0;
+box-sizing:border-box;
+border-radius:8px;
+font-size:16px;
 }
-input{border:1px solid #ccc}
+
+input{
+border:1px solid #ccc;
+}
+
 button{
-  border:0;
-  cursor:pointer;
-  background:#333;
-  color:white;
+border:0;
+cursor:pointer;
+background:#333;
+color:white;
 }
+
 .student{
-  background:#f8f8f8;
-  padding:15px;
-  border-radius:10px;
-  margin-top:15px;
+background:#f8f8f8;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
 }
-.error{color:red;text-align:center}
-.success{color:green;text-align:center}
+
+.error{
+color:red;
+text-align:center;
+}
+
+.success{
+color:green;
+text-align:center;
+}
+
 .evaluations{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
 }
-hr{margin:25px 0}
+
+hr{
+margin:25px 0;
+}
+
+#teacherPanel{
+display:none;
+}
+
+#loginPanel{
+display:none;
+}
+
 </style>
 </head>
 
@@ -60,22 +93,82 @@ hr{margin:25px 0}
 
 <h1>سلسلة التميز</h1>
 
+<!-- استعلام ولي الأمر -->
+
+<section>
+
 <h2>استعلام ولي الأمر</h2>
 
-<input id="searchCode" placeholder="اكتب كود الطالب">
-<button onclick="searchStudent()">بحث</button>
+<input
+id="searchCode"
+placeholder="اكتب كود الطالب">
+
+<button onclick="searchStudent()">
+بحث
+</button>
 
 <div id="searchResult"></div>
 
+</section>
+
 <hr>
 
-<h2>إدارة الطلاب</h2>
+<!-- زر دخول المعلم -->
 
-<input id="teacherCode" placeholder="كود الطالب">
-<input id="teacherName" placeholder="اسم الطالب">
-<input id="teacherGrade" placeholder="الصف الدراسي">
+<div id="teacherButton">
+
+<button onclick="showLogin()">
+دخول المعلم
+</button>
+
+</div>
+
+<!-- تسجيل دخول المعلم -->
+
+<section id="loginPanel">
+
+<h2>دخول المعلم</h2>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="البريد الإلكتروني">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="كلمة المرور">
+
+<button onclick="teacherLogin()">
+دخول
+</button>
+
+<div id="loginMessage"></div>
+
+</section>
+
+<!-- لوحة المعلم -->
+
+<section id="teacherPanel">
+
+<hr>
+
+<h2>لوحة المعلم</h2>
+
+<input
+id="teacherCode"
+placeholder="كود الطالب">
+
+<input
+id="teacherName"
+placeholder="اسم الطالب">
+
+<input
+id="teacherGrade"
+placeholder="الصف الدراسي">
 
 <div class="evaluations">
+
 <input id="e1" placeholder="التقييم 1">
 <input id="e2" placeholder="التقييم 2">
 <input id="e3" placeholder="التقييم 3">
@@ -91,12 +184,24 @@ hr{margin:25px 0}
 <input id="e13" placeholder="التقييم 13">
 <input id="e14" placeholder="التقييم 14">
 <input id="e15" placeholder="التقييم 15">
+
 </div>
 
-<button onclick="addStudent()">إضافة طالب</button>
-<button onclick="updateStudent()">تعديل طالب</button>
+<button onclick="addStudent()">
+إضافة طالب
+</button>
+
+<button onclick="updateStudent()">
+تعديل طالب
+</button>
+
+<button onclick="logout()">
+تسجيل الخروج
+</button>
 
 <div id="message"></div>
+
+</section>
 
 </div>
 
@@ -108,67 +213,242 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
 
-const db = supabase.createClient(
+const db =
+supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
+
+// عند فتح الموقع
+
+checkLogin();
+
+
+// التحقق من تسجيل الدخول
+
+async function checkLogin(){
+
+const {
+data:{
+session
+}
+}=await db.auth.getSession();
+
+if(session){
+
+showTeacherPanel();
+
+}
+
+}
+
+
+// إظهار تسجيل الدخول
+
+function showLogin(){
+
+document.getElementById(
+"loginPanel"
+).style.display="block";
+
+document.getElementById(
+"teacherButton"
+).style.display="none";
+
+}
+
+
+// تسجيل دخول المعلم
+
+async function teacherLogin(){
+
+const email =
+document.getElementById(
+"loginEmail"
+).value.trim();
+
+const password =
+document.getElementById(
+"loginPassword"
+).value;
+
+const message =
+document.getElementById(
+"loginMessage"
+);
+
+if(!email || !password){
+
+message.innerHTML =
+'<div class="error">اكتب البريد وكلمة المرور</div>';
+
+return;
+
+}
+
+const {
+data,
+error
+}=await db.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+if(error){
+
+message.innerHTML =
+'<div class="error">البريد أو كلمة المرور غير صحيحة</div>';
+
+return;
+
+}
+
+message.innerHTML =
+'<div class="success">تم تسجيل الدخول</div>';
+
+showTeacherPanel();
+
+}
+
+
+// إظهار لوحة المعلم
+
+function showTeacherPanel(){
+
+document.getElementById(
+"loginPanel"
+).style.display="none";
+
+document.getElementById(
+"teacherButton"
+).style.display="none";
+
+document.getElementById(
+"teacherPanel"
+).style.display="block";
+
+}
+
+
+// تسجيل الخروج
+
+async function logout(){
+
+await db.auth.signOut();
+
+document.getElementById(
+"teacherPanel"
+).style.display="none";
+
+document.getElementById(
+"teacherButton"
+).style.display="block";
+
+}
+
+
+// البحث
+
 async function searchStudent(){
 
 const code =
-document.getElementById("searchCode").value.trim();
+document.getElementById(
+"searchCode"
+).value.trim();
 
 const result =
-document.getElementById("searchResult");
+document.getElementById(
+"searchResult"
+);
 
 if(!code){
-result.innerHTML='<div class="error">اكتب كود الطالب</div>';
+
+result.innerHTML =
+'<div class="error">اكتب كود الطالب</div>';
+
 return;
+
 }
 
-const {data,error}=await db
+const {
+data,
+error
+}=await db
 .from("students")
 .select("*")
 .eq("student_code",code)
 .maybeSingle();
 
 if(error){
-result.innerHTML=
+
+result.innerHTML =
 '<div class="error">حدث خطأ أثناء البحث</div>';
+
 return;
+
 }
 
 if(!data){
-result.innerHTML=
+
+result.innerHTML =
 '<div class="error">لم يتم العثور على الطالب</div>';
+
 return;
+
 }
 
 let evaluations="";
 
 for(let i=1;i<=15;i++){
 
-evaluations+=`
+evaluations += `
+
 <p>
-<strong>التقييم ${i}:</strong>
-${escapeHtml(data["evaluation_"+i]||"")}
+
+<strong>
+التقييم ${i}:
+</strong>
+
+${escapeHtml(
+data["evaluation_"+i] || ""
+)}
+
 </p>
+
 `;
+
 }
 
-result.innerHTML=`
+result.innerHTML = `
+
 <div class="student">
 
-<h3>${escapeHtml(data.student_name)}</h3>
+<h3>
+${escapeHtml(data.student_name)}
+</h3>
 
 <p>
-<strong>كود الطالب:</strong>
+
+<strong>
+كود الطالب:
+</strong>
+
 ${escapeHtml(data.student_code)}
+
 </p>
 
 <p>
-<strong>الصف:</strong>
-${escapeHtml(data.grade||"")}
+
+<strong>
+الصف:
+</strong>
+
+${escapeHtml(data.grade || "")}
+
 </p>
 
 <hr>
@@ -176,14 +456,23 @@ ${escapeHtml(data.grade||"")}
 ${evaluations}
 
 </div>
+
 `;
+
 }
+
+
+// إضافة طالب
 
 async function addStudent(){
 
-const row=getFormData();
+const row =
+getFormData();
 
-if(!row.student_code||!row.student_name){
+if(
+!row.student_code ||
+!row.student_name
+){
 
 showMessage(
 "اكتب كود الطالب واسم الطالب",
@@ -191,9 +480,12 @@ showMessage(
 );
 
 return;
+
 }
 
-const {error}=await db
+const {
+error
+}=await db
 .from("students")
 .insert([row]);
 
@@ -205,6 +497,7 @@ showMessage(
 );
 
 return;
+
 }
 
 showMessage(
@@ -213,13 +506,18 @@ showMessage(
 );
 
 clearForm();
+
 }
+
+
+// تعديل طالب
 
 async function updateStudent(){
 
-const code=
-document.getElementById("teacherCode")
-.value.trim();
+const code =
+document.getElementById(
+"teacherCode"
+).value.trim();
 
 if(!code){
 
@@ -229,16 +527,22 @@ showMessage(
 );
 
 return;
+
 }
 
-const {data:student,error:findError}=
-await db
+const {
+data:student,
+error:findError
+}=await db
 .from("students")
 .select("id")
 .eq("student_code",code)
 .maybeSingle();
 
-if(findError||!student){
+if(
+findError ||
+!student
+){
 
 showMessage(
 "الطالب غير موجود",
@@ -246,11 +550,15 @@ showMessage(
 );
 
 return;
+
 }
 
-const row=getFormData();
+const row =
+getFormData();
 
-const {error}=await db
+const {
+error
+}=await db
 .from("students")
 .update(row)
 .eq("id",student.id);
@@ -263,69 +571,127 @@ showMessage(
 );
 
 return;
+
 }
 
 showMessage(
 "تم تعديل بيانات الطالب بنجاح",
 "success"
 );
+
 }
+
+
+// جمع بيانات الطالب
 
 function getFormData(){
 
 const row={
 
 student_code:
-document.getElementById("teacherCode")
-.value.trim(),
+document.getElementById(
+"teacherCode"
+).value.trim(),
 
 student_name:
-document.getElementById("teacherName")
-.value.trim(),
+document.getElementById(
+"teacherName"
+).value.trim(),
 
 grade:
-document.getElementById("teacherGrade")
-.value.trim()
+document.getElementById(
+"teacherGrade"
+).value.trim()
 
 };
 
-for(let i=1;i<=15;i++){
+for(
+let i=1;
+i<=15;
+i++
+){
 
-row["evaluation_"+i]=
-document.getElementById("e"+i)
-.value.trim();
+row[
+"evaluation_"+i
+]=
+document.getElementById(
+"e"+i
+).value.trim();
 
 }
 
 return row;
+
 }
+
+
+// مسح الخانات
 
 function clearForm(){
 
-document.querySelectorAll("input")
-.forEach(input=>{
+document
+.querySelectorAll(
+"#teacherPanel input"
+)
+.forEach(
+input=>{
 input.value="";
-});
+}
+);
 
 }
 
-function showMessage(message,type){
 
-const element=
-document.getElementById("message");
+// رسالة
+
+function showMessage(
+message,
+type
+){
+
+const element =
+document.getElementById(
+"message"
+);
 
 element.className=type;
-element.textContent=message;
+
+element.textContent=
+message;
+
 }
+
+
+// حماية النصوص
 
 function escapeHtml(value){
 
 return String(value)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
