@@ -21,6 +21,8 @@ background:linear-gradient(135deg,#eef5ff,#f8fafc);
 color:#222;
 }
 
+/* الحاوية */
+
 .container{
 width:94%;
 max-width:650px;
@@ -31,6 +33,8 @@ border-radius:22px;
 box-shadow:0 8px 25px rgba(0,0,0,.12);
 min-height:90vh;
 }
+
+/* الصفحات */
 
 .page{
 display:none;
@@ -49,29 +53,37 @@ border-bottom:1px solid #eee;
 margin-bottom:20px;
 }
 
+/* سلسلة التميز */
+
 .brand-title-main{
 font-size:29px;
 font-weight:bold;
 color:#1976d2;
-margin-bottom:8px;
+margin-bottom:9px;
 }
+
+/* اسم المعلم */
 
 .teacher-name{
 font-size:24px;
 font-weight:bold;
-color:#e67e22;
-margin-bottom:5px;
+color:#d4a017;
+margin-bottom:6px;
 }
+
+/* التخصص */
 
 .teacher-title{
 font-size:16px;
 font-weight:bold;
-color:#555;
+color:#475569;
 }
 
 /* العناوين */
 
-h1,h2,h3{
+h1,
+h2,
+h3{
 text-align:center;
 }
 
@@ -85,7 +97,8 @@ color:#555;
 
 /* الحقول */
 
-input,select{
+input,
+select{
 width:100%;
 padding:14px;
 margin:7px 0;
@@ -186,7 +199,7 @@ flex:1;
 margin:0;
 }
 
-/* الفاصل */
+/* الخط */
 
 hr{
 border:none;
@@ -232,7 +245,9 @@ color:#555;
 <div class="container">
 
 
-<!-- ================= الصفحة الرئيسية ================= -->
+<!-- ================================================= -->
+<!-- الصفحة الرئيسية -->
+<!-- ================================================= -->
 
 <div id="home" class="page active">
 
@@ -283,7 +298,9 @@ color:#555;
 </div>
 
 
-<!-- ================= دخول المعلم ================= -->
+<!-- ================================================= -->
+<!-- دخول المعلم -->
+<!-- ================================================= -->
 
 <div id="teacherLogin" class="page">
 
@@ -342,7 +359,9 @@ placeholder="كلمة المرور">
 </div>
 
 
-<!-- ================= صفحة المعلم ================= -->
+<!-- ================================================= -->
+<!-- صفحة المعلم -->
+<!-- ================================================= -->
 
 <div id="teacher" class="page">
 
@@ -419,6 +438,7 @@ id="studentCode"
 type="text"
 placeholder="كود الطالب">
 
+
 <h3>
 📊 التقييمات من 1 إلى 15
 </h3>
@@ -428,6 +448,7 @@ placeholder="كود الطالب">
 </p>
 
 <div id="evaluationInputs"></div>
+
 
 <button class="green" onclick="saveStudent()">
 💾 حفظ بيانات الطالب
@@ -443,6 +464,7 @@ placeholder="كود الطالب">
 
 <div id="saveMessage" class="message"></div>
 
+
 <hr>
 
 <h3>
@@ -454,6 +476,7 @@ placeholder="كود الطالب">
 <button class="gray" onclick="showPage('home')">
 ↩️ الصفحة الرئيسية
 </button>
+
 
 <div class="footer">
 
@@ -470,7 +493,9 @@ placeholder="كود الطالب">
 </div>
 
 
-<!-- ================= صفحة ولي الأمر ================= -->
+<!-- ================================================= -->
+<!-- صفحة ولي الأمر -->
+<!-- ================================================= -->
 
 <div id="parent" class="page">
 
@@ -515,6 +540,7 @@ placeholder="أدخل كود الطالب">
 ↩️ رجوع
 </button>
 
+
 <div class="footer">
 
 <strong>
@@ -534,6 +560,10 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
+/* ================================================= */
+/* Supabase */
+/* ================================================= */
+
 const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
 
@@ -547,10 +577,13 @@ SUPABASE_KEY
 );
 
 
+/* ================================================= */
 /* إنشاء التقييمات */
+/* ================================================= */
 
 var evaluationBox =
 document.getElementById("evaluationInputs");
+
 
 for(var i=1;i<=15;i++){
 
@@ -563,48 +596,59 @@ evaluationBox.innerHTML +=
 '<select id="evaluation'+i+'">' +
 
 '<option value="">لم يتم التقييم</option>' +
+
 '<option value="غاب">غاب</option>' +
 
 '<option value="0">0</option>' +
 '<option value="0.25">0.25</option>' +
 '<option value="0.5">0.5</option>' +
 '<option value="0.75">0.75</option>' +
+
 '<option value="1">1</option>' +
 '<option value="1.25">1.25</option>' +
 '<option value="1.5">1.5</option>' +
 '<option value="1.75">1.75</option>' +
+
 '<option value="2">2</option>' +
 '<option value="2.25">2.25</option>' +
 '<option value="2.5">2.5</option>' +
 '<option value="2.75">2.75</option>' +
+
 '<option value="3">3</option>' +
 '<option value="3.25">3.25</option>' +
 '<option value="3.5">3.5</option>' +
 '<option value="3.75">3.75</option>' +
+
 '<option value="4">4</option>' +
 '<option value="4.25">4.25</option>' +
 '<option value="4.5">4.5</option>' +
 '<option value="4.75">4.75</option>' +
+
 '<option value="5">5</option>' +
 '<option value="5.25">5.25</option>' +
 '<option value="5.5">5.5</option>' +
 '<option value="5.75">5.75</option>' +
+
 '<option value="6">6</option>' +
 '<option value="6.25">6.25</option>' +
 '<option value="6.5">6.5</option>' +
 '<option value="6.75">6.75</option>' +
+
 '<option value="7">7</option>' +
 '<option value="7.25">7.25</option>' +
 '<option value="7.5">7.5</option>' +
 '<option value="7.75">7.75</option>' +
+
 '<option value="8">8</option>' +
 '<option value="8.25">8.25</option>' +
 '<option value="8.5">8.5</option>' +
 '<option value="8.75">8.75</option>' +
+
 '<option value="9">9</option>' +
 '<option value="9.25">9.25</option>' +
 '<option value="9.5">9.5</option>' +
 '<option value="9.75">9.75</option>' +
+
 '<option value="10">10</option>' +
 
 '</select>' +
@@ -614,7 +658,9 @@ evaluationBox.innerHTML +=
 }
 
 
+/* ================================================= */
 /* تغيير الصفحة */
+/* ================================================= */
 
 function showPage(pageId){
 
@@ -628,10 +674,14 @@ page.classList.remove("active");
 document.getElementById(pageId)
 .classList.add("active");
 
+window.scrollTo(0,0);
+
 }
 
 
+/* ================================================= */
 /* تسجيل دخول المعلم */
+/* ================================================= */
 
 async function loginTeacher(){
 
@@ -646,16 +696,19 @@ document.getElementById("teacherPassword")
 var message =
 document.getElementById("loginMessage");
 
+
 if(email==="" || password===""){
 
 message.innerHTML =
 "❌ اكتب البريد الإلكتروني وكلمة المرور.";
 
-message.className="message error";
+message.className =
+"message error";
 
 return;
 
 }
+
 
 const {error} =
 await db.auth.signInWithPassword({
@@ -665,24 +718,29 @@ password:password
 
 });
 
+
 if(error){
 
 message.innerHTML =
 "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.";
 
-message.className="message error";
+message.className =
+"message error";
 
 return;
 
 }
 
+
 message.innerHTML="";
+
 
 document.getElementById("teacherEmail")
 .value="";
 
 document.getElementById("teacherPassword")
 .value="";
+
 
 showPage("teacher");
 
@@ -691,7 +749,9 @@ displayStudents();
 }
 
 
+/* ================================================= */
 /* تسجيل الخروج */
+/* ================================================= */
 
 async function logoutTeacher(){
 
@@ -704,7 +764,9 @@ showPage("home");
 }
 
 
+/* ================================================= */
 /* التأكد من دخول المعلم */
+/* ================================================= */
 
 async function isTeacherLoggedIn(){
 
@@ -716,12 +778,15 @@ return !!data.session;
 }
 
 
+/* ================================================= */
 /* حفظ بيانات الطالب */
+/* ================================================= */
 
 async function saveStudent(){
 
 const loggedIn =
 await isTeacherLoggedIn();
+
 
 if(!loggedIn){
 
@@ -730,6 +795,7 @@ showPage("teacherLogin");
 return;
 
 }
+
 
 var name =
 document.getElementById("studentName")
@@ -761,11 +827,13 @@ code===""
 message.innerHTML =
 "❌ اكتب اسم الطالب واختر النوع والصف والكود.";
 
-message.className="message error";
+message.className =
+"message error";
 
 return;
 
 }
+
 
 var row={
 
@@ -776,6 +844,8 @@ grade:grade
 
 };
 
+
+/* التقييمات */
 
 for(var i=1;i<=15;i++){
 
@@ -790,6 +860,8 @@ value || null;
 }
 
 
+/* البحث عن الطالب */
+
 const {data:existing,error:findError} =
 await db
 .from("students")
@@ -803,12 +875,15 @@ if(findError){
 message.innerHTML =
 "❌ حدث خطأ أثناء البحث عن الطالب.";
 
-message.className="message error";
+message.className =
+"message error";
 
 return;
 
 }
 
+
+/* تعديل */
 
 if(existing){
 
@@ -818,22 +893,28 @@ await db
 .update(row)
 .eq("id",existing.id);
 
+
 if(error){
 
 message.innerHTML =
 "❌ حدث خطأ أثناء التعديل: "+
 error.message;
 
-message.className="message error";
+message.className =
+"message error";
 
 return;
 
 }
 
+
 message.innerHTML =
 "✅ تم تعديل بيانات الطالب بنجاح.";
 
 }
+
+
+/* إضافة */
 
 else{
 
@@ -842,31 +923,39 @@ await db
 .from("students")
 .insert([row]);
 
+
 if(error){
 
 message.innerHTML =
 "❌ حدث خطأ أثناء الحفظ: "+
 error.message;
 
-message.className="message error";
+message.className =
+"message error";
 
 return;
 
 }
+
 
 message.innerHTML =
 "✅ تم حفظ بيانات الطالب بنجاح.";
 
 }
 
-message.className="message success";
+
+message.className =
+"message success";
+
 
 displayStudents();
 
 }
 
 
+/* ================================================= */
 /* عرض الطلاب */
+/* ================================================= */
 
 async function displayStudents(){
 
@@ -875,17 +964,21 @@ await isTeacherLoggedIn();
 
 if(!loggedIn)return;
 
+
 var list =
 document.getElementById("studentsList");
 
+
 list.innerHTML =
 "جاري تحميل الطلاب...";
+
 
 const {data,error} =
 await db
 .from("students")
 .select("*")
 .order("student_name");
+
 
 if(error){
 
@@ -896,7 +989,9 @@ return;
 
 }
 
+
 list.innerHTML="";
+
 
 if(!data || data.length===0){
 
@@ -907,17 +1002,21 @@ return;
 
 }
 
+
 data.forEach(function(student){
 
 var div =
 document.createElement("div");
 
-div.className="card";
+div.className =
+"card";
+
 
 var title =
 student.gender === "أنثى"
 ? "👧 طالبة"
 : "👦 طالب";
+
 
 div.innerHTML=
 
@@ -949,6 +1048,7 @@ encodeURIComponent(student.student_code)+
 "🗑️ حذف الطالب"+
 "</button>";
 
+
 list.appendChild(div);
 
 });
@@ -956,12 +1056,15 @@ list.appendChild(div);
 }
 
 
+/* ================================================= */
 /* تعديل الطالب */
+/* ================================================= */
 
 async function editStudent(encodedCode){
 
 var code =
 decodeURIComponent(encodedCode);
+
 
 const {data:student,error} =
 await db
@@ -970,19 +1073,28 @@ await db
 .eq("student_code",code)
 .maybeSingle();
 
+
 if(error || !student)return;
 
+
 document.getElementById("studentName")
-.value=student.student_name || "";
+.value =
+student.student_name || "";
+
 
 document.getElementById("studentGender")
-.value=student.gender || "";
+.value =
+student.gender || "";
+
 
 document.getElementById("studentGrade")
-.value=student.grade || "";
+.value =
+student.grade || "";
+
 
 document.getElementById("studentCode")
-.value=student.student_code || "";
+.value =
+student.student_code || "";
 
 
 for(var i=1;i<=15;i++){
@@ -1000,17 +1112,21 @@ document.getElementById(
 ).innerHTML =
 "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
 
+
 document.getElementById(
 "saveMessage"
 ).className =
 "message success";
+
 
 window.scrollTo(0,0);
 
 }
 
 
+/* ================================================= */
 /* طالب جديد */
+/* ================================================= */
 
 function newStudent(){
 
@@ -1026,6 +1142,7 @@ document.getElementById("studentGrade")
 document.getElementById("studentCode")
 .value="";
 
+
 for(var i=1;i<=15;i++){
 
 document.getElementById(
@@ -1034,6 +1151,7 @@ document.getElementById(
 
 }
 
+
 document.getElementById(
 "saveMessage"
 ).innerHTML="";
@@ -1041,12 +1159,15 @@ document.getElementById(
 }
 
 
+/* ================================================= */
 /* حذف الطالب */
+/* ================================================= */
 
 async function deleteStudent(encodedCode){
 
 const loggedIn =
 await isTeacherLoggedIn();
+
 
 if(!loggedIn){
 
@@ -1056,18 +1177,22 @@ return;
 
 }
 
+
 var code =
 decodeURIComponent(encodedCode);
+
 
 if(!confirm(
 "هل تريد حذف هذا الطالب؟"
 ))return;
+
 
 const {error} =
 await db
 .from("students")
 .delete()
 .eq("student_code",code);
+
 
 if(error){
 
@@ -1086,6 +1211,7 @@ return;
 
 }
 
+
 document.getElementById(
 "saveMessage"
 ).innerHTML =
@@ -1096,12 +1222,15 @@ document.getElementById(
 ).className =
 "message success";
 
+
 displayStudents();
 
 }
 
 
+/* ================================================= */
 /* استعلام ولي الأمر */
+/* ================================================= */
 
 async function searchStudent(){
 
@@ -1115,18 +1244,21 @@ document.getElementById("parentMessage");
 var result =
 document.getElementById("parentResult");
 
+
 if(code===""){
 
 message.innerHTML =
 "❌ اكتب كود الطالب.";
 
-message.className="message error";
+message.className =
+"message error";
 
 result.innerHTML="";
 
 return;
 
 }
+
 
 const {data:student,error} =
 await db
@@ -1135,31 +1267,36 @@ await db
 .eq("student_code",code)
 .maybeSingle();
 
+
 if(error){
 
 message.innerHTML =
 "❌ حدث خطأ أثناء الاستعلام.";
 
-message.className="message error";
+message.className =
+"message error";
 
 result.innerHTML="";
 
 return;
 
 }
+
 
 if(!student){
 
 message.innerHTML =
 "❌ كود الطالب غير موجود.";
 
-message.className="message error";
+message.className =
+"message error";
 
 result.innerHTML="";
 
 return;
 
 }
+
 
 message.innerHTML="";
 
@@ -1201,6 +1338,7 @@ for(var i=1;i<=15;i++){
 var value =
 student["evaluation_"+i];
 
+
 if(
 value!==null &&
 value!==undefined &&
@@ -1209,11 +1347,14 @@ value!==""
 
 hasEvaluation=true;
 
+
 var displayValue;
+
 
 if(value==="غاب"){
 
-displayValue="غياب";
+displayValue =
+"غياب";
 
 }else{
 
@@ -1221,6 +1362,7 @@ displayValue =
 escapeHtml(value)+"/10";
 
 }
+
 
 html +=
 
@@ -1243,14 +1385,19 @@ html +=
 }
 
 
-html += "</div>";
+html +=
+"</div>";
 
-result.innerHTML=html;
+
+result.innerHTML =
+html;
 
 }
 
 
+/* ================================================= */
 /* حماية النص */
+/* ================================================= */
 
 function escapeHtml(value){
 
@@ -1267,4 +1414,4 @@ return String(value)
 </script>
 
 </body>
-</html>
+  </html>
