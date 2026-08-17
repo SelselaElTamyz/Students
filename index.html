@@ -9,22 +9,94 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9}
-.container{width:94%;max-width:650px;margin:25px auto;background:white;padding:20px;border-radius:18px;box-shadow:0 4px 15px rgba(0,0,0,.15)}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f1f5f9;
+}
+
+.container{
+width:94%;
+max-width:650px;
+margin:25px auto;
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
 .page{display:none}
 .page.active{display:block}
+
 h1,h2,h3{text-align:center}
+
 p{color:#555}
-input,select{width:100%;padding:13px;margin:7px 0;border:1px solid #ccc;border-radius:9px;font-size:16px}
-button{width:100%;padding:13px;margin:7px 0;border:none;border-radius:9px;color:white;font-size:17px;cursor:pointer}
-.blue{background:#1976d2}.green{background:#2e7d32}.red{background:#c62828}.gray{background:#777}.orange{background:#ef6c00}
-.message{text-align:center;font-weight:bold;margin:10px}
-.success{color:green}.error{color:red}
-.card{background:#f8fafc;border:1px solid #ddd;border-radius:12px;padding:14px;margin:10px 0}
-.evaluation{display:flex;gap:8px;align-items:center;margin:8px 0}
-.evaluation strong{width:110px}
-.evaluation select{flex:1;margin:0}
-hr{border:none;border-top:1px solid #ddd;margin:20px 0}
+
+input,select{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:none;
+border-radius:9px;
+color:white;
+font-size:17px;
+cursor:pointer;
+}
+
+.blue{background:#1976d2}
+.green{background:#2e7d32}
+.red{background:#c62828}
+.gray{background:#777}
+.orange{background:#ef6c00}
+
+.message{
+text-align:center;
+font-weight:bold;
+margin:10px;
+}
+
+.success{color:green}
+.error{color:red}
+
+.card{
+background:#f8fafc;
+border:1px solid #ddd;
+border-radius:12px;
+padding:14px;
+margin:10px 0;
+}
+
+.evaluation{
+display:flex;
+gap:8px;
+align-items:center;
+margin:8px 0;
+}
+
+.evaluation strong{
+width:110px;
+}
+
+.evaluation select{
+flex:1;
+margin:0;
+}
+
+hr{
+border:none;
+border-top:1px solid #ddd;
+margin:20px 0;
+}
 </style>
 </head>
 
@@ -32,11 +104,15 @@ hr{border:none;border-top:1px solid #ddd;margin:20px 0}
 
 <div class="container">
 
+<!-- الصفحة الرئيسية -->
+
 <div id="home" class="page active">
 
 <h1>⭐ سلسلة التميز</h1>
 
-<p style="text-align:center">نظام متابعة الطلاب</p>
+<p style="text-align:center;">
+نظام متابعة الطلاب
+</p>
 
 <button class="blue" onclick="showPage('parent')">
 👨‍👩‍👧 صفحة ولي الأمر
@@ -49,14 +125,20 @@ hr{border:none;border-top:1px solid #ddd;margin:20px 0}
 </div>
 
 
+<!-- دخول المعلم -->
+
 <div id="teacherLogin" class="page">
 
 <h2>👨‍🏫 دخول المعلم</h2>
 
-<input id="teacherEmail" type="email"
+<input
+id="teacherEmail"
+type="email"
 placeholder="البريد الإلكتروني">
 
-<input id="teacherPassword" type="password"
+<input
+id="teacherPassword"
+type="password"
 placeholder="كلمة المرور">
 
 <button class="green" onclick="loginTeacher()">
@@ -72,18 +154,43 @@ placeholder="كلمة المرور">
 </div>
 
 
+<!-- صفحة المعلم -->
+
 <div id="teacher" class="page">
 
 <h2>👨‍🏫 صفحة المعلم</h2>
 
-<p style="text-align:center">إضافة وتعديل بيانات الطلاب</p>
+<p style="text-align:center;">
+إضافة وتعديل بيانات الطلاب
+</p>
 
-<input id="studentName" type="text"
-placeholder="اسم الطالب">
+<input
+id="studentName"
+type="text"
+placeholder="اسم الطالب / الطالبة">
+
+<select id="studentGender">
+
+<option value="">
+اختر النوع
+</option>
+
+<option value="ذكر">
+👦 طالب
+</option>
+
+<option value="أنثى">
+👧 طالبة
+</option>
+
+</select>
+
 
 <select id="studentGrade">
 
-<option value="">اختر الصف الدراسي</option>
+<option value="">
+اختر الصف الدراسي
+</option>
 
 <option>الصف الأول الابتدائي</option>
 <option>الصف الثاني الابتدائي</option>
@@ -102,16 +209,21 @@ placeholder="اسم الطالب">
 
 </select>
 
-<input id="studentCode" type="text"
+
+<input
+id="studentCode"
+type="text"
 placeholder="كود الطالب">
+
 
 <h3>📊 التقييمات من 1 إلى 15</h3>
 
-<p style="text-align:center">
+<p style="text-align:center;">
 اختر الدرجة من 0 إلى 10 أو اختر غاب
 </p>
 
 <div id="evaluationInputs"></div>
+
 
 <button class="green" onclick="saveStudent()">
 💾 حفظ بيانات الطالب
@@ -140,15 +252,19 @@ placeholder="كود الطالب">
 </div>
 
 
+<!-- صفحة ولي الأمر -->
+
 <div id="parent" class="page">
 
 <h2>👨‍👩‍👧 صفحة ولي الأمر</h2>
 
-<p style="text-align:center">
-الاستعلام عن الطالب
+<p style="text-align:center;">
+الاستعلام عن الطالب / الطالبة
 </p>
 
-<input id="parentCode" type="text"
+<input
+id="parentCode"
+type="text"
 placeholder="أدخل كود الطالب">
 
 <button class="blue" onclick="searchStudent()">
@@ -214,6 +330,7 @@ evaluationBox.innerHTML +=
 '<option value="10">10</option>' +
 
 '</select>' +
+
 '</div>';
 
 }
@@ -236,7 +353,7 @@ document.getElementById(pageId)
 }
 
 
-/* دخول المعلم */
+/* تسجيل دخول المعلم */
 
 async function loginTeacher(){
 
@@ -259,6 +376,7 @@ message.innerHTML =
 message.className="message error";
 
 return;
+
 }
 
 const {error} =
@@ -280,8 +398,7 @@ return;
 
 }
 
-message.innerHTML =
-"";
+message.innerHTML="";
 
 document.getElementById("teacherEmail")
 .value="";
@@ -321,7 +438,7 @@ return !!data.session;
 }
 
 
-/* حفظ الطالب */
+/* حفظ بيانات الطالب */
 
 async function saveStudent(){
 
@@ -340,6 +457,10 @@ var name =
 document.getElementById("studentName")
 .value.trim();
 
+var gender =
+document.getElementById("studentGender")
+.value;
+
 var grade =
 document.getElementById("studentGrade")
 .value;
@@ -351,10 +472,16 @@ document.getElementById("studentCode")
 var message =
 document.getElementById("saveMessage");
 
-if(name==="" || grade==="" || code===""){
+
+if(
+name==="" ||
+gender==="" ||
+grade==="" ||
+code===""
+){
 
 message.innerHTML =
-"❌ اكتب اسم الطالب والصف والكود.";
+"❌ اكتب اسم الطالب واختر النوع والصف والكود.";
 
 message.className="message error";
 
@@ -363,9 +490,19 @@ return;
 }
 
 
-/* تجهيز التقييمات */
+/* تجهيز البيانات */
 
-var evaluations={};
+var row={
+
+student_code:code,
+student_name:name,
+gender:gender,
+grade:grade
+
+};
+
+
+/* إضافة التقييمات */
 
 for(var i=1;i<=15;i++){
 
@@ -374,34 +511,13 @@ document.getElementById(
 "evaluation"+i
 ).value;
 
-if(value!==""){
-
-evaluations[i]=value;
-
-}
-
-}
-
-
-/* تحويل التقييمات إلى أعمدة Supabase */
-
-var row={
-
-student_code:code,
-student_name:name,
-grade:grade
-
-};
-
-for(var i=1;i<=15;i++){
-
 row["evaluation_"+i] =
-evaluations[i] || null;
+value || null;
 
 }
 
 
-/* هل الطالب موجود؟ */
+/* البحث عن الطالب */
 
 const {data:existing,error:findError} =
 await db
@@ -409,6 +525,7 @@ await db
 .select("id")
 .eq("student_code",code)
 .maybeSingle();
+
 
 if(findError){
 
@@ -492,7 +609,7 @@ await isTeacherLoggedIn();
 
 if(!loggedIn)return;
 
-const list =
+var list =
 document.getElementById("studentsList");
 
 list.innerHTML =
@@ -531,9 +648,16 @@ document.createElement("div");
 
 div.className="card";
 
+var title =
+student.gender === "أنثى"
+? "👧 طالبة"
+: "👦 طالب";
+
 div.innerHTML=
 
-"<strong>👨‍🎓 "+
+"<strong>"+
+title+
+": "+
 escapeHtml(student.student_name)+
 "</strong>"+
 
@@ -570,7 +694,7 @@ list.appendChild(div);
 
 async function editStudent(encodedCode){
 
-const code =
+var code =
 decodeURIComponent(encodedCode);
 
 const {data:student,error} =
@@ -585,11 +709,15 @@ if(error || !student)return;
 document.getElementById("studentName")
 .value=student.student_name || "";
 
+document.getElementById("studentGender")
+.value=student.gender || "";
+
 document.getElementById("studentGrade")
 .value=student.grade || "";
 
 document.getElementById("studentCode")
 .value=student.student_code || "";
+
 
 for(var i=1;i<=15;i++){
 
@@ -599,6 +727,7 @@ document.getElementById(
 student["evaluation_"+i] || "";
 
 }
+
 
 document.getElementById(
 "saveMessage"
@@ -620,6 +749,9 @@ window.scrollTo(0,0);
 function newStudent(){
 
 document.getElementById("studentName")
+.value="";
+
+document.getElementById("studentGender")
 .value="";
 
 document.getElementById("studentGrade")
@@ -658,7 +790,7 @@ return;
 
 }
 
-const code =
+var code =
 decodeURIComponent(encodedCode);
 
 if(!confirm(
@@ -765,13 +897,20 @@ return;
 
 message.innerHTML="";
 
+
+var personTitle =
+student.gender === "أنثى"
+? "الطالبة"
+: "الطالب";
+
+
 var html=
 
 "<div class='card'>"+
 
-"<h3>📋 بيانات الطالب</h3>"+
+"<h3>📋 بيانات "+personTitle+"</h3>"+
 
-"<p><strong>اسم الطالب:</strong> "+
+"<p><strong>اسم "+personTitle+":</strong> "+
 escapeHtml(student.student_name)+
 "</p>"+
 
@@ -787,16 +926,20 @@ escapeHtml(student.student_code)+
 
 "<h3>📊 التقييمات</h3>";
 
+
 var hasEvaluation=false;
+
 
 for(var i=1;i<=15;i++){
 
 var value =
 student["evaluation_"+i];
 
-if(value!==null &&
+if(
+value!==null &&
 value!==undefined &&
-value!==""){
+value!==""
+){
 
 hasEvaluation=true;
 
@@ -825,12 +968,14 @@ displayValue+
 
 }
 
+
 if(!hasEvaluation){
 
 html +=
 "<p>لا توجد تقييمات مسجلة حتى الآن.</p>";
 
 }
+
 
 html += "</div>";
 
