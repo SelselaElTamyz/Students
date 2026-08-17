@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>سلسلة التميز | أ/ محمد القهوجى</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
 box-sizing:border-box;
 }
@@ -15,17 +17,19 @@ box-sizing:border-box;
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:#f1f5f9;
+background:linear-gradient(135deg,#eef5ff,#f8fafc);
+color:#222;
 }
 
 .container{
 width:94%;
 max-width:650px;
 margin:25px auto;
-background:white;
-padding:20px;
-border-radius:18px;
-box-shadow:0 4px 15px rgba(0,0,0,.15);
+background:#fff;
+padding:22px;
+border-radius:22px;
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+min-height:90vh;
 }
 
 .page{
@@ -36,8 +40,33 @@ display:none;
 display:block;
 }
 
+.brand{
+text-align:center;
+padding:10px 0 18px;
+border-bottom:1px solid #eee;
+margin-bottom:20px;
+}
+
+.brand-name{
+font-size:25px;
+font-weight:bold;
+color:#1976d2;
+margin-bottom:6px;
+}
+
+.brand-title{
+font-size:16px;
+font-weight:bold;
+color:#555;
+}
+
 h1,h2,h3{
 text-align:center;
+}
+
+h1{
+color:#1976d2;
+margin-top:10px;
 }
 
 p{
@@ -46,22 +75,37 @@ color:#555;
 
 input,select{
 width:100%;
-padding:13px;
+padding:14px;
 margin:7px 0;
-border:1px solid #ccc;
-border-radius:9px;
+border:1px solid #d1d5db;
+border-radius:10px;
 font-size:16px;
+background:#fff;
+outline:none;
+}
+
+input:focus,
+select:focus{
+border-color:#1976d2;
+box-shadow:0 0 0 2px rgba(25,118,210,.1);
 }
 
 button{
 width:100%;
-padding:13px;
+padding:14px;
 margin:7px 0;
 border:none;
-border-radius:9px;
+border-radius:10px;
 color:white;
 font-size:17px;
 cursor:pointer;
+font-weight:bold;
+transition:.2s;
+}
+
+button:hover{
+opacity:.9;
+transform:translateY(-1px);
 }
 
 .blue{
@@ -87,23 +131,23 @@ background:#ef6c00;
 .message{
 text-align:center;
 font-weight:bold;
-margin:10px;
+margin:12px;
 }
 
 .success{
-color:green;
+color:#2e7d32;
 }
 
 .error{
-color:red;
+color:#c62828;
 }
 
 .card{
 background:#f8fafc;
-border:1px solid #ddd;
-border-radius:12px;
-padding:14px;
-margin:10px 0;
+border:1px solid #e2e8f0;
+border-radius:14px;
+padding:16px;
+margin:12px 0;
 }
 
 .evaluation{
@@ -124,34 +168,36 @@ margin:0;
 
 hr{
 border:none;
-border-top:1px solid #ddd;
-margin:20px 0;
-}
-
-.teacher-name{
-text-align:center;
-font-size:22px;
-font-weight:bold;
-color:#1976d2;
-margin:5px 0;
-}
-
-.teacher-title{
-text-align:center;
-font-weight:bold;
-color:#444;
-margin-top:0;
+border-top:1px solid #e5e7eb;
+margin:22px 0;
 }
 
 .footer{
 text-align:center;
-margin-top:25px;
-padding-top:15px;
+margin-top:30px;
+padding-top:16px;
 border-top:1px solid #eee;
-font-size:13px;
 color:#777;
+font-size:13px;
 line-height:1.8;
 }
+
+.footer strong{
+color:#555;
+}
+
+.home-icon{
+font-size:45px;
+text-align:center;
+margin:5px 0 10px;
+}
+
+.subtitle{
+text-align:center;
+font-size:16px;
+margin-bottom:22px;
+}
+
 </style>
 </head>
 
@@ -159,21 +205,32 @@ line-height:1.8;
 
 <div class="container">
 
-<!-- الصفحة الرئيسية -->
+
+<!-- ================= الصفحة الرئيسية ================= -->
 
 <div id="home" class="page active">
 
-<h1>⭐ سلسلة التميز</h1>
+<div class="brand">
 
-<div class="teacher-name">
+<div class="brand-name">
 أ/ محمد القهوجى
 </div>
 
-<p class="teacher-title">
+<div class="brand-title">
 معلم الرياضيات والإحصاء
-</p>
+</div>
 
-<p style="text-align:center;">
+</div>
+
+<div class="home-icon">
+⭐
+</div>
+
+<h1>
+سلسلة التميز
+</h1>
+
+<p class="subtitle">
 نظام متابعة الطلاب
 </p>
 
@@ -187,7 +244,9 @@ line-height:1.8;
 
 <div class="footer">
 
-<strong>تصميم وبرمجة أ/ محمد القهوجى</strong>
+<strong>
+تصميم وبرمجة أ/ محمد القهوجى
+</strong>
 
 <br>
 
@@ -198,11 +257,25 @@ line-height:1.8;
 </div>
 
 
-<!-- دخول المعلم -->
+<!-- ================= دخول المعلم ================= -->
 
 <div id="teacherLogin" class="page">
 
-<h2>👨‍🏫 دخول المعلم</h2>
+<div class="brand">
+
+<div class="brand-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="brand-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+👨‍🏫 دخول المعلم
+</h2>
 
 <input
 id="teacherEmail"
@@ -224,14 +297,40 @@ placeholder="كلمة المرور">
 ↩️ رجوع
 </button>
 
+<div class="footer">
+
+<strong>
+تصميم وبرمجة أ/ محمد القهوجى
+</strong>
+
+<br>
+
+© 2026 جميع الحقوق محفوظة
+
+</div>
+
 </div>
 
 
-<!-- صفحة المعلم -->
+<!-- ================= صفحة المعلم ================= -->
 
 <div id="teacher" class="page">
 
-<h2>👨‍🏫 صفحة المعلم</h2>
+<div class="brand">
+
+<div class="brand-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="brand-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+👨‍🏫 صفحة المعلم
+</h2>
 
 <p style="text-align:center;">
 إضافة وتعديل بيانات الطلاب
@@ -258,7 +357,6 @@ placeholder="اسم الطالب / الطالبة">
 
 </select>
 
-
 <select id="studentGrade">
 
 <option value="">
@@ -282,21 +380,20 @@ placeholder="اسم الطالب / الطالبة">
 
 </select>
 
-
 <input
 id="studentCode"
 type="text"
 placeholder="كود الطالب">
 
-
-<h3>📊 التقييمات من 1 إلى 15</h3>
+<h3>
+📊 التقييمات من 1 إلى 15
+</h3>
 
 <p style="text-align:center;">
 اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
 </p>
 
 <div id="evaluationInputs"></div>
-
 
 <button class="green" onclick="saveStudent()">
 💾 حفظ بيانات الطالب
@@ -314,7 +411,9 @@ placeholder="كود الطالب">
 
 <hr>
 
-<h3>👨‍🎓 الطلاب المسجلون</h3>
+<h3>
+👨‍🎓 الطلاب المسجلون
+</h3>
 
 <div id="studentsList"></div>
 
@@ -322,14 +421,40 @@ placeholder="كود الطالب">
 ↩️ الصفحة الرئيسية
 </button>
 
+<div class="footer">
+
+<strong>
+تصميم وبرمجة أ/ محمد القهوجى
+</strong>
+
+<br>
+
+© 2026 جميع الحقوق محفوظة
+
+</div>
+
 </div>
 
 
-<!-- صفحة ولي الأمر -->
+<!-- ================= صفحة ولي الأمر ================= -->
 
 <div id="parent" class="page">
 
-<h2>👨‍👩‍👧 صفحة ولي الأمر</h2>
+<div class="brand">
+
+<div class="brand-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="brand-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+👨‍👩‍👧 صفحة ولي الأمر
+</h2>
 
 <p style="text-align:center;">
 الاستعلام عن الطالب / الطالبة
@@ -351,6 +476,18 @@ placeholder="أدخل كود الطالب">
 <button class="gray" onclick="showPage('home')">
 ↩️ رجوع
 </button>
+
+<div class="footer">
+
+<strong>
+تصميم وبرمجة أ/ محمد القهوجى
+</strong>
+
+<br>
+
+© 2026 جميع الحقوق محفوظة
+
+</div>
 
 </div>
 
@@ -593,8 +730,6 @@ return;
 }
 
 
-/* تجهيز البيانات */
-
 var row={
 
 student_code:code,
@@ -604,8 +739,6 @@ grade:grade
 
 };
 
-
-/* إضافة التقييمات */
 
 for(var i=1;i<=15;i++){
 
@@ -619,8 +752,6 @@ value || null;
 
 }
 
-
-/* البحث عن الطالب */
 
 const {data:existing,error:findError} =
 await db
@@ -641,8 +772,6 @@ return;
 
 }
 
-
-/* تعديل */
 
 if(existing){
 
@@ -668,9 +797,6 @@ message.innerHTML =
 "✅ تم تعديل بيانات الطالب بنجاح.";
 
 }
-
-
-/* إضافة */
 
 else{
 
@@ -1104,4 +1230,4 @@ return String(value)
 </script>
 
 </body>
-  </html>
+</html>
