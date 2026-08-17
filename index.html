@@ -40,25 +40,36 @@ display:none;
 display:block;
 }
 
+/* الهوية */
+
 .brand{
 text-align:center;
-padding:10px 0 18px;
+padding:8px 0 18px;
 border-bottom:1px solid #eee;
 margin-bottom:20px;
 }
 
-.brand-name{
-font-size:25px;
+.brand-title-main{
+font-size:29px;
 font-weight:bold;
 color:#1976d2;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
-.brand-title{
+.teacher-name{
+font-size:24px;
+font-weight:bold;
+color:#e67e22;
+margin-bottom:5px;
+}
+
+.teacher-title{
 font-size:16px;
 font-weight:bold;
 color:#555;
 }
+
+/* العناوين */
 
 h1,h2,h3{
 text-align:center;
@@ -66,12 +77,13 @@ text-align:center;
 
 h1{
 color:#1976d2;
-margin-top:10px;
 }
 
 p{
 color:#555;
 }
+
+/* الحقول */
 
 input,select{
 width:100%;
@@ -90,6 +102,8 @@ border-color:#1976d2;
 box-shadow:0 0 0 2px rgba(25,118,210,.1);
 }
 
+/* الأزرار */
+
 button{
 width:100%;
 padding:14px;
@@ -104,7 +118,7 @@ transition:.2s;
 }
 
 button:hover{
-opacity:.9;
+opacity:.92;
 transform:translateY(-1px);
 }
 
@@ -128,6 +142,8 @@ background:#777;
 background:#ef6c00;
 }
 
+/* الرسائل */
+
 .message{
 text-align:center;
 font-weight:bold;
@@ -142,6 +158,8 @@ color:#2e7d32;
 color:#c62828;
 }
 
+/* البطاقات */
+
 .card{
 background:#f8fafc;
 border:1px solid #e2e8f0;
@@ -149,6 +167,8 @@ border-radius:14px;
 padding:16px;
 margin:12px 0;
 }
+
+/* التقييمات */
 
 .evaluation{
 display:flex;
@@ -166,11 +186,29 @@ flex:1;
 margin:0;
 }
 
+/* الفاصل */
+
 hr{
 border:none;
 border-top:1px solid #e5e7eb;
 margin:22px 0;
 }
+
+/* الصفحة الرئيسية */
+
+.home-icon{
+font-size:45px;
+text-align:center;
+margin:5px 0 10px;
+}
+
+.subtitle{
+text-align:center;
+font-size:16px;
+margin-bottom:22px;
+}
+
+/* التذييل */
 
 .footer{
 text-align:center;
@@ -184,18 +222,6 @@ line-height:1.8;
 
 .footer strong{
 color:#555;
-}
-
-.home-icon{
-font-size:45px;
-text-align:center;
-margin:5px 0 10px;
-}
-
-.subtitle{
-text-align:center;
-font-size:16px;
-margin-bottom:22px;
 }
 
 </style>
@@ -212,23 +238,23 @@ margin-bottom:22px;
 
 <div class="brand">
 
-<div class="brand-name">
+<div class="brand-title-main">
+⭐ سلسلة التميز
+</div>
+
+<div class="teacher-name">
 أ/ محمد القهوجى
 </div>
 
-<div class="brand-title">
+<div class="teacher-title">
 معلم الرياضيات والإحصاء
 </div>
 
 </div>
 
 <div class="home-icon">
-⭐
+📚
 </div>
-
-<h1>
-سلسلة التميز
-</h1>
 
 <p class="subtitle">
 نظام متابعة الطلاب
@@ -263,11 +289,15 @@ margin-bottom:22px;
 
 <div class="brand">
 
-<div class="brand-name">
+<div class="brand-title-main">
+⭐ سلسلة التميز
+</div>
+
+<div class="teacher-name">
 أ/ محمد القهوجى
 </div>
 
-<div class="brand-title">
+<div class="teacher-title">
 معلم الرياضيات والإحصاء
 </div>
 
@@ -318,11 +348,15 @@ placeholder="كلمة المرور">
 
 <div class="brand">
 
-<div class="brand-name">
+<div class="brand-title-main">
+⭐ سلسلة التميز
+</div>
+
+<div class="teacher-name">
 أ/ محمد القهوجى
 </div>
 
-<div class="brand-title">
+<div class="teacher-title">
 معلم الرياضيات والإحصاء
 </div>
 
@@ -442,11 +476,15 @@ placeholder="كود الطالب">
 
 <div class="brand">
 
-<div class="brand-name">
+<div class="brand-title-main">
+⭐ سلسلة التميز
+</div>
+
+<div class="teacher-name">
 أ/ محمد القهوجى
 </div>
 
-<div class="brand-title">
+<div class="teacher-title">
 معلم الرياضيات والإحصاء
 </div>
 
@@ -728,7 +766,6 @@ message.className="message error";
 return;
 
 }
-
 
 var row={
 
