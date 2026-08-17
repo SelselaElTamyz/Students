@@ -67,8 +67,8 @@ letter-spacing:.3px;
 .teacher-name{
 font-size:25px;
 font-weight:900;
-color:#a66a00;
-margin-bottom:7px;
+color:#A66A00;
+margin-bottom:2px;
 }
 
 
@@ -77,7 +77,8 @@ margin-bottom:7px;
 .teacher-title{
 font-size:18px;
 font-weight:bold;
-color:#14213D;
+color:#6A1B6D;
+margin-top:0;
 }
 
 
@@ -140,15 +141,15 @@ transform:translateY(-1px);
 }
 
 .blue{
-background:#1976d2;
+background:#1976D2;
 }
 
 .green{
-background:#2e7d32;
+background:#2E7D32;
 }
 
 .red{
-background:#c62828;
+background:#C62828;
 }
 
 .gray{
@@ -156,7 +157,7 @@ background:#777;
 }
 
 .orange{
-background:#ef6c00;
+background:#EF6C00;
 }
 
 
@@ -169,19 +170,19 @@ margin:12px;
 }
 
 .success{
-color:#2e7d32;
+color:#2E7D32;
 }
 
 .error{
-color:#c62828;
+color:#C62828;
 }
 
 
 /* ================= البطاقات ================= */
 
 .card{
-background:#f8fafc;
-border:1px solid #e2e8f0;
+background:#F8FAFC;
+border:1px solid #E2E8F0;
 border-radius:14px;
 padding:16px;
 margin:12px 0;
@@ -211,7 +212,7 @@ margin:0;
 
 hr{
 border:none;
-border-top:1px solid #e5e7eb;
+border-top:1px solid #E5E7EB;
 margin:22px 0;
 }
 
@@ -255,9 +256,7 @@ color:#555;
 <div class="container">
 
 
-<!-- ================================================= -->
-<!-- الصفحة الرئيسية -->
-<!-- ================================================= -->
+<!-- ================= الصفحة الرئيسية ================= -->
 
 <div id="home" class="page active">
 
@@ -313,9 +312,7 @@ color:#555;
 
 
 
-<!-- ================================================= -->
-<!-- دخول المعلم -->
-<!-- ================================================= -->
+<!-- ================= دخول المعلم ================= -->
 
 <div id="teacherLogin" class="page">
 
@@ -382,9 +379,7 @@ placeholder="كلمة المرور">
 
 
 
-<!-- ================================================= -->
-<!-- صفحة المعلم -->
-<!-- ================================================= -->
+<!-- ================= صفحة المعلم ================= -->
 
 <div id="teacher" class="page">
 
@@ -531,9 +526,7 @@ placeholder="كود الطالب">
 
 
 
-<!-- ================================================= -->
-<!-- صفحة ولي الأمر -->
-<!-- ================================================= -->
+<!-- ================= صفحة ولي الأمر ================= -->
 
 <div id="parent" class="page">
 
@@ -605,10 +598,7 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
-
-/* ================================================= */
-/* Supabase */
-/* ================================================= */
+/* ================= Supabase ================= */
 
 const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
@@ -623,10 +613,7 @@ SUPABASE_KEY
 );
 
 
-
-/* ================================================= */
-/* إنشاء التقييمات */
-/* ================================================= */
+/* ================= التقييمات ================= */
 
 var evaluationBox =
 document.getElementById("evaluationInputs");
@@ -705,10 +692,7 @@ evaluationBox.innerHTML +=
 }
 
 
-
-/* ================================================= */
-/* تغيير الصفحة */
-/* ================================================= */
+/* ================= تغيير الصفحة ================= */
 
 function showPage(pageId){
 
@@ -727,10 +711,7 @@ window.scrollTo(0,0);
 }
 
 
-
-/* ================================================= */
-/* تسجيل دخول المعلم */
-/* ================================================= */
+/* ================= تسجيل الدخول ================= */
 
 async function loginTeacher(){
 
@@ -783,13 +764,11 @@ return;
 
 message.innerHTML="";
 
-
 document.getElementById("teacherEmail")
 .value="";
 
 document.getElementById("teacherPassword")
 .value="";
-
 
 showPage("teacher");
 
@@ -798,10 +777,7 @@ displayStudents();
 }
 
 
-
-/* ================================================= */
-/* تسجيل الخروج */
-/* ================================================= */
+/* ================= تسجيل الخروج ================= */
 
 async function logoutTeacher(){
 
@@ -814,10 +790,7 @@ showPage("home");
 }
 
 
-
-/* ================================================= */
-/* التأكد من دخول المعلم */
-/* ================================================= */
+/* ================= حالة تسجيل الدخول ================= */
 
 async function isTeacherLoggedIn(){
 
@@ -829,16 +802,12 @@ return !!data.session;
 }
 
 
-
-/* ================================================= */
-/* حفظ بيانات الطالب */
-/* ================================================= */
+/* ================= حفظ الطالب ================= */
 
 async function saveStudent(){
 
 const loggedIn =
 await isTeacherLoggedIn();
-
 
 if(!loggedIn){
 
@@ -957,9 +926,7 @@ return;
 message.innerHTML =
 "✅ تم تعديل بيانات الطالب بنجاح.";
 
-}
-
-else{
+}else{
 
 const {error} =
 await db
@@ -990,16 +957,12 @@ message.innerHTML =
 message.className =
 "message success";
 
-
 displayStudents();
 
 }
 
 
-
-/* ================================================= */
-/* عرض الطلاب */
-/* ================================================= */
+/* ================= عرض الطلاب ================= */
 
 async function displayStudents(){
 
@@ -1011,7 +974,6 @@ if(!loggedIn)return;
 
 var list =
 document.getElementById("studentsList");
-
 
 list.innerHTML =
 "جاري تحميل الطلاب...";
@@ -1052,8 +1014,7 @@ data.forEach(function(student){
 var div =
 document.createElement("div");
 
-div.className =
-"card";
+div.className="card";
 
 
 var title =
@@ -1092,7 +1053,6 @@ encodeURIComponent(student.student_code)+
 "🗑️ حذف الطالب"+
 "</button>";
 
-
 list.appendChild(div);
 
 });
@@ -1100,10 +1060,7 @@ list.appendChild(div);
 }
 
 
-
-/* ================================================= */
-/* تعديل الطالب */
-/* ================================================= */
+/* ================= تعديل الطالب ================= */
 
 async function editStudent(encodedCode){
 
@@ -1157,22 +1114,17 @@ document.getElementById(
 ).innerHTML =
 "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
 
-
 document.getElementById(
 "saveMessage"
 ).className =
 "message success";
-
 
 window.scrollTo(0,0);
 
 }
 
 
-
-/* ================================================= */
-/* طالب جديد */
-/* ================================================= */
+/* ================= طالب جديد ================= */
 
 function newStudent(){
 
@@ -1205,16 +1157,12 @@ document.getElementById(
 }
 
 
-
-/* ================================================= */
-/* حذف الطالب */
-/* ================================================= */
+/* ================= حذف الطالب ================= */
 
 async function deleteStudent(encodedCode){
 
 const loggedIn =
 await isTeacherLoggedIn();
-
 
 if(!loggedIn){
 
@@ -1275,10 +1223,7 @@ displayStudents();
 }
 
 
-
-/* ================================================= */
-/* استعلام ولي الأمر */
-/* ================================================= */
+/* ================= استعلام ولي الأمر ================= */
 
 async function searchStudent(){
 
@@ -1401,8 +1346,7 @@ var displayValue;
 
 if(value==="غاب"){
 
-displayValue =
-"غياب";
+displayValue="غياب";
 
 }else{
 
@@ -1433,20 +1377,14 @@ html +=
 }
 
 
-html +=
-"</div>";
+html += "</div>";
 
-
-result.innerHTML =
-html;
+result.innerHTML=html;
 
 }
 
 
-
-/* ================================================= */
-/* حماية النص */
-/* ================================================= */
+/* ================= حماية النص ================= */
 
 function escapeHtml(value){
 
@@ -1463,5 +1401,4 @@ return String(value)
 </script>
 
 </body>
-  </html>
-  
+</html>
