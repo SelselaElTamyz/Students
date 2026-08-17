@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سلسلة التميز فى الرياضيات | أ/ محمد القهوجى</title>
+
+<title>سلسلة التميز فى الرياضيات | أ/ محمد القهوجي</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 margin:0;
@@ -27,8 +34,16 @@ box-shadow:0 8px 28px rgba(15,23,42,.13);
 min-height:90vh
 }
 
-.page{display:none}
-.page.active{display:block}
+.page{
+display:none
+}
+
+.page.active{
+display:block
+}
+
+
+/* ================= الهوية ================= */
 
 .brand{
 text-align:center;
@@ -76,10 +91,27 @@ line-height:1.5;
 text-align:center
 }
 
-h1,h2,h3{text-align:center}
-h2{color:#172554}
-h3{color:#334155}
-p{color:#64748b}
+
+/* ================= العناوين ================= */
+
+h1,h2,h3{
+text-align:center
+}
+
+h2{
+color:#172554
+}
+
+h3{
+color:#334155
+}
+
+p{
+color:#64748b
+}
+
+
+/* ================= الحقول ================= */
 
 input,select{
 width:100%;
@@ -96,6 +128,9 @@ input:focus,select:focus{
 border-color:#1565C0;
 box-shadow:0 0 0 3px rgba(21,101,192,.10)
 }
+
+
+/* ================= الأزرار ================= */
 
 button{
 width:100%;
@@ -115,11 +150,28 @@ opacity:.93;
 transform:translateY(-1px)
 }
 
-.blue{background:#1565C0}
-.green{background:#2E7D32}
-.red{background:#C62828}
-.gray{background:#64748b}
-.orange{background:#C2410C}
+.blue{
+background:#1565C0
+}
+
+.green{
+background:#2E7D32
+}
+
+.red{
+background:#C62828
+}
+
+.gray{
+background:#64748b
+}
+
+.orange{
+background:#C2410C
+}
+
+
+/* ================= الرسائل ================= */
 
 .message{
 text-align:center;
@@ -127,8 +179,16 @@ font-weight:bold;
 margin:12px
 }
 
-.success{color:#2E7D32}
-.error{color:#C62828}
+.success{
+color:#2E7D32
+}
+
+.error{
+color:#C62828
+}
+
+
+/* ================= البطاقات ================= */
 
 .card{
 background:#f8fafc;
@@ -137,6 +197,9 @@ border-radius:15px;
 padding:16px;
 margin:12px 0
 }
+
+
+/* ================= التقييمات ================= */
 
 .evaluation{
 display:flex;
@@ -155,11 +218,17 @@ flex:1;
 margin:0
 }
 
+
+/* ================= الخط ================= */
+
 hr{
 border:none;
 border-top:1px solid #e2e8f0;
 margin:22px 0
 }
+
+
+/* ================= الصفحة الرئيسية ================= */
 
 .home-icon{
 font-size:45px;
@@ -174,6 +243,9 @@ margin-bottom:22px;
 color:#475569
 }
 
+
+/* ================= التذييل ================= */
+
 .footer{
 text-align:center;
 margin-top:30px;
@@ -184,7 +256,25 @@ font-size:13px;
 line-height:1.8
 }
 
-.footer strong{color:#475569}
+.footer-title{
+font-weight:700;
+color:#475569;
+font-size:14px
+}
+
+.footer-name{
+font-weight:900;
+color:#475569;
+font-size:16px
+}
+
+.copyright{
+font-size:13px;
+color:#94a3b8
+}
+
+
+/* ================= الهاتف ================= */
 
 @media(max-width:480px){
 
@@ -199,23 +289,35 @@ font-size:37px;
 padding-right:30px
 }
 
-.brand-subtitle{font-size:13px}
+.brand-subtitle{
+font-size:13px
+}
 
-.teacher-name{font-size:26px}
+.teacher-name{
+font-size:26px
+}
 
-.teacher-title{font-size:17px}
+.teacher-title{
+font-size:17px
+}
 
-.evaluation strong{width:100px}
+.evaluation strong{
+width:100px
+}
 
 }
+
 </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
-<!-- الصفحة الرئيسية -->
+
+<!-- ================= الصفحة الرئيسية ================= -->
 
 <div id="home" class="page active">
 
@@ -230,7 +332,7 @@ padding-right:30px
 </div>
 
 <div class="teacher-name">
-أ/ محمد القهوجى
+أ/ محمد القهوجي
 </div>
 
 <div class="teacher-title">
@@ -239,39 +341,56 @@ padding-right:30px
 
 </div>
 
+
 <div class="home-icon">
 📚
 </div>
+
 
 <p class="subtitle">
 نظام متابعة الطلاب
 </p>
 
-<button class="blue" onclick="showPage('parent')">
+
+<button
+class="blue"
+onclick="showPage('parent')">
+
 👨‍👩‍👧 صفحة ولى الأمر
+
 </button>
 
-<button class="green" onclick="showPage('teacherLogin')">
+
+<button
+class="green"
+onclick="showPage('teacherLogin')">
+
 👨‍🏫 صفحة المعلم
+
 </button>
+
 
 <footer class="footer">
 
-    <div class="footer-title">
-        تصميم وبرمجة
-    </div>
+<div class="footer-title">
+تصميم وبرمجة
+</div>
 
-    <div class="footer-name">
-        أ/ محمد القهوجي
-    </div>
+<div class="footer-name">
+أ/ محمد القهوجي
+</div>
 
-    <div class="copyright">
-        © 2026 جميع الحقوق محفوظة
-    </div>
+<div class="copyright">
+© 2026 جميع الحقوق محفوظة
+</div>
 
 </footer>
 
-<!-- دخول المعلم -->
+</div>
+
+
+
+<!-- ================= دخول المعلم ================= -->
 
 <div id="teacherLogin" class="page">
 
@@ -286,7 +405,7 @@ padding-right:30px
 </div>
 
 <div class="teacher-name">
-أ/ محمد القهوجى
+أ/ محمد القهوجي
 </div>
 
 <div class="teacher-title">
@@ -295,19 +414,23 @@ padding-right:30px
 
 </div>
 
+
 <h2>
 👨‍🏫 دخول المعلم
 </h2>
+
 
 <input
 id="teacherEmail"
 type="email"
 placeholder="البريد الإلكترونى">
 
+
 <input
 id="teacherPassword"
 type="password"
 placeholder="كلمة المرور">
+
 
 <button
 class="green"
@@ -317,10 +440,12 @@ onclick="loginTeacher()">
 
 </button>
 
+
 <div
 id="loginMessage"
 class="message">
 </div>
+
 
 <button
 class="gray"
@@ -330,22 +455,28 @@ onclick="showPage('home')">
 
 </button>
 
-<div class="footer">
 
-<strong>
-تصميم وبرمجة أ/ محمد القهوجى
-</strong>
+<footer class="footer">
 
-<br>
+<div class="footer-title">
+تصميم وبرمجة
+</div>
 
+<div class="footer-name">
+أ/ محمد القهوجي
+</div>
+
+<div class="copyright">
 © 2026 جميع الحقوق محفوظة
+</div>
+
+</footer>
 
 </div>
 
-</div>
 
 
-<!-- صفحة المعلم -->
+<!-- ================= صفحة المعلم ================= -->
 
 <div id="teacher" class="page">
 
@@ -360,7 +491,7 @@ onclick="showPage('home')">
 </div>
 
 <div class="teacher-name">
-أ/ محمد القهوجى
+أ/ محمد القهوجي
 </div>
 
 <div class="teacher-title">
@@ -369,18 +500,22 @@ onclick="showPage('home')">
 
 </div>
 
+
 <h2>
 👨‍🏫 صفحة المعلم
 </h2>
+
 
 <p style="text-align:center;">
 إضافة وتعديل بيانات الطلاب
 </p>
 
+
 <input
 id="studentName"
 type="text"
 placeholder="اسم الطالب / الطالبة">
+
 
 <select id="studentGender">
 
@@ -397,6 +532,7 @@ placeholder="اسم الطالب / الطالبة">
 </option>
 
 </select>
+
 
 <select id="studentGrade">
 
@@ -421,20 +557,25 @@ placeholder="اسم الطالب / الطالبة">
 
 </select>
 
+
 <input
 id="studentCode"
 type="text"
 placeholder="كود الطالب">
 
+
 <h3>
 📊 التقييمات من 1 إلى 15
 </h3>
+
 
 <p style="text-align:center;">
 اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
 </p>
 
+
 <div id="evaluationInputs"></div>
+
 
 <button
 class="green"
@@ -444,6 +585,7 @@ onclick="saveStudent()">
 
 </button>
 
+
 <button
 class="orange"
 onclick="newStudent()">
@@ -451,6 +593,7 @@ onclick="newStudent()">
 ➕ طالب جديد
 
 </button>
+
 
 <button
 class="red"
@@ -460,18 +603,23 @@ onclick="logoutTeacher()">
 
 </button>
 
+
 <div
 id="saveMessage"
 class="message">
 </div>
 
+
 <hr>
+
 
 <h3>
 👨‍🎓 الطلاب المسجلون
 </h3>
 
+
 <div id="studentsList"></div>
+
 
 <button
 class="gray"
@@ -481,22 +629,28 @@ onclick="showPage('home')">
 
 </button>
 
-<div class="footer">
 
-<strong>
-تصميم وبرمجة أ/ محمد القهوجى
-</strong>
+<footer class="footer">
 
-<br>
+<div class="footer-title">
+تصميم وبرمجة
+</div>
 
+<div class="footer-name">
+أ/ محمد القهوجي
+</div>
+
+<div class="copyright">
 © 2026 جميع الحقوق محفوظة
+</div>
+
+</footer>
 
 </div>
 
-</div>
 
 
-<!-- صفحة ولى الأمر -->
+<!-- ================= صفحة ولى الأمر ================= -->
 
 <div id="parent" class="page">
 
@@ -511,7 +665,7 @@ onclick="showPage('home')">
 </div>
 
 <div class="teacher-name">
-أ/ محمد القهوجى
+أ/ محمد القهوجي
 </div>
 
 <div class="teacher-title">
@@ -520,18 +674,22 @@ onclick="showPage('home')">
 
 </div>
 
+
 <h2>
 👨‍👩‍👧 صفحة ولى الأمر
 </h2>
+
 
 <p style="text-align:center;">
 الاستعلام عن الطالب / الطالبة
 </p>
 
+
 <input
 id="parentCode"
 type="text"
 placeholder="أدخل كود الطالب">
+
 
 <button
 class="blue"
@@ -541,12 +699,15 @@ onclick="searchStudent()">
 
 </button>
 
+
 <div
 id="parentMessage"
 class="message">
 </div>
 
+
 <div id="parentResult"></div>
+
 
 <button
 class="gray"
@@ -556,122 +717,170 @@ onclick="showPage('home')">
 
 </button>
 
-<div class="footer">
 
-<strong>
-   تصميم وبرمجة
-  أ/ محمد القهوجى
-</strong>
+<footer class="footer">
 
-<br>
+<div class="footer-title">
+تصميم وبرمجة
+</div>
 
+<div class="footer-name">
+أ/ محمد القهوجي
+</div>
+
+<div class="copyright">
 © 2026 جميع الحقوق محفوظة
+</div>
+
+</footer>
 
 </div>
 
 </div>
 
-</div>
 
 
 <script>
 
-const SUPABASE_URL=
+
+/* ================= Supabase ================= */
+
+const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
 
-const SUPABASE_KEY=
+
+const SUPABASE_KEY =
 "sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
 
-const db=
+
+const db =
 supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
 
-const evaluationBox=
+
+/* ================= التقييمات ================= */
+
+const evaluationBox =
 document.getElementById(
 "evaluationInputs"
 );
 
-const values=[
+
+const values = [
+
 "0","0.25","0.5","0.75",
+
 "1","1.25","1.5","1.75",
+
 "2","2.25","2.5","2.75",
+
 "3","3.25","3.5","3.75",
+
 "4","4.25","4.5","4.75",
+
 "5","5.25","5.5","5.75",
+
 "6","6.25","6.5","6.75",
+
 "7","7.25","7.5","7.75",
+
 "8","8.25","8.5","8.75",
+
 "9","9.25","9.5","9.75",
+
 "10"
+
 ];
 
 
 for(let i=1;i<=15;i++){
 
-let options=
-'<option value="">لم يتم التقييم</option>'+
+let options =
+'<option value="">لم يتم التقييم</option>' +
+
 '<option value="غاب">غاب</option>';
 
+
 values.forEach(
-v=>
-options+=
+v =>
+options +=
 `<option value="${v}">${v}</option>`
 );
 
-evaluationBox.innerHTML+=
+
+evaluationBox.innerHTML +=
+
 `<div class="evaluation">
-<strong>التقييم ${i}</strong>
+
+<strong>
+التقييم ${i}
+</strong>
+
 <select id="evaluation${i}">
+
 ${options}
+
 </select>
+
 </div>`;
 
 }
 
+
+
+/* ================= تغيير الصفحة ================= */
 
 function showPage(id){
 
 document
 .querySelectorAll(".page")
 .forEach(
-p=>p.classList.remove("active")
+p =>
+p.classList.remove("active")
 );
+
 
 document
 .getElementById(id)
 .classList.add("active");
+
 
 window.scrollTo(0,0);
 
 }
 
 
+
+/* ================= دخول المعلم ================= */
+
 async function loginTeacher(){
 
-const email=
+const email =
 document
 .getElementById("teacherEmail")
 .value.trim();
 
-const password=
+
+const password =
 document
 .getElementById("teacherPassword")
 .value;
 
-const message=
+
+const message =
 document
 .getElementById("loginMessage");
 
 
-if(!email||!password){
+if(!email || !password){
 
-message.innerHTML=
+message.innerHTML =
 "❌ اكتب البريد الإلكترونى وكلمة المرور.";
 
-message.className=
+message.className =
 "message error";
 
 return;
@@ -679,7 +888,7 @@ return;
 }
 
 
-const {error}=
+const {error} =
 await db.auth.signInWithPassword({
 
 email,
@@ -690,10 +899,10 @@ password
 
 if(error){
 
-message.innerHTML=
+message.innerHTML =
 "❌ البريد الإلكترونى أو كلمة المرور غير صحيحة.";
 
-message.className=
+message.className =
 "message error";
 
 return;
@@ -701,22 +910,29 @@ return;
 }
 
 
-message.innerHTML="";
+message.innerHTML = "";
+
 
 document
 .getElementById("teacherEmail")
-.value="";
+.value = "";
+
 
 document
 .getElementById("teacherPassword")
-.value="";
+.value = "";
+
 
 showPage("teacher");
+
 
 displayStudents();
 
 }
 
+
+
+/* ================= تسجيل الخروج ================= */
 
 async function logoutTeacher(){
 
@@ -729,15 +945,21 @@ showPage("home");
 }
 
 
+
+/* ================= التأكد من دخول المعلم ================= */
+
 async function isTeacherLoggedIn(){
 
-const {data}=
+const {data} =
 await db.auth.getSession();
 
 return !!data.session;
 
 }
 
+
+
+/* ================= حفظ الطالب ================= */
 
 async function saveStudent(){
 
@@ -750,42 +972,46 @@ return;
 }
 
 
-const name=
+const name =
 document
 .getElementById("studentName")
 .value.trim();
 
-const gender=
+
+const gender =
 document
 .getElementById("studentGender")
 .value;
 
-const grade=
+
+const grade =
 document
 .getElementById("studentGrade")
 .value;
 
-const code=
+
+const code =
 document
 .getElementById("studentCode")
 .value.trim();
 
-const message=
+
+const message =
 document
 .getElementById("saveMessage");
 
 
 if(
-!name||
-!gender||
-!grade||
+!name ||
+!gender ||
+!grade ||
 !code
 ){
 
-message.innerHTML=
+message.innerHTML =
 "❌ اكتب اسم الطالب واختر النوع والصف والكود.";
 
-message.className=
+message.className =
 "message error";
 
 return;
@@ -793,28 +1019,37 @@ return;
 }
 
 
-let row={
-student_code:code,
-student_name:name,
+let row = {
+
+student_code: code,
+
+student_name: name,
+
 gender,
+
 grade
+
 };
 
 
 for(let i=1;i<=15;i++){
 
-row["evaluation_"+i]=
+row["evaluation_"+i] =
+
 document
 .getElementById("evaluation"+i)
-.value||null;
+.value || null;
 
 }
 
 
 const {
+
 data:existing,
+
 error:findError
-}=
+
+} =
 await db
 .from("students")
 .select("id")
@@ -824,10 +1059,10 @@ await db
 
 if(findError){
 
-message.innerHTML=
+message.innerHTML =
 "❌ حدث خطأ أثناء البحث عن الطالب.";
 
-message.className=
+message.className =
 "message error";
 
 return;
@@ -840,67 +1075,90 @@ let error;
 
 if(existing){
 
-({error}=
+({error} =
 await db
 .from("students")
 .update(row)
 .eq("id",existing.id));
 
-message.innerHTML=
+
+message.innerHTML =
+
 error
+
 ?
-"❌ حدث خطأ أثناء التعديل: "+
+
+"❌ حدث خطأ أثناء التعديل: " +
 error.message
+
 :
+
 "✅ تم تعديل بيانات الطالب بنجاح.";
 
 }
 
 else{
 
-({error}=
+({error} =
 await db
 .from("students")
 .insert([row]));
 
-message.innerHTML=
+
+message.innerHTML =
+
 error
+
 ?
-"❌ حدث خطأ أثناء الحفظ: "+
+
+"❌ حدث خطأ أثناء الحفظ: " +
 error.message
+
 :
+
 "✅ تم حفظ بيانات الطالب بنجاح.";
 
 }
 
 
-message.className=
+message.className =
+
 error
+
 ?
+
 "message error"
+
 :
+
 "message success";
+
 
 displayStudents();
 
 }
 
 
+
+/* ================= عرض الطلاب ================= */
+
 async function displayStudents(){
 
 if(!await isTeacherLoggedIn())
 return;
 
-const list=
+
+const list =
 document.getElementById(
 "studentsList"
 );
 
-list.innerHTML=
+
+list.innerHTML =
 "جارى تحميل الطلاب...";
 
 
-const {data,error}=
+const {data,error} =
 await db
 .from("students")
 .select("*")
@@ -909,7 +1167,7 @@ await db
 
 if(error){
 
-list.innerHTML=
+list.innerHTML =
 "<p class='error'>حدث خطأ فى تحميل الطلاب.</p>";
 
 return;
@@ -917,12 +1175,12 @@ return;
 }
 
 
-list.innerHTML="";
+list.innerHTML = "";
 
 
 if(!data?.length){
 
-list.innerHTML=
+list.innerHTML =
 "<p style='text-align:center'>لا يوجد طلاب مسجلون.</p>";
 
 return;
@@ -930,41 +1188,58 @@ return;
 }
 
 
-data.forEach(student=>{
+data.forEach(student => {
 
-const div=
+const div =
 document.createElement("div");
 
-div.className="card";
+
+div.className =
+"card";
 
 
-const title=
-student.gender==="أنثى"
+const title =
+student.gender === "أنثى"
+
 ?
+
 "👧 طالبة"
+
 :
+
 "👦 طالب";
 
 
-div.innerHTML=
+div.innerHTML =
 
 `<strong>
-${title}: 
+
+${title}:
+
 ${escapeHtml(student.student_name)}
+
 </strong>
 
 <p>
+
 الصف:
-${escapeHtml(student.grade||"")}
+
+${escapeHtml(student.grade || "")}
+
 </p>
 
 <p>
+
 الكود:
+
 ${escapeHtml(student.student_code)}
+
 </p>
 
 <button
+
 class="blue"
+
 onclick="editStudent('${encodeURIComponent(student.student_code)}')">
 
 ✏️ تعديل الطالب
@@ -972,7 +1247,9 @@ onclick="editStudent('${encodeURIComponent(student.student_code)}')">
 </button>
 
 <button
+
 class="red"
+
 onclick="deleteStudent('${encodeURIComponent(student.student_code)}')">
 
 🗑️ حذف الطالب
@@ -987,16 +1264,22 @@ list.appendChild(div);
 }
 
 
+
+/* ================= تعديل الطالب ================= */
+
 async function editStudent(encoded){
 
-const code=
+const code =
 decodeURIComponent(encoded);
 
 
 const {
+
 data:student,
+
 error
-}=
+
+} =
 await db
 .from("students")
 .select("*")
@@ -1004,92 +1287,104 @@ await db
 .maybeSingle();
 
 
-if(error||!student)
+if(error || !student)
 return;
 
 
 document
 .getElementById("studentName")
-.value=
-student.student_name||"";
+.value =
+student.student_name || "";
 
 
 document
 .getElementById("studentGender")
-.value=
-student.gender||"";
+.value =
+student.gender || "";
 
 
 document
 .getElementById("studentGrade")
-.value=
-student.grade||"";
+.value =
+student.grade || "";
 
 
 document
 .getElementById("studentCode")
-.value=
-student.student_code||"";
+.value =
+student.student_code || "";
 
 
 for(let i=1;i<=15;i++){
 
 document
 .getElementById("evaluation"+i)
-.value=
-student["evaluation_"+i]||"";
+.value =
+student["evaluation_"+i] || "";
 
 }
 
 
-const m=
+const m =
 document.getElementById(
 "saveMessage"
 );
 
-m.innerHTML=
+
+m.innerHTML =
 "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
 
-m.className=
+
+m.className =
 "message success";
+
 
 window.scrollTo(0,0);
 
 }
 
 
+
+/* ================= طالب جديد ================= */
+
 function newStudent(){
 
 document
 .getElementById("studentName")
-.value="";
+.value = "";
+
 
 document
 .getElementById("studentGender")
-.value="";
+.value = "";
+
 
 document
 .getElementById("studentGrade")
-.value="";
+.value = "";
+
 
 document
 .getElementById("studentCode")
-.value="";
+.value = "";
 
 
 for(let i=1;i<=15;i++)
 
 document
 .getElementById("evaluation"+i)
-.value="";
+.value = "";
 
 
 document
 .getElementById("saveMessage")
-.innerHTML="";
+.innerHTML = "";
 
 }
 
+
+
+/* ================= حذف الطالب ================= */
 
 async function deleteStudent(encoded){
 
@@ -1102,24 +1397,25 @@ return;
 }
 
 
-const code=
+const code =
 decodeURIComponent(encoded);
 
 
 if(!confirm(
 "هل تريد حذف هذا الطالب؟"
 ))
+
 return;
 
 
-const {error}=
+const {error} =
 await db
 .from("students")
 .delete()
 .eq("student_code",code);
 
 
-const m=
+const m =
 document.getElementById(
 "saveMessage"
 );
@@ -1127,11 +1423,11 @@ document.getElementById(
 
 if(error){
 
-m.innerHTML=
-"❌ حدث خطأ أثناء الحذف: "+
+m.innerHTML =
+"❌ حدث خطأ أثناء الحذف: " +
 error.message;
 
-m.className=
+m.className =
 "message error";
 
 return;
@@ -1139,42 +1435,47 @@ return;
 }
 
 
-m.innerHTML=
+m.innerHTML =
 "✅ تم حذف الطالب.";
 
-m.className=
+
+m.className =
 "message success";
+
 
 displayStudents();
 
 }
 
 
+
+/* ================= استعلام ولي الأمر ================= */
+
 async function searchStudent(){
 
-const code=
+const code =
 document
 .getElementById("parentCode")
 .value.trim();
 
-const message=
-document
-.getElementById("parentMessage");
 
-const result=
-document
-.getElementById("parentResult");
+const message =
+document.getElementById("parentMessage");
+
+
+const result =
+document.getElementById("parentResult");
 
 
 if(!code){
 
-message.innerHTML=
+message.innerHTML =
 "❌ اكتب كود الطالب.";
 
-message.className=
+message.className =
 "message error";
 
-result.innerHTML="";
+result.innerHTML = "";
 
 return;
 
@@ -1182,9 +1483,12 @@ return;
 
 
 const {
+
 data:student,
+
 error
-}=
+
+} =
 await db
 .from("students")
 .select("*")
@@ -1194,13 +1498,13 @@ await db
 
 if(error){
 
-message.innerHTML=
+message.innerHTML =
 "❌ حدث خطأ أثناء الاستعلام.";
 
-message.className=
+message.className =
 "message error";
 
-result.innerHTML="";
+result.innerHTML = "";
 
 return;
 
@@ -1209,98 +1513,128 @@ return;
 
 if(!student){
 
-message.innerHTML=
+message.innerHTML =
 "❌ كود الطالب غير موجود.";
 
-message.className=
+message.className =
 "message error";
 
-result.innerHTML="";
+result.innerHTML = "";
 
 return;
 
 }
 
 
-message.innerHTML="";
+message.innerHTML = "";
 
 
-const personTitle=
-student.gender==="أنثى"
+const personTitle =
+student.gender === "أنثى"
+
 ?
+
 "الطالبة"
+
 :
+
 "الطالب";
 
 
-let html=
+let html =
 
 `<div class="card">
 
 <h3>
+
 📋 بيانات ${personTitle}
+
 </h3>
 
 <p>
+
 <strong>
+
 اسم ${personTitle}:
+
 </strong>
+
 ${escapeHtml(student.student_name)}
+
 </p>
 
 <p>
+
 <strong>
+
 الصف:
+
 </strong>
-${escapeHtml(student.grade||"")}
+
+${escapeHtml(student.grade || "")}
+
 </p>
 
 <p>
+
 <strong>
+
 الكود:
+
 </strong>
+
 ${escapeHtml(student.student_code)}
+
 </p>
 
 <hr>
 
 <h3>
+
 📊 التقييمات
+
 </h3>`;
 
 
-let has=false;
+let has = false;
 
 
 for(let i=1;i<=15;i++){
 
-const value=
+const value =
 student["evaluation_"+i];
 
 
 if(
-value!==null&&
-value!==undefined&&
-value!==""
+value !== null &&
+value !== undefined &&
+value !== ""
 ){
 
-has=true;
+has = true;
 
 
-html+=
+html +=
 
 `<p>
 
 <strong>
+
 التقييم ${i}:
+
 </strong>
 
 ${
-value==="غاب"
+value === "غاب"
+
 ?
+
 "غياب"
+
 :
-escapeHtml(value)+"/10"
+
+escapeHtml(value) + "/10"
+
 }
 
 </p>`;
@@ -1312,16 +1646,21 @@ escapeHtml(value)+"/10"
 
 if(!has)
 
-html+=
+html +=
+
 "<p>لا توجد تقييمات مسجلة حتى الآن.</p>";
 
 
-html+="</div>";
+html += "</div>";
 
-result.innerHTML=html;
+
+result.innerHTML = html;
 
 }
 
+
+
+/* ================= حماية النص ================= */
 
 function escapeHtml(value){
 
@@ -1342,4 +1681,5 @@ return String(value)
 </script>
 
 </body>
-</html>
+
+    </html>
