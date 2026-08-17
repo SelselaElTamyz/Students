@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>سلسلة التميز في الرياضيات | أ/ محمد القهوجى</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+سلسلة التميز في الرياضيات | أ/ محمد القهوجى
+</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* =========================
+   الإعدادات العامة
+========================= */
 
 *{
 box-sizing:border-box;
@@ -41,7 +50,9 @@ display:block;
 }
 
 
-/* ================= الهوية ================= */
+/* =========================
+   الهوية
+========================= */
 
 .brand{
 text-align:center;
@@ -51,25 +62,36 @@ margin-bottom:22px;
 }
 
 
-/* اسم السلسلة */
+/* سلسلة التميز */
 
 .brand-title-main{
-font-size:36px;
+font-size:40px;
 font-weight:900;
 color:#1565C0;
-margin-bottom:9px;
-line-height:1.3;
+line-height:1.2;
+margin-bottom:0;
+}
+
+
+/* في الرياضيات */
+
+.brand-subtitle{
+font-size:18px;
+font-weight:bold;
+color:#64748B;
+margin-top:3px;
+margin-bottom:10px;
 }
 
 
 /* اسم المعلم */
 
 .teacher-name{
-font-size:28px;
+font-size:29px;
 font-weight:900;
-color:#172554;
-margin-bottom:2px;
+color:#0F4C5C;
 line-height:1.3;
+margin-bottom:1px;
 }
 
 
@@ -78,22 +100,20 @@ line-height:1.3;
 .teacher-title{
 font-size:18px;
 font-weight:800;
-color:#9A3412;
+color:#047857;
 margin-top:0;
 line-height:1.5;
 }
 
 
-/* ================= العناوين ================= */
+/* =========================
+   العناوين
+========================= */
 
 h1,
 h2,
 h3{
 text-align:center;
-}
-
-h1{
-color:#1565C0;
 }
 
 h2{
@@ -109,7 +129,9 @@ color:#64748b;
 }
 
 
-/* ================= الحقول ================= */
+/* =========================
+   الحقول
+========================= */
 
 input,
 select{
@@ -126,11 +148,14 @@ outline:none;
 input:focus,
 select:focus{
 border-color:#1565C0;
-box-shadow:0 0 0 3px rgba(21,101,192,.10);
+box-shadow:
+0 0 0 3px rgba(21,101,192,.10);
 }
 
 
-/* ================= الأزرار ================= */
+/* =========================
+   الأزرار
+========================= */
 
 button{
 width:100%;
@@ -171,7 +196,9 @@ background:#C2410C;
 }
 
 
-/* ================= الرسائل ================= */
+/* =========================
+   الرسائل
+========================= */
 
 .message{
 text-align:center;
@@ -188,7 +215,9 @@ color:#C62828;
 }
 
 
-/* ================= البطاقات ================= */
+/* =========================
+   البطاقات
+========================= */
 
 .card{
 background:#f8fafc;
@@ -199,7 +228,9 @@ margin:12px 0;
 }
 
 
-/* ================= التقييمات ================= */
+/* =========================
+   التقييمات
+========================= */
 
 .evaluation{
 display:flex;
@@ -219,7 +250,9 @@ margin:0;
 }
 
 
-/* ================= الخطوط ================= */
+/* =========================
+   الخطوط
+========================= */
 
 hr{
 border:none;
@@ -228,7 +261,9 @@ margin:22px 0;
 }
 
 
-/* ================= الصفحة الرئيسية ================= */
+/* =========================
+   الصفحة الرئيسية
+========================= */
 
 .home-icon{
 font-size:45px;
@@ -244,7 +279,9 @@ color:#475569;
 }
 
 
-/* ================= التذييل ================= */
+/* =========================
+   التذييل
+========================= */
 
 .footer{
 text-align:center;
@@ -260,7 +297,43 @@ line-height:1.8;
 color:#475569;
 }
 
+
+/* =========================
+   الهاتف
+========================= */
+
+@media(max-width:480px){
+
+.container{
+width:96%;
+padding:17px;
+margin:12px auto;
+}
+
+.brand-title-main{
+font-size:34px;
+}
+
+.brand-subtitle{
+font-size:16px;
+}
+
+.teacher-name{
+font-size:26px;
+}
+
+.teacher-title{
+font-size:17px;
+}
+
+.evaluation strong{
+width:100px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
@@ -268,16 +341,20 @@ color:#475569;
 <div class="container">
 
 
-<!-- ================================================= -->
-<!-- الصفحة الرئيسية -->
-<!-- ================================================= -->
+<!-- =================================================
+     الصفحة الرئيسية
+================================================= -->
 
 <div id="home" class="page active">
 
 <div class="brand">
 
 <div class="brand-title-main">
-⭐ سلسلة التميز في الرياضيات
+⭐ سلسلة التميز
+</div>
+
+<div class="brand-subtitle">
+في الرياضيات
 </div>
 
 <div class="teacher-name">
@@ -295,19 +372,26 @@ color:#475569;
 📚
 </div>
 
-
 <p class="subtitle">
 نظام متابعة الطلاب
 </p>
 
 
-<button class="blue" onclick="showPage('parent')">
+<button
+class="blue"
+onclick="showPage('parent')">
+
 👨‍👩‍👧 صفحة ولي الأمر
+
 </button>
 
 
-<button class="green" onclick="showPage('teacherLogin')">
+<button
+class="green"
+onclick="showPage('teacherLogin')">
+
 👨‍🏫 صفحة المعلم
+
 </button>
 
 
@@ -327,16 +411,20 @@ color:#475569;
 
 
 
-<!-- ================================================= -->
-<!-- دخول المعلم -->
-<!-- ================================================= -->
+<!-- =================================================
+     دخول المعلم
+================================================= -->
 
 <div id="teacherLogin" class="page">
 
 <div class="brand">
 
 <div class="brand-title-main">
-⭐ سلسلة التميز في الرياضيات
+⭐ سلسلة التميز
+</div>
+
+<div class="brand-subtitle">
+في الرياضيات
 </div>
 
 <div class="teacher-name">
@@ -367,16 +455,27 @@ type="password"
 placeholder="كلمة المرور">
 
 
-<button class="green" onclick="loginTeacher()">
+<button
+class="green"
+onclick="loginTeacher()">
+
 🔐 دخول
+
 </button>
 
 
-<div id="loginMessage" class="message"></div>
+<div
+id="loginMessage"
+class="message">
+</div>
 
 
-<button class="gray" onclick="showPage('home')">
+<button
+class="gray"
+onclick="showPage('home')">
+
 ↩️ رجوع
+
 </button>
 
 
@@ -396,16 +495,20 @@ placeholder="كلمة المرور">
 
 
 
-<!-- ================================================= -->
-<!-- صفحة المعلم -->
-<!-- ================================================= -->
+<!-- =================================================
+     صفحة المعلم
+================================================= -->
 
 <div id="teacher" class="page">
 
 <div class="brand">
 
 <div class="brand-title-main">
-⭐ سلسلة التميز في الرياضيات
+⭐ سلسلة التميز
+</div>
+
+<div class="brand-subtitle">
+في الرياضيات
 </div>
 
 <div class="teacher-name">
@@ -458,20 +561,53 @@ placeholder="اسم الطالب / الطالبة">
 اختر الصف الدراسي
 </option>
 
-<option>الصف الأول الابتدائي</option>
-<option>الصف الثاني الابتدائي</option>
-<option>الصف الثالث الابتدائي</option>
-<option>الصف الرابع الابتدائي</option>
-<option>الصف الخامس الابتدائي</option>
-<option>الصف السادس الابتدائي</option>
+<option>
+الصف الأول الابتدائي
+</option>
 
-<option>الصف الأول الإعدادي</option>
-<option>الصف الثاني الإعدادي</option>
-<option>الصف الثالث الإعدادي</option>
+<option>
+الصف الثاني الابتدائي
+</option>
 
-<option>الصف الأول الثانوي</option>
-<option>الصف الثاني الثانوي</option>
-<option>الصف الثالث الثانوي</option>
+<option>
+الصف الثالث الابتدائي
+</option>
+
+<option>
+الصف الرابع الابتدائي
+</option>
+
+<option>
+الصف الخامس الابتدائي
+</option>
+
+<option>
+الصف السادس الابتدائي
+</option>
+
+<option>
+الصف الأول الإعدادي
+</option>
+
+<option>
+الصف الثاني الإعدادي
+</option>
+
+<option>
+الصف الثالث الإعدادي
+</option>
+
+<option>
+الصف الأول الثانوي
+</option>
+
+<option>
+الصف الثاني الثانوي
+</option>
+
+<option>
+الصف الثالث الثانوي
+</option>
 
 </select>
 
@@ -495,22 +631,37 @@ placeholder="كود الطالب">
 <div id="evaluationInputs"></div>
 
 
-<button class="green" onclick="saveStudent()">
+<button
+class="green"
+onclick="saveStudent()">
+
 💾 حفظ بيانات الطالب
+
 </button>
 
 
-<button class="orange" onclick="newStudent()">
+<button
+class="orange"
+onclick="newStudent()">
+
 ➕ طالب جديد
+
 </button>
 
 
-<button class="red" onclick="logoutTeacher()">
+<button
+class="red"
+onclick="logoutTeacher()">
+
 🚪 تسجيل الخروج
+
 </button>
 
 
-<div id="saveMessage" class="message"></div>
+<div
+id="saveMessage"
+class="message">
+</div>
 
 
 <hr>
@@ -524,8 +675,12 @@ placeholder="كود الطالب">
 <div id="studentsList"></div>
 
 
-<button class="gray" onclick="showPage('home')">
+<button
+class="gray"
+onclick="showPage('home')">
+
 ↩️ الصفحة الرئيسية
+
 </button>
 
 
@@ -545,16 +700,20 @@ placeholder="كود الطالب">
 
 
 
-<!-- ================================================= -->
-<!-- صفحة ولي الأمر -->
-<!-- ================================================= -->
+<!-- =================================================
+     صفحة ولي الأمر
+================================================= -->
 
 <div id="parent" class="page">
 
 <div class="brand">
 
 <div class="brand-title-main">
-⭐ سلسلة التميز في الرياضيات
+⭐ سلسلة التميز
+</div>
+
+<div class="brand-subtitle">
+في الرياضيات
 </div>
 
 <div class="teacher-name">
@@ -584,19 +743,30 @@ type="text"
 placeholder="أدخل كود الطالب">
 
 
-<button class="blue" onclick="searchStudent()">
+<button
+class="blue"
+onclick="searchStudent()">
+
 🔎 استعلام
+
 </button>
 
 
-<div id="parentMessage" class="message"></div>
+<div
+id="parentMessage"
+class="message">
+</div>
 
 
 <div id="parentResult"></div>
 
 
-<button class="gray" onclick="showPage('home')">
+<button
+class="gray"
+onclick="showPage('home')">
+
 ↩️ رجوع
+
 </button>
 
 
@@ -619,9 +789,10 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
-/* ================================================= */
-/* Supabase */
-/* ================================================= */
+
+/* =================================================
+   Supabase
+================================================= */
 
 const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
@@ -636,12 +807,16 @@ SUPABASE_KEY
 );
 
 
-/* ================================================= */
-/* إنشاء اختيارات التقييم */
-/* ================================================= */
+
+/* =================================================
+   إنشاء التقييمات
+================================================= */
 
 var evaluationBox =
-document.getElementById("evaluationInputs");
+document.getElementById(
+"evaluationInputs"
+);
+
 
 for(var i=1;i<=15;i++){
 
@@ -658,53 +833,83 @@ evaluationBox.innerHTML +=
 '<option value="غاب">غاب</option>' +
 
 '<option value="0">0</option>' +
+
 '<option value="0.25">0.25</option>' +
+
 '<option value="0.5">0.5</option>' +
+
 '<option value="0.75">0.75</option>' +
 
 '<option value="1">1</option>' +
+
 '<option value="1.25">1.25</option>' +
+
 '<option value="1.5">1.5</option>' +
+
 '<option value="1.75">1.75</option>' +
 
 '<option value="2">2</option>' +
+
 '<option value="2.25">2.25</option>' +
+
 '<option value="2.5">2.5</option>' +
+
 '<option value="2.75">2.75</option>' +
 
 '<option value="3">3</option>' +
+
 '<option value="3.25">3.25</option>' +
+
 '<option value="3.5">3.5</option>' +
+
 '<option value="3.75">3.75</option>' +
 
 '<option value="4">4</option>' +
+
 '<option value="4.25">4.25</option>' +
+
 '<option value="4.5">4.5</option>' +
+
 '<option value="4.75">4.75</option>' +
 
 '<option value="5">5</option>' +
+
 '<option value="5.25">5.25</option>' +
+
 '<option value="5.5">5.5</option>' +
+
 '<option value="5.75">5.75</option>' +
 
 '<option value="6">6</option>' +
+
 '<option value="6.25">6.25</option>' +
+
 '<option value="6.5">6.5</option>' +
+
 '<option value="6.75">6.75</option>' +
 
 '<option value="7">7</option>' +
+
 '<option value="7.25">7.25</option>' +
+
 '<option value="7.5">7.5</option>' +
+
 '<option value="7.75">7.75</option>' +
 
 '<option value="8">8</option>' +
+
 '<option value="8.25">8.25</option>' +
+
 '<option value="8.5">8.5</option>' +
+
 '<option value="8.75">8.75</option>' +
 
 '<option value="9">9</option>' +
+
 '<option value="9.25">9.25</option>' +
+
 '<option value="9.5">9.5</option>' +
+
 '<option value="9.75">9.75</option>' +
 
 '<option value="10">10</option>' +
@@ -716,46 +921,61 @@ evaluationBox.innerHTML +=
 }
 
 
-/* ================================================= */
-/* تغيير الصفحة */
-/* ================================================= */
+
+/* =================================================
+   تغيير الصفحة
+================================================= */
 
 function showPage(pageId){
 
-document.querySelectorAll(".page")
+document
+.querySelectorAll(".page")
 .forEach(function(page){
 
 page.classList.remove("active");
 
 });
 
-document.getElementById(pageId)
+
+document
+.getElementById(pageId)
 .classList.add("active");
+
 
 window.scrollTo(0,0);
 
 }
 
 
-/* ================================================= */
-/* تسجيل دخول المعلم */
-/* ================================================= */
+
+/* =================================================
+   تسجيل دخول المعلم
+================================================= */
 
 async function loginTeacher(){
 
 var email =
-document.getElementById("teacherEmail")
-.value.trim();
+document
+.getElementById("teacherEmail")
+.value
+.trim();
+
 
 var password =
-document.getElementById("teacherPassword")
+document
+.getElementById("teacherPassword")
 .value;
 
+
 var message =
-document.getElementById("loginMessage");
+document
+.getElementById("loginMessage");
 
 
-if(email==="" || password===""){
+if(
+email==="" ||
+password===""
+){
 
 message.innerHTML =
 "❌ اكتب البريد الإلكتروني وكلمة المرور.";
@@ -792,10 +1012,14 @@ return;
 
 message.innerHTML="";
 
-document.getElementById("teacherEmail")
+
+document
+.getElementById("teacherEmail")
 .value="";
 
-document.getElementById("teacherPassword")
+
+document
+.getElementById("teacherPassword")
 .value="";
 
 
@@ -806,9 +1030,10 @@ displayStudents();
 }
 
 
-/* ================================================= */
-/* تسجيل الخروج */
-/* ================================================= */
+
+/* =================================================
+   تسجيل الخروج
+================================================= */
 
 async function logoutTeacher(){
 
@@ -821,9 +1046,10 @@ showPage("home");
 }
 
 
-/* ================================================= */
-/* التأكد من دخول المعلم */
-/* ================================================= */
+
+/* =================================================
+   التأكد من دخول المعلم
+================================================= */
 
 async function isTeacherLoggedIn(){
 
@@ -835,14 +1061,16 @@ return !!data.session;
 }
 
 
-/* ================================================= */
-/* حفظ الطالب */
-/* ================================================= */
+
+/* =================================================
+   حفظ بيانات الطالب
+================================================= */
 
 async function saveStudent(){
 
 const loggedIn =
 await isTeacherLoggedIn();
+
 
 if(!loggedIn){
 
@@ -854,23 +1082,34 @@ return;
 
 
 var name =
-document.getElementById("studentName")
-.value.trim();
+document
+.getElementById("studentName")
+.value
+.trim();
+
 
 var gender =
-document.getElementById("studentGender")
+document
+.getElementById("studentGender")
 .value;
+
 
 var grade =
-document.getElementById("studentGrade")
+document
+.getElementById("studentGrade")
 .value;
 
+
 var code =
-document.getElementById("studentCode")
-.value.trim();
+document
+.getElementById("studentCode")
+.value
+.trim();
+
 
 var message =
-document.getElementById("saveMessage");
+document
+.getElementById("saveMessage");
 
 
 if(
@@ -894,19 +1133,29 @@ return;
 var row={
 
 student_code:code,
+
 student_name:name,
+
 gender:gender,
+
 grade:grade
 
 };
 
 
-for(var i=1;i<=15;i++){
+for(
+var i=1;
+i<=15;
+i++
+){
 
 var value =
-document.getElementById(
+document
+.getElementById(
 "evaluation"+i
-).value;
+)
+.value;
+
 
 row["evaluation_"+i] =
 value || null;
@@ -914,7 +1163,10 @@ value || null;
 }
 
 
-const {data:existing,error:findError} =
+const {
+data:existing,
+error:findError
+} =
 await db
 .from("students")
 .select("id")
@@ -935,7 +1187,7 @@ return;
 }
 
 
-/* تعديل */
+/* تعديل الطالب */
 
 if(existing){
 
@@ -966,7 +1218,7 @@ message.innerHTML =
 }
 
 
-/* إضافة */
+/* إضافة الطالب */
 
 else{
 
@@ -1004,20 +1256,24 @@ displayStudents();
 }
 
 
-/* ================================================= */
-/* عرض الطلاب */
-/* ================================================= */
+
+/* =================================================
+   عرض الطلاب
+================================================= */
 
 async function displayStudents(){
 
 const loggedIn =
 await isTeacherLoggedIn();
 
+
 if(!loggedIn)return;
 
 
 var list =
-document.getElementById("studentsList");
+document
+.getElementById("studentsList");
+
 
 list.innerHTML =
 "جاري تحميل الطلاب...";
@@ -1043,7 +1299,10 @@ return;
 list.innerHTML="";
 
 
-if(!data || data.length===0){
+if(
+!data ||
+data.length===0
+){
 
 list.innerHTML =
 "<p style='text-align:center'>لا يوجد طلاب مسجلون.</p>";
@@ -1053,46 +1312,61 @@ return;
 }
 
 
-data.forEach(function(student){
+data.forEach(
+function(student){
 
 var div =
 document.createElement("div");
 
-div.className="card";
+
+div.className =
+"card";
 
 
 var title =
 student.gender === "أنثى"
-? "👧 طالبة"
-: "👦 طالب";
+?
+"👧 طالبة"
+:
+"👦 طالب";
 
 
-div.innerHTML=
+div.innerHTML =
 
 "<strong>"+
 title+
 ": "+
-escapeHtml(student.student_name)+
+escapeHtml(
+student.student_name
+)+
 "</strong>"+
 
 "<p>الصف: "+
-escapeHtml(student.grade || "")+
+escapeHtml(
+student.grade || ""
+)+
 "</p>"+
 
 "<p>الكود: "+
-escapeHtml(student.student_code)+
+escapeHtml(
+student.student_code
+)+
 "</p>"+
 
 "<button class='blue' "+
 "onclick=\"editStudent('"+
-encodeURIComponent(student.student_code)+
+encodeURIComponent(
+student.student_code
+)+
 "')\">"+
 "✏️ تعديل الطالب"+
 "</button>"+
 
 "<button class='red' "+
 "onclick=\"deleteStudent('"+
-encodeURIComponent(student.student_code)+
+encodeURIComponent(
+student.student_code
+)+
 "')\">"+
 "🗑️ حذف الطالب"+
 "</button>";
@@ -1105,17 +1379,23 @@ list.appendChild(div);
 }
 
 
-/* ================================================= */
-/* تعديل الطالب */
-/* ================================================= */
+
+/* =================================================
+   تعديل الطالب
+================================================= */
 
 async function editStudent(encodedCode){
 
 var code =
-decodeURIComponent(encodedCode);
+decodeURIComponent(
+encodedCode
+);
 
 
-const {data:student,error} =
+const {
+data:student,
+error
+} =
 await db
 .from("students")
 .select("*")
@@ -1123,47 +1403,67 @@ await db
 .maybeSingle();
 
 
-if(error || !student)return;
+if(
+error ||
+!student
+)return;
 
 
-document.getElementById("studentName")
+document
+.getElementById("studentName")
 .value =
 student.student_name || "";
 
 
-document.getElementById("studentGender")
+document
+.getElementById("studentGender")
 .value =
 student.gender || "";
 
 
-document.getElementById("studentGrade")
+document
+.getElementById("studentGrade")
 .value =
 student.grade || "";
 
 
-document.getElementById("studentCode")
+document
+.getElementById("studentCode")
 .value =
 student.student_code || "";
 
 
-for(var i=1;i<=15;i++){
+for(
+var i=1;
+i<=15;
+i++
+){
 
-document.getElementById(
+document
+.getElementById(
 "evaluation"+i
-).value =
-student["evaluation_"+i] || "";
+)
+.value =
+student[
+"evaluation_"+i
+] || "";
 
 }
 
 
-document.getElementById(
+document
+.getElementById(
 "saveMessage"
-).innerHTML =
+)
+.innerHTML =
 "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
 
-document.getElementById(
+
+document
+.getElementById(
 "saveMessage"
-).className =
+)
+.className =
 "message success";
 
 
@@ -1172,44 +1472,61 @@ window.scrollTo(0,0);
 }
 
 
-/* ================================================= */
-/* طالب جديد */
-/* ================================================= */
+
+/* =================================================
+   طالب جديد
+================================================= */
 
 function newStudent(){
 
-document.getElementById("studentName")
-.value="";
-
-document.getElementById("studentGender")
-.value="";
-
-document.getElementById("studentGrade")
-.value="";
-
-document.getElementById("studentCode")
+document
+.getElementById("studentName")
 .value="";
 
 
-for(var i=1;i<=15;i++){
+document
+.getElementById("studentGender")
+.value="";
 
-document.getElementById(
+
+document
+.getElementById("studentGrade")
+.value="";
+
+
+document
+.getElementById("studentCode")
+.value="";
+
+
+for(
+var i=1;
+i<=15;
+i++
+){
+
+document
+.getElementById(
 "evaluation"+i
-).value="";
+)
+.value="";
 
 }
 
 
-document.getElementById(
+document
+.getElementById(
 "saveMessage"
-).innerHTML="";
+)
+.innerHTML="";
 
 }
 
 
-/* ================================================= */
-/* حذف الطالب */
-/* ================================================= */
+
+/* =================================================
+   حذف الطالب
+================================================= */
 
 async function deleteStudent(encodedCode){
 
@@ -1227,47 +1544,65 @@ return;
 
 
 var code =
-decodeURIComponent(encodedCode);
+decodeURIComponent(
+encodedCode
+);
 
 
-if(!confirm(
+if(
+!confirm(
 "هل تريد حذف هذا الطالب؟"
-))return;
+)
+)return;
 
 
 const {error} =
 await db
 .from("students")
 .delete()
-.eq("student_code",code);
+.eq(
+"student_code",
+code
+);
 
 
 if(error){
 
-document.getElementById(
+document
+.getElementById(
 "saveMessage"
-).innerHTML =
+)
+.innerHTML =
 "❌ حدث خطأ أثناء الحذف: "+
 error.message;
 
-document.getElementById(
+
+document
+.getElementById(
 "saveMessage"
-).className =
+)
+.className =
 "message error";
+
 
 return;
 
 }
 
 
-document.getElementById(
+document
+.getElementById(
 "saveMessage"
-).innerHTML =
+)
+.innerHTML =
 "✅ تم حذف الطالب.";
 
-document.getElementById(
+
+document
+.getElementById(
 "saveMessage"
-).className =
+)
+.className =
 "message success";
 
 
@@ -1276,21 +1611,28 @@ displayStudents();
 }
 
 
-/* ================================================= */
-/* استعلام ولي الأمر */
-/* ================================================= */
+
+/* =================================================
+   استعلام ولي الأمر
+================================================= */
 
 async function searchStudent(){
 
 var code =
-document.getElementById("parentCode")
-.value.trim();
+document
+.getElementById("parentCode")
+.value
+.trim();
+
 
 var message =
-document.getElementById("parentMessage");
+document
+.getElementById("parentMessage");
+
 
 var result =
-document.getElementById("parentResult");
+document
+.getElementById("parentResult");
 
 
 if(code===""){
@@ -1308,7 +1650,10 @@ return;
 }
 
 
-const {data:student,error} =
+const {
+data:student,
+error
+} =
 await db
 .from("students")
 .select("*")
@@ -1351,26 +1696,38 @@ message.innerHTML="";
 
 var personTitle =
 student.gender === "أنثى"
-? "الطالبة"
-: "الطالب";
+?
+"الطالبة"
+:
+"الطالب";
 
 
-var html=
+var html =
 
 "<div class='card'>"+
 
-"<h3>📋 بيانات "+personTitle+"</h3>"+
+"<h3>📋 بيانات "+
+personTitle+
+"</h3>"+
 
-"<p><strong>اسم "+personTitle+":</strong> "+
-escapeHtml(student.student_name)+
+"<p><strong>اسم "+
+personTitle+
+":</strong> "+
+escapeHtml(
+student.student_name
+)+
 "</p>"+
 
 "<p><strong>الصف:</strong> "+
-escapeHtml(student.grade || "")+
+escapeHtml(
+student.grade || ""
+)+
 "</p>"+
 
 "<p><strong>الكود:</strong> "+
-escapeHtml(student.student_code)+
+escapeHtml(
+student.student_code
+)+
 "</p>"+
 
 "<hr>"+
@@ -1378,13 +1735,20 @@ escapeHtml(student.student_code)+
 "<h3>📊 التقييمات</h3>";
 
 
-var hasEvaluation=false;
+var hasEvaluation =
+false;
 
 
-for(var i=1;i<=15;i++){
+for(
+var i=1;
+i<=15;
+i++
+){
 
 var value =
-student["evaluation_"+i];
+student[
+"evaluation_"+i
+];
 
 
 if(
@@ -1393,20 +1757,25 @@ value!==undefined &&
 value!==""
 ){
 
-hasEvaluation=true;
+hasEvaluation =
+true;
 
 
 var displayValue;
 
 
-if(value==="غاب"){
+if(
+value==="غاب"
+){
 
-displayValue="غياب";
+displayValue =
+"غياب";
 
 }else{
 
 displayValue =
-escapeHtml(value)+"/10";
+escapeHtml(value)+
+"/10";
 
 }
 
@@ -1432,27 +1801,49 @@ html +=
 }
 
 
-html += "</div>";
+html +=
+"</div>";
 
 
-result.innerHTML=html;
+result.innerHTML =
+html;
 
 }
 
 
-/* ================================================= */
-/* حماية النص */
-/* ================================================= */
+
+/* =================================================
+   حماية النص
+================================================= */
 
 function escapeHtml(value){
 
 return String(value)
 
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
