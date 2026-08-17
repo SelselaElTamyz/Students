@@ -21,8 +21,6 @@ background:linear-gradient(135deg,#eef5ff,#f8fafc);
 color:#222;
 }
 
-/* الحاوية */
-
 .container{
 width:94%;
 max-width:650px;
@@ -34,8 +32,6 @@ box-shadow:0 8px 25px rgba(0,0,0,.12);
 min-height:90vh;
 }
 
-/* الصفحات */
-
 .page{
 display:none;
 }
@@ -44,42 +40,48 @@ display:none;
 display:block;
 }
 
-/* الهوية */
+
+/* ================= الهوية ================= */
 
 .brand{
 text-align:center;
-padding:8px 0 18px;
+padding:8px 0 20px;
 border-bottom:1px solid #eee;
-margin-bottom:20px;
+margin-bottom:22px;
 }
+
 
 /* سلسلة التميز */
 
 .brand-title-main{
-font-size:29px;
-font-weight:bold;
-color:#1976d2;
-margin-bottom:9px;
+font-size:36px;
+font-weight:900;
+color:#1565c0;
+margin-bottom:10px;
+letter-spacing:.3px;
 }
+
 
 /* اسم المعلم */
 
 .teacher-name{
-font-size:24px;
-font-weight:bold;
-color:#d4a017;
-margin-bottom:6px;
+font-size:25px;
+font-weight:900;
+color:#a66a00;
+margin-bottom:7px;
 }
+
 
 /* التخصص */
 
 .teacher-title{
-font-size:16px;
+font-size:18px;
 font-weight:bold;
-color:#475569;
+color:#14213D;
 }
 
-/* العناوين */
+
+/* ================= العناوين ================= */
 
 h1,
 h2,
@@ -88,14 +90,15 @@ text-align:center;
 }
 
 h1{
-color:#1976d2;
+color:#1565c0;
 }
 
 p{
 color:#555;
 }
 
-/* الحقول */
+
+/* ================= الحقول ================= */
 
 input,
 select{
@@ -111,11 +114,12 @@ outline:none;
 
 input:focus,
 select:focus{
-border-color:#1976d2;
-box-shadow:0 0 0 2px rgba(25,118,210,.1);
+border-color:#1565c0;
+box-shadow:0 0 0 2px rgba(21,101,192,.1);
 }
 
-/* الأزرار */
+
+/* ================= الأزرار ================= */
 
 button{
 width:100%;
@@ -155,7 +159,8 @@ background:#777;
 background:#ef6c00;
 }
 
-/* الرسائل */
+
+/* ================= الرسائل ================= */
 
 .message{
 text-align:center;
@@ -171,7 +176,8 @@ color:#2e7d32;
 color:#c62828;
 }
 
-/* البطاقات */
+
+/* ================= البطاقات ================= */
 
 .card{
 background:#f8fafc;
@@ -181,7 +187,8 @@ padding:16px;
 margin:12px 0;
 }
 
-/* التقييمات */
+
+/* ================= التقييمات ================= */
 
 .evaluation{
 display:flex;
@@ -199,7 +206,8 @@ flex:1;
 margin:0;
 }
 
-/* الخط */
+
+/* ================= الخطوط ================= */
 
 hr{
 border:none;
@@ -207,7 +215,8 @@ border-top:1px solid #e5e7eb;
 margin:22px 0;
 }
 
-/* الصفحة الرئيسية */
+
+/* ================= الصفحة الرئيسية ================= */
 
 .home-icon{
 font-size:45px;
@@ -221,7 +230,8 @@ font-size:16px;
 margin-bottom:22px;
 }
 
-/* التذييل */
+
+/* ================= التذييل ================= */
 
 .footer{
 text-align:center;
@@ -267,6 +277,7 @@ color:#555;
 
 </div>
 
+
 <div class="home-icon">
 📚
 </div>
@@ -275,13 +286,16 @@ color:#555;
 نظام متابعة الطلاب
 </p>
 
+
 <button class="blue" onclick="showPage('parent')">
 👨‍👩‍👧 صفحة ولي الأمر
 </button>
 
+
 <button class="green" onclick="showPage('teacherLogin')">
 👨‍🏫 صفحة المعلم
 </button>
+
 
 <div class="footer">
 
@@ -296,6 +310,7 @@ color:#555;
 </div>
 
 </div>
+
 
 
 <!-- ================================================= -->
@@ -320,29 +335,36 @@ color:#555;
 
 </div>
 
+
 <h2>
 👨‍🏫 دخول المعلم
 </h2>
+
 
 <input
 id="teacherEmail"
 type="email"
 placeholder="البريد الإلكتروني">
 
+
 <input
 id="teacherPassword"
 type="password"
 placeholder="كلمة المرور">
 
+
 <button class="green" onclick="loginTeacher()">
 🔐 دخول
 </button>
 
+
 <div id="loginMessage" class="message"></div>
+
 
 <button class="gray" onclick="showPage('home')">
 ↩️ رجوع
 </button>
+
 
 <div class="footer">
 
@@ -357,6 +379,7 @@ placeholder="كلمة المرور">
 </div>
 
 </div>
+
 
 
 <!-- ================================================= -->
@@ -381,18 +404,22 @@ placeholder="كلمة المرور">
 
 </div>
 
+
 <h2>
 👨‍🏫 صفحة المعلم
 </h2>
+
 
 <p style="text-align:center;">
 إضافة وتعديل بيانات الطلاب
 </p>
 
+
 <input
 id="studentName"
 type="text"
 placeholder="اسم الطالب / الطالبة">
+
 
 <select id="studentGender">
 
@@ -409,6 +436,7 @@ placeholder="اسم الطالب / الطالبة">
 </option>
 
 </select>
+
 
 <select id="studentGrade">
 
@@ -433,6 +461,7 @@ placeholder="اسم الطالب / الطالبة">
 
 </select>
 
+
 <input
 id="studentCode"
 type="text"
@@ -443,9 +472,11 @@ placeholder="كود الطالب">
 📊 التقييمات من 1 إلى 15
 </h3>
 
+
 <p style="text-align:center;">
 اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
 </p>
+
 
 <div id="evaluationInputs"></div>
 
@@ -454,24 +485,30 @@ placeholder="كود الطالب">
 💾 حفظ بيانات الطالب
 </button>
 
+
 <button class="orange" onclick="newStudent()">
 ➕ طالب جديد
 </button>
 
+
 <button class="red" onclick="logoutTeacher()">
 🚪 تسجيل الخروج
 </button>
+
 
 <div id="saveMessage" class="message"></div>
 
 
 <hr>
 
+
 <h3>
 👨‍🎓 الطلاب المسجلون
 </h3>
 
+
 <div id="studentsList"></div>
+
 
 <button class="gray" onclick="showPage('home')">
 ↩️ الصفحة الرئيسية
@@ -491,6 +528,7 @@ placeholder="كود الطالب">
 </div>
 
 </div>
+
 
 
 <!-- ================================================= -->
@@ -515,26 +553,33 @@ placeholder="كود الطالب">
 
 </div>
 
+
 <h2>
 👨‍👩‍👧 صفحة ولي الأمر
 </h2>
 
+
 <p style="text-align:center;">
 الاستعلام عن الطالب / الطالبة
 </p>
+
 
 <input
 id="parentCode"
 type="text"
 placeholder="أدخل كود الطالب">
 
+
 <button class="blue" onclick="searchStudent()">
 🔎 استعلام
 </button>
 
+
 <div id="parentMessage" class="message"></div>
 
+
 <div id="parentResult"></div>
+
 
 <button class="gray" onclick="showPage('home')">
 ↩️ رجوع
@@ -560,6 +605,7 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
+
 /* ================================================= */
 /* Supabase */
 /* ================================================= */
@@ -575,6 +621,7 @@ supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
+
 
 
 /* ================================================= */
@@ -658,6 +705,7 @@ evaluationBox.innerHTML +=
 }
 
 
+
 /* ================================================= */
 /* تغيير الصفحة */
 /* ================================================= */
@@ -677,6 +725,7 @@ document.getElementById(pageId)
 window.scrollTo(0,0);
 
 }
+
 
 
 /* ================================================= */
@@ -749,6 +798,7 @@ displayStudents();
 }
 
 
+
 /* ================================================= */
 /* تسجيل الخروج */
 /* ================================================= */
@@ -764,6 +814,7 @@ showPage("home");
 }
 
 
+
 /* ================================================= */
 /* التأكد من دخول المعلم */
 /* ================================================= */
@@ -776,6 +827,7 @@ await db.auth.getSession();
 return !!data.session;
 
 }
+
 
 
 /* ================================================= */
@@ -845,8 +897,6 @@ grade:grade
 };
 
 
-/* التقييمات */
-
 for(var i=1;i<=15;i++){
 
 var value =
@@ -859,8 +909,6 @@ value || null;
 
 }
 
-
-/* البحث عن الطالب */
 
 const {data:existing,error:findError} =
 await db
@@ -882,8 +930,6 @@ return;
 
 }
 
-
-/* تعديل */
 
 if(existing){
 
@@ -912,9 +958,6 @@ message.innerHTML =
 "✅ تم تعديل بيانات الطالب بنجاح.";
 
 }
-
-
-/* إضافة */
 
 else{
 
@@ -951,6 +994,7 @@ message.className =
 displayStudents();
 
 }
+
 
 
 /* ================================================= */
@@ -1056,6 +1100,7 @@ list.appendChild(div);
 }
 
 
+
 /* ================================================= */
 /* تعديل الطالب */
 /* ================================================= */
@@ -1124,6 +1169,7 @@ window.scrollTo(0,0);
 }
 
 
+
 /* ================================================= */
 /* طالب جديد */
 /* ================================================= */
@@ -1157,6 +1203,7 @@ document.getElementById(
 ).innerHTML="";
 
 }
+
 
 
 /* ================================================= */
@@ -1226,6 +1273,7 @@ document.getElementById(
 displayStudents();
 
 }
+
 
 
 /* ================================================= */
@@ -1395,6 +1443,7 @@ html;
 }
 
 
+
 /* ================================================= */
 /* حماية النص */
 /* ================================================= */
@@ -1414,4 +1463,4 @@ return String(value)
 </script>
 
 </body>
-  </html>
+</html>
