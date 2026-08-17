@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>سلسلة التميز فى الرياضيات | أ/ محمد القهوجى</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -39,6 +37,8 @@ body{
 .page.active{
     display:block;
 }
+
+/* ================= الهوية ================= */
 
 .brand{
     text-align:center;
@@ -86,6 +86,8 @@ body{
     text-align:center;
 }
 
+/* ================= العناوين ================= */
+
 h1,h2,h3{
     text-align:center;
 }
@@ -102,7 +104,10 @@ p{
     color:#64748b;
 }
 
-input,select{
+/* ================= الحقول ================= */
+
+input,
+select{
     width:100%;
     padding:14px;
     margin:7px 0;
@@ -113,10 +118,13 @@ input,select{
     outline:none;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
     border-color:#1565C0;
     box-shadow:0 0 0 3px rgba(21,101,192,.10);
 }
+
+/* ================= الأزرار ================= */
 
 button{
     width:100%;
@@ -156,6 +164,8 @@ button:hover{
     background:#C2410C;
 }
 
+/* ================= الرسائل ================= */
+
 .message{
     text-align:center;
     font-weight:bold;
@@ -170,6 +180,8 @@ button:hover{
     color:#C62828;
 }
 
+/* ================= البطاقات ================= */
+
 .card{
     background:#f8fafc;
     border:1px solid #e2e8f0;
@@ -177,6 +189,8 @@ button:hover{
     padding:16px;
     margin:12px 0;
 }
+
+/* ================= التقييمات ================= */
 
 .evaluation{
     display:flex;
@@ -195,11 +209,15 @@ button:hover{
     margin:0;
 }
 
+/* ================= الخط ================= */
+
 hr{
     border:none;
     border-top:1px solid #e2e8f0;
     margin:22px 0;
 }
+
+/* ================= الصفحة الرئيسية ================= */
 
 .home-icon{
     font-size:45px;
@@ -214,8 +232,7 @@ hr{
     color:#475569;
 }
 
-
-/* ================= الفوتر ================= */
+/* ================= التذييل ================= */
 
 .footer{
     text-align:center;
@@ -225,25 +242,21 @@ hr{
     line-height:1.8;
 }
 
-.footer-title{
-    font-size:13px;
-    color:#94a3b8;
-    font-weight:600;
+.footer-title,
+.footer-name{
+    color:#475569;
+    font-weight:800;
 }
 
 .footer-name{
-    font-size:17px;
-    color:#475569;
-    font-weight:900;
-    margin-top:2px;
+    font-size:15px;
 }
 
 .copyright{
-    font-size:12px;
     color:#94a3b8;
-    margin-top:4px;
+    font-size:13px;
+    margin-top:3px;
 }
-
 
 /* ================= الهاتف ================= */
 
@@ -275,20 +288,13 @@ hr{
     .evaluation strong{
         width:100px;
     }
-
-    .footer-name{
-        font-size:16px;
-    }
-
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
 
 <!-- ================= الصفحة الرئيسية ================= -->
 
@@ -314,34 +320,21 @@ hr{
 
     </div>
 
-
     <div class="home-icon">
         📚
     </div>
-
 
     <p class="subtitle">
         نظام متابعة الطلاب
     </p>
 
-
-    <button
-        class="blue"
-        onclick="showPage('parent')">
-
+    <button class="blue" onclick="showPage('parent')">
         👨‍👩‍👧 صفحة ولى الأمر
-
     </button>
 
-
-    <button
-        class="green"
-        onclick="showPage('teacherLogin')">
-
+    <button class="green" onclick="showPage('teacherLogin')">
         👨‍🏫 صفحة المعلم
-
     </button>
-
 
     <footer class="footer">
 
@@ -386,47 +379,33 @@ hr{
 
     </div>
 
-
     <h2>
         👨‍🏫 دخول المعلم
     </h2>
-
 
     <input
         id="teacherEmail"
         type="email"
         placeholder="البريد الإلكترونى">
 
-
     <input
         id="teacherPassword"
         type="password"
         placeholder="كلمة المرور">
 
-
     <button
         class="green"
         onclick="loginTeacher()">
-
         🔐 دخول
-
     </button>
 
-
-    <div
-        id="loginMessage"
-        class="message">
-    </div>
-
+    <div id="loginMessage" class="message"></div>
 
     <button
         class="gray"
         onclick="showPage('home')">
-
         ↩️ رجوع
-
     </button>
-
 
     <footer class="footer">
 
@@ -471,22 +450,18 @@ hr{
 
     </div>
 
-
     <h2>
         👨‍🏫 صفحة المعلم
     </h2>
-
 
     <p style="text-align:center;">
         إضافة وتعديل بيانات الطلاب
     </p>
 
-
     <input
         id="studentName"
         type="text"
         placeholder="اسم الطالب / الطالبة">
-
 
     <select id="studentGender">
 
@@ -503,7 +478,6 @@ hr{
         </option>
 
     </select>
-
 
     <select id="studentGrade">
 
@@ -528,78 +502,54 @@ hr{
 
     </select>
 
-
     <input
         id="studentCode"
         type="text"
         placeholder="كود الطالب">
 
-
     <h3>
         📊 التقييمات من 1 إلى 15
     </h3>
-
 
     <p style="text-align:center;">
         اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
     </p>
 
-
     <div id="evaluationInputs"></div>
-
 
     <button
         class="green"
         onclick="saveStudent()">
-
         💾 حفظ بيانات الطالب
-
     </button>
-
 
     <button
         class="orange"
         onclick="newStudent()">
-
         ➕ طالب جديد
-
     </button>
-
 
     <button
         class="red"
         onclick="logoutTeacher()">
-
         🚪 تسجيل الخروج
-
     </button>
 
-
-    <div
-        id="saveMessage"
-        class="message">
-    </div>
-
+    <div id="saveMessage" class="message"></div>
 
     <hr>
-
 
     <h3>
         👨‍🎓 الطلاب المسجلون
     </h3>
 
-
     <div id="studentsList"></div>
-
 
     <button
         class="gray"
         onclick="showPage('home')">
-
         ↩️ الصفحة الرئيسية
-
     </button>
-
 
     <footer class="footer">
 
@@ -644,49 +594,34 @@ hr{
 
     </div>
 
-
     <h2>
         👨‍👩‍👧 صفحة ولى الأمر
     </h2>
 
-
     <p style="text-align:center;">
         الاستعلام عن الطالب / الطالبة
     </p>
-
 
     <input
         id="parentCode"
         type="text"
         placeholder="أدخل كود الطالب">
 
-
     <button
         class="blue"
         onclick="searchStudent()">
-
         🔎 استعلام
-
     </button>
 
-
-    <div
-        id="parentMessage"
-        class="message">
-    </div>
-
+    <div id="parentMessage" class="message"></div>
 
     <div id="parentResult"></div>
-
 
     <button
         class="gray"
         onclick="showPage('home')">
-
         ↩️ رجوع
-
     </button>
-
 
     <footer class="footer">
 
@@ -711,9 +646,6 @@ hr{
 
 <script>
 
-
-/* ================= Supabase ================= */
-
 const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
 
@@ -730,44 +662,27 @@ supabase.createClient(
 /* ================= التقييمات ================= */
 
 const evaluationBox =
-document.getElementById(
-    "evaluationInputs"
-);
-
+document.getElementById("evaluationInputs");
 
 const values = [
-
     "0","0.25","0.5","0.75",
-
     "1","1.25","1.5","1.75",
-
     "2","2.25","2.5","2.75",
-
     "3","3.25","3.5","3.75",
-
     "4","4.25","4.5","4.75",
-
     "5","5.25","5.5","5.75",
-
     "6","6.25","6.5","6.75",
-
     "7","7.25","7.5","7.75",
-
     "8","8.25","8.5","8.75",
-
     "9","9.25","9.5","9.75",
-
     "10"
-
 ];
-
 
 for(let i = 1; i <= 15; i++){
 
     let options =
         '<option value="">لم يتم التقييم</option>' +
         '<option value="غاب">غاب</option>';
-
 
     values.forEach(function(v){
 
@@ -776,23 +691,13 @@ for(let i = 1; i <= 15; i++){
 
     });
 
-
     evaluationBox.innerHTML +=
-
         `<div class="evaluation">
-
-            <strong>
-                التقييم ${i}
-            </strong>
-
+            <strong>التقييم ${i}</strong>
             <select id="evaluation${i}">
-
                 ${options}
-
             </select>
-
         </div>`;
-
 }
 
 
@@ -802,20 +707,18 @@ function showPage(id){
 
     document
         .querySelectorAll(".page")
-        .forEach(function(page){
-
-            page.classList.remove("active");
-
+        .forEach(function(p){
+            p.classList.remove("active");
         });
 
+    const page =
+        document.getElementById(id);
 
-    document
-        .getElementById(id)
-        .classList.add("active");
-
+    if(page){
+        page.classList.add("active");
+    }
 
     window.scrollTo(0,0);
-
 }
 
 
@@ -829,18 +732,13 @@ async function loginTeacher(){
         .value
         .trim();
 
-
     const password =
         document
         .getElementById("teacherPassword")
         .value;
 
-
     const message =
-        document.getElementById(
-            "loginMessage"
-        );
-
+        document.getElementById("loginMessage");
 
     if(!email || !password){
 
@@ -851,18 +749,13 @@ async function loginTeacher(){
             "message error";
 
         return;
-
     }
-
 
     const {error} =
         await db.auth.signInWithPassword({
-
-            email: email,
-            password: password
-
+            email:email,
+            password:password
         });
-
 
     if(error){
 
@@ -873,9 +766,7 @@ async function loginTeacher(){
             "message error";
 
         return;
-
     }
-
 
     message.innerHTML = "";
 
@@ -887,11 +778,9 @@ async function loginTeacher(){
         .getElementById("teacherPassword")
         .value = "";
 
-
     showPage("teacher");
 
     displayStudents();
-
 }
 
 
@@ -904,11 +793,10 @@ async function logoutTeacher(){
     newStudent();
 
     showPage("home");
-
 }
 
 
-/* ================= التأكد من دخول المعلم ================= */
+/* ================= التأكد من الدخول ================= */
 
 async function isTeacherLoggedIn(){
 
@@ -916,7 +804,6 @@ async function isTeacherLoggedIn(){
         await db.auth.getSession();
 
     return !!data.session;
-
 }
 
 
@@ -929,9 +816,7 @@ async function saveStudent(){
         showPage("teacherLogin");
 
         return;
-
     }
-
 
     const name =
         document
@@ -939,18 +824,15 @@ async function saveStudent(){
         .value
         .trim();
 
-
     const gender =
         document
         .getElementById("studentGender")
         .value;
 
-
     const grade =
         document
         .getElementById("studentGrade")
         .value;
-
 
     const code =
         document
@@ -958,12 +840,8 @@ async function saveStudent(){
         .value
         .trim();
 
-
     const message =
-        document.getElementById(
-            "saveMessage"
-        );
-
+        document.getElementById("saveMessage");
 
     if(!name || !gender || !grade || !code){
 
@@ -974,45 +852,32 @@ async function saveStudent(){
             "message error";
 
         return;
-
     }
 
-
     let row = {
-
-        student_code: code,
-
-        student_name: name,
-
-        gender: gender,
-
-        grade: grade
-
+        student_code:code,
+        student_name:name,
+        gender:gender,
+        grade:grade
     };
-
 
     for(let i = 1; i <= 15; i++){
 
         row["evaluation_" + i] =
             document
-            .getElementById(
-                "evaluation" + i
-            )
+            .getElementById("evaluation" + i)
             .value || null;
-
     }
 
-
     const {
-        data: existing,
-        error: findError
+        data:existing,
+        error:findError
     } =
         await db
         .from("students")
         .select("id")
         .eq("student_code",code)
         .maybeSingle();
-
 
     if(findError){
 
@@ -1023,12 +888,9 @@ async function saveStudent(){
             "message error";
 
         return;
-
     }
 
-
     let error;
-
 
     if(existing){
 
@@ -1038,40 +900,30 @@ async function saveStudent(){
             .update(row)
             .eq("id",existing.id));
 
-
         message.innerHTML =
             error
-            ? "❌ حدث خطأ أثناء التعديل: " +
-              error.message
+            ? "❌ حدث خطأ أثناء التعديل: " + error.message
             : "✅ تم تعديل بيانات الطالب بنجاح.";
 
-    }
-
-    else{
+    }else{
 
         ({error} =
             await db
             .from("students")
             .insert([row]));
 
-
         message.innerHTML =
             error
-            ? "❌ حدث خطأ أثناء الحفظ: " +
-              error.message
+            ? "❌ حدث خطأ أثناء الحفظ: " + error.message
             : "✅ تم حفظ بيانات الطالب بنجاح.";
-
     }
-
 
     message.className =
         error
         ? "message error"
         : "message success";
 
-
     displayStudents();
-
 }
 
 
@@ -1082,16 +934,11 @@ async function displayStudents(){
     if(!await isTeacherLoggedIn())
         return;
 
-
     const list =
-        document.getElementById(
-            "studentsList"
-        );
-
+        document.getElementById("studentsList");
 
     list.innerHTML =
         "جارى تحميل الطلاب...";
-
 
     const {data,error} =
         await db
@@ -1099,19 +946,15 @@ async function displayStudents(){
         .select("*")
         .order("student_name");
 
-
     if(error){
 
         list.innerHTML =
             "<p class='error'>حدث خطأ فى تحميل الطلاب.</p>";
 
         return;
-
     }
 
-
     list.innerHTML = "";
-
 
     if(!data || data.length === 0){
 
@@ -1119,63 +962,50 @@ async function displayStudents(){
             "<p style='text-align:center'>لا يوجد طلاب مسجلون.</p>";
 
         return;
-
     }
-
 
     data.forEach(function(student){
 
         const div =
             document.createElement("div");
 
-
         div.className = "card";
-
 
         const title =
             student.gender === "أنثى"
             ? "👧 طالبة"
             : "👦 طالب";
 
-
         div.innerHTML =
 
-            `<strong>
-                ${title}:
-                ${escapeHtml(student.student_name)}
-            </strong>
+        `<strong>
+            ${title}: ${escapeHtml(student.student_name)}
+        </strong>
 
-            <p>
-                الصف:
-                ${escapeHtml(student.grade || "")}
-            </p>
+        <p>
+            الصف:
+            ${escapeHtml(student.grade || "")}
+        </p>
 
-            <p>
-                الكود:
-                ${escapeHtml(student.student_code)}
-            </p>
+        <p>
+            الكود:
+            ${escapeHtml(student.student_code)}
+        </p>
 
-            <button
-                class="blue"
-                onclick="editStudent('${encodeURIComponent(student.student_code)}')">
+        <button
+            class="blue"
+            onclick="editStudent('${encodeURIComponent(student.student_code)}')">
+            ✏️ تعديل الطالب
+        </button>
 
-                ✏️ تعديل الطالب
-
-            </button>
-
-            <button
-                class="red"
-                onclick="deleteStudent('${encodeURIComponent(student.student_code)}')">
-
-                🗑️ حذف الطالب
-
-            </button>`;
-
+        <button
+            class="red"
+            onclick="deleteStudent('${encodeURIComponent(student.student_code)}')">
+            🗑️ حذف الطالب
+        </button>`;
 
         list.appendChild(div);
-
     });
-
 }
 
 
@@ -1186,9 +1016,8 @@ async function editStudent(encoded){
     const code =
         decodeURIComponent(encoded);
 
-
     const {
-        data: student,
+        data:student,
         error
     } =
         await db
@@ -1197,63 +1026,47 @@ async function editStudent(encoded){
         .eq("student_code",code)
         .maybeSingle();
 
-
     if(error || !student)
         return;
-
 
     document
         .getElementById("studentName")
         .value =
-            student.student_name || "";
-
+        student.student_name || "";
 
     document
         .getElementById("studentGender")
         .value =
-            student.gender || "";
-
+        student.gender || "";
 
     document
         .getElementById("studentGrade")
         .value =
-            student.grade || "";
-
+        student.grade || "";
 
     document
         .getElementById("studentCode")
         .value =
-            student.student_code || "";
-
+        student.student_code || "";
 
     for(let i = 1; i <= 15; i++){
 
         document
-            .getElementById(
-                "evaluation" + i
-            )
+            .getElementById("evaluation" + i)
             .value =
-                student["evaluation_" + i] || "";
-
+            student["evaluation_" + i] || "";
     }
 
+    const m =
+        document.getElementById("saveMessage");
 
-    const message =
-        document.getElementById(
-            "saveMessage"
-        );
-
-
-    message.innerHTML =
+    m.innerHTML =
         "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
 
-
-    message.className =
+    m.className =
         "message success";
 
-
     window.scrollTo(0,0);
-
 }
 
 
@@ -1261,41 +1074,19 @@ async function editStudent(encoded){
 
 function newStudent(){
 
-    document
-        .getElementById("studentName")
-        .value = "";
-
-
-    document
-        .getElementById("studentGender")
-        .value = "";
-
-
-    document
-        .getElementById("studentGrade")
-        .value = "";
-
-
-    document
-        .getElementById("studentCode")
-        .value = "";
-
+    document.getElementById("studentName").value = "";
+    document.getElementById("studentGender").value = "";
+    document.getElementById("studentGrade").value = "";
+    document.getElementById("studentCode").value = "";
 
     for(let i = 1; i <= 15; i++){
 
         document
-            .getElementById(
-                "evaluation" + i
-            )
+            .getElementById("evaluation" + i)
             .value = "";
-
     }
 
-
-    document
-        .getElementById("saveMessage")
-        .innerHTML = "";
-
+    document.getElementById("saveMessage").innerHTML = "";
 }
 
 
@@ -1308,19 +1099,13 @@ async function deleteStudent(encoded){
         showPage("teacherLogin");
 
         return;
-
     }
-
 
     const code =
         decodeURIComponent(encoded);
 
-
-    if(!confirm(
-        "هل تريد حذف هذا الطالب؟"
-    ))
+    if(!confirm("هل تريد حذف هذا الطالب؟"))
         return;
-
 
     const {error} =
         await db
@@ -1328,40 +1113,31 @@ async function deleteStudent(encoded){
         .delete()
         .eq("student_code",code);
 
-
-    const message =
-        document.getElementById(
-            "saveMessage"
-        );
-
+    const m =
+        document.getElementById("saveMessage");
 
     if(error){
 
-        message.innerHTML =
-            "❌ حدث خطأ أثناء الحذف: " +
-            error.message;
+        m.innerHTML =
+            "❌ حدث خطأ أثناء الحذف: " + error.message;
 
-        message.className =
+        m.className =
             "message error";
 
         return;
-
     }
 
-
-    message.innerHTML =
+    m.innerHTML =
         "✅ تم حذف الطالب.";
 
-    message.className =
+    m.className =
         "message success";
 
-
     displayStudents();
-
 }
 
 
-/* ================= استعلام ولي الأمر ================= */
+/* ================= استعلام ولى الأمر ================= */
 
 async function searchStudent(){
 
@@ -1371,18 +1147,11 @@ async function searchStudent(){
         .value
         .trim();
 
-
     const message =
-        document.getElementById(
-            "parentMessage"
-        );
-
+        document.getElementById("parentMessage");
 
     const result =
-        document.getElementById(
-            "parentResult"
-        );
-
+        document.getElementById("parentResult");
 
     if(!code){
 
@@ -1395,12 +1164,10 @@ async function searchStudent(){
         result.innerHTML = "";
 
         return;
-
     }
 
-
     const {
-        data: student,
+        data:student,
         error
     } =
         await db
@@ -1408,7 +1175,6 @@ async function searchStudent(){
         .select("*")
         .eq("student_code",code)
         .maybeSingle();
-
 
     if(error){
 
@@ -1421,9 +1187,7 @@ async function searchStudent(){
         result.innerHTML = "";
 
         return;
-
     }
-
 
     if(!student){
 
@@ -1436,66 +1200,56 @@ async function searchStudent(){
         result.innerHTML = "";
 
         return;
-
     }
 
-
     message.innerHTML = "";
-
 
     const personTitle =
         student.gender === "أنثى"
         ? "الطالبة"
         : "الطالب";
 
-
     let html =
 
-        `<div class="card">
+    `<div class="card">
 
-            <h3>
-                📋 بيانات ${personTitle}
-            </h3>
+        <h3>
+            📋 بيانات ${personTitle}
+        </h3>
 
-            <p>
-                <strong>
-                    اسم ${personTitle}:
-                </strong>
+        <p>
+            <strong>
+                اسم ${personTitle}:
+            </strong>
+            ${escapeHtml(student.student_name)}
+        </p>
 
-                ${escapeHtml(student.student_name)}
-            </p>
+        <p>
+            <strong>
+                الصف:
+            </strong>
+            ${escapeHtml(student.grade || "")}
+        </p>
 
-            <p>
-                <strong>
-                    الصف:
-                </strong>
+        <p>
+            <strong>
+                الكود:
+            </strong>
+            ${escapeHtml(student.student_code)}
+        </p>
 
-                ${escapeHtml(student.grade || "")}
-            </p>
+        <hr>
 
-            <p>
-                <strong>
-                    الكود:
-                </strong>
-
-                ${escapeHtml(student.student_code)}
-            </p>
-
-            <hr>
-
-            <h3>
-                📊 التقييمات
-            </h3>`;
-
+        <h3>
+            📊 التقييمات
+        </h3>`;
 
     let has = false;
-
 
     for(let i = 1; i <= 15; i++){
 
         const value =
             student["evaluation_" + i];
-
 
         if(
             value !== null &&
@@ -1505,60 +1259,46 @@ async function searchStudent(){
 
             has = true;
 
-
             html +=
 
-                `<p>
+            `<p>
 
-                    <strong>
-                        التقييم ${i}:
-                    </strong>
+                <strong>
+                    التقييم ${i}:
+                </strong>
 
-                    ${
-                        value === "غاب"
-                        ? "غياب"
-                        : escapeHtml(value) + "/10"
-                    }
+                ${
+                    value === "غاب"
+                    ? "غياب"
+                    : escapeHtml(value) + "/10"
+                }
 
-                </p>`;
-
+            </p>`;
         }
-
     }
-
 
     if(!has){
 
         html +=
             "<p>لا توجد تقييمات مسجلة حتى الآن.</p>";
-
     }
-
 
     html += "</div>";
 
-
     result.innerHTML = html;
-
 }
 
 
-/* ================= حماية النص ================= */
+/* ================= حماية النصوص ================= */
 
 function escapeHtml(value){
 
     return String(value)
-
         .replaceAll("&","&amp;")
-
         .replaceAll("<","&lt;")
-
         .replaceAll(">","&gt;")
-
         .replaceAll('"',"&quot;")
-
         .replaceAll("'","&#039;");
-
 }
 
 </script>
