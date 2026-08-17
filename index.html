@@ -3,12 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سلسلة التميز</title>
+<title>سلسلة التميز | أ/ محمد القهوجى</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -26,12 +28,21 @@ border-radius:18px;
 box-shadow:0 4px 15px rgba(0,0,0,.15);
 }
 
-.page{display:none}
-.page.active{display:block}
+.page{
+display:none;
+}
 
-h1,h2,h3{text-align:center}
+.page.active{
+display:block;
+}
 
-p{color:#555}
+h1,h2,h3{
+text-align:center;
+}
+
+p{
+color:#555;
+}
 
 input,select{
 width:100%;
@@ -53,11 +64,25 @@ font-size:17px;
 cursor:pointer;
 }
 
-.blue{background:#1976d2}
-.green{background:#2e7d32}
-.red{background:#c62828}
-.gray{background:#777}
-.orange{background:#ef6c00}
+.blue{
+background:#1976d2;
+}
+
+.green{
+background:#2e7d32;
+}
+
+.red{
+background:#c62828;
+}
+
+.gray{
+background:#777;
+}
+
+.orange{
+background:#ef6c00;
+}
 
 .message{
 text-align:center;
@@ -65,8 +90,13 @@ font-weight:bold;
 margin:10px;
 }
 
-.success{color:green}
-.error{color:red}
+.success{
+color:green;
+}
+
+.error{
+color:red;
+}
 
 .card{
 background:#f8fafc;
@@ -97,6 +127,31 @@ border:none;
 border-top:1px solid #ddd;
 margin:20px 0;
 }
+
+.teacher-name{
+text-align:center;
+font-size:22px;
+font-weight:bold;
+color:#1976d2;
+margin:5px 0;
+}
+
+.teacher-title{
+text-align:center;
+font-weight:bold;
+color:#444;
+margin-top:0;
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+padding-top:15px;
+border-top:1px solid #eee;
+font-size:13px;
+color:#777;
+line-height:1.8;
+}
 </style>
 </head>
 
@@ -110,6 +165,14 @@ margin:20px 0;
 
 <h1>⭐ سلسلة التميز</h1>
 
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<p class="teacher-title">
+معلم الرياضيات والإحصاء
+</p>
+
 <p style="text-align:center;">
 نظام متابعة الطلاب
 </p>
@@ -121,6 +184,16 @@ margin:20px 0;
 <button class="green" onclick="showPage('teacherLogin')">
 👨‍🏫 صفحة المعلم
 </button>
+
+<div class="footer">
+
+<strong>تصميم وبرمجة أ/ محمد القهوجى</strong>
+
+<br>
+
+© 2026 جميع الحقوق محفوظة
+
+</div>
 
 </div>
 
@@ -1031,4 +1104,4 @@ return String(value)
 </script>
 
 </body>
-</html>
+  </html>
