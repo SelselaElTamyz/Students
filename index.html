@@ -781,4 +781,398 @@ placeholder="اسم الطالب / الطالبة">
 <option value="الصف السادس الابتدائى">الصف السادس الابتدائى</option>
 <option value="الصف الأول الإعدادى">الصف الأول الإعدادى</option>
 <option value="الصف الثانى الإعدادى">الصف الثانى الإعدادى</option>
-<option value="الصف الثالث الإعدادى">الصف الثالث الإ
+<option value="الصف الثالث الإعدادى">الصف الثالث الإعدادى</option>
+<option value="الصف الأول الثانوى">الصف الأول الثانوى</option>
+<option value="الصف الثانى الثانوى">الصف الثانى الثانوى</option>
+<option value="الصف الثالث الثانوى">الصف الثالث الثانوى</option>
+</select>
+
+<input id="studentCode"
+type="text"
+placeholder="كود الطالب">
+
+<h3>📊 التقييمات من 1 إلى 15</h3>
+
+<p style="text-align:center">
+اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
+</p>
+
+<div id="evaluationInputs"></div>
+
+
+<!-- ================= PAYMENTS MANAGEMENT ================= -->
+
+<div class="payment-box">
+
+<h3>💰 المصروفات الشهرية</h3>
+
+<p style="text-align:center">
+ستظهر هنا الشهور التي تم تفعيلها فقط.
+</p>
+
+<div id="paymentInputs"></div>
+
+<button class="orange" onclick="savePayments()">
+💾 حفظ المصروفات
+</button>
+
+<div id="paymentMessage" class="message"></div>
+
+</div>
+
+
+<button class="green" onclick="saveStudent()">
+💾 حفظ بيانات الطالب
+</button>
+
+<button class="orange" onclick="newStudent()">
+➕ طالب جديد
+</button>
+
+<div id="saveMessage" class="message"></div>
+
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+
+<!-- ================= ATTENDANCE ================= -->
+
+<div id="attendancePage" class="page">
+
+<div class="brand">
+<div class="brand-title-main">⭐ سلسلة التميز</div>
+<div class="brand-subtitle">فى الرياضيات</div>
+<div class="teacher-name">أ/ محمد القهوجى</div>
+<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+</div>
+
+<h2>📅 الحضور والغياب</h2>
+
+<input
+id="attendanceDate"
+type="date">
+
+<input
+id="attendanceStudentCode"
+type="text"
+placeholder="كود الطالب">
+
+<div class="attendance-status">
+
+<button class="green" onclick="saveAttendance('حاضر')">
+✅ حاضر
+</button>
+
+<button class="red" onclick="saveAttendance('غائب')">
+❌ غائب
+</button>
+
+</div>
+
+<div id="attendanceMessage" class="message"></div>
+
+<hr>
+
+<h3>📋 سجل حضور الطالب</h3>
+
+<button class="blue" onclick="loadAttendanceForTeacher()">
+🔎 عرض سجل الحضور
+</button>
+
+<div id="teacherAttendanceResults"></div>
+
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+
+<!-- ================= GRADE ================= -->
+
+<div id="gradePage" class="page">
+
+<div class="brand">
+<div class="brand-title-main">⭐ سلسلة التميز</div>
+<div class="brand-subtitle">فى الرياضيات</div>
+<div class="teacher-name">أ/ محمد القهوجى</div>
+<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+</div>
+
+<div class="grade-header">
+
+<h2 id="gradePageTitle">📚 الصف</h2>
+
+<p id="gradeStudentsCount">
+جارى تحميل الطلاب...
+</p>
+
+</div>
+
+<button class="purple" onclick="showAllStudentsReport()">
+📊 تقرير جميع الطلاب
+</button>
+
+<div id="gradeStudentsList"></div>
+
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+
+<!-- ================= STUDENT REPORT ================= -->
+
+<div id="studentReport" class="page">
+
+<div class="brand">
+<div class="brand-title-main">⭐ سلسلة التميز</div>
+<div class="brand-subtitle">فى الرياضيات</div>
+<div class="teacher-name">أ/ محمد القهوجى</div>
+<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+</div>
+
+<h2>📄 تقرير الطالب</h2>
+
+<div id="studentReportContent"></div>
+
+<button class="dark" onclick="window.print()">
+🖨️ طباعة التقرير
+</button>
+
+<button class="gray" onclick="showPage('gradePage')">
+↩️ العودة إلى الصف
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+
+<!-- ================= ALL REPORT ================= -->
+
+<div id="allStudentsReport" class="page">
+
+<div class="brand">
+<div class="brand-title-main">⭐ سلسلة التميز</div>
+<div class="brand-subtitle">فى الرياضيات</div>
+<div class="teacher-name">أ/ محمد القهوجى</div>
+<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+</div>
+
+<h2>📊 تقرير جميع الطلاب</h2>
+
+<div id="allStudentsReportContent"></div>
+
+<button class="dark" onclick="window.print()">
+🖨️ طباعة التقرير
+</button>
+
+<button class="gray" onclick="showPage('gradePage')">
+↩️ العودة إلى الصف
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+
+<!-- ================= PARENT ================= -->
+
+<div id="parent" class="page">
+
+<div class="brand">
+<div class="brand-title-main">⭐ سلسلة التميز</div>
+<div class="brand-subtitle">فى الرياضيات</div>
+<div class="teacher-name">أ/ محمد القهوجى</div>
+<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+</div>
+
+<h2>👨‍👩‍👧 صفحة ولى الأمر</h2>
+
+<p style="text-align:center">
+الاستعلام عن الطالب / الطالبة
+</p>
+
+<input id="parentCode"
+type="text"
+placeholder="أدخل كود الطالب">
+
+<button class="blue" onclick="searchStudent()">
+🔎 استعلام
+</button>
+
+<div id="parentMessage" class="message"></div>
+
+<div id="parentResult"></div>
+
+<button class="home-button" onclick="goHomeFromParent()">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ================= SUPABASE ================= */
+
+const SUPABASE_URL =
+"https://jdpppofgbthxagbpldrb.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
+
+let db=null;
+let currentGrade="";
+
+const allPaymentMonths=[
+"يناير",
+"فبراير",
+"مارس",
+"أبريل",
+"مايو",
+"يونيو",
+"يوليو",
+"أغسطس",
+"سبتمبر",
+"أكتوبر",
+"نوفمبر",
+"ديسمبر"
+];
+
+let paymentMonths=[];
+
+
+function initSupabase(){
+
+try{
+
+if(
+typeof window.supabase==="undefined" ||
+!window.supabase.createClient
+){
+return false;
+}
+
+db=window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+return true;
+
+}catch(e){
+
+console.error(e);
+return false;
+
+}
+
+}
+
+
+/* ================= PAYMENT SETTINGS ================= */
+
+async function loadPaymentSettings(){
+
+if(!db&&!initSupabase())return;
+
+try{
+
+const result=
+await db
+.from("payment_month_settings")
+.select("*")
+.order("id",{ascending:true});
+
+if(result.error){
+
+console.error(result.error);
+
+paymentMonths=[
+"أغسطس",
+"سبتمبر",
+"أكتوبر",
+"نوفمبر",
+"ديسمبر"
+];
+
+return;
+
+}
+
+const rows=result.data||[];
+
+paymentMonths=rows
+.filter(function(row){
+return row.enabled===true;
+})
+.map(function(row){
+return row.month_name;
+});
+
+}catch(e){
+
+console.error(e);
+
+paymentMonths=[
+"أغسطس",
+"سبتمبر",
+"أكتوبر",
+"نوفمبر",
+"ديسمبر"
+];
+
+}
+
+}
+
+
+async function openPaymentSettings(){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+await loadPaymentSettings();
+
+const box=
+document.getElementById("monthSettingsList");
+
+const message=
+document.getElementById("monthSettingsMessage");
+
+box.innerHTML="";
+
+message.innerHTML="";
+
+allPaymentMonths.forEach(function(month){
+
+const active=
+paymen
