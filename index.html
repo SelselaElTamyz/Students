@@ -1365,4 +1365,472 @@ onclick="deleteStudent('${encodeURIComponent(s.student_code)}')">
 </div>
 `;
 
-list.appendChi
+list.appendChild(d);
+
+});
+
+}catch(e){
+
+console.error(e);
+
+list.innerHTML=
+`
+<div class="message error">
+❌ حدث خطأ فى تحميل الطلاب.
+</div>
+`;
+
+}
+
+}
+
+
+async function editStudent(encoded){
+
+if(!await isTeacherLoggedIn()){
+
+await openTeacherLogin();
+
+return;
+
+}
+
+const code=decodeURIComponent(encoded);
+
+try{
+
+const r=
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(r.error || !r.data){
+
+alert("❌ تعذر تحميل بيانات الطالب.");
+
+return;
+
+}
+
+const s=r.data;
+
+document.getElementById("studentName")
+.value=s.student_name||"";
+
+document.getElementById("studentGender")
+.value=s.gender||"";
+
+document.getElementById("studentGrade")
+.value=s.grade||"";
+
+document.getElementById("studentCode")
+.value=s.student_code||"";
+
+for(let i=1;i<=15;i++){
+
+document.getElementById(
+"evaluation"+i
+).value=
+s["evaluation_"+i]||"";
+
+}
+
+setMessage(
+"saveMessage",
+"✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.",
+"success"
+);
+
+showPage("studentManagement");
+
+}catch(e){
+
+console.error(e);
+
+alert("❌ حدث خطأ أثناء تحميل الطالب.");
+
+}
+
+}
+
+
+async function deleteStudent(encoded){
+
+if(!await isTeacherLoggedIn()){
+
+await openTeacherLogin();
+
+return;
+
+}
+
+const code=decodeURIComponent(encoded);
+
+if(!confirm(
+"هل أنت متأكد من حذف هذا الطالب؟\nلا يمكن التراجع عن الحذف."
+)){
+
+return;
+
+}
+
+try{
+
+const r=
+await db
+.from("students")
+.delete()
+.eq("student_code",code);
+
+if(r.error)throw r.error;
+
+alert("✅ تم حذف الطالب بنجاح.");
+
+if(currentGrade){
+
+await loadGradeStudents();
+
+}
+
+const searchName=
+document.getElementById(
+"teacherSearchName"
+).value.trim();
+
+if(searchName){
+
+await searchTeacherByName();
+
+}
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"❌ حدث خطأ أثناء حذف الطالب: "+
+e.message
+);
+
+}
+
+}
+
+
+async function openStudentReport(encoded){
+
+if(!await isTeacherLoggedIn()){
+
+await openTeacherLogin();
+
+return;
+
+}
+
+const code=decodeURIComponent(encoded);
+
+try{
+
+const r=
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(r.error)throw r.error;
+
+if(!r.data){
+
+alert("❌ الطالب غير موجود.");
+
+return;
+
+}
+
+const s=r.data;
+
+let rows="";
+
+let total=0;
+let count=0;
+
+for(let i=1;i<=15;i++){
+
+const v=s["evaluation_"+i];
+
+if(v!==null &&
+v!==undefined &&
+v!==""){
+
+let display=v;
+
+if(v!=="غاب"){
+
+display=escapeHtml(v)+"/10";
+
+total+=Number(v);
+count++;
+
+}else{
+
+display="غياب";
+
+}
+
+rows+=`
+<tr>
+<td>التقييم ${i}</td>
+<td>${display}</td>
+</tr>
+`;
+
+}
+
+}
+
+let average="—";
+
+if(count>0){
+
+average=(total/count).toFixed(2)+"/10";
+
+}
+
+if(!rows){
+
+rows=`
+<tr>
+<td colspan="2">
+لا توجد تقييمات مسجلة.
+</td>
+</tr>
+`;
+
+}
+
+document.getElementById(
+"studentReportContent"
+).innerHTML=`
+
+<div class="report-header">
+
+<h3>
+${s.gender==="أنثى"?"👧 تقرير الطالبة":"👦 تقرير الطالب"}
+</h3>
+
+<p>
+<strong>الاسم:</strong>
+${escapeHtml(s.student_name)}
+</p>
+
+<p>
+<strong>الصف:</strong>
+${escapeHtml(s.grade)}
+</p>
+
+<p>
+<strong>كود الطالب:</strong>
+${escapeHtml(s.student_code)}
+</p>
+
+<p>
+<strong>متوسط التقييمات:</strong>
+${average}
+</p>
+
+</div>
+
+<div class="table-container">
+
+<table class="report-table">
+
+<thead>
+<tr>
+<th>التقييم</th>
+<th>الدرجة</th>
+</tr>
+</thead>
+
+<tbody>
+${rows}
+</tbody>
+
+</table>
+
+</div>
+`;
+
+showPage("studentReport");
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"❌ حدث خطأ أثناء إنشاء التقرير."
+);
+
+}
+
+}
+
+
+async function showAllStudentsReport(){
+
+if(!await isTeacherLoggedIn()){
+
+await openTeacherLogin();
+
+return;
+
+}
+
+try{
+
+const r=
+await db
+.from("students")
+.select("*")
+.eq("grade",currentGrade)
+.order("student_name");
+
+if(r.error)throw r.error;
+
+let rows="";
+
+r.data.forEach((s,i)=>{
+
+let total=0;
+let count=0;
+
+for(let x=1;x<=15;x++){
+
+const v=s["evaluation_"+x];
+
+if(v!==null &&
+v!==undefined &&
+v!=="" &&
+v!=="غاب"){
+
+total+=Number(v);
+count++;
+
+}
+
+}
+
+const avg=
+count>0
+?(total/count).toFixed(2)
+:"—";
+
+rows+=`
+
+<tr>
+
+<td>${i+1}</td>
+
+<td>
+${escapeHtml(s.student_name)}
+</td>
+
+<td>
+${escapeHtml(s.student_code)}
+</td>
+
+<td>
+${avg}
+</td>
+
+</tr>
+`;
+
+});
+
+if(!rows){
+
+rows=`
+<tr>
+<td colspan="4">
+لا يوجد طلاب فى هذا الصف.
+</td>
+</tr>
+`;
+
+}
+
+document.getElementById(
+"allStudentsReportContent"
+).innerHTML=`
+
+<div class="report-header">
+
+<h3>
+📚 ${escapeHtml(currentGrade)}
+</h3>
+
+<p>
+عدد الطلاب: ${r.data.length}
+</p>
+
+</div>
+
+<div class="table-container">
+
+<table class="report-table">
+
+<thead>
+
+<tr>
+<th>م</th>
+<th>اسم الطالب</th>
+<th>الكود</th>
+<th>المتوسط</th>
+</tr>
+
+</thead>
+
+<tbody>
+${rows}
+</tbody>
+
+</table>
+
+</div>
+`;
+
+showPage("allStudentsReport");
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"❌ حدث خطأ أثناء إنشاء التقرير."
+);
+
+}
+
+}
+
+
+/* تشغيل Supabase وإنشاء التقييمات عند فتح الصفحة */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+initSupabase();
+
+createEvaluations();
+
+}
+);
+
+</script>
+
+</body>
+</html>
