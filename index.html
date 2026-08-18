@@ -65,6 +65,7 @@ font-size:29px;
 font-weight:900;
 color:#0F4C5C;
 line-height:1.3;
+margin-bottom:1px;
 text-align:center
 }
 
@@ -108,7 +109,13 @@ border-radius:11px;
 color:white;
 font-size:17px;
 cursor:pointer;
-font-weight:bold
+font-weight:bold;
+transition:.2s
+}
+
+button:hover{
+opacity:.93;
+transform:translateY(-1px)
 }
 
 .blue{background:#1565C0}
@@ -214,6 +221,10 @@ padding:16px;
 margin:12px 0
 }
 
+.student-card h3{
+margin-top:0
+}
+
 .student-actions{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -228,8 +239,7 @@ margin:0
 grid-column:1 / -1
 }
 
-.grade-header,
-.report-header{
+.grade-header{
 background:#eff6ff;
 border:1px solid #bfdbfe;
 border-radius:15px;
@@ -244,6 +254,15 @@ margin:0 0 8px
 
 .grade-header p{
 margin:0
+}
+
+.report-header{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+border-radius:15px;
+padding:15px;
+margin-bottom:15px;
+text-align:center
 }
 
 .report-header p{
@@ -336,20 +355,37 @@ grid-column:auto
 
 <div class="container">
 
-<!-- ================= الرئيسية ================= -->
+<!-- ================= الصفحة الرئيسية ================= -->
 
 <div id="home" class="page active">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<div class="home-icon">📚</div>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
 
-<p class="subtitle">نظام متابعة الطلاب</p>
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<div class="home-icon">
+📚
+</div>
+
+<p class="subtitle">
+نظام متابعة الطلاب
+</p>
 
 <button class="blue" onclick="openParentPage()">
 👨‍👩‍👧 صفحة ولى الأمر
@@ -360,9 +396,19 @@ grid-column:auto
 </button>
 
 <footer class="footer">
-<div class="footer-title">تصميم وبرمجة</div>
-<div class="footer-name">أ/ محمد القهوجى</div>
-<div class="copyright">جميع الحقوق محفوظة © 2026</div>
+
+<div class="footer-title">
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="copyright">
+جميع الحقوق محفوظة © 2026
+</div>
+
 </footer>
 
 </div>
@@ -373,22 +419,39 @@ grid-column:auto
 <div id="teacherLogin" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<h2>👨‍🏫 دخول المعلم</h2>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
+
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+👨‍🏫 دخول المعلم
+</h2>
 
 <input
 id="teacherEmail"
 type="email"
+autocomplete="username"
 placeholder="البريد الإلكترونى">
 
 <input
 id="teacherPassword"
 type="password"
+autocomplete="current-password"
 placeholder="كلمة المرور">
 
 <button class="green" onclick="loginTeacher()">
@@ -397,16 +460,26 @@ placeholder="كلمة المرور">
 
 <div id="loginMessage" class="message"></div>
 
-<!-- لا يوجد زر رجوع -->
+<!-- تم حذف زر رجوع من صفحة دخول المعلم -->
 
 <button class="home-button" onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
 
 <footer class="footer">
-<div class="footer-title">تصميم وبرمجة</div>
-<div class="footer-name">أ/ محمد القهوجى</div>
-<div class="copyright">جميع الحقوق محفوظة © 2026</div>
+
+<div class="footer-title">
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="copyright">
+جميع الحقوق محفوظة © 2026
+</div>
+
 </footer>
 
 </div>
@@ -417,15 +490,32 @@ placeholder="كلمة المرور">
 <div id="teacher" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<h2>👨‍🏫 صفحة المعلم</h2>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
 
-<p style="text-align:center">اختر القسم المطلوب</p>
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+👨‍🏫 صفحة المعلم
+</h2>
+
+<p style="text-align:center">
+اختر القسم المطلوب
+</p>
 
 <button class="blue" onclick="showPage('studentManagement')">
 ➕ إضافة وتعديل بيانات الطلاب
@@ -433,7 +523,9 @@ placeholder="كلمة المرور">
 
 <hr>
 
-<h3>📚 الصفوف الدراسية</h3>
+<h3>
+📚 الصفوف الدراسية
+</h3>
 
 <div class="grade-buttons">
 
@@ -500,30 +592,60 @@ placeholder="كلمة المرور">
 </div>
 
 
-<!-- ================= إدارة الطلاب ================= -->
+<!-- ================= إضافة وتعديل ================= -->
 
 <div id="studentManagement" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<h2>➕ إضافة وتعديل بيانات الطلاب</h2>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
 
-<input id="studentName" type="text" placeholder="اسم الطالب / الطالبة">
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+➕ إضافة وتعديل بيانات الطلاب
+</h2>
+
+<input
+id="studentName"
+type="text"
+placeholder="اسم الطالب / الطالبة">
 
 <select id="studentGender">
-<option value="">اختر النوع</option>
-<option value="ذكر">👦 طالب</option>
-<option value="أنثى">👧 طالبة</option>
+
+<option value="">
+اختر النوع
+</option>
+
+<option value="ذكر">
+👦 طالب
+</option>
+
+<option value="أنثى">
+👧 طالبة
+</option>
+
 </select>
 
 <select id="studentGrade">
 
-<option value="">اختر الصف الدراسى</option>
+<option value="">
+اختر الصف الدراسى
+</option>
 
 <option value="الصف الأول الابتدائى">الصف الأول الابتدائى</option>
 <option value="الصف الثانى الابتدائى">الصف الثانى الابتدائى</option>
@@ -542,9 +664,14 @@ placeholder="كلمة المرور">
 
 </select>
 
-<input id="studentCode" type="text" placeholder="كود الطالب">
+<input
+id="studentCode"
+type="text"
+placeholder="كود الطالب">
 
-<h3>📊 التقييمات من 1 إلى 15</h3>
+<h3>
+📊 التقييمات من 1 إلى 15
+</h3>
 
 <p style="text-align:center">
 اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
@@ -578,15 +705,30 @@ placeholder="كلمة المرور">
 <div id="gradePage" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
+</div>
+
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
+
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
 </div>
 
 <div class="grade-header">
 
-<h2 id="gradePageTitle">📚 الصف</h2>
+<h2 id="gradePageTitle">
+📚 الصف
+</h2>
 
 <p id="gradeStudentsCount">
 جارى تحميل الطلاب...
@@ -616,13 +758,28 @@ placeholder="كلمة المرور">
 <div id="studentReport" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<h2>📄 تقرير الطالب</h2>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
+
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+📄 تقرير الطالب
+</h2>
 
 <div id="studentReportContent"></div>
 
@@ -641,18 +798,33 @@ placeholder="كلمة المرور">
 </div>
 
 
-<!-- ================= تقرير جميع الطلاب ================= -->
+<!-- ================= تقرير كل الطلاب ================= -->
 
 <div id="allStudentsReport" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<h2>📊 تقرير جميع الطلاب</h2>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
+
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+📊 تقرير جميع الطلاب
+</h2>
 
 <div id="allStudentsReportContent"></div>
 
@@ -676,13 +848,28 @@ placeholder="كلمة المرور">
 <div id="parent" class="page">
 
 <div class="brand">
-<div class="brand-title-main">⭐ سلسلة التميز</div>
-<div class="brand-subtitle">فى الرياضيات</div>
-<div class="teacher-name">أ/ محمد القهوجى</div>
-<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+
+<div class="brand-title-main">
+⭐ سلسلة التميز
 </div>
 
-<h2>👨‍👩‍👧 صفحة ولى الأمر</h2>
+<div class="brand-subtitle">
+فى الرياضيات
+</div>
+
+<div class="teacher-name">
+أ/ محمد القهوجى
+</div>
+
+<div class="teacher-title">
+معلم الرياضيات والإحصاء
+</div>
+
+</div>
+
+<h2>
+👨‍👩‍👧 صفحة ولى الأمر
+</h2>
 
 <p style="text-align:center">
 الاستعلام عن الطالب / الطالبة
@@ -701,9 +888,9 @@ placeholder="أدخل كود الطالب">
 
 <div id="parentResult"></div>
 
-<!-- تم حذف زر الرجوع فقط -->
+<!-- تم حذف زر الرجوع من صفحة ولي الأمر -->
 
-<button class="home-button" onclick="showPage('home')">
+<button class="home-button" onclick="goHomeFromParent()">
 🏠 الصفحة الرئيسية
 </button>
 
@@ -714,98 +901,1459 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
-/* =========================================
-   التنقل الأساسي
-   موضوع قبل أي اتصال بقاعدة البيانات
-========================================= */
-
-function showPage(id){
-
-document.querySelectorAll(".page").forEach(function(page){
-page.classList.remove("active");
-});
-
-var page=document.getElementById(id);
-
-if(page){
-page.classList.add("active");
-window.scrollTo(0,0);
-}
-
-}
-
-
-/* =========================================
-   صفحة ولي الأمر
-========================================= */
-
-function openParentPage(){
-
-var code=document.getElementById("parentCode");
-var message=document.getElementById("parentMessage");
-var result=document.getElementById("parentResult");
-
-if(code){
-code.value="";
-}
-
-if(message){
-message.innerHTML="";
-message.className="message";
-}
-
-if(result){
-result.innerHTML="";
-}
-
-showPage("parent");
-
-}
-
-
-/* =========================================
+/* =====================================
    Supabase
-========================================= */
+===================================== */
 
-var SUPABASE_URL=
+const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
 
-var SUPABASE_KEY=
+const SUPABASE_KEY =
 "sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
 
-var db=null;
+let db = null;
 
-try{
+try {
 
-if(window.supabase){
+if(
+window.supabase &&
+typeof window.supabase.createClient === "function"
+){
 
-db=window.supabase.createClient(
+db = window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
 }
 
-}catch(error){
+} catch(error){
 
-console.error("Supabase Error:",error);
+console.error(
+"Supabase Error:",
+error
+);
 
 }
 
 
-/* =========================================
-   دخول المعلم
-========================================= */
+/* =====================================
+   التقييمات
+===================================== */
+
+const evaluationBox =
+document.getElementById("evaluationInputs");
+
+const values = [
+"0","0.25","0.5","0.75",
+"1","1.25","1.5","1.75",
+"2","2.25","2.5","2.75",
+"3","3.25","3.5","3.75",
+"4","4.25","4.5","4.75",
+"5","5.25","5.5","5.75",
+"6","6.25","6.5","6.75",
+"7","7.25","7.5","7.75",
+"8","8.25","8.5","8.75",
+"9","9.25","9.5","9.75",
+"10"
+];
+
+for(let i=1;i<=15;i++){
+
+let options =
+'<option value="">لم يتم التقييم</option>' +
+'<option value="غاب">غاب</option>';
+
+values.forEach(function(v){
+
+options +=
+'<option value="' +
+v +
+'">' +
+v +
+'</option>';
+
+});
+
+evaluationBox.innerHTML +=
+
+'<div class="evaluation">' +
+
+'<strong>التقييم ' +
+i +
+'</strong>' +
+
+'<select id="evaluation' +
+i +
+'">' +
+
+options +
+
+'</select>' +
+
+'</div>';
+
+}
+
+
+/* =====================================
+   التنقل
+===================================== */
+
+function showPage(id){
+
+document
+.querySelectorAll(".page")
+.forEach(function(page){
+
+page.classList.remove("active");
+
+});
+
+const page =
+document.getElementById(id);
+
+if(!page){
+
+console.error(
+"الصفحة غير موجودة:",
+id
+);
+
+return;
+
+}
+
+page.classList.add("active");
+
+window.scrollTo(0,0);
+
+}
+
+
+/* =====================================
+   فتح صفحة ولي الأمر
+   مع مسح البحث السابق
+===================================== */
+
+function openParentPage(){
+
+clearParentPage();
+
+showPage("parent");
+
+}
+
+
+/* =====================================
+   تنظيف صفحة ولي الأمر
+===================================== */
+
+function clearParentPage(){
+
+const code =
+document.getElementById("parentCode");
+
+const message =
+document.getElementById("parentMessage");
+
+const result =
+document.getElementById("parentResult");
+
+if(code){
+
+code.value="";
+
+}
+
+if(message){
+
+message.innerHTML="";
+
+message.className="message";
+
+}
+
+if(result){
+
+result.innerHTML="";
+
+}
+
+}
+
+
+/* =====================================
+   العودة للرئيسية من ولي الأمر
+===================================== */
+
+function goHomeFromParent(){
+
+clearParentPage();
+
+showPage("home");
+
+}
+
+
+/* =====================================
+   فتح صفحة دخول المعلم
+===================================== */
 
 async function openTeacherLogin(){
-
-showPage("teacherLogin");
-
-document.getElementById("teacherEmail").value="";
-document.getElementById("teacherPassword").value="";
-document.getElementById("loginMessage").innerHTML="";
 
 if(db){
 
 try{
-await db.auth.sign
+
+await db.auth.signOut();
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+const email =
+document.getElementById("teacherEmail");
+
+const password =
+document.getElementById("teacherPassword");
+
+const message =
+document.getElementById("loginMessage");
+
+if(email){
+
+email.value="";
+
+}
+
+if(password){
+
+password.value="";
+
+}
+
+if(message){
+
+message.innerHTML="";
+
+message.className="message";
+
+}
+
+showPage("teacherLogin");
+
+}
+
+
+/* =====================================
+   دخول المعلم
+===================================== */
+
+async function loginTeacher(){
+
+if(!db){
+
+const message =
+document.getElementById("loginMessage");
+
+message.innerHTML =
+"❌ تعذر الاتصال بقاعدة البيانات.";
+
+message.className =
+"message error";
+
+return;
+
+}
+
+const email =
+document
+.getElementById("teacherEmail")
+.value
+.trim();
+
+const password =
+document
+.getElementById("teacherPassword")
+.value;
+
+const message =
+document.getElementById("loginMessage");
+
+if(!email || !password){
+
+message.innerHTML =
+"❌ اكتب البريد الإلكترونى وكلمة المرور.";
+
+message.className =
+"message error";
+
+return;
+
+}
+
+message.innerHTML =
+"جارى تسجيل الدخول...";
+
+message.className =
+"message";
+
+try{
+
+const result =
+await db.auth.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+if(result.error){
+
+message.innerHTML =
+"❌ البريد الإلكترونى أو كلمة المرور غير صحيحة.";
+
+message.className =
+"message error";
+
+return;
+
+}
+
+message.innerHTML="";
+
+document
+.getElementById("teacherEmail")
+.value="";
+
+document
+.getElementById("teacherPassword")
+.value="";
+
+showPage("teacher");
+
+}catch(error){
+
+console.error(error);
+
+message.innerHTML =
+"❌ حدث خطأ أثناء تسجيل الدخول.";
+
+message.className =
+"message error";
+
+}
+
+}
+
+
+/* =====================================
+   التأكد من دخول المعلم
+===================================== */
+
+async function isTeacherLoggedIn(){
+
+if(!db){
+
+return false;
+
+}
+
+try{
+
+const result =
+await db.auth.getSession();
+
+return !!(
+result.data &&
+result.data.session
+);
+
+}catch(error){
+
+return false;
+
+}
+
+}
+
+
+/* =====================================
+   تسجيل الخروج
+===================================== */
+
+async function logoutTeacher(){
+
+if(db){
+
+try{
+
+await db.auth.signOut();
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+newStudent();
+
+showPage("home");
+
+}
+
+
+/* =====================================
+   حفظ الطالب
+===================================== */
+
+async function saveStudent(){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+
+return;
+
+}
+
+const name =
+document
+.getElementById("studentName")
+.value
+.trim();
+
+const gender =
+document
+.getElementById("studentGender")
+.value;
+
+const grade =
+document
+.getElementById("studentGrade")
+.value;
+
+const code =
+document
+.getElementById("studentCode")
+.value
+.trim();
+
+const message =
+document.getElementById("saveMessage");
+
+if(!name || !gender || !grade || !code){
+
+message.innerHTML =
+"❌ اكتب اسم الطالب واختر النوع والصف والكود.";
+
+message.className =
+"message error";
+
+return;
+
+}
+
+let row = {
+
+student_code:code,
+student_name:name,
+gender:gender,
+grade:grade
+
+};
+
+for(let i=1;i<=15;i++){
+
+row["evaluation_"+i] =
+document
+.getElementById("evaluation"+i)
+.value || null;
+
+}
+
+try{
+
+const findResult =
+await db
+.from("students")
+.select("id")
+.eq("student_code",code)
+.maybeSingle();
+
+if(findResult.error){
+
+message.innerHTML =
+"❌ حدث خطأ أثناء البحث عن الطالب.";
+
+message.className =
+"message error";
+
+return;
+
+}
+
+let error=null;
+
+if(findResult.data){
+
+const result =
+await db
+.from("students")
+.update(row)
+.eq("id",findResult.data.id);
+
+error=result.error;
+
+}else{
+
+const result =
+await db
+.from("students")
+.insert([row]);
+
+error=result.error;
+
+}
+
+if(error){
+
+message.innerHTML =
+"❌ حدث خطأ: " +
+error.message;
+
+message.className =
+"message error";
+
+return;
+
+}
+
+message.innerHTML =
+"✅ تم حفظ بيانات الطالب بنجاح.";
+
+message.className =
+"message success";
+
+}catch(error){
+
+message.innerHTML =
+"❌ حدث خطأ أثناء الحفظ.";
+
+message.className =
+"message error";
+
+}
+
+}
+
+
+/* =====================================
+   طالب جديد
+===================================== */
+
+function newStudent(){
+
+document.getElementById("studentName").value="";
+document.getElementById("studentGender").value="";
+document.getElementById("studentGrade").value="";
+document.getElementById("studentCode").value="";
+
+for(let i=1;i<=15;i++){
+
+document
+.getElementById("evaluation"+i)
+.value="";
+
+}
+
+document
+.getElementById("saveMessage")
+.innerHTML="";
+
+}
+
+
+/* =====================================
+   فتح صف
+===================================== */
+
+async function openGradePage(grade){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+
+return;
+
+}
+
+currentGrade=grade;
+
+document
+.getElementById("gradePageTitle")
+.textContent=
+"📚 "+grade;
+
+showPage("gradePage");
+
+await loadGradeStudents();
+
+}
+
+
+/* =====================================
+   الصف الحالي
+===================================== */
+
+let currentGrade = "";
+
+
+/* =====================================
+   تحميل طلاب الصف
+===================================== */
+
+async function loadGradeStudents(){
+
+const list =
+document.getElementById("gradeStudentsList");
+
+const count =
+document.getElementById("gradeStudentsCount");
+
+list.innerHTML =
+'<div class="loading">جارى تحميل الطلاب...</div>';
+
+if(!db){
+
+list.innerHTML =
+'<div class="message error">❌ لا يوجد اتصال بقاعدة البيانات.</div>';
+
+return;
+
+}
+
+try{
+
+const result =
+await db
+.from("students")
+.select("*")
+.order("student_name");
+
+if(result.error){
+
+list.innerHTML =
+'<div class="message error">❌ حدث خطأ فى تحميل الطلاب.</div>';
+
+return;
+
+}
+
+const students =
+(result.data || []).filter(function(student){
+
+return student.grade === currentGrade;
+
+});
+
+count.textContent =
+"عدد الطلاب: "+
+students.length;
+
+list.innerHTML="";
+
+if(students.length===0){
+
+list.innerHTML =
+'<div class="card">' +
+'<p style="text-align:center">' +
+'لا يوجد طلاب مسجلون فى هذا الصف.' +
+'</p>' +
+'</div>';
+
+return;
+
+}
+
+students.forEach(function(student,index){
+
+const div =
+document.createElement("div");
+
+div.className =
+"student-card";
+
+const title =
+student.gender==="أنثى"
+?
+"👧 طالبة"
+:
+"👦 طالب";
+
+div.innerHTML =
+
+'<h3>' +
+title +
+'</h3>' +
+
+'<p><strong>م:</strong> ' +
+(index+1) +
+'</p>' +
+
+'<p><strong>الاسم:</strong> ' +
+escapeHtml(student.student_name) +
+'</p>' +
+
+'<p><strong>الكود:</strong> ' +
+escapeHtml(student.student_code) +
+'</p>' +
+
+'<div class="student-actions">' +
+
+'<button class="blue" onclick="openStudentReport(\'' +
+encodeURIComponent(student.student_code) +
+'\')">' +
+'📄 تقرير' +
+'</button>' +
+
+'<button class="green" onclick="editStudent(\'' +
+encodeURIComponent(student.student_code) +
+'\')">' +
+'✏️ تعديل' +
+'</button>' +
+
+'<button class="red delete-button" onclick="deleteStudent(\'' +
+encodeURIComponent(student.student_code) +
+'\')">' +
+'🗑️ حذف الطالب' +
+'</button>' +
+
+'</div>';
+
+list.appendChild(div);
+
+});
+
+}catch(error){
+
+console.error(error);
+
+list.innerHTML =
+'<div class="message error">❌ حدث خطأ فى تحميل الطلاب.</div>';
+
+}
+
+}
+
+
+/* =====================================
+   تعديل طالب
+===================================== */
+
+async function editStudent(encodedCode){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+
+return;
+
+}
+
+const code =
+decodeURIComponent(encodedCode);
+
+const result =
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(result.error || !result.data){
+
+alert("❌ تعذر تحميل بيانات الطالب.");
+
+return;
+
+}
+
+const student=result.data;
+
+document.getElementById("studentName").value=
+student.student_name || "";
+
+document.getElementById("studentGender").value=
+student.gender || "";
+
+document.getElementById("studentGrade").value=
+student.grade || "";
+
+document.getElementById("studentCode").value=
+student.student_code || "";
+
+for(let i=1;i<=15;i++){
+
+document
+.getElementById("evaluation"+i)
+.value=
+student["evaluation_"+i] || "";
+
+}
+
+document
+.getElementById("saveMessage")
+.innerHTML=
+"✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
+
+document
+.getElementById("saveMessage")
+.className=
+"message success";
+
+showPage("studentManagement");
+
+}
+
+
+/* =====================================
+   حذف الطالب
+===================================== */
+
+async function deleteStudent(encodedCode){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+
+return;
+
+}
+
+const code =
+decodeURIComponent(encodedCode);
+
+const studentResult =
+await db
+.from("students")
+.select("id,student_name")
+.eq("student_code",code)
+.maybeSingle();
+
+if(
+studentResult.error ||
+!studentResult.data
+){
+
+alert(
+"❌ الطالب غير موجود."
+);
+
+return;
+
+}
+
+const student =
+studentResult.data;
+
+const answer =
+confirm(
+"⚠️ تحذير!\n\n" +
+"هل أنت متأكد من حذف الطالب:\n\n" +
+student.student_name +
+"\n\n" +
+"سيتم حذف بياناته نهائيًا.\n\n" +
+"اضغط موافق للحذف أو إلغاء للرجوع."
+);
+
+if(!answer){
+
+return;
+
+}
+
+const sessionResult =
+await db.auth.getSession();
+
+if(
+!sessionResult.data ||
+!sessionResult.data.session
+){
+
+alert(
+"❌ انتهت جلسة المعلم.\nيرجى تسجيل الدخول مرة أخرى."
+);
+
+openTeacherLogin();
+
+return;
+
+}
+
+const email =
+sessionResult.data.session.user.email;
+
+const password =
+prompt(
+"🔐 تأكيد حذف الطالب\n\n" +
+"اكتب كلمة مرور دخول المعلم:"
+);
+
+if(password === null){
+
+return;
+
+}
+
+if(password.trim()===""){
+
+alert(
+"❌ لم يتم إدخال كلمة المرور.\nلم يتم حذف الطالب."
+);
+
+return;
+
+}
+
+const loginResult =
+await db.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+if(loginResult.error){
+
+alert(
+"❌ كلمة المرور غير صحيحة.\n\n" +
+"لم يتم حذف الطالب."
+);
+
+return;
+
+}
+
+const deleteResult =
+await db
+.from("students")
+.delete()
+.eq("id",student.id);
+
+if(deleteResult.error){
+
+alert(
+"❌ حدث خطأ أثناء الحذف:\n" +
+deleteResult.error.message
+);
+
+return;
+
+}
+
+alert(
+"✅ تم حذف الطالب بنجاح."
+);
+
+await loadGradeStudents();
+
+}
+
+
+/* =====================================
+   تقرير طالب
+===================================== */
+
+async function openStudentReport(encodedCode){
+
+const code =
+decodeURIComponent(encodedCode);
+
+const result =
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(result.error || !result.data){
+
+alert("❌ تعذر تحميل التقرير.");
+
+return;
+
+}
+
+const student=result.data;
+
+const personTitle =
+student.gender==="أنثى"
+?
+"الطالبة"
+:
+"الطالب";
+
+let html=
+
+'<div class="report-header">' +
+
+'<h3>📋 بيانات '+
+personTitle+
+'</h3>' +
+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>' +
+
+'<p><strong>الصف:</strong> '+
+escapeHtml(student.grade||"")+
+'</p>' +
+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>' +
+
+'</div>' +
+
+'<h3>📊 التقييمات</h3>' +
+
+'<table class="report-table">' +
+
+'<tr><th>التقييم</th><th>الدرجة</th></tr>';
+
+for(let i=1;i<=15;i++){
+
+const value =
+student["evaluation_"+i];
+
+let display="لم يتم التقييم";
+
+if(value==="غاب"){
+
+display="غياب";
+
+}else if(
+value!==null &&
+value!==undefined &&
+value!==""
+){
+
+display=
+escapeHtml(value)+
+"/10";
+
+}
+
+html +=
+
+'<tr>' +
+
+'<td>التقييم '+
+i+
+'</td>' +
+
+'<td>'+
+display+
+'</td>' +
+
+'</tr>';
+
+}
+
+html +=
+'</table>';
+
+document
+.getElementById("studentReportContent")
+.innerHTML=
+html;
+
+showPage("studentReport");
+
+}
+
+
+/* =====================================
+   تقرير جميع الطلاب
+===================================== */
+
+async function showAllStudentsReport(){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+
+return;
+
+}
+
+const result =
+await db
+.from("students")
+.select("*")
+.order("student_name");
+
+if(result.error){
+
+alert(
+"❌ حدث خطأ أثناء تحميل التقرير."
+);
+
+return;
+
+}
+
+const students =
+(result.data||[]).filter(function(student){
+
+return student.grade===currentGrade;
+
+});
+
+let html=
+
+'<div class="report-header">' +
+
+'<h3>📊 تقرير '+
+escapeHtml(currentGrade)+
+'</h3>' +
+
+'<p><strong>عدد الطلاب:</strong> '+
+students.length+
+'</p>' +
+
+'</div>';
+
+if(students.length===0){
+
+html+=
+'<div class="card">' +
+'<p style="text-align:center">' +
+'لا يوجد طلاب فى هذا الصف.' +
+'</p>' +
+'</div>';
+
+document
+.getElementById("allStudentsReportContent")
+.innerHTML=
+html;
+
+showPage("allStudentsReport");
+
+return;
+
+}
+
+html+=
+
+'<div class="table-container">' +
+
+'<table class="report-table">' +
+
+'<tr>' +
+
+'<th>م</th>' +
+'<th>اسم الطالب</th>' +
+'<th>الكود</th>' +
+'<th>النوع</th>' +
+'<th>التقييمات</th>' +
+
+'</tr>';
+
+students.forEach(function(student,index){
+
+let evaluations="";
+
+for(let i=1;i<=15;i++){
+
+const value=
+student["evaluation_"+i];
+
+if(
+value!==null &&
+value!==undefined &&
+value!==""
+){
+
+evaluations+=
+"التقييم "+
+i+
+": "+
+(
+value==="غاب"
+?
+"غياب"
+:
+escapeHtml(value)
+)+
+"<br>";
+
+}
+
+}
+
+if(!evaluations){
+
+evaluations="لا توجد تقييمات";
+
+}
+
+html+=
+
+'<tr>' +
+
+'<td>'+
+(index+1)+
+'</td>' +
+
+'<td>'+
+escapeHtml(student.student_name)+
+'</td>' +
+
+'<td>'+
+escapeHtml(student.student_code)+
+'</td>' +
+
+'<td>'+
+escapeHtml(student.gender||"")+
+'</td>' +
+
+'<td style="text-align:right">'+
+evaluations+
+'</td>' +
+
+'</tr>';
+
+});
+
+html+=
+'</table>' +
+'</div>';
+
+document
+.getElementById("allStudentsReportContent")
+.innerHTML=
+html;
+
+showPage("allStudentsReport");
+
+}
+
+
+/* =====================================
+   ولي الأمر
+===================================== */
+
+async function searchStudent(){
+
+const code =
+document
+.getElementById("parentCode")
+.value
+.trim();
+
+const message =
+document.getElementById("parentMessage");
+
+const resultBox =
+document.getElementById("parentResult");
+
+if(!code){
+
+message.innerHTML=
+"❌ اكتب كود الطالب.";
+
+message.className=
+"message error";
+
+resultBox.innerHTML="";
+
+return;
+
+}
+
+if(!db){
+
+message.innerHTML=
+"❌ تعذر الاتصال بقاعدة البيانات.";
+
+message.className=
+"message error";
+
+return;
+
+}
+
+message.innerHTML=
+"جارى البحث...";
+
+message.className=
+"message";
+
+try{
+
+const result =
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(result.error){
+
+message.innerHTML=
+"❌ حدث خطأ أثناء الاستعلام.";
+
+message.className=
+"message error";
+
+resultBox.innerHTML="";
+
+return;
+
+}
+
+if(!result.data){
+
+message.innerHTML=
+"❌ كود الطالب غير موجود.";
+
+message.className=
+"message error";
+
+resultBox.innerHTML="";
+
+return;
+
+}
+
+const student=result.data;
+
+message.innerHTML="";
+
+const personTitle =
+student.gender==="أنثى"
+?
+"الطالبة"
+:
+"الطالب";
+
+let html=
+
+'<div class="card">' +
+
+'<h3>📋 بيانات '+
+personTitle+
+'</h3>' +
+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>' +
+
+'<p><strong>الصف:</strong> '+
+escapeHtml(student.grade||"")+
+'</p>' +
+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>' +
+
+'<hr>' +
+
+'<h3>📊 التقييمات</h3>';
+
+let has=false;
+
+for(let i=1;i<=15;i++){
+
+const value =
+student["evaluation_"+i];
+
+if(
+value!==null &&
+value!==undefined &&
+value!==""
+){
+
+has=true;
+
+html+=
+
+'<p>' +
+
+'<strong>التقييم '+
+i+
+': </strong>' +
+
+(
+value==="غاب"
+?
+"غياب"
+:
+escapeHtml(value)+
+"/10"
+) +
+
+'</p>';
+
+}
+
+}
+
+if(!has){
+
+html+=
+'<p>لا توجد تقييمات مسجلة حتى الآن.</p>';
+
+}
+
+html+='</div>';
+
+resultBox.innerHTML=html;
+
+}catch(error){
+
+console.error(error);
+
+message.innerHTML=
+"❌ حدث خطأ أثناء الاستعلام.";
+
+message.className=
+"message error";
+
+resultBox.innerHTML="";
+
+}
+
+}
+
+
+/* =====================================
+   حماية النصوص
+===================================== */
+
+function escapeHtml(value){
+
+return String(value==null?"":value)
+
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
