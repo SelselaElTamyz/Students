@@ -438,9 +438,7 @@ grid-column:auto
 
 </div>
 
-<h2>
-👨‍🏫 دخول المعلم
-</h2>
+<h2>👨‍🏫 دخول المعلم</h2>
 
 <input
 id="teacherEmail"
@@ -460,7 +458,7 @@ placeholder="كلمة المرور">
 
 <div id="loginMessage" class="message"></div>
 
-<!-- تم حذف زر رجوع من صفحة دخول المعلم -->
+<!-- لا يوجد زر رجوع هنا -->
 
 <button class="home-button" onclick="showPage('home')">
 🏠 الصفحة الرئيسية
@@ -509,9 +507,7 @@ placeholder="كلمة المرور">
 
 </div>
 
-<h2>
-👨‍🏫 صفحة المعلم
-</h2>
+<h2>👨‍🏫 صفحة المعلم</h2>
 
 <p style="text-align:center">
 اختر القسم المطلوب
@@ -523,9 +519,7 @@ placeholder="كلمة المرور">
 
 <hr>
 
-<h3>
-📚 الصفوف الدراسية
-</h3>
+<h3>📚 الصفوف الدراسية</h3>
 
 <div class="grade-buttons">
 
@@ -616,9 +610,7 @@ placeholder="كلمة المرور">
 
 </div>
 
-<h2>
-➕ إضافة وتعديل بيانات الطلاب
-</h2>
+<h2>➕ إضافة وتعديل بيانات الطلاب</h2>
 
 <input
 id="studentName"
@@ -627,25 +619,17 @@ placeholder="اسم الطالب / الطالبة">
 
 <select id="studentGender">
 
-<option value="">
-اختر النوع
-</option>
+<option value="">اختر النوع</option>
 
-<option value="ذكر">
-👦 طالب
-</option>
+<option value="ذكر">👦 طالب</option>
 
-<option value="أنثى">
-👧 طالبة
-</option>
+<option value="أنثى">👧 طالبة</option>
 
 </select>
 
 <select id="studentGrade">
 
-<option value="">
-اختر الصف الدراسى
-</option>
+<option value="">اختر الصف الدراسى</option>
 
 <option value="الصف الأول الابتدائى">الصف الأول الابتدائى</option>
 <option value="الصف الثانى الابتدائى">الصف الثانى الابتدائى</option>
@@ -669,9 +653,7 @@ id="studentCode"
 type="text"
 placeholder="كود الطالب">
 
-<h3>
-📊 التقييمات من 1 إلى 15
-</h3>
+<h3>📊 التقييمات من 1 إلى 15</h3>
 
 <p style="text-align:center">
 اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
@@ -777,9 +759,7 @@ placeholder="كود الطالب">
 
 </div>
 
-<h2>
-📄 تقرير الطالب
-</h2>
+<h2>📄 تقرير الطالب</h2>
 
 <div id="studentReportContent"></div>
 
@@ -822,9 +802,7 @@ placeholder="كود الطالب">
 
 </div>
 
-<h2>
-📊 تقرير جميع الطلاب
-</h2>
+<h2>📊 تقرير جميع الطلاب</h2>
 
 <div id="allStudentsReportContent"></div>
 
@@ -867,9 +845,7 @@ placeholder="كود الطالب">
 
 </div>
 
-<h2>
-👨‍👩‍👧 صفحة ولى الأمر
-</h2>
+<h2>👨‍👩‍👧 صفحة ولى الأمر</h2>
 
 <p style="text-align:center">
 الاستعلام عن الطالب / الطالبة
@@ -888,7 +864,7 @@ placeholder="أدخل كود الطالب">
 
 <div id="parentResult"></div>
 
-<!-- تم حذف زر الرجوع من صفحة ولي الأمر -->
+<!-- لا يوجد زر رجوع هنا -->
 
 <button class="home-button" onclick="goHomeFromParent()">
 🏠 الصفحة الرئيسية
@@ -901,9 +877,9 @@ placeholder="أدخل كود الطالب">
 
 <script>
 
-/* =====================================
-   Supabase
-===================================== */
+/* =========================================
+   إعداد Supabase
+========================================= */
 
 const SUPABASE_URL =
 "https://jdpppofgbthxagbpldrb.supabase.co";
@@ -912,37 +888,57 @@ const SUPABASE_KEY =
 "sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
 
 let db = null;
+let currentGrade = "";
 
-try {
+
+/* =========================================
+   تشغيل Supabase بأمان
+========================================= */
+
+function initSupabase(){
+
+try{
 
 if(
-window.supabase &&
-typeof window.supabase.createClient === "function"
+typeof window.supabase === "undefined" ||
+!window.supabase.createClient
 ){
 
-db = window.supabase.createClient(
+console.error("Supabase لم يتم تحميله.");
+
+return false;
+
+}
+
+db =
+window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
+return true;
+
+}catch(error){
+
+console.error(error);
+
+return false;
+
 }
 
-} catch(error){
-
-console.error(
-"Supabase Error:",
-error
-);
-
 }
 
 
-/* =====================================
-   التقييمات
-===================================== */
+/* =========================================
+   إنشاء التقييمات
+========================================= */
 
-const evaluationBox =
+function createEvaluations(){
+
+const box =
 document.getElementById("evaluationInputs");
+
+if(!box) return;
 
 const values = [
 "0","0.25","0.5","0.75",
@@ -958,6 +954,8 @@ const values = [
 "10"
 ];
 
+let html="";
+
 for(let i=1;i<=15;i++){
 
 let options =
@@ -967,38 +965,29 @@ let options =
 values.forEach(function(v){
 
 options +=
-'<option value="' +
-v +
-'">' +
-v +
-'</option>';
+'<option value="'+v+'">'+v+'</option>';
 
 });
 
-evaluationBox.innerHTML +=
+html +=
 
-'<div class="evaluation">' +
-
-'<strong>التقييم ' +
-i +
-'</strong>' +
-
-'<select id="evaluation' +
-i +
-'">' +
-
-options +
-
-'</select>' +
-
+'<div class="evaluation">'+
+'<strong>التقييم '+i+'</strong>'+
+'<select id="evaluation'+i+'">'+
+options+
+'</select>'+
 '</div>';
 
 }
 
+box.innerHTML=html;
 
-/* =====================================
+}
+
+
+/* =========================================
    التنقل
-===================================== */
+========================================= */
 
 function showPage(id){
 
@@ -1015,10 +1004,7 @@ document.getElementById(id);
 
 if(!page){
 
-console.error(
-"الصفحة غير موجودة:",
-id
-);
+console.error("الصفحة غير موجودة:",id);
 
 return;
 
@@ -1031,25 +1017,12 @@ window.scrollTo(0,0);
 }
 
 
-/* =====================================
-   فتح صفحة ولي الأمر
-   مع مسح البحث السابق
-===================================== */
+/* =========================================
+   صفحة ولي الأمر
+   يتم مسح البحث في كل مرة
+========================================= */
 
 function openParentPage(){
-
-clearParentPage();
-
-showPage("parent");
-
-}
-
-
-/* =====================================
-   تنظيف صفحة ولي الأمر
-===================================== */
-
-function clearParentPage(){
 
 const code =
 document.getElementById("parentCode");
@@ -1060,49 +1033,64 @@ document.getElementById("parentMessage");
 const result =
 document.getElementById("parentResult");
 
-if(code){
-
-code.value="";
-
-}
+if(code) code.value="";
 
 if(message){
 
 message.innerHTML="";
-
 message.className="message";
 
 }
 
-if(result){
+if(result) result.innerHTML="";
 
-result.innerHTML="";
-
-}
+showPage("parent");
 
 }
 
 
-/* =====================================
-   العودة للرئيسية من ولي الأمر
-===================================== */
+/* =========================================
+   العودة من ولي الأمر
+   ثم عند الدخول مرة أخرى يكون البحث فارغًا
+========================================= */
 
 function goHomeFromParent(){
 
-clearParentPage();
+document.getElementById("parentCode").value="";
+
+document.getElementById("parentMessage").innerHTML="";
+
+document.getElementById("parentResult").innerHTML="";
 
 showPage("home");
 
 }
 
 
-/* =====================================
-   فتح صفحة دخول المعلم
-===================================== */
+/* =========================================
+   دخول المعلم
+========================================= */
 
 async function openTeacherLogin(){
 
-if(db){
+if(!initSupabase()){
+
+showPage("teacherLogin");
+
+document.getElementById("loginMessage").innerHTML =
+"⚠️ جارى تحميل النظام...";
+
+setTimeout(function(){
+
+initSupabase();
+
+document.getElementById("loginMessage").innerHTML="";
+
+},1000);
+
+return;
+
+}
 
 try{
 
@@ -1114,60 +1102,36 @@ console.log(error);
 
 }
 
-}
+document.getElementById("teacherEmail").value="";
 
-const email =
-document.getElementById("teacherEmail");
+document.getElementById("teacherPassword").value="";
 
-const password =
-document.getElementById("teacherPassword");
-
-const message =
-document.getElementById("loginMessage");
-
-if(email){
-
-email.value="";
-
-}
-
-if(password){
-
-password.value="";
-
-}
-
-if(message){
-
-message.innerHTML="";
-
-message.className="message";
-
-}
+document.getElementById("loginMessage").innerHTML="";
 
 showPage("teacherLogin");
 
 }
 
 
-/* =====================================
-   دخول المعلم
-===================================== */
+/* =========================================
+   تسجيل دخول المعلم
+========================================= */
 
 async function loginTeacher(){
 
 if(!db){
 
-const message =
-document.getElementById("loginMessage");
+if(!initSupabase()){
 
-message.innerHTML =
-"❌ تعذر الاتصال بقاعدة البيانات.";
+document.getElementById("loginMessage").innerHTML =
+"❌ تعذر الاتصال بالنظام.";
 
-message.className =
+document.getElementById("loginMessage").className =
 "message error";
 
 return;
+
+}
 
 }
 
@@ -1227,13 +1191,9 @@ return;
 
 message.innerHTML="";
 
-document
-.getElementById("teacherEmail")
-.value="";
+document.getElementById("teacherEmail").value="";
 
-document
-.getElementById("teacherPassword")
-.value="";
+document.getElementById("teacherPassword").value="";
 
 showPage("teacher");
 
@@ -1252,15 +1212,15 @@ message.className =
 }
 
 
-/* =====================================
-   التأكد من دخول المعلم
-===================================== */
+/* =========================================
+   التأكد من تسجيل الدخول
+========================================= */
 
 async function isTeacherLoggedIn(){
 
 if(!db){
 
-return false;
+if(!initSupabase()) return false;
 
 }
 
@@ -1276,6 +1236,8 @@ result.data.session
 
 }catch(error){
 
+console.error(error);
+
 return false;
 
 }
@@ -1283,9 +1245,9 @@ return false;
 }
 
 
-/* =====================================
+/* =========================================
    تسجيل الخروج
-===================================== */
+========================================= */
 
 async function logoutTeacher(){
 
@@ -1310,9 +1272,9 @@ showPage("home");
 }
 
 
-/* =====================================
+/* =========================================
    حفظ الطالب
-===================================== */
+========================================= */
 
 async function saveStudent(){
 
@@ -1325,26 +1287,16 @@ return;
 }
 
 const name =
-document
-.getElementById("studentName")
-.value
-.trim();
+document.getElementById("studentName").value.trim();
 
 const gender =
-document
-.getElementById("studentGender")
-.value;
+document.getElementById("studentGender").value;
 
 const grade =
-document
-.getElementById("studentGrade")
-.value;
+document.getElementById("studentGrade").value;
 
 const code =
-document
-.getElementById("studentCode")
-.value
-.trim();
+document.getElementById("studentCode").value.trim();
 
 const message =
 document.getElementById("saveMessage");
@@ -1361,7 +1313,7 @@ return;
 
 }
 
-let row = {
+let row={
 
 student_code:code,
 student_name:name,
@@ -1373,9 +1325,7 @@ grade:grade
 for(let i=1;i<=15;i++){
 
 row["evaluation_"+i] =
-document
-.getElementById("evaluation"+i)
-.value || null;
+document.getElementById("evaluation"+i).value || null;
 
 }
 
@@ -1426,8 +1376,7 @@ error=result.error;
 if(error){
 
 message.innerHTML =
-"❌ حدث خطأ: " +
-error.message;
+"❌ حدث خطأ: "+error.message;
 
 message.className =
 "message error";
@@ -1444,6 +1393,8 @@ message.className =
 
 }catch(error){
 
+console.error(error);
+
 message.innerHTML =
 "❌ حدث خطأ أثناء الحفظ.";
 
@@ -1455,35 +1406,52 @@ message.className =
 }
 
 
-/* =====================================
+/* =========================================
    طالب جديد
-===================================== */
+========================================= */
 
 function newStudent(){
 
-document.getElementById("studentName").value="";
-document.getElementById("studentGender").value="";
-document.getElementById("studentGrade").value="";
-document.getElementById("studentCode").value="";
+const fields=[
+"studentName",
+"studentGender",
+"studentGrade",
+"studentCode"
+];
+
+fields.forEach(function(id){
+
+const el=document.getElementById(id);
+
+if(el) el.value="";
+
+});
 
 for(let i=1;i<=15;i++){
 
-document
-.getElementById("evaluation"+i)
-.value="";
+const el=
+document.getElementById("evaluation"+i);
+
+if(el) el.value="";
 
 }
 
-document
-.getElementById("saveMessage")
-.innerHTML="";
+const msg=
+document.getElementById("saveMessage");
+
+if(msg){
+
+msg.innerHTML="";
+msg.className="message";
+
+}
 
 }
 
 
-/* =====================================
-   فتح صف
-===================================== */
+/* =========================================
+   فتح الصف
+========================================= */
 
 async function openGradePage(grade){
 
@@ -1499,8 +1467,11 @@ currentGrade=grade;
 
 document
 .getElementById("gradePageTitle")
-.textContent=
-"📚 "+grade;
+.textContent="📚 "+grade;
+
+document
+.getElementById("gradeStudentsCount")
+.textContent="جارى تحميل الطلاب...";
 
 showPage("gradePage");
 
@@ -1509,16 +1480,10 @@ await loadGradeStudents();
 }
 
 
-/* =====================================
-   الصف الحالي
-===================================== */
-
-let currentGrade = "";
-
-
-/* =====================================
+/* =========================================
    تحميل طلاب الصف
-===================================== */
+   تم إصلاح الصف السادس هنا
+========================================= */
 
 async function loadGradeStudents(){
 
@@ -1531,52 +1496,49 @@ document.getElementById("gradeStudentsCount");
 list.innerHTML =
 '<div class="loading">جارى تحميل الطلاب...</div>';
 
-if(!db){
-
-list.innerHTML =
-'<div class="message error">❌ لا يوجد اتصال بقاعدة البيانات.</div>';
-
-return;
-
-}
-
 try{
+
+/*
+ مهم:
+ بدل تحميل كل الطلاب ثم الفلترة،
+ نطلب الصف المطلوب مباشرة من Supabase.
+*/
 
 const result =
 await db
 .from("students")
 .select("*")
-.order("student_name");
+.eq("grade",currentGrade)
+.order("student_name",{ascending:true});
 
 if(result.error){
 
+console.error(result.error);
+
 list.innerHTML =
 '<div class="message error">❌ حدث خطأ فى تحميل الطلاب.</div>';
+
+count.textContent="";
 
 return;
 
 }
 
 const students =
-(result.data || []).filter(function(student){
-
-return student.grade === currentGrade;
-
-});
+result.data || [];
 
 count.textContent =
-"عدد الطلاب: "+
-students.length;
+"عدد الطلاب: "+students.length;
 
 list.innerHTML="";
 
 if(students.length===0){
 
 list.innerHTML =
-'<div class="card">' +
-'<p style="text-align:center">' +
-'لا يوجد طلاب مسجلون فى هذا الصف.' +
-'</p>' +
+'<div class="card">'+
+'<p style="text-align:center">'+
+'لا يوجد طلاب مسجلون فى هذا الصف.'+
+'</p>'+
 '</div>';
 
 return;
@@ -1588,8 +1550,7 @@ students.forEach(function(student,index){
 const div =
 document.createElement("div");
 
-div.className =
-"student-card";
+div.className="student-card";
 
 const title =
 student.gender==="أنثى"
@@ -1598,43 +1559,35 @@ student.gender==="أنثى"
 :
 "👦 طالب";
 
-div.innerHTML =
+div.innerHTML=
 
-'<h3>' +
-title +
-'</h3>' +
+'<h3>'+title+'</h3>'+
 
-'<p><strong>م:</strong> ' +
-(index+1) +
-'</p>' +
+'<p><strong>م:</strong> '+
+(index+1)+
+'</p>'+
 
-'<p><strong>الاسم:</strong> ' +
-escapeHtml(student.student_name) +
-'</p>' +
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>'+
 
-'<p><strong>الكود:</strong> ' +
-escapeHtml(student.student_code) +
-'</p>' +
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>'+
 
-'<div class="student-actions">' +
+'<div class="student-actions">'+
 
-'<button class="blue" onclick="openStudentReport(\'' +
-encodeURIComponent(student.student_code) +
-'\')">' +
-'📄 تقرير' +
-'</button>' +
+'<button class="blue" onclick="openStudentReport(\''+
+encodeURIComponent(student.student_code)+
+'\')">📄 تقرير</button>'+
 
-'<button class="green" onclick="editStudent(\'' +
-encodeURIComponent(student.student_code) +
-'\')">' +
-'✏️ تعديل' +
-'</button>' +
+'<button class="green" onclick="editStudent(\''+
+encodeURIComponent(student.student_code)+
+'\')">✏️ تعديل</button>'+
 
-'<button class="red delete-button" onclick="deleteStudent(\'' +
-encodeURIComponent(student.student_code) +
-'\')">' +
-'🗑️ حذف الطالب' +
-'</button>' +
+'<button class="red delete-button" onclick="deleteStudent(\''+
+encodeURIComponent(student.student_code)+
+'\')">🗑️ حذف الطالب</button>'+
 
 '</div>';
 
@@ -1647,16 +1600,16 @@ list.appendChild(div);
 console.error(error);
 
 list.innerHTML =
-'<div class="message error">❌ حدث خطأ فى تحميل الطلاب.</div>';
+'<div class="message error">❌ حدث خطأ فى الاتصال بقاعدة البيانات.</div>';
 
 }
 
 }
 
 
-/* =====================================
+/* =========================================
    تعديل طالب
-===================================== */
+========================================= */
 
 async function editStudent(encodedCode){
 
@@ -1702,21 +1655,15 @@ student.student_code || "";
 
 for(let i=1;i<=15;i++){
 
-document
-.getElementById("evaluation"+i)
-.value=
+document.getElementById("evaluation"+i).value=
 student["evaluation_"+i] || "";
 
 }
 
-document
-.getElementById("saveMessage")
-.innerHTML=
+document.getElementById("saveMessage").innerHTML=
 "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
 
-document
-.getElementById("saveMessage")
-.className=
+document.getElementById("saveMessage").className=
 "message success";
 
 showPage("studentManagement");
@@ -1724,9 +1671,9 @@ showPage("studentManagement");
 }
 
 
-/* =====================================
-   حذف الطالب
-===================================== */
+/* =========================================
+   حذف طالب
+========================================= */
 
 async function deleteStudent(encodedCode){
 
@@ -1753,32 +1700,23 @@ studentResult.error ||
 !studentResult.data
 ){
 
-alert(
-"❌ الطالب غير موجود."
-);
+alert("❌ الطالب غير موجود.");
 
 return;
 
 }
 
-const student =
-studentResult.data;
+const student=studentResult.data;
 
-const answer =
+const answer=
 confirm(
-"⚠️ تحذير!\n\n" +
-"هل أنت متأكد من حذف الطالب:\n\n" +
-student.student_name +
-"\n\n" +
-"سيتم حذف بياناته نهائيًا.\n\n" +
-"اضغط موافق للحذف أو إلغاء للرجوع."
+"⚠️ تحذير!\n\n"+
+"هل أنت متأكد من حذف الطالب:\n\n"+
+student.student_name+
+"\n\nسيتم حذف بياناته نهائيًا."
 );
 
-if(!answer){
-
-return;
-
-}
+if(!answer) return;
 
 const sessionResult =
 await db.auth.getSession();
@@ -1803,21 +1741,14 @@ sessionResult.data.session.user.email;
 
 const password =
 prompt(
-"🔐 تأكيد حذف الطالب\n\n" +
-"اكتب كلمة مرور دخول المعلم:"
+"🔐 تأكيد حذف الطالب\n\nاكتب كلمة مرور دخول المعلم:"
 );
 
-if(password === null){
-
-return;
-
-}
+if(password===null) return;
 
 if(password.trim()===""){
 
-alert(
-"❌ لم يتم إدخال كلمة المرور.\nلم يتم حذف الطالب."
-);
+alert("❌ لم يتم إدخال كلمة المرور.");
 
 return;
 
@@ -1827,17 +1758,13 @@ const loginResult =
 await db.auth.signInWithPassword({
 
 email:email,
-
 password:password
 
 });
 
 if(loginResult.error){
 
-alert(
-"❌ كلمة المرور غير صحيحة.\n\n" +
-"لم يتم حذف الطالب."
-);
+alert("❌ كلمة المرور غير صحيحة.\nلم يتم حذف الطالب.");
 
 return;
 
@@ -1852,7 +1779,7 @@ await db
 if(deleteResult.error){
 
 alert(
-"❌ حدث خطأ أثناء الحذف:\n" +
+"❌ حدث خطأ أثناء الحذف:\n"+
 deleteResult.error.message
 );
 
@@ -1860,18 +1787,16 @@ return;
 
 }
 
-alert(
-"✅ تم حذف الطالب بنجاح."
-);
+alert("✅ تم حذف الطالب بنجاح.");
 
 await loadGradeStudents();
 
 }
 
 
-/* =====================================
+/* =========================================
    تقرير طالب
-===================================== */
+========================================= */
 
 async function openStudentReport(encodedCode){
 
@@ -1904,29 +1829,27 @@ student.gender==="أنثى"
 
 let html=
 
-'<div class="report-header">' +
+'<div class="report-header">'+
 
-'<h3>📋 بيانات '+
-personTitle+
-'</h3>' +
+'<h3>📋 بيانات '+personTitle+'</h3>'+
 
 '<p><strong>الاسم:</strong> '+
 escapeHtml(student.student_name)+
-'</p>' +
+'</p>'+
 
 '<p><strong>الصف:</strong> '+
 escapeHtml(student.grade||"")+
-'</p>' +
+'</p>'+
 
 '<p><strong>الكود:</strong> '+
 escapeHtml(student.student_code)+
-'</p>' +
+'</p>'+
 
-'</div>' +
+'</div>'+
 
-'<h3>📊 التقييمات</h3>' +
+'<h3>📊 التقييمات</h3>'+
 
-'<table class="report-table">' +
+'<table class="report-table">'+
 
 '<tr><th>التقييم</th><th>الدرجة</th></tr>';
 
@@ -1948,43 +1871,30 @@ value!==""
 ){
 
 display=
-escapeHtml(value)+
-"/10";
+escapeHtml(value)+"/10";
 
 }
 
-html +=
-
-'<tr>' +
-
-'<td>التقييم '+
-i+
-'</td>' +
-
-'<td>'+
-display+
-'</td>' +
-
+html+=
+'<tr>'+
+'<td>التقييم '+i+'</td>'+
+'<td>'+display+'</td>'+
 '</tr>';
 
 }
 
-html +=
-'</table>';
+html+='</table>';
 
-document
-.getElementById("studentReportContent")
-.innerHTML=
-html;
+document.getElementById("studentReportContent").innerHTML=html;
 
 showPage("studentReport");
 
 }
 
 
-/* =====================================
+/* =========================================
    تقرير جميع الطلاب
-===================================== */
+========================================= */
 
 async function showAllStudentsReport(){
 
@@ -2000,52 +1910,41 @@ const result =
 await db
 .from("students")
 .select("*")
-.order("student_name");
+.eq("grade",currentGrade)
+.order("student_name",{ascending:true});
 
 if(result.error){
 
-alert(
-"❌ حدث خطأ أثناء تحميل التقرير."
-);
+alert("❌ حدث خطأ أثناء تحميل التقرير.");
 
 return;
 
 }
 
-const students =
-(result.data||[]).filter(function(student){
-
-return student.grade===currentGrade;
-
-});
+const students=result.data || [];
 
 let html=
 
-'<div class="report-header">' +
+'<div class="report-header">'+
 
-'<h3>📊 تقرير '+
-escapeHtml(currentGrade)+
-'</h3>' +
+'<h3>📊 تقرير '+escapeHtml(currentGrade)+'</h3>'+
 
 '<p><strong>عدد الطلاب:</strong> '+
 students.length+
-'</p>' +
+'</p>'+
 
 '</div>';
 
 if(students.length===0){
 
 html+=
-'<div class="card">' +
-'<p style="text-align:center">' +
-'لا يوجد طلاب فى هذا الصف.' +
-'</p>' +
+'<div class="card">'+
+'<p style="text-align:center">'+
+'لا يوجد طلاب فى هذا الصف.'+
+'</p>'+
 '</div>';
 
-document
-.getElementById("allStudentsReportContent")
-.innerHTML=
-html;
+document.getElementById("allStudentsReportContent").innerHTML=html;
 
 showPage("allStudentsReport");
 
@@ -2055,18 +1954,16 @@ return;
 
 html+=
 
-'<div class="table-container">' +
+'<div class="table-container">'+
 
-'<table class="report-table">' +
+'<table class="report-table">'+
 
-'<tr>' +
-
-'<th>م</th>' +
-'<th>اسم الطالب</th>' +
-'<th>الكود</th>' +
-'<th>النوع</th>' +
-'<th>التقييمات</th>' +
-
+'<tr>'+
+'<th>م</th>'+
+'<th>اسم الطالب</th>'+
+'<th>الكود</th>'+
+'<th>النوع</th>'+
+'<th>التقييمات</th>'+
 '</tr>';
 
 students.forEach(function(student,index){
@@ -2085,9 +1982,7 @@ value!==""
 ){
 
 evaluations+=
-"التقييم "+
-i+
-": "+
+"التقييم "+i+": "+
 (
 value==="غاب"
 ?
@@ -2109,57 +2004,57 @@ evaluations="لا توجد تقييمات";
 
 html+=
 
-'<tr>' +
+'<tr>'+
 
-'<td>'+
-(index+1)+
-'</td>' +
+'<td>'+ (index+1) +'</td>'+
 
-'<td>'+
-escapeHtml(student.student_name)+
-'</td>' +
+'<td>'+escapeHtml(student.student_name)+'</td>'+
 
-'<td>'+
-escapeHtml(student.student_code)+
-'</td>' +
+'<td>'+escapeHtml(student.student_code)+'</td>'+
 
-'<td>'+
-escapeHtml(student.gender||"")+
-'</td>' +
+'<td>'+escapeHtml(student.gender||"")+'</td>'+
 
 '<td style="text-align:right">'+
 evaluations+
-'</td>' +
+'</td>'+
 
 '</tr>';
 
 });
 
-html+=
-'</table>' +
-'</div>';
+html+='</table></div>';
 
-document
-.getElementById("allStudentsReportContent")
-.innerHTML=
-html;
+document.getElementById("allStudentsReportContent").innerHTML=html;
 
 showPage("allStudentsReport");
 
 }
 
 
-/* =====================================
-   ولي الأمر
-===================================== */
+/* =========================================
+   استعلام ولي الأمر
+========================================= */
 
 async function searchStudent(){
 
+if(!db){
+
+if(!initSupabase()){
+
+document.getElementById("parentMessage").innerHTML=
+"❌ تعذر الاتصال بالنظام.";
+
+document.getElementById("parentMessage").className=
+"message error";
+
+return;
+
+}
+
+}
+
 const code =
-document
-.getElementById("parentCode")
-.value
-.trim();
+document.getElementById("parentCode").value.trim();
 
 const message =
 document.getElementById("parentMessage");
@@ -2169,11 +2064,9 @@ document.getElementById("parentResult");
 
 if(!code){
 
-message.innerHTML=
-"❌ اكتب كود الطالب.";
+message.innerHTML="❌ اكتب كود الطالب.";
 
-message.className=
-"message error";
+message.className="message error";
 
 resultBox.innerHTML="";
 
@@ -2181,23 +2074,9 @@ return;
 
 }
 
-if(!db){
+message.innerHTML="جارى البحث...";
 
-message.innerHTML=
-"❌ تعذر الاتصال بقاعدة البيانات.";
-
-message.className=
-"message error";
-
-return;
-
-}
-
-message.innerHTML=
-"جارى البحث...";
-
-message.className=
-"message";
+message.className="message";
 
 try{
 
@@ -2210,11 +2089,12 @@ await db
 
 if(result.error){
 
+console.error(result.error);
+
 message.innerHTML=
 "❌ حدث خطأ أثناء الاستعلام.";
 
-message.className=
-"message error";
+message.className="message error";
 
 resultBox.innerHTML="";
 
@@ -2227,8 +2107,7 @@ if(!result.data){
 message.innerHTML=
 "❌ كود الطالب غير موجود.";
 
-message.className=
-"message error";
+message.className="message error";
 
 resultBox.innerHTML="";
 
@@ -2249,25 +2128,23 @@ student.gender==="أنثى"
 
 let html=
 
-'<div class="card">' +
+'<div class="card">'+
 
-'<h3>📋 بيانات '+
-personTitle+
-'</h3>' +
+'<h3>📋 بيانات '+personTitle+'</h3>'+
 
 '<p><strong>الاسم:</strong> '+
 escapeHtml(student.student_name)+
-'</p>' +
+'</p>'+
 
 '<p><strong>الصف:</strong> '+
 escapeHtml(student.grade||"")+
-'</p>' +
+'</p>'+
 
 '<p><strong>الكود:</strong> '+
 escapeHtml(student.student_code)+
-'</p>' +
+'</p>'+
 
-'<hr>' +
+'<hr>'+
 
 '<h3>📊 التقييمات</h3>';
 
@@ -2275,7 +2152,7 @@ let has=false;
 
 for(let i=1;i<=15;i++){
 
-const value =
+const value=
 student["evaluation_"+i];
 
 if(
@@ -2288,21 +2165,15 @@ has=true;
 
 html+=
 
-'<p>' +
-
-'<strong>التقييم '+
-i+
-': </strong>' +
-
+'<p>'+
+'<strong>التقييم '+i+': </strong>'+
 (
 value==="غاب"
 ?
 "غياب"
 :
-escapeHtml(value)+
-"/10"
-) +
-
+escapeHtml(value)+"/10"
+)+
 '</p>';
 
 }
@@ -2325,21 +2196,18 @@ resultBox.innerHTML=html;
 console.error(error);
 
 message.innerHTML=
-"❌ حدث خطأ أثناء الاستعلام.";
+"❌ حدث خطأ أثناء الاتصال.";
 
-message.className=
-"message error";
-
-resultBox.innerHTML="";
+message.className="message error";
 
 }
 
 }
 
 
-/* =====================================
+/* =========================================
    حماية النصوص
-===================================== */
+========================================= */
 
 function escapeHtml(value){
 
@@ -2352,6 +2220,21 @@ return String(value==null?"":value)
 .replaceAll("'","&#039;");
 
 }
+
+
+/* =========================================
+   تشغيل الصفحة
+========================================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+initSupabase();
+
+createEvaluations();
+
+showPage("home");
+
+});
 
 </script>
 
