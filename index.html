@@ -1595,10 +1595,9 @@ div.innerHTML=
 '<p><strong>الاسم:</strong> '+
 escapeHtml(student.student_name)+
 '</p>'+
-
+   
 '<p><strong>الصف:</strong> '+
-escapeHtml(student.grade || "")+
-'</p>'+
+escapeHtml((student.grade||"").replace(/^الصف\s*/,""))+
 
 '<p><strong>الكود:</strong> '+
 escapeHtml(student.student_code)+
