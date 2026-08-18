@@ -9,12 +9,14 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
 background:linear-gradient(135deg,#eef4ff,#f8fafc);
 color:#1e293b
 }
+
 .container{
 width:94%;
 max-width:650px;
@@ -25,6 +27,7 @@ border-radius:22px;
 box-shadow:0 8px 28px rgba(15,23,42,.13);
 min-height:90vh
 }
+
 .page{display:none}
 .page.active{display:block}
 
@@ -34,6 +37,7 @@ padding:8px 0 20px;
 border-bottom:1px solid #e5e7eb;
 margin-bottom:22px
 }
+
 .brand-title-main{
 font-size:46px;
 font-weight:900;
@@ -43,6 +47,7 @@ margin:0;
 text-align:right;
 padding-right:45px
 }
+
 .brand-subtitle{
 font-size:14px;
 font-weight:900;
@@ -50,18 +55,21 @@ color:#002B5C;
 text-align:center;
 margin:2px 0 5px
 }
+
 .teacher-name{
 font-size:29px;
 font-weight:900;
 color:#0F4C5C;
 text-align:center
 }
+
 .teacher-title{
 font-size:18px;
 font-weight:800;
 color:#047857;
 text-align:center
 }
+
 h1,h2,h3{text-align:center}
 h2{color:#172554}
 h3{color:#334155}
@@ -77,10 +85,12 @@ font-size:16px;
 background:#fff;
 outline:none
 }
+
 input:focus,select:focus{
 border-color:#1565C0;
 box-shadow:0 0 0 3px rgba(21,101,192,.10)
 }
+
 button{
 width:100%;
 padding:14px;
@@ -92,7 +102,9 @@ font-size:17px;
 cursor:pointer;
 font-weight:bold
 }
+
 button:hover{opacity:.93}
+
 .blue{background:#1565C0}
 .green{background:#2E7D32}
 .red{background:#C62828}
@@ -106,6 +118,7 @@ text-align:center;
 font-weight:bold;
 margin:12px
 }
+
 .success{color:#2E7D32}
 .error{color:#C62828}
 
@@ -116,33 +129,42 @@ border-radius:15px;
 padding:16px;
 margin:12px 0
 }
+
 .evaluation{
 display:flex;
 gap:8px;
 align-items:center;
 margin:8px 0
 }
+
 .evaluation strong{
 width:110px;
 color:#334155
 }
-.evaluation select{flex:1;margin:0}
+
+.evaluation select{
+flex:1;
+margin:0
+}
 
 hr{
 border:none;
 border-top:1px solid #e2e8f0;
 margin:22px 0
 }
+
 .home-icon{
 font-size:45px;
 text-align:center;
 margin:8px 0 12px
 }
+
 .subtitle{
 text-align:center;
 font-size:17px;
 margin-bottom:22px
 }
+
 .footer{
 text-align:center;
 margin-top:30px;
@@ -152,16 +174,22 @@ color:#475569;
 font-size:13px;
 line-height:1.8
 }
+
 .footer-name{
 font-weight:900;
 font-size:15px
 }
+
 .grade-buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px
 }
-.grade-buttons button{margin:0;min-height:60px}
+
+.grade-buttons button{
+margin:0;
+min-height:60px
+}
 
 .student-actions,
 .search-actions{
@@ -169,15 +197,22 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:8px
 }
+
 .student-actions button,
-.search-actions button{margin:0}
-.delete-button{grid-column:1/-1}
+.search-actions button{
+margin:0
+}
+
+.delete-button{
+grid-column:1/-1
+}
 
 .search-result-name{
 font-size:19px;
 font-weight:900;
 color:#172554
 }
+
 .grade-header,.report-header{
 background:#eff6ff;
 border:1px solid #bfdbfe;
@@ -186,7 +221,9 @@ padding:15px;
 margin-bottom:15px;
 text-align:center
 }
+
 .grade-header h2{margin:0 0 8px}
+
 .report-header p{margin:7px}
 
 .report-table{
@@ -194,49 +231,160 @@ width:100%;
 border-collapse:collapse;
 margin-top:12px
 }
-.report-table th,.report-table td{
+
+.report-table th,
+.report-table td{
 border:1px solid #cbd5e1;
 padding:9px 6px;
 text-align:center;
 font-size:14px
 }
+
 .report-table th{
 background:#e2e8f0;
 color:#172554;
 font-weight:900
 }
-.table-container{overflow-x:auto}
+
+.table-container{
+overflow-x:auto
+}
+
 .loading{
 text-align:center;
 padding:20px;
 font-weight:bold;
 color:#64748b
 }
-.home-button{margin-top:15px;background:#475569}
+
+.home-button{
+margin-top:15px;
+background:#475569
+}
+
+/* ================= PAYMENTS ================= */
+
+.payment-box{
+background:#fff7ed;
+border:1px solid #fed7aa;
+border-radius:15px;
+padding:16px;
+margin:18px 0
+}
+
+.payment-box h3{
+color:#9a3412;
+margin-top:0
+}
+
+.payment-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+align-items:center;
+margin:8px 0;
+padding:10px;
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:11px
+}
+
+.payment-row select{
+margin:0
+}
+
+.payment-month{
+font-weight:900;
+color:#334155
+}
+
+.payment-paid{
+color:#15803d;
+font-weight:900
+}
+
+.payment-unpaid{
+color:#c2410c;
+font-weight:900
+}
+
+.payment-info{
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+border-radius:12px;
+padding:12px;
+margin-top:10px
+}
+
+.payment-info.unpaid{
+background:#fff7ed;
+border-color:#fed7aa
+}
 
 @media(max-width:480px){
-.container{width:96%;padding:17px;margin:12px auto}
-.brand-title-main{font-size:37px;padding-right:30px}
-.teacher-name{font-size:26px}
-.teacher-title{font-size:17px}
+
+.container{
+width:96%;
+padding:17px;
+margin:12px auto
+}
+
+.brand-title-main{
+font-size:37px;
+padding-right:30px
+}
+
+.teacher-name{
+font-size:26px
+}
+
+.teacher-title{
+font-size:17px
+}
+
 .grade-buttons,
 .student-actions,
-.search-actions{grid-template-columns:1fr}
-.delete-button{grid-column:auto}
-.evaluation strong{width:100px}
+.search-actions{
+grid-template-columns:1fr
+}
+
+.delete-button{
+grid-column:auto
+}
+
+.evaluation strong{
+width:100px
+}
+
+.payment-row{
+grid-template-columns:1fr
+}
+
 }
 
 @media print{
-button{display:none!important}
+
+button{
+display:none!important
+}
+
 .container{
 box-shadow:none;
 width:100%;
 max-width:none;
 margin:0
 }
-.page{display:none!important}
-.page.active{display:block!important}
+
+.page{
+display:none!important
 }
+
+.page.active{
+display:block!important
+}
+
+}
+
 </style>
 </head>
 
@@ -299,7 +447,9 @@ type="password"
 autocomplete="current-password"
 placeholder="كلمة المرور">
 
-<button class="green" onclick="loginTeacher()">🔐 دخول</button>
+<button class="green" onclick="loginTeacher()">
+🔐 دخول
+</button>
 
 <div id="loginMessage" class="message"></div>
 
@@ -337,7 +487,6 @@ placeholder="كلمة المرور">
 ➕ إضافة وتعديل بيانات الطلاب
 </button>
 
-<!-- زر البحث الجديد -->
 <button class="orange" onclick="openTeacherSearchPage()">
 🔎 البحث عن طالب
 </button>
@@ -516,6 +665,28 @@ placeholder="كود الطالب">
 
 <div id="evaluationInputs"></div>
 
+
+<!-- ================= PAYMENTS MANAGEMENT ================= -->
+
+<div class="payment-box">
+
+<h3>💰 المصروفات الشهرية</h3>
+
+<p style="text-align:center">
+حدد حالة دفع المصروفات لكل شهر
+</p>
+
+<div id="paymentInputs"></div>
+
+<button class="orange" onclick="savePayments()">
+💾 حفظ المصروفات
+</button>
+
+<div id="paymentMessage" class="message"></div>
+
+</div>
+
+
 <button class="green" onclick="saveStudent()">
 💾 حفظ بيانات الطالب
 </button>
@@ -555,8 +726,13 @@ placeholder="كود الطالب">
 </div>
 
 <div class="grade-header">
+
 <h2 id="gradePageTitle">📚 الصف</h2>
-<p id="gradeStudentsCount">جارى تحميل الطلاب...</p>
+
+<p id="gradeStudentsCount">
+جارى تحميل الطلاب...
+</p>
+
 </div>
 
 <button class="purple" onclick="showAllStudentsReport()">
@@ -728,6 +904,58 @@ return false;
 }
 
 
+/* ================= MONTHS ================= */
+
+const paymentMonths=[
+"يناير",
+"فبراير",
+"مارس",
+"أبريل",
+"مايو",
+"يونيو",
+"يوليو",
+"أغسطس",
+"سبتمبر",
+"أكتوبر",
+"نوفمبر",
+"ديسمبر"
+];
+
+
+function createPaymentInputs(){
+
+const box=
+document.getElementById("paymentInputs");
+
+if(!box)return;
+
+let html="";
+
+paymentMonths.forEach(function(month){
+
+html+=
+'<div class="payment-row">'+
+
+'<div class="payment-month">'+
+'💰 '+month+
+'</div>'+
+
+'<select id="payment_'+month+'">'+
+
+'<option value="لم يدفع">لم يدفع</option>'+
+'<option value="دفع">دفع</option>'+
+
+'</select>'+
+
+'</div>';
+
+});
+
+box.innerHTML=html;
+
+}
+
+
 /* ================= NAVIGATION ================= */
 
 function showPage(id){
@@ -759,6 +987,7 @@ document.getElementById("parentResult").innerHTML="";
 showPage("parent");
 
 }
+
 
 function goHomeFromParent(){
 
@@ -894,10 +1123,6 @@ showPage("home");
 
 /* ================= SEARCH PAGE ================= */
 
-/*
-فتح صفحة البحث منفصلة
-*/
-
 async function openTeacherSearchPage(){
 
 if(!await isTeacherLoggedIn()){
@@ -922,11 +1147,6 @@ document.getElementById("teacherSearchName").focus();
 }
 
 
-/*
-الرجوع من البحث إلى المعلم
-مع تحديث الصفحة
-*/
-
 async function backFromSearch(){
 
 document.getElementById("teacherSearchName").value="";
@@ -935,18 +1155,10 @@ document.getElementById("teacherSearchResults").innerHTML="";
 
 showPage("teacher");
 
-/*
-إعادة عرض صفحة المعلم من جديد
-*/
-
 await refreshTeacherPage();
 
 }
 
-
-/*
-تحديث صفحة المعلم
-*/
 
 async function refreshTeacherPage(){
 
@@ -964,10 +1176,6 @@ window.scrollTo(0,0);
 
 }
 
-
-/*
-البحث بالاسم
-*/
 
 async function searchTeacherByName(){
 
@@ -1157,7 +1365,7 @@ box.innerHTML=html;
 }
 
 
-/* ================= SAVE ================= */
+/* ================= SAVE STUDENT ================= */
 
 async function saveStudent(){
 
@@ -1263,6 +1471,12 @@ message.innerHTML=
 
 message.className="message success";
 
+/*
+بعد حفظ الطالب نحفظ المصروفات أيضًا
+*/
+
+await savePayments(true);
+
 }catch(e){
 
 console.error(e);
@@ -1271,6 +1485,166 @@ message.innerHTML=
 "❌ حدث خطأ أثناء الحفظ.";
 
 message.className="message error";
+
+}
+
+}
+
+
+/* ================= SAVE PAYMENTS ================= */
+
+async function savePayments(silent=false){
+
+if(!await isTeacherLoggedIn()){
+
+if(!silent)openTeacherLogin();
+
+return;
+
+}
+
+const code=
+document.getElementById("studentCode").value.trim();
+
+const message=
+document.getElementById("paymentMessage");
+
+if(!code){
+
+if(!silent){
+
+message.innerHTML=
+"❌ اكتب كود الطالب أولًا.";
+
+message.className="message error";
+
+}
+
+return;
+
+}
+
+try{
+
+for(const month of paymentMonths){
+
+const status=
+document.getElementById("payment_"+month).value;
+
+const result=
+await db
+.from("monthly_payments")
+.upsert(
+{
+student_code:code,
+payment_month:month,
+status:status
+},
+{
+onConflict:"student_code,payment_month"
+}
+);
+
+if(result.error){
+
+console.error(result.error);
+
+if(!silent){
+
+message.innerHTML=
+"❌ حدث خطأ أثناء حفظ مصروفات شهر "+month;
+
+message.className="message error";
+
+}
+
+return;
+
+}
+
+}
+
+if(!silent){
+
+message.innerHTML=
+"✅ تم حفظ المصروفات الشهرية بنجاح.";
+
+message.className="message success";
+
+}
+
+}catch(e){
+
+console.error(e);
+
+if(!silent){
+
+message.innerHTML=
+"❌ حدث خطأ أثناء حفظ المصروفات.";
+
+message.className="message error";
+
+}
+
+}
+
+}
+
+
+/* ================= LOAD PAYMENTS ================= */
+
+async function loadStudentPayments(code){
+
+if(!code)return;
+
+paymentMonths.forEach(function(month){
+
+const el=
+document.getElementById("payment_"+month);
+
+if(el)el.value="لم يدفع";
+
+});
+
+try{
+
+const result=
+await db
+.from("monthly_payments")
+.select("*")
+.eq("student_code",code)
+.order("id",{ascending:true});
+
+if(result.error){
+
+console.error(result.error);
+return;
+
+}
+
+const payments=result.data||[];
+
+payments.forEach(function(payment){
+
+const month=payment.payment_month;
+
+const el=
+document.getElementById("payment_"+month);
+
+if(el){
+
+el.value=
+payment.status==="دفع"?
+"دفع":
+"لم يدفع";
+
+}
+
+});
+
+}catch(e){
+
+console.error(e);
 
 }
 
@@ -1302,12 +1676,31 @@ if(el)el.value="";
 
 }
 
+paymentMonths.forEach(function(month){
+
+const el=
+document.getElementById("payment_"+month);
+
+if(el)el.value="لم يدفع";
+
+});
+
 const msg=document.getElementById("saveMessage");
 
 if(msg){
 
 msg.innerHTML="";
 msg.className="message";
+
+}
+
+const paymentMessage=
+document.getElementById("paymentMessage");
+
+if(paymentMessage){
+
+paymentMessage.innerHTML="";
+paymentMessage.className="message";
 
 }
 
@@ -1361,6 +1754,8 @@ document.getElementById("evaluation"+i).value=
 student["evaluation_"+i]||"";
 
 }
+
+await loadStudentPayments(student.student_code);
 
 document.getElementById("saveMessage").innerHTML=
 "✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
@@ -1468,12 +1863,18 @@ return;
 
 }
 
-alert("✅ تم حذف الطالب بنجاح.");
 
 /*
-لو الحذف من صفحة البحث:
-نعيد البحث تلقائيًا إذا كان الاسم موجودًا
+حذف المصروفات الخاصة بالطالب
 */
+
+await db
+.from("monthly_payments")
+.delete()
+.eq("student_code",code);
+
+alert("✅ تم حذف الطالب وبيانات المصروفات بنجاح.");
+
 
 if(
 document.getElementById("teacherSearchPage")
@@ -1493,9 +1894,6 @@ return;
 
 }
 
-/*
-لو الحذف من صفحة الصف
-*/
 
 if(
 document.getElementById("gradePage")
@@ -1707,6 +2105,61 @@ html+=
 
 html+='</table>';
 
+
+/*
+المصروفات في تقرير المعلم
+*/
+
+const paymentResult=
+await db
+.from("monthly_payments")
+.select("*")
+.eq("student_code",code)
+.order("id",{ascending:true});
+
+html+=
+'<h3 style="margin-top:25px">💰 المصروفات الشهرية</h3>';
+
+html+=
+'<table class="report-table">'+
+'<tr><th>الشهر</th><th>الحالة</th></tr>';
+
+const paymentMap={};
+
+if(!paymentResult.error){
+
+(paymentResult.data||[]).forEach(function(payment){
+
+paymentMap[payment.payment_month]=payment.status;
+
+});
+
+}
+
+paymentMonths.forEach(function(month){
+
+const status=
+paymentMap[month]||"لم يسجل";
+
+html+=
+'<tr>'+
+'<td>'+escapeHtml(month)+'</td>'+
+'<td>'+
+(
+status==="دفع"?
+'<span class="payment-paid">دفع</span>':
+'<span class="payment-unpaid">'+
+escapeHtml(status)+
+'</span>'
+)+
+'</td>'+
+'</tr>';
+
+});
+
+html+='</table>';
+
+
 document.getElementById("studentReportContent").innerHTML=html;
 
 showPage("studentReport");
@@ -1898,17 +2351,23 @@ student.gender==="أنثى"?
 let html=
 
 '<div class="card">'+
+
 '<h3>📋 بيانات '+personTitle+'</h3>'+
+
 '<p><strong>الاسم:</strong> '+
 escapeHtml(student.student_name)+
 '</p>'+
+
 '<p><strong>الصف:</strong> '+
 escapeHtml(removeRepeatedGrade(student.grade||""))+
 '</p>'+
+
 '<p><strong>الكود:</strong> '+
 escapeHtml(student.student_code)+
 '</p>'+
+
 '<hr>'+
+
 '<h3>📊 التقييمات</h3>';
 
 let has=false;
@@ -1938,6 +2397,79 @@ if(!has){
 
 html+=
 '<p>لا توجد تقييمات مسجلة حتى الآن.</p>';
+
+}
+
+
+/* ================= PARENT PAYMENTS ================= */
+
+const paymentResult=
+await db
+.from("monthly_payments")
+.select("*")
+.eq("student_code",code)
+.order("id",{ascending:true});
+
+html+=
+'<hr>'+
+'<h3>💰 المصروفات الشهرية</h3>';
+
+if(paymentResult.error){
+
+html+=
+'<div class="payment-info unpaid">'+
+'❌ تعذر تحميل بيانات المصروفات حاليًا.'+
+'</div>';
+
+}else{
+
+const payments=paymentResult.data||[];
+
+const paymentMap={};
+
+payments.forEach(function(payment){
+
+paymentMap[payment.payment_month]=payment.status;
+
+});
+
+let hasPayments=false;
+
+paymentMonths.forEach(function(month){
+
+if(paymentMap[month]){
+
+hasPayments=true;
+
+const status=paymentMap[month];
+
+html+=
+'<div class="payment-info '+
+(status==="دفع"?"":"unpaid")+
+'">'+
+
+'<strong>'+escapeHtml(month)+'</strong>'+
+' — '+
+(
+status==="دفع"?
+'<span class="payment-paid">✅ تم الدفع</span>':
+'<span class="payment-unpaid">⚠️ لم يدفع</span>'
+)+
+
+'</div>';
+
+}
+
+});
+
+if(!hasPayments){
+
+html+=
+'<div class="payment-info">'+
+'لا توجد بيانات مصروفات مسجلة حتى الآن.'+
+'</div>';
+
+}
 
 }
 
@@ -1988,6 +2520,8 @@ function(){
 initSupabase();
 
 createEvaluations();
+
+createPaymentInputs();
 
 showPage("home");
 
