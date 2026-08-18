@@ -4,56 +4,250 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>سلسلة التميز فى الرياضيات | أ/ محمد القهوجى</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef4ff,#f8fafc);color:#1e293b}
-.container{width:94%;max-width:650px;margin:20px auto;background:#fff;padding:20px;border-radius:22px;box-shadow:0 8px 28px #0002;min-height:90vh}
-.page{display:none}.page.active{display:block}
-.brand{text-align:center;padding:8px 0 20px;border-bottom:1px solid #e5e7eb;margin-bottom:22px}
-.brand-title-main{font-size:42px;font-weight:900;color:#1565c0;text-align:center}
-.brand-subtitle{font-size:14px;font-weight:900;color:#002b5c}
-.teacher-name{font-size:28px;font-weight:900;color:#0f4c5c}
-.teacher-title{font-size:18px;font-weight:800;color:#047857}
-h2,h3{text-align:center;color:#172554}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#eef4ff,#f8fafc);
+color:#1e293b
+}
+.container{
+width:94%;
+max-width:650px;
+margin:25px auto;
+background:#fff;
+padding:22px;
+border-radius:22px;
+box-shadow:0 8px 28px rgba(15,23,42,.13);
+min-height:90vh
+}
+.page{display:none}
+.page.active{display:block}
+
+.brand{
+text-align:center;
+padding:8px 0 20px;
+border-bottom:1px solid #e5e7eb;
+margin-bottom:22px
+}
+.brand-title-main{
+font-size:46px;
+font-weight:900;
+color:#1565C0;
+line-height:1.1;
+margin:0;
+text-align:right;
+padding-right:45px
+}
+.brand-subtitle{
+font-size:14px;
+font-weight:900;
+color:#002B5C;
+text-align:center;
+margin:2px 0 5px
+}
+.teacher-name{
+font-size:29px;
+font-weight:900;
+color:#0F4C5C;
+text-align:center
+}
+.teacher-title{
+font-size:18px;
+font-weight:800;
+color:#047857;
+text-align:center
+}
+h1,h2,h3{text-align:center}
+h2{color:#172554}
+h3{color:#334155}
 p{color:#64748b}
-input,select{width:100%;padding:14px;margin:7px 0;border:1px solid #cbd5e1;border-radius:11px;font-size:16px;background:#fff}
-button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#fff;font-size:17px;cursor:pointer;font-weight:bold}
-.blue{background:#1565c0}.green{background:#2e7d32}.red{background:#c62828}
-.gray{background:#64748b}.orange{background:#c2410c}.purple{background:#6a1b9a}.dark{background:#374151}
-.message{text-align:center;font-weight:bold;margin:12px}.success{color:#2e7d32}.error{color:#c62828}
-.card,.student-card,.search-result,.grade-header,.report-header{background:#f8fafc;border:1px solid #e2e8f0;border-radius:15px;padding:15px;margin:12px 0}
-.footer{text-align:center;margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;color:#475569;font-size:13px;line-height:1.8}
-.footer-name{font-weight:900;font-size:15px}.copyright{font-weight:700}
-.grade-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grade-buttons button{margin:0;min-height:60px}
-.student-actions,.search-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.student-actions button,.search-actions button{margin:0}
-.evaluation{display:flex;gap:8px;align-items:center;margin:8px 0}
-.evaluation strong{width:110px}
+
+input,select{
+width:100%;
+padding:14px;
+margin:7px 0;
+border:1px solid #cbd5e1;
+border-radius:11px;
+font-size:16px;
+background:#fff;
+outline:none
+}
+input:focus,select:focus{
+border-color:#1565C0;
+box-shadow:0 0 0 3px rgba(21,101,192,.10)
+}
+button{
+width:100%;
+padding:14px;
+margin:7px 0;
+border:none;
+border-radius:11px;
+color:white;
+font-size:17px;
+cursor:pointer;
+font-weight:bold
+}
+button:hover{opacity:.93}
+.blue{background:#1565C0}
+.green{background:#2E7D32}
+.red{background:#C62828}
+.gray{background:#64748b}
+.orange{background:#C2410C}
+.purple{background:#6A1B9A}
+.dark{background:#374151}
+
+.message{
+text-align:center;
+font-weight:bold;
+margin:12px
+}
+.success{color:#2E7D32}
+.error{color:#C62828}
+
+.card,.student-card,.search-result{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:15px;
+padding:16px;
+margin:12px 0
+}
+.evaluation{
+display:flex;
+gap:8px;
+align-items:center;
+margin:8px 0
+}
+.evaluation strong{
+width:110px;
+color:#334155
+}
 .evaluation select{flex:1;margin:0}
-.report-table{width:100%;border-collapse:collapse}
-.report-table th,.report-table td{border:1px solid #cbd5e1;padding:8px;text-align:center}
-.report-table th{background:#e2e8f0}
+
+hr{
+border:none;
+border-top:1px solid #e2e8f0;
+margin:22px 0
+}
+.home-icon{
+font-size:45px;
+text-align:center;
+margin:8px 0 12px
+}
+.subtitle{
+text-align:center;
+font-size:17px;
+margin-bottom:22px
+}
+.footer{
+text-align:center;
+margin-top:30px;
+padding-top:16px;
+border-top:1px solid #e5e7eb;
+color:#475569;
+font-size:13px;
+line-height:1.8
+}
+.footer-name{
+font-weight:900;
+font-size:15px
+}
+.grade-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+.grade-buttons button{margin:0;min-height:60px}
+
+.student-actions,
+.search-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+.student-actions button,
+.search-actions button{margin:0}
+.delete-button{grid-column:1/-1}
+
+.search-result-name{
+font-size:19px;
+font-weight:900;
+color:#172554
+}
+.grade-header,.report-header{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+border-radius:15px;
+padding:15px;
+margin-bottom:15px;
+text-align:center
+}
+.grade-header h2{margin:0 0 8px}
+.report-header p{margin:7px}
+
+.report-table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px
+}
+.report-table th,.report-table td{
+border:1px solid #cbd5e1;
+padding:9px 6px;
+text-align:center;
+font-size:14px
+}
+.report-table th{
+background:#e2e8f0;
+color:#172554;
+font-weight:900
+}
 .table-container{overflow-x:auto}
-.home-button{background:#475569}
-.loading{text-align:center;padding:20px;font-weight:bold}
+.loading{
+text-align:center;
+padding:20px;
+font-weight:bold;
+color:#64748b
+}
+.home-button{margin-top:15px;background:#475569}
+
 @media(max-width:480px){
-.container{width:96%;padding:16px}
-.brand-title-main{font-size:36px}
-.teacher-name{font-size:25px}
-.grade-buttons,.student-actions,.search-actions{grid-template-columns:1fr}
+.container{width:96%;padding:17px;margin:12px auto}
+.brand-title-main{font-size:37px;padding-right:30px}
+.teacher-name{font-size:26px}
+.teacher-title{font-size:17px}
+.grade-buttons,
+.student-actions,
+.search-actions{grid-template-columns:1fr}
+.delete-button{grid-column:auto}
 .evaluation strong{width:100px}
+}
+
+@media print{
+button{display:none!important}
+.container{
+box-shadow:none;
+width:100%;
+max-width:none;
+margin:0
+}
+.page{display:none!important}
+.page.active{display:block!important}
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
-<!-- الرئيسية -->
+<!-- ================= HOME ================= -->
+
 <div id="home" class="page active">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -61,21 +255,31 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 <div class="teacher-title">معلم الرياضيات والإحصاء</div>
 </div>
 
-<div style="text-align:center;font-size:45px">📚</div>
-<p style="text-align:center;font-size:18px">نظام متابعة الطلاب</p>
+<div class="home-icon">📚</div>
 
-<button class="blue" onclick="openParentPage()">👨‍👩‍👧 صفحة ولى الأمر</button>
-<button class="green" onclick="openTeacherLogin()">👨‍🏫 صفحة المعلم</button>
+<p class="subtitle">نظام متابعة الطلاب</p>
+
+<button class="blue" onclick="openParentPage()">
+👨‍👩‍👧 صفحة ولى الأمر
+</button>
+
+<button class="green" onclick="openTeacherLogin()">
+👨‍🏫 صفحة المعلم
+</button>
 
 <footer class="footer">
 <div>تصميم وبرمجة</div>
 <div class="footer-name">أ/ محمد القهوجى</div>
-<div class="copyright">جميع الحقوق محفوظة © 2026</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </footer>
+
 </div>
 
-<!-- دخول المعلم -->
+
+<!-- ================= TEACHER LOGIN ================= -->
+
 <div id="teacherLogin" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -84,15 +288,38 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 </div>
 
 <h2>👨‍🏫 دخول المعلم</h2>
-<input id="teacherEmail" type="email" placeholder="البريد الإلكترونى">
-<input id="teacherPassword" type="password" placeholder="كلمة المرور">
+
+<input id="teacherEmail"
+type="email"
+autocomplete="username"
+placeholder="البريد الإلكترونى">
+
+<input id="teacherPassword"
+type="password"
+autocomplete="current-password"
+placeholder="كلمة المرور">
+
 <button class="green" onclick="loginTeacher()">🔐 دخول</button>
+
 <div id="loginMessage" class="message"></div>
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<footer class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
+</footer>
+
 </div>
 
-<!-- صفحة المعلم -->
+
+<!-- ================= TEACHER ================= -->
+
 <div id="teacher" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -102,40 +329,146 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 
 <h2>👨‍🏫 صفحة المعلم</h2>
 
+<p style="text-align:center">
+اختر القسم المطلوب
+</p>
+
 <button class="blue" onclick="showPage('studentManagement')">
 ➕ إضافة وتعديل بيانات الطلاب
 </button>
 
-<h3>🔎 البحث باسم الطالب</h3>
-<input id="teacherSearchName" placeholder="اكتب اسم الطالب للبحث">
-<button class="blue" onclick="searchTeacherByName()">🔎 بحث عن الطالب</button>
-<div id="teacherSearchMessage" class="message"></div>
-<div id="teacherSearchResults"></div>
+<!-- زر البحث الجديد -->
+<button class="orange" onclick="openTeacherSearchPage()">
+🔎 البحث عن طالب
+</button>
 
 <hr>
+
 <h3>📚 الصفوف الدراسية</h3>
 
 <div class="grade-buttons">
-<button class="blue" onclick="openGradePage('الصف الأول الابتدائى')">📘 الصف الأول الابتدائى</button>
-<button class="blue" onclick="openGradePage('الصف الثانى الابتدائى')">📘 الصف الثانى الابتدائى</button>
-<button class="blue" onclick="openGradePage('الصف الثالث الابتدائى')">📘 الصف الثالث الابتدائى</button>
-<button class="blue" onclick="openGradePage('الصف الرابع الابتدائى')">📘 الصف الرابع الابتدائى</button>
-<button class="green" onclick="openGradePage('الصف الخامس الابتدائى')">📗 الصف الخامس الابتدائى</button>
-<button class="orange" onclick="openGradePage('الصف السادس الابتدائى')">📙 الصف السادس الابتدائى</button>
-<button class="purple" onclick="openGradePage('الصف الأول الإعدادى')">📕 الصف الأول الإعدادى</button>
-<button class="purple" onclick="openGradePage('الصف الثانى الإعدادى')">📕 الصف الثانى الإعدادى</button>
-<button class="purple" onclick="openGradePage('الصف الثالث الإعدادى')">📕 الصف الثالث الإعدادى</button>
-<button class="dark" onclick="openGradePage('الصف الأول الثانوى')">📒 الصف الأول الثانوى</button>
-<button class="dark" onclick="openGradePage('الصف الثانى الثانوى')">📒 الصف الثانى الثانوى</button>
-<button class="dark" onclick="openGradePage('الصف الثالث الثانوى')">📒 الصف الثالث الثانوى</button>
+
+<button class="blue" onclick="openGradePage('الصف الأول الابتدائى')">
+📘 الصف الأول الابتدائى
+</button>
+
+<button class="blue" onclick="openGradePage('الصف الثانى الابتدائى')">
+📘 الصف الثانى الابتدائى
+</button>
+
+<button class="blue" onclick="openGradePage('الصف الثالث الابتدائى')">
+📘 الصف الثالث الابتدائى
+</button>
+
+<button class="blue" onclick="openGradePage('الصف الرابع الابتدائى')">
+📘 الصف الرابع الابتدائى
+</button>
+
+<button class="green" onclick="openGradePage('الصف الخامس الابتدائى')">
+📗 الصف الخامس الابتدائى
+</button>
+
+<button class="orange" onclick="openGradePage('الصف السادس الابتدائى')">
+📙 الصف السادس الابتدائى
+</button>
+
+<button class="purple" onclick="openGradePage('الصف الأول الإعدادى')">
+📕 الصف الأول الإعدادى
+</button>
+
+<button class="purple" onclick="openGradePage('الصف الثانى الإعدادى')">
+📕 الصف الثانى الإعدادى
+</button>
+
+<button class="purple" onclick="openGradePage('الصف الثالث الإعدادى')">
+📕 الصف الثالث الإعدادى
+</button>
+
+<button class="dark" onclick="openGradePage('الصف الأول الثانوى')">
+📒 الصف الأول الثانوى
+</button>
+
+<button class="dark" onclick="openGradePage('الصف الثانى الثانوى')">
+📒 الصف الثانى الثانوى
+</button>
+
+<button class="dark" onclick="openGradePage('الصف الثالث الثانوى')">
+📒 الصف الثالث الثانوى
+</button>
+
 </div>
 
-<button class="red" onclick="logoutTeacher()">🚪 تسجيل الخروج</button>
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+<hr>
+
+<button class="red" onclick="logoutTeacher()">
+🚪 تسجيل الخروج
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<footer class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
+</footer>
+
 </div>
 
-<!-- إدارة الطلاب -->
+
+<!-- ================= SEARCH PAGE ================= -->
+
+<div id="teacherSearchPage" class="page">
+
+<div class="brand">
+<div class="brand-title-main">⭐ سلسلة التميز</div>
+<div class="brand-subtitle">فى الرياضيات</div>
+<div class="teacher-name">أ/ محمد القهوجى</div>
+<div class="teacher-title">معلم الرياضيات والإحصاء</div>
+</div>
+
+<h2>🔎 البحث عن طالب</h2>
+
+<p style="text-align:center">
+ابحث باسم الطالب لعرض بياناته
+</p>
+
+<input
+id="teacherSearchName"
+type="text"
+placeholder="اكتب اسم الطالب للبحث"
+autocomplete="off">
+
+<button class="blue" onclick="searchTeacherByName()">
+🔎 بحث عن الطالب
+</button>
+
+<div id="teacherSearchMessage" class="message"></div>
+
+<div id="teacherSearchResults"></div>
+
+<button class="gray" onclick="backFromSearch()">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<footer class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
+</footer>
+
+</div>
+
+
+<!-- ================= STUDENT MANAGEMENT ================= -->
+
 <div id="studentManagement" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -145,7 +478,9 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 
 <h2>➕ إضافة وتعديل بيانات الطلاب</h2>
 
-<input id="studentName" placeholder="اسم الطالب / الطالبة">
+<input id="studentName"
+type="text"
+placeholder="اسم الطالب / الطالبة">
 
 <select id="studentGender">
 <option value="">اختر النوع</option>
@@ -155,35 +490,63 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 
 <select id="studentGrade">
 <option value="">اختر الصف الدراسى</option>
-<option>الصف الأول الابتدائى</option>
-<option>الصف الثانى الابتدائى</option>
-<option>الصف الثالث الابتدائى</option>
-<option>الصف الرابع الابتدائى</option>
-<option>الصف الخامس الابتدائى</option>
-<option>الصف السادس الابتدائى</option>
-<option>الصف الأول الإعدادى</option>
-<option>الصف الثانى الإعدادى</option>
-<option>الصف الثالث الإعدادى</option>
-<option>الصف الأول الثانوى</option>
-<option>الصف الثانى الثانوى</option>
-<option>الصف الثالث الثانوى</option>
+<option value="الصف الأول الابتدائى">الصف الأول الابتدائى</option>
+<option value="الصف الثانى الابتدائى">الصف الثانى الابتدائى</option>
+<option value="الصف الثالث الابتدائى">الصف الثالث الابتدائى</option>
+<option value="الصف الرابع الابتدائى">الصف الرابع الابتدائى</option>
+<option value="الصف الخامس الابتدائى">الصف الخامس الابتدائى</option>
+<option value="الصف السادس الابتدائى">الصف السادس الابتدائى</option>
+<option value="الصف الأول الإعدادى">الصف الأول الإعدادى</option>
+<option value="الصف الثانى الإعدادى">الصف الثانى الإعدادى</option>
+<option value="الصف الثالث الإعدادى">الصف الثالث الإعدادى</option>
+<option value="الصف الأول الثانوى">الصف الأول الثانوى</option>
+<option value="الصف الثانى الثانوى">الصف الثانى الثانوى</option>
+<option value="الصف الثالث الثانوى">الصف الثالث الثانوى</option>
 </select>
 
-<input id="studentCode" placeholder="كود الطالب">
+<input id="studentCode"
+type="text"
+placeholder="كود الطالب">
 
 <h3>📊 التقييمات من 1 إلى 15</h3>
+
+<p style="text-align:center">
+اختر الدرجة من 0 إلى 10 بزيادة 0.25 أو اختر غاب
+</p>
+
 <div id="evaluationInputs"></div>
 
-<button class="green" onclick="saveStudent()">💾 حفظ بيانات الطالب</button>
-<button class="orange" onclick="newStudent()">➕ طالب جديد</button>
+<button class="green" onclick="saveStudent()">
+💾 حفظ بيانات الطالب
+</button>
+
+<button class="orange" onclick="newStudent()">
+➕ طالب جديد
+</button>
+
 <div id="saveMessage" class="message"></div>
 
-<button class="gray" onclick="showPage('teacher')">↩️ العودة إلى صفحة المعلم</button>
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<footer class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
+</footer>
+
 </div>
 
-<!-- الصف -->
+
+<!-- ================= GRADE ================= -->
+
 <div id="gradePage" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -196,44 +559,93 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 <p id="gradeStudentsCount">جارى تحميل الطلاب...</p>
 </div>
 
-<button class="purple" onclick="showAllStudentsReport()">📊 تقرير جميع الطلاب</button>
+<button class="purple" onclick="showAllStudentsReport()">
+📊 تقرير جميع الطلاب
+</button>
+
 <div id="gradeStudentsList"></div>
-<button class="gray" onclick="showPage('teacher')">↩️ العودة إلى صفحة المعلم</button>
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<footer class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
+</footer>
+
 </div>
 
-<!-- تقرير الطالب -->
+
+<!-- ================= STUDENT REPORT ================= -->
+
 <div id="studentReport" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
 <div class="teacher-name">أ/ محمد القهوجى</div>
 <div class="teacher-title">معلم الرياضيات والإحصاء</div>
 </div>
+
 <h2>📄 تقرير الطالب</h2>
+
 <div id="studentReportContent"></div>
-<button class="dark" onclick="window.print()">🖨️ طباعة التقرير</button>
-<button class="gray" onclick="showPage('gradePage')">↩️ العودة إلى الصف</button>
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<button class="dark" onclick="window.print()">
+🖨️ طباعة التقرير
+</button>
+
+<button class="gray" onclick="showPage('gradePage')">
+↩️ العودة إلى الصف
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
 </div>
 
-<!-- تقرير جميع الطلاب -->
+
+<!-- ================= ALL REPORT ================= -->
+
 <div id="allStudentsReport" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
 <div class="teacher-name">أ/ محمد القهوجى</div>
 <div class="teacher-title">معلم الرياضيات والإحصاء</div>
 </div>
+
 <h2>📊 تقرير جميع الطلاب</h2>
+
 <div id="allStudentsReportContent"></div>
-<button class="dark" onclick="window.print()">🖨️ طباعة التقرير</button>
-<button class="gray" onclick="showPage('gradePage')">↩️ العودة إلى الصف</button>
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<button class="dark" onclick="window.print()">
+🖨️ طباعة التقرير
+</button>
+
+<button class="gray" onclick="showPage('gradePage')">
+↩️ العودة إلى الصف
+</button>
+
+<button class="home-button" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
 </div>
 
-<!-- ولي الأمر -->
+
+<!-- ================= PARENT ================= -->
+
 <div id="parent" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -242,413 +654,1347 @@ button{width:100%;padding:14px;margin:7px 0;border:0;border-radius:11px;color:#f
 </div>
 
 <h2>👨‍👩‍👧 صفحة ولى الأمر</h2>
-<p style="text-align:center">الاستعلام عن الطالب / الطالبة</p>
 
-<input id="parentCode" placeholder="أدخل كود الطالب">
-<button class="blue" onclick="searchStudent()">🔎 استعلام</button>
+<p style="text-align:center">
+الاستعلام عن الطالب / الطالبة
+</p>
+
+<input id="parentCode"
+type="text"
+placeholder="أدخل كود الطالب">
+
+<button class="blue" onclick="searchStudent()">
+🔎 استعلام
+</button>
+
 <div id="parentMessage" class="message"></div>
+
 <div id="parentResult"></div>
 
-<button class="home-button" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+<button class="home-button" onclick="goHomeFromParent()">
+🏠 الصفحة الرئيسية
+</button>
+
+<footer class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
+</footer>
+
 </div>
 
 </div>
+
 
 <script>
-const SUPABASE_URL="https://jdpppofgbthxagbpldrb.supabase.co";
-const SUPABASE_KEY="sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
-let db=null,currentGrade="";
+
+/* ================= SUPABASE ================= */
+
+const SUPABASE_URL =
+"https://jdpppofgbthxagbpldrb.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
+
+let db=null;
+let currentGrade="";
+
 
 function initSupabase(){
+
 try{
-if(!window.supabase||!window.supabase.createClient)return false;
-db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-return true;
-}catch(e){console.error(e);return false}
+
+if(
+typeof window.supabase==="undefined" ||
+!window.supabase.createClient
+){
+return false;
 }
+
+db=window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+return true;
+
+}catch(e){
+
+console.error(e);
+return false;
+
+}
+
+}
+
+
+/* ================= NAVIGATION ================= */
 
 function showPage(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+
+document.querySelectorAll(".page")
+.forEach(function(page){
+page.classList.remove("active");
+});
+
 const page=document.getElementById(id);
-if(page)page.classList.add("active");
+
+if(!page)return;
+
+page.classList.add("active");
+
 window.scrollTo(0,0);
+
 }
 
+
+/* ================= HOME PARENT ================= */
+
 function openParentPage(){
+
 document.getElementById("parentCode").value="";
 document.getElementById("parentMessage").innerHTML="";
 document.getElementById("parentResult").innerHTML="";
+
 showPage("parent");
+
 }
 
+function goHomeFromParent(){
+
+document.getElementById("parentCode").value="";
+document.getElementById("parentMessage").innerHTML="";
+document.getElementById("parentResult").innerHTML="";
+
+showPage("home");
+
+}
+
+
+/* ================= TEACHER LOGIN ================= */
+
 async function openTeacherLogin(){
+
+if(!db)initSupabase();
+
+try{
+
+if(db)await db.auth.signOut();
+
+}catch(e){}
+
 document.getElementById("teacherEmail").value="";
 document.getElementById("teacherPassword").value="";
 document.getElementById("loginMessage").innerHTML="";
-if(!db)initSupabase();
-if(db){try{await db.auth.signOut()}catch(e){}}
+
 showPage("teacherLogin");
+
 }
+
 
 async function loginTeacher(){
-if(!db&&!initSupabase()){
-setMessage("loginMessage","❌ تعذر الاتصال بالنظام.","error");return;
-}
 
-const email=document.getElementById("teacherEmail").value.trim();
-const password=document.getElementById("teacherPassword").value;
+if(!db)initSupabase();
+
+const email=
+document.getElementById("teacherEmail").value.trim();
+
+const password=
+document.getElementById("teacherPassword").value;
+
+const message=
+document.getElementById("loginMessage");
 
 if(!email||!password){
-setMessage("loginMessage","❌ اكتب البريد الإلكترونى وكلمة المرور.","error");return;
+
+message.innerHTML=
+"❌ اكتب البريد الإلكترونى وكلمة المرور.";
+
+message.className="message error";
+
+return;
+
 }
 
-setMessage("loginMessage","جارى تسجيل الدخول...","message");
+message.innerHTML="جارى تسجيل الدخول...";
+message.className="message";
 
 try{
-const r=await db.auth.signInWithPassword({email,password});
-if(r.error){
-setMessage("loginMessage","❌ البريد الإلكترونى أو كلمة المرور غير صحيحة.","error");
+
+const result=
+await db.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(result.error){
+
+message.innerHTML=
+"❌ البريد الإلكترونى أو كلمة المرور غير صحيحة.";
+
+message.className="message error";
+
 return;
+
 }
+
 showPage("teacher");
+
 }catch(e){
+
 console.error(e);
-setMessage("loginMessage","❌ حدث خطأ أثناء تسجيل الدخول.","error");
+
+message.innerHTML=
+"❌ حدث خطأ أثناء تسجيل الدخول.";
+
+message.className="message error";
+
 }
+
 }
+
 
 async function isTeacherLoggedIn(){
+
 if(!db&&!initSupabase())return false;
+
 try{
-const r=await db.auth.getSession();
-return !!r.data?.session;
-}catch(e){return false}
+
+const result=await db.auth.getSession();
+
+return !!(
+result.data &&
+result.data.session
+);
+
+}catch(e){
+
+return false;
+
 }
+
+}
+
 
 async function logoutTeacher(){
-if(db){try{await db.auth.signOut()}catch(e){}}
+
+if(db){
+
+try{
+await db.auth.signOut();
+}catch(e){}
+
+}
+
 newStudent();
 showPage("home");
+
 }
 
-function setMessage(id,text,type){
-const e=document.getElementById(id);
-e.innerHTML=text;
-e.className="message "+(type||"");
+
+/* ================= SEARCH PAGE ================= */
+
+/*
+فتح صفحة البحث منفصلة
+*/
+
+async function openTeacherSearchPage(){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
 }
 
-function createEvaluations(){
-const box=document.getElementById("evaluationInputs");
-let html="";
-for(let i=1;i<=15;i++){
-let opts='<option value="">لم يتم التقييم</option><option value="غاب">غاب</option>';
-for(let n=0;n<=40;n++){
-let v=n/4;
-opts+=`<option value="${v}">${v}</option>`;
-}
-html+=`<div class="evaluation"><strong>التقييم ${i}</strong><select id="evaluation${i}">${opts}</select></div>`;
-}
-box.innerHTML=html;
-}
+document.getElementById("teacherSearchName").value="";
+document.getElementById("teacherSearchMessage").innerHTML="";
+document.getElementById("teacherSearchResults").innerHTML="";
 
-async function saveStudent(){
-if(!await isTeacherLoggedIn()){openTeacherLogin();return}
+showPage("teacherSearchPage");
 
-const name=document.getElementById("studentName").value.trim();
-const gender=document.getElementById("studentGender").value;
-const grade=document.getElementById("studentGrade").value;
-const code=document.getElementById("studentCode").value.trim();
+setTimeout(function(){
 
-if(!name||!gender||!grade||!code){
-setMessage("saveMessage","❌ اكتب اسم الطالب واختر النوع والصف والكود.","error");return;
+document.getElementById("teacherSearchName").focus();
+
+},100);
+
 }
 
-let row={student_code:code,student_name:name,gender,grade};
-for(let i=1;i<=15;i++)row["evaluation_"+i]=document.getElementById("evaluation"+i).value||null;
 
-try{
-const found=await db.from("students").select("id").eq("student_code",code).maybeSingle();
-if(found.error)throw found.error;
+/*
+الرجوع من البحث إلى المعلم
+مع تحديث الصفحة
+*/
 
-let r;
-if(found.data)r=await db.from("students").update(row).eq("id",found.data.id);
-else r=await db.from("students").insert([row]);
+async function backFromSearch(){
 
-if(r.error)throw r.error;
+document.getElementById("teacherSearchName").value="";
+document.getElementById("teacherSearchMessage").innerHTML="";
+document.getElementById("teacherSearchResults").innerHTML="";
 
-setMessage("saveMessage","✅ تم حفظ بيانات الطالب بنجاح.","success");
-}catch(e){
-console.error(e);
-setMessage("saveMessage","❌ حدث خطأ: "+e.message,"error");
-}
-}
+showPage("teacher");
 
-function newStudent(){
-["studentName","studentGender","studentGrade","studentCode"].forEach(id=>{
-const e=document.getElementById(id);if(e)e.value="";
-});
-for(let i=1;i<=15;i++){
-const e=document.getElementById("evaluation"+i);if(e)e.value="";
-}
-setMessage("saveMessage","","");
+/*
+إعادة عرض صفحة المعلم من جديد
+*/
+
+await refreshTeacherPage();
+
 }
 
-async function searchStudent(){
-if(!db&&!initSupabase()){
-setMessage("parentMessage","❌ تعذر الاتصال بالنظام.","error");return;
+
+/*
+تحديث صفحة المعلم
+*/
+
+async function refreshTeacherPage(){
+
+const teacher=document.getElementById("teacher");
+
+if(!teacher)return;
+
+teacher.classList.remove("active");
+
+void teacher.offsetWidth;
+
+teacher.classList.add("active");
+
+window.scrollTo(0,0);
+
 }
 
-const code=document.getElementById("parentCode").value.trim();
-const resultBox=document.getElementById("parentResult");
 
-if(!code){
-setMessage("parentMessage","❌ اكتب كود الطالب.","error");
-resultBox.innerHTML="";return;
-}
-
-setMessage("parentMessage","جارى البحث...","");
-try{
-const r=await db.from("students").select("*").eq("student_code",code).maybeSingle();
-
-if(r.error)throw r.error;
-
-if(!r.data){
-setMessage("parentMessage","❌ كود الطالب غير موجود.","error");
-resultBox.innerHTML="";return;
-}
-
-const s=r.data;
-let html=`<div class="card">
-<h3>📋 بيانات ${s.gender==="أنثى"?"الطالبة":"الطالب"}</h3>
-<p><strong>الاسم:</strong> ${escapeHtml(s.student_name)}</p>
-<p><strong>الصف:</strong> ${escapeHtml(s.grade)}</p>
-<p><strong>الكود:</strong> ${escapeHtml(s.student_code)}</p>
-<hr><h3>📊 التقييمات</h3>`;
-
-let has=false;
-for(let i=1;i<=15;i++){
-const v=s["evaluation_"+i];
-if(v!==null&&v!==undefined&&v!==""){
-has=true;
-html+=`<p><strong>التقييم ${i}:</strong> ${v==="غاب"?"غياب":escapeHtml(v)+"/10"}</p>`;
-}
-}
-if(!has)html+="<p>لا توجد تقييمات مسجلة حتى الآن.</p>";
-html+="</div>";
-resultBox.innerHTML=html;
-setMessage("parentMessage","","");
-}catch(e){
-console.error(e);
-setMessage("parentMessage","❌ حدث خطأ أثناء الاتصال.","error");
-}
-}
+/*
+البحث بالاسم
+*/
 
 async function searchTeacherByName(){
-if(!await isTeacherLoggedIn()){openTeacherLogin();return}
 
-const name=document.getElementById("teacherSearchName").value.trim();
-const box=document.getElementById("teacherSearchResults");
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+const input=
+document.getElementById("teacherSearchName");
+
+const message=
+document.getElementById("teacherSearchMessage");
+
+const results=
+document.getElementById("teacherSearchResults");
+
+const name=input.value.trim();
 
 if(!name){
-setMessage("teacherSearchMessage","❌ اكتب اسم الطالب للبحث.","error");
-box.innerHTML="";return;
-}
 
-setMessage("teacherSearchMessage","جارى البحث...","");
-box.innerHTML="";
-
-try{
-const r=await db.from("students").select("*").ilike("student_name","%"+name+"%").order("student_name");
-if(r.error)throw r.error;
-
-if(!r.data.length){
-setMessage("teacherSearchMessage","❌ لا يوجد طالب بهذا الاسم.","error");return;
-}
-
-setMessage("teacherSearchMessage","✅ تم العثور على "+r.data.length+" طالب.","success");
-
-r.data.forEach(s=>{
-const d=document.createElement("div");
-d.className="search-result";
-d.innerHTML=`
-<h3>${s.gender==="أنثى"?"👧":"👦"} ${escapeHtml(s.student_name)}</h3>
-<p><strong>الكود:</strong> ${escapeHtml(s.student_code)}</p>
-<p><strong>الصف:</strong> ${escapeHtml(s.grade)}</p>
-<div class="search-actions">
-<button class="green" onclick="editStudent('${encodeURIComponent(s.student_code)}')">✏️ تعديل</button>
-<button class="red" onclick="deleteStudent('${encodeURIComponent(s.student_code)}')">🗑️ حذف</button>
-</div>`;
-box.appendChild(d);
-});
-}catch(e){
-console.error(e);
-setMessage("teacherSearchMessage","❌ حدث خطأ فى الاتصال.","error");
-}
-}
-
-async function openGradePage(grade){
-if(!await isTeacherLoggedIn()){openTeacherLogin();return}
-currentGrade=grade;
-document.getElementById("gradePageTitle").textContent="📚 "+grade;
-showPage("gradePage");
-loadGradeStudents();
-}
-
-async function loadGradeStudents(){
-const list=document.getElementById("gradeStudentsList");
-const count=document.getElementById("gradeStudentsCount");
-list.innerHTML='<div class="loading">جارى تحميل الطلاب...</div>';
-
-try{
-const r=await db.from("students").select("*").eq("grade",currentGrade).order("student_name");
-if(r.error)throw r.error;
-
-count.textContent="عدد الطلاب: "+r.data.length;
-list.innerHTML="";
-
-if(!r.data.length){
-list.innerHTML='<div class="card"><p style="text-align:center">لا يوجد طلاب مسجلون فى هذا الصف.</p></div>';
+message.innerHTML="❌ اكتب اسم الطالب للبحث.";
+message.className="message error";
+results.innerHTML="";
 return;
+
 }
 
-r.data.forEach((s,i)=>{
-const d=document.createElement("div");
-d.className="student-card";
-d.innerHTML=`
-<h3>${s.gender==="أنثى"?"👧 طالبة":"👦 طالب"}</h3>
-<p><strong>م:</strong> ${i+1}</p>
-<p><strong>الاسم:</strong> ${escapeHtml(s.student_name)}</p>
-<p><strong>الكود:</strong> ${escapeHtml(s.student_code)}</p>
-<div class="student-actions">
-<button class="blue" onclick="openStudentReport('${encodeURIComponent(s.student_code)}')">📄 تقرير</button>
-<button class="green" onclick="editStudent('${encodeURIComponent(s.student_code)}')">✏️ تعديل</button>
-<button class="red" onclick="deleteStudent('${encodeURIComponent(s.student_code)}')">🗑️ حذف الطالب</button>
-</div>`;
-list.appendChild(d);
-});
-}catch(e){
-console.error(e);
-list.innerHTML='<div class="message error">❌ حدث خطأ فى تحميل الطلاب.</div>';
-}
-}
-
-async function editStudent(encoded){
-if(!await isTeacherLoggedIn()){openTeacherLogin();return}
-const code=decodeURIComponent(encoded);
+message.innerHTML="جارى البحث...";
+message.className="message";
+results.innerHTML="";
 
 try{
-const r=await db.from("students").select("*").eq("student_code",code).maybeSingle();
-if(r.error||!r.data){alert("❌ تعذر تحميل بيانات الطالب.");return}
 
-const s=r.data;
-document.getElementById("studentName").value=s.student_name||"";
-document.getElementById("studentGender").value=s.gender||"";
-document.getElementById("studentGrade").value=s.grade||"";
-document.getElementById("studentCode").value=s.student_code||"";
+const result=
+await db
+.from("students")
+.select("*")
+.ilike(
+"student_name",
+"%"+name+"%"
+)
+.order(
+"student_name",
+{ascending:true}
+);
 
-for(let i=1;i<=15;i++)
-document.getElementById("evaluation"+i).value=s["evaluation_"+i]||"";
+if(result.error){
 
-setMessage("saveMessage","✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.","success");
-showPage("studentManagement");
-}catch(e){alert("❌ حدث خطأ أثناء تحميل الطالب.")}
+console.error(result.error);
+
+message.innerHTML="❌ حدث خطأ أثناء البحث.";
+message.className="message error";
+
+return;
+
 }
 
-async function deleteStudent(encoded){
-if(!await isTeacherLoggedIn()){openTeacherLogin();return}
+const students=result.data||[];
 
-const code=decodeURIComponent(encoded);
-const r=await db.from("students").select("id,student_name").eq("student_code",code).maybeSingle();
+if(students.length===0){
 
-if(r.error||!r.data){alert("❌ الطالب غير موجود.");return}
+message.innerHTML="❌ لا يوجد طالب بهذا الاسم.";
+message.className="message error";
 
-if(!confirm("⚠️ هل أنت متأكد من حذف الطالب:\n\n"+r.data.student_name+"\n\nسيتم حذف البيانات نهائيًا."))return;
+return;
 
-const session=await db.auth.getSession();
-const email=session.data?.session?.user?.email;
-const password=prompt("🔐 اكتب كلمة مرور دخول المعلم لتأكيد الحذف:");
+}
+
+message.innerHTML=
+"✅ تم العثور على "+
+students.length+
+" طالب.";
+
+message.className="message success";
+
+
+students.forEach(function(student){
+
+const div=document.createElement("div");
+
+div.className="search-result";
+
+div.innerHTML=
+
+'<div class="search-result-name">'+
+(
+student.gender==="أنثى"?"👧 ":"👦 "
+)+
+escapeHtml(student.student_name)+
+'</div>'+
+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>'+
+
+'<p><strong>الصف:</strong> '+
+escapeHtml(removeRepeatedGrade(student.grade))+
+'</p>'+
+
+'<div class="search-actions">'+
+
+'<button class="green" onclick="editStudent(\''+
+encodeURIComponent(student.student_code)+
+'\')">'+
+'✏️ تعديل'+
+'</button>'+
+
+'<button class="red" onclick="deleteStudent(\''+
+encodeURIComponent(student.student_code)+
+'\')">'+
+'🗑️ حذف'+
+'</button>'+
+
+'</div>';
+
+results.appendChild(div);
+
+});
+
+}catch(e){
+
+console.error(e);
+
+message.innerHTML=
+"❌ حدث خطأ فى الاتصال بقاعدة البيانات.";
+
+message.className="message error";
+
+}
+
+}
+
+
+/* ================= EVALUATIONS ================= */
+
+function createEvaluations(){
+
+const box=
+document.getElementById("evaluationInputs");
+
+if(!box)return;
+
+const values=[
+"0","0.25","0.5","0.75",
+"1","1.25","1.5","1.75",
+"2","2.25","2.5","2.75",
+"3","3.25","3.5","3.75",
+"4","4.25","4.5","4.75",
+"5","5.25","5.5","5.75",
+"6","6.25","6.5","6.75",
+"7","7.25","7.5","7.75",
+"8","8.25","8.5","8.75",
+"9","9.25","9.5","9.75",
+"10"
+];
+
+let html="";
+
+for(let i=1;i<=15;i++){
+
+let options=
+'<option value="">لم يتم التقييم</option>'+
+'<option value="غاب">غاب</option>';
+
+values.forEach(function(v){
+
+options+=
+'<option value="'+v+'">'+v+'</option>';
+
+});
+
+html+=
+'<div class="evaluation">'+
+'<strong>التقييم '+i+'</strong>'+
+'<select id="evaluation'+i+'">'+
+options+
+'</select>'+
+'</div>';
+
+}
+
+box.innerHTML=html;
+
+}
+
+
+/* ================= SAVE ================= */
+
+async function saveStudent(){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+const name=
+document.getElementById("studentName").value.trim();
+
+const gender=
+document.getElementById("studentGender").value;
+
+const grade=
+document.getElementById("studentGrade").value;
+
+const code=
+document.getElementById("studentCode").value.trim();
+
+const message=
+document.getElementById("saveMessage");
+
+if(!name||!gender||!grade||!code){
+
+message.innerHTML=
+"❌ اكتب اسم الطالب واختر النوع والصف والكود.";
+
+message.className="message error";
+
+return;
+
+}
+
+let row={
+student_code:code,
+student_name:name,
+gender:gender,
+grade:grade
+};
+
+for(let i=1;i<=15;i++){
+
+row["evaluation_"+i]=
+document.getElementById("evaluation"+i).value||null;
+
+}
+
+try{
+
+const findResult=
+await db
+.from("students")
+.select("id")
+.eq("student_code",code)
+.maybeSingle();
+
+if(findResult.error){
+
+message.innerHTML=
+"❌ حدث خطأ أثناء البحث عن الطالب.";
+
+message.className="message error";
+
+return;
+
+}
+
+let result;
+
+if(findResult.data){
+
+result=
+await db
+.from("students")
+.update(row)
+.eq("id",findResult.data.id);
+
+}else{
+
+result=
+await db
+.from("students")
+.insert([row]);
+
+}
+
+if(result.error){
+
+message.innerHTML=
+"❌ حدث خطأ: "+result.error.message;
+
+message.className="message error";
+
+return;
+
+}
+
+message.innerHTML=
+"✅ تم حفظ بيانات الطالب بنجاح.";
+
+message.className="message success";
+
+}catch(e){
+
+console.error(e);
+
+message.innerHTML=
+"❌ حدث خطأ أثناء الحفظ.";
+
+message.className="message error";
+
+}
+
+}
+
+
+/* ================= NEW STUDENT ================= */
+
+function newStudent(){
+
+[
+"studentName",
+"studentGender",
+"studentGrade",
+"studentCode"
+].forEach(function(id){
+
+const el=document.getElementById(id);
+
+if(el)el.value="";
+
+});
+
+for(let i=1;i<=15;i++){
+
+const el=document.getElementById("evaluation"+i);
+
+if(el)el.value="";
+
+}
+
+const msg=document.getElementById("saveMessage");
+
+if(msg){
+
+msg.innerHTML="";
+msg.className="message";
+
+}
+
+}
+
+
+/* ================= EDIT ================= */
+
+async function editStudent(encodedCode){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+const code=decodeURIComponent(encodedCode);
+
+const result=
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(result.error||!result.data){
+
+alert("❌ تعذر تحميل بيانات الطالب.");
+return;
+
+}
+
+const student=result.data;
+
+document.getElementById("studentName").value=
+student.student_name||"";
+
+document.getElementById("studentGender").value=
+student.gender||"";
+
+document.getElementById("studentGrade").value=
+student.grade||"";
+
+document.getElementById("studentCode").value=
+student.student_code||"";
+
+for(let i=1;i<=15;i++){
+
+document.getElementById("evaluation"+i).value=
+student["evaluation_"+i]||"";
+
+}
+
+document.getElementById("saveMessage").innerHTML=
+"✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
+
+document.getElementById("saveMessage").className=
+"message success";
+
+showPage("studentManagement");
+
+}
+
+
+/* ================= DELETE ================= */
+
+async function deleteStudent(encodedCode){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+const code=decodeURIComponent(encodedCode);
+
+const studentResult=
+await db
+.from("students")
+.select("id,student_name")
+.eq("student_code",code)
+.maybeSingle();
+
+if(studentResult.error||!studentResult.data){
+
+alert("❌ الطالب غير موجود.");
+return;
+
+}
+
+const student=studentResult.data;
+
+if(!confirm(
+"⚠️ تحذير!\n\n"+
+"هل أنت متأكد من حذف الطالب:\n\n"+
+student.student_name+
+"\n\nسيتم حذف بيانات الطالب نهائيًا."
+))return;
+
+const sessionResult=
+await db.auth.getSession();
+
+if(!sessionResult.data.session){
+
+alert("❌ انتهت جلسة المعلم.");
+openTeacherLogin();
+return;
+
+}
+
+const email=
+sessionResult.data.session.user.email;
+
+const password=
+prompt(
+"🔐 تأكيد حذف الطالب\n\n"+
+"اكتب كلمة مرور دخول المعلم:"
+);
 
 if(password===null)return;
 
-const login=await db.auth.signInWithPassword({email,password});
-if(login.error){alert("❌ كلمة المرور غير صحيحة.\nلم يتم حذف الطالب.");return}
+if(!password.trim()){
 
-const del=await db.from("students").delete().eq("id",r.data.id);
-if(del.error){alert("❌ حدث خطأ أثناء الحذف.");return}
+alert("❌ يجب إدخال كلمة المرور.");
+return;
+
+}
+
+const loginResult=
+await db.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(loginResult.error){
+
+alert("❌ كلمة المرور غير صحيحة.\n\nلم يتم حذف الطالب.");
+return;
+
+}
+
+const deleteResult=
+await db
+.from("students")
+.delete()
+.eq("id",student.id);
+
+if(deleteResult.error){
+
+alert(
+"❌ حدث خطأ أثناء حذف الطالب:\n"+
+deleteResult.error.message
+);
+
+return;
+
+}
 
 alert("✅ تم حذف الطالب بنجاح.");
 
-if(document.getElementById("gradePage").classList.contains("active"))
-loadGradeStudents();
-else searchTeacherByName();
+/*
+لو الحذف من صفحة البحث:
+نعيد البحث تلقائيًا إذا كان الاسم موجودًا
+*/
+
+if(
+document.getElementById("teacherSearchPage")
+.classList.contains("active")
+){
+
+const searchInput=
+document.getElementById("teacherSearchName");
+
+if(searchInput.value.trim()){
+
+await searchTeacherByName();
+
 }
 
-async function openStudentReport(encoded){
-const code=decodeURIComponent(encoded);
-const r=await db.from("students").select("*").eq("student_code",code).maybeSingle();
+return;
 
-if(r.error||!r.data){alert("❌ تعذر تحميل التقرير.");return}
+}
 
-const s=r.data;
-let html=`<div class="report-header">
-<h3>📋 بيانات ${s.gender==="أنثى"?"الطالبة":"الطالب"}</h3>
-<p><strong>الاسم:</strong> ${escapeHtml(s.student_name)}</p>
-<p><strong>الصف:</strong> ${escapeHtml(s.grade)}</p>
-<p><strong>الكود:</strong> ${escapeHtml(s.student_code)}</p>
-</div>
-<table class="report-table"><tr><th>التقييم</th><th>الدرجة</th></tr>`;
+/*
+لو الحذف من صفحة الصف
+*/
+
+if(
+document.getElementById("gradePage")
+.classList.contains("active")
+){
+
+await loadGradeStudents();
+
+}
+
+}
+
+
+/* ================= GRADE ================= */
+
+async function openGradePage(grade){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+currentGrade=grade;
+
+document.getElementById("gradePageTitle").textContent=
+"📚 "+grade;
+
+document.getElementById("gradeStudentsCount").textContent=
+"جارى تحميل الطلاب...";
+
+showPage("gradePage");
+
+await loadGradeStudents();
+
+}
+
+
+async function loadGradeStudents(){
+
+const list=
+document.getElementById("gradeStudentsList");
+
+const count=
+document.getElementById("gradeStudentsCount");
+
+list.innerHTML=
+'<div class="loading">جارى تحميل الطلاب...</div>';
+
+try{
+
+const result=
+await db
+.from("students")
+.select("*")
+.eq("grade",currentGrade)
+.order(
+"student_name",
+{ascending:true}
+);
+
+if(result.error){
+
+list.innerHTML=
+'<div class="message error">❌ حدث خطأ فى تحميل الطلاب.</div>';
+
+return;
+
+}
+
+const students=result.data||[];
+
+count.textContent=
+"عدد الطلاب: "+students.length;
+
+list.innerHTML="";
+
+if(!students.length){
+
+list.innerHTML=
+'<div class="card">'+
+'<p style="text-align:center">لا يوجد طلاب مسجلون فى هذا الصف.</p>'+
+'</div>';
+
+return;
+
+}
+
+students.forEach(function(student,index){
+
+const div=document.createElement("div");
+
+div.className="student-card";
+
+div.innerHTML=
+
+'<h3>'+
+(
+student.gender==="أنثى"?
+"👧 طالبة":
+"👦 طالب"
+)+
+'</h3>'+
+
+'<p><strong>م:</strong> '+(index+1)+'</p>'+
+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>'+
+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>'+
+
+'<div class="student-actions">'+
+
+'<button class="blue" onclick="openStudentReport(\''+
+encodeURIComponent(student.student_code)+
+'\')">📄 تقرير</button>'+
+
+'<button class="green" onclick="editStudent(\''+
+encodeURIComponent(student.student_code)+
+'\')">✏️ تعديل</button>'+
+
+'<button class="red delete-button" onclick="deleteStudent(\''+
+encodeURIComponent(student.student_code)+
+'\')">🗑️ حذف الطالب</button>'+
+
+'</div>';
+
+list.appendChild(div);
+
+});
+
+}catch(e){
+
+console.error(e);
+
+list.innerHTML=
+'<div class="message error">❌ حدث خطأ فى الاتصال بقاعدة البيانات.</div>';
+
+}
+
+}
+
+
+/* ================= STUDENT REPORT ================= */
+
+async function openStudentReport(encodedCode){
+
+const code=decodeURIComponent(encodedCode);
+
+const result=
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(result.error||!result.data){
+
+alert("❌ تعذر تحميل التقرير.");
+return;
+
+}
+
+const student=result.data;
+
+const personTitle=
+student.gender==="أنثى"?"الطالبة":"الطالب";
+
+let html=
+
+'<div class="report-header">'+
+'<h3>📋 بيانات '+personTitle+'</h3>'+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>'+
+'<p><strong>الصف:</strong> '+
+escapeHtml(removeRepeatedGrade(student.grade))+
+'</p>'+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>'+
+'</div>'+
+
+'<h3>📊 التقييمات</h3>'+
+'<table class="report-table">'+
+'<tr><th>التقييم</th><th>الدرجة</th></tr>';
 
 for(let i=1;i<=15;i++){
-const v=s["evaluation_"+i];
-html+=`<tr><td>التقييم ${i}</td><td>${v==="غاب"?"غياب":v?escapeHtml(v)+"/10":"لم يتم التقييم"}</td></tr>`;
+
+const value=student["evaluation_"+i];
+
+let display="لم يتم التقييم";
+
+if(value==="غاب")display="غياب";
+else if(value!==null&&value!==undefined&&value!=="")
+display=escapeHtml(value)+"/10";
+
+html+=
+'<tr>'+
+'<td>التقييم '+i+'</td>'+
+'<td>'+display+'</td>'+
+'</tr>';
+
 }
-html+="</table>";
+
+html+='</table>';
 
 document.getElementById("studentReportContent").innerHTML=html;
+
 showPage("studentReport");
+
 }
+
+
+/* ================= ALL REPORT ================= */
 
 async function showAllStudentsReport(){
-if(!await isTeacherLoggedIn()){openTeacherLogin();return}
 
-const r=await db.from("students").select("*").eq("grade",currentGrade).order("student_name");
-if(r.error){alert("❌ حدث خطأ.");return}
+if(!await isTeacherLoggedIn()){
 
-let html=`<div class="report-header"><h3>📊 تقرير ${escapeHtml(currentGrade)}</h3><p>عدد الطلاب: ${r.data.length}</p></div>`;
+openTeacherLogin();
+return;
 
-if(!r.data.length){
-html+='<div class="card"><p>لا يوجد طلاب فى هذا الصف.</p></div>';
-}else{
-html+='<div class="table-container"><table class="report-table"><tr><th>م</th><th>الاسم</th><th>الكود</th><th>النوع</th><th>التقييمات</th></tr>';
-r.data.forEach((s,i)=>{
-let ev="";
-for(let n=1;n<=15;n++){
-const v=s["evaluation_"+n];
-if(v)ev+=`التقييم ${n}: ${v==="غاب"?"غياب":escapeHtml(v)}<br>`;
 }
-html+=`<tr><td>${i+1}</td><td>${escapeHtml(s.student_name)}</td><td>${escapeHtml(s.student_code)}</td><td>${escapeHtml(s.gender)}</td><td>${ev||"لا توجد"}</td></tr>`;
-});
-html+="</table></div>";
+
+const result=
+await db
+.from("students")
+.select("*")
+.eq("grade",currentGrade)
+.order("student_name",{ascending:true});
+
+if(result.error){
+
+alert("❌ حدث خطأ أثناء تحميل التقرير.");
+return;
+
 }
+
+const students=result.data||[];
+
+let html=
+
+'<div class="report-header">'+
+'<h3>📊 تقرير '+
+escapeHtml(removeRepeatedGrade(currentGrade))+
+'</h3>'+
+'<p><strong>عدد الطلاب:</strong> '+
+students.length+
+'</p>'+
+'</div>';
+
+if(!students.length){
+
+html+=
+'<div class="card">'+
+'<p style="text-align:center">لا يوجد طلاب فى هذا الصف.</p>'+
+'</div>';
 
 document.getElementById("allStudentsReportContent").innerHTML=html;
+
 showPage("allStudentsReport");
+
+return;
+
 }
 
-function escapeHtml(v){
-return String(v??"")
+html+=
+'<div class="table-container">'+
+'<table class="report-table">'+
+'<tr>'+
+'<th>م</th>'+
+'<th>اسم الطالب</th>'+
+'<th>الكود</th>'+
+'<th>النوع</th>'+
+'<th>التقييمات</th>'+
+'</tr>';
+
+students.forEach(function(student,index){
+
+let evaluations="";
+
+for(let i=1;i<=15;i++){
+
+const value=student["evaluation_"+i];
+
+if(value!==null&&value!==undefined&&value!==""){
+
+evaluations+=
+"التقييم "+i+": "+
+(
+value==="غاب"?
+"غياب":
+escapeHtml(value)
+)+
+"<br>";
+
+}
+
+}
+
+if(!evaluations)evaluations="لا توجد تقييمات";
+
+html+=
+'<tr>'+
+'<td>'+(index+1)+'</td>'+
+'<td>'+escapeHtml(student.student_name)+'</td>'+
+'<td>'+escapeHtml(student.student_code)+'</td>'+
+'<td>'+escapeHtml(student.gender||"")+'</td>'+
+'<td style="text-align:right">'+evaluations+'</td>'+
+'</tr>';
+
+});
+
+html+='</table></div>';
+
+document.getElementById("allStudentsReportContent").innerHTML=html;
+
+showPage("allStudentsReport");
+
+}
+
+
+/* ================= PARENT SEARCH ================= */
+
+async function searchStudent(){
+
+if(!db&&!initSupabase()){
+
+document.getElementById("parentMessage").innerHTML=
+"❌ تعذر الاتصال بالنظام.";
+
+document.getElementById("parentMessage").className=
+"message error";
+
+return;
+
+}
+
+const code=
+document.getElementById("parentCode").value.trim();
+
+const message=
+document.getElementById("parentMessage");
+
+const resultBox=
+document.getElementById("parentResult");
+
+if(!code){
+
+message.innerHTML="❌ اكتب كود الطالب.";
+message.className="message error";
+resultBox.innerHTML="";
+return;
+
+}
+
+message.innerHTML="جارى البحث...";
+message.className="message";
+resultBox.innerHTML="";
+
+try{
+
+const result=
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(result.error){
+
+message.innerHTML="❌ حدث خطأ أثناء الاستعلام.";
+message.className="message error";
+return;
+
+}
+
+if(!result.data){
+
+message.innerHTML="❌ كود الطالب غير موجود.";
+message.className="message error";
+return;
+
+}
+
+const student=result.data;
+
+message.innerHTML="";
+
+const personTitle=
+student.gender==="أنثى"?
+"الطالبة":
+"الطالب";
+
+let html=
+
+'<div class="card">'+
+'<h3>📋 بيانات '+personTitle+'</h3>'+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>'+
+'<p><strong>الصف:</strong> '+
+escapeHtml(removeRepeatedGrade(student.grade||""))+
+'</p>'+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>'+
+'<hr>'+
+'<h3>📊 التقييمات</h3>';
+
+let has=false;
+
+for(let i=1;i<=15;i++){
+
+const value=student["evaluation_"+i];
+
+if(value!==null&&value!==undefined&&value!==""){
+
+has=true;
+
+html+=
+'<p><strong>التقييم '+i+': </strong>'+
+(
+value==="غاب"?
+"غياب":
+escapeHtml(value)+"/10"
+)+
+'</p>';
+
+}
+
+}
+
+if(!has){
+
+html+=
+'<p>لا توجد تقييمات مسجلة حتى الآن.</p>';
+
+}
+
+html+='</div>';
+
+resultBox.innerHTML=html;
+
+}catch(e){
+
+console.error(e);
+
+message.innerHTML="❌ حدث خطأ أثناء الاتصال.";
+message.className="message error";
+
+}
+
+}
+
+
+/* ================= HELPERS ================= */
+
+function removeRepeatedGrade(value){
+
+return String(value||"")
+.replace(/^الصف\s+/,"");
+
+}
+
+
+function escapeHtml(value){
+
+return String(value==null?"":value)
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
+
+/* ================= START ================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
 initSupabase();
+
 createEvaluations();
+
 showPage("home");
-});
+
+}
+);
+
 </script>
+
 </body>
 </html>
