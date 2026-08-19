@@ -4836,9 +4836,7 @@ await db
 .order("attendance_date",{ascending:true});
 
 if(result.error){
-
 return "";
-
 }
 
 const records=result.data||[];
@@ -4870,15 +4868,11 @@ absent:0
 }
 
 if(record.status==="حاضر"){
-
 months[monthKey].present++;
-
 }
 
 if(record.status==="غائب"){
-
 months[monthKey].absent++;
-
 }
 
 });
@@ -4908,14 +4902,14 @@ monthName+
 '<div class="count-box">'+
 
 '<div class="count-item present-box">'+
-"✅ عدد أيام الحضور<br>"+
+"✅ الحضور<br>"+
 '<strong style="font-size:20px">'+
 item.present+
 '</strong>'+
 '</div>'+
 
 '<div class="count-item absent-box">'+
-"❌ عدد أيام الغياب<br>"+
+"❌ الغياب<br>"+
 '<strong style="font-size:20px">'+
 item.absent+
 '</strong>'+
@@ -4931,8 +4925,7 @@ html+='</div>';
 
 return html;
 
-}
-
+  }
 
 /* ================================================= */
 /* PARENT PAYMENTS */
