@@ -313,7 +313,7 @@ font-weight:bold;
 color:#64748b
 }
 
-/* ================= PAYMENT ================= */
+/* PAYMENT */
 
 .payment-box{
 background:#fff7ed;
@@ -372,7 +372,7 @@ background:#fff7ed;
 border-color:#fed7aa
 }
 
-/* ================= MONTH SETTINGS ================= */
+/* MONTH SETTINGS */
 
 .month-settings-box{
 background:#f5f3ff;
@@ -409,7 +409,7 @@ width:auto;
 margin:0
 }
 
-/* ================= ATTENDANCE ================= */
+/* ATTENDANCE */
 
 .attendance-box{
 background:#eff6ff;
@@ -548,7 +548,7 @@ display:block!important
 
 <div class="container">
 
-<!-- ================= HOME ================= -->
+<!-- HOME -->
 
 <div id="home" class="page active">
 
@@ -580,7 +580,7 @@ display:block!important
 </div>
 
 
-<!-- ================= TEACHER LOGIN ================= -->
+<!-- TEACHER LOGIN -->
 
 <div id="teacherLogin" class="page">
 
@@ -609,7 +609,7 @@ placeholder="كلمة المرور">
 
 <div id="loginMessage" class="message"></div>
 
-<button class="home-button gray" onclick="showPage('home')">
+<button class="gray" onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
 
@@ -622,7 +622,7 @@ placeholder="كلمة المرور">
 </div>
 
 
-<!-- ================= TEACHER ================= -->
+<!-- TEACHER -->
 
 <div id="teacher" class="page">
 
@@ -726,7 +726,7 @@ placeholder="كلمة المرور">
 </div>
 
 
-<!-- ================= PAYMENT SETTINGS ================= -->
+<!-- PAYMENT SETTINGS -->
 
 <div id="paymentSettings" class="page">
 
@@ -764,7 +764,7 @@ placeholder="كلمة المرور">
 </div>
 
 
-<!-- ================= SEARCH ================= -->
+<!-- SEARCH -->
 
 <div id="teacherSearchPage" class="page">
 
@@ -802,7 +802,7 @@ autocomplete="off">
 </div>
 
 
-<!-- ================= STUDENT MANAGEMENT ================= -->
+<!-- STUDENT MANAGEMENT -->
 
 <div id="studentManagement" class="page">
 
@@ -869,7 +869,7 @@ placeholder="كود الطالب">
 <div id="evaluationInputs"></div>
 
 
-<!-- ================= PAYMENTS ================= -->
+<!-- PAYMENTS -->
 
 <div class="payment-box">
 
@@ -890,7 +890,7 @@ placeholder="كود الطالب">
 </div>
 
 
-<!-- ================= ATTENDANCE ================= -->
+<!-- ATTENDANCE -->
 
 <div class="attendance-box">
 
@@ -944,7 +944,7 @@ type="date">
 </div>
 
 
-<!-- ================= GRADE ================= -->
+<!-- GRADE -->
 
 <div id="gradePage" class="page">
 
@@ -982,7 +982,7 @@ type="date">
 </div>
 
 
-<!-- ================= STUDENT REPORT ================= -->
+<!-- STUDENT REPORT -->
 
 <div id="studentReport" class="page">
 
@@ -1012,7 +1012,7 @@ type="date">
 </div>
 
 
-<!-- ================= ALL REPORT ================= -->
+<!-- ALL REPORT -->
 
 <div id="allStudentsReport" class="page">
 
@@ -1042,7 +1042,7 @@ type="date">
 </div>
 
 
-<!-- ================= PARENT ================= -->
+<!-- PARENT -->
 
 <div id="parent" class="page">
 
@@ -1153,7 +1153,7 @@ return false;
 
 
 /* =========================================================
-PAYMENT SETTINGS - LOAD
+LOAD PAYMENT SETTINGS
 ========================================================= */
 
 async function loadPaymentSettings(){
@@ -1279,7 +1279,7 @@ showPage("paymentSettings");
 
 
 /* =========================================================
-PAYMENT SETTINGS SAVE - FIXED
+SAVE PAYMENT SETTINGS - NEW FIX
 ========================================================= */
 
 async function savePaymentSettings(){
@@ -1320,43 +1320,85 @@ message.innerHTML =
 message.className =
 "message";
 
-
 try{
-
-/*
-نستخدم upsert بدل update
-حتى لو الشهر غير موجود يتم إنشاؤه.
-*/
 
 for(const month of allPaymentMonths){
 
 const enabled =
 selected.includes(month);
 
-const result =
+/*
+نبحث عن الشهر أولًا.
+إذا كان موجودًا يتم تحديثه.
+إذا لم يكن موجودًا يتم إدخاله.
+وهكذا لا نعتمد على UNIQUE constraint.
+*/
+
+const existing =
 await db
 .from("payment_month_settings")
-.upsert(
-{
-month_name: month,
-enabled: enabled
-},
-{
-onConflict: "month_name"
-}
+.select("id")
+.eq("month_name",month)
+.maybeSingle();
+
+if(existing.error){
+
+console.error(
+"Search month error:",
+existing.error
 );
+
+message.innerHTML =
+"❌ حدث خطأ أثناء البحث عن شهر " +
+escapeHtml(month) +
+"<br>" +
+escapeHtml(existing.error.message);
+
+message.className =
+"message error";
+
+return;
+
+}
+
+let result;
+
+if(existing.data){
+
+result =
+await db
+.from("payment_month_settings")
+.update({
+enabled:enabled
+})
+.eq(
+"id",
+existing.data.id
+);
+
+}else{
+
+result =
+await db
+.from("payment_month_settings")
+.insert({
+month_name:month,
+enabled:enabled
+});
+
+}
 
 if(result.error){
 
 console.error(
-"Payment month error:",
+"Payment month save error:",
 month,
 result.error
 );
 
 message.innerHTML =
 "❌ حدث خطأ أثناء حفظ شهر " +
-month +
+escapeHtml(month) +
 "<br>" +
 escapeHtml(result.error.message);
 
@@ -1611,9 +1653,9 @@ try{
 const result =
 await db.auth.signInWithPassword({
 
-email: email,
+email:email,
 
-password: password
+password:password
 
 });
 
@@ -2036,13 +2078,13 @@ return;
 
 let row = {
 
-student_code: code,
+student_code:code,
 
-student_name: name,
+student_name:name,
 
-gender: gender,
+gender:gender,
 
-grade: grade
+grade:grade
 
 };
 
@@ -2141,7 +2183,7 @@ message.className =
 
 
 /* =========================================================
-SAVE PAYMENTS
+SAVE PAYMENTS - NEW FIX
 ========================================================= */
 
 async function savePayments(silent=false){
@@ -2212,24 +2254,78 @@ if(!el) continue;
 const status =
 el.value;
 
-const result =
+/*
+البحث عن سجل الشهر أولًا.
+*/
+
+const existing =
 await db
 .from("monthly_payments")
-.upsert(
-{
-student_code: code,
-payment_month: month,
-status: status
-},
-{
-onConflict:
-"student_code,payment_month"
-}
+.select("id")
+.eq("student_code",code)
+.eq("payment_month",month)
+.maybeSingle();
+
+if(existing.error){
+
+console.error(
+"Payment search error:",
+existing.error
 );
+
+if(!silent){
+
+message.innerHTML =
+"❌ حدث خطأ أثناء البحث عن شهر " +
+escapeHtml(month) +
+"<br>" +
+escapeHtml(existing.error.message);
+
+message.className =
+"message error";
+
+}
+
+return;
+
+}
+
+let result;
+
+if(existing.data){
+
+/* السجل موجود → تحديث */
+
+result =
+await db
+.from("monthly_payments")
+.update({
+status:status
+})
+.eq(
+"id",
+existing.data.id
+);
+
+}else{
+
+/* السجل غير موجود → إضافة */
+
+result =
+await db
+.from("monthly_payments")
+.insert({
+student_code:code,
+payment_month:month,
+status:status
+});
+
+}
 
 if(result.error){
 
 console.error(
+"Payment save error:",
 result.error
 );
 
@@ -2237,7 +2333,9 @@ if(!silent){
 
 message.innerHTML =
 "❌ حدث خطأ أثناء حفظ مصروفات شهر " +
-escapeHtml(month);
+escapeHtml(month) +
+"<br>" +
+escapeHtml(result.error.message);
 
 message.className =
 "message error";
@@ -2663,9 +2761,9 @@ return;
 const loginResult =
 await db.auth.signInWithPassword({
 
-email: email,
+email:email,
 
-password: password
+password:password
 
 });
 
@@ -2783,7 +2881,7 @@ day
 
 
 /* =========================================================
-SAVE ATTENDANCE FROM STUDENT PAGE
+SAVE ATTENDANCE - NEW FIX
 ========================================================= */
 
 async function saveStudentAttendance(status){
@@ -2837,22 +2935,35 @@ return;
 
 try{
 
+/* التأكد من وجود الطالب */
+
 const student =
 await db
 .from("students")
-.select(
-"student_name"
-)
+.select("student_name")
 .eq(
 "student_code",
 code
 )
 .maybeSingle();
 
-if(
-student.error ||
-!student.data
-){
+if(student.error){
+
+console.error(
+student.error
+);
+
+message.innerHTML =
+"❌ حدث خطأ أثناء البحث عن الطالب.";
+
+message.className =
+"message error";
+
+return;
+
+}
+
+if(!student.data){
 
 message.innerHTML =
 "❌ كود الطالب غير موجود.";
@@ -2864,29 +2975,85 @@ return;
 
 }
 
-const result =
+
+/*
+البحث عن سجل الحضور في نفس اليوم.
+*/
+
+const existing =
 await db
 .from("attendance")
-.upsert(
-{
-student_code: code,
-attendance_date: date,
-status: status
-},
-{
-onConflict:
-"student_code,attendance_date"
-}
+.select("id")
+.eq(
+"student_code",
+code
+)
+.eq(
+"attendance_date",
+date
+)
+.maybeSingle();
+
+if(existing.error){
+
+console.error(
+existing.error
 );
+
+message.innerHTML =
+"❌ حدث خطأ أثناء البحث عن سجل الحضور.<br>" +
+escapeHtml(
+existing.error.message
+);
+
+message.className =
+"message error";
+
+return;
+
+}
+
+let result;
+
+if(existing.data){
+
+/* يوجد سجل لنفس اليوم → تحديث */
+
+result =
+await db
+.from("attendance")
+.update({
+status:status
+})
+.eq(
+"id",
+existing.data.id
+);
+
+}else{
+
+/* لا يوجد سجل → إضافة */
+
+result =
+await db
+.from("attendance")
+.insert({
+student_code:code,
+attendance_date:date,
+status:status
+});
+
+}
 
 if(result.error){
 
 console.error(
+"Attendance save error:",
 result.error
 );
 
 message.innerHTML =
-"❌ حدث خطأ أثناء حفظ الحضور: " +
+"❌ حدث خطأ أثناء حفظ الحضور.<br>" +
 escapeHtml(
 result.error.message
 );
@@ -2904,21 +3071,23 @@ status +
 " للطالب " +
 escapeHtml(
 student.data.student_name
-);
+) +
+" بتاريخ " +
+escapeHtml(date);
 
 message.className =
 "message success";
 
-await loadStudentAttendanceHistory(
-code
-);
+/* تحديث سجل الحضور */
+
+await loadStudentAttendanceHistory(code);
 
 }catch(error){
 
 console.error(error);
 
 message.innerHTML =
-"❌ حدث خطأ أثناء الاتصال.";
+"❌ حدث خطأ أثناء الاتصال بقاعدة البيانات.";
 
 message.className =
 "message error";
