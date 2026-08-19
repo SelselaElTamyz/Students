@@ -601,7 +601,22 @@ class="message">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -740,7 +755,22 @@ onclick="logoutTeacher()">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -801,7 +831,22 @@ onclick="backFromSearch()">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -951,7 +996,22 @@ onclick="showPage('teacher')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1044,7 +1104,22 @@ onclick="showPage('teacher')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1103,7 +1178,22 @@ onclick="showPage('teacher')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1161,7 +1251,22 @@ onclick="showPage('teacher')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1220,7 +1325,22 @@ onclick="showPage('teacher')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1271,7 +1391,22 @@ onclick="showPage('gradePage')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1322,7 +1457,22 @@ onclick="showPage('gradePage')">
 onclick="showPage('home')">
 🏠 الصفحة الرئيسية
 </button>
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -1384,7 +1534,22 @@ onclick="goHomeFromParent()">
 
 </div>
 
+<footer class="footer">
 
+<div>
+تصميم وبرمجة
+</div>
+
+<div class="footer-name">
+أ/ محمد القهوجى
+</div>
+
+<div>
+جميع الحقوق محفوظة © 2026
+</div>
+
+</footer>
+  
 </div>
 
 
@@ -2113,7 +2278,6 @@ showPage("studentManagement");
 
 }
 
-
 /* ================================================= */
 /* DELETE STUDENT */
 /* ================================================= */
@@ -2148,12 +2312,78 @@ return;
 
 const student=studentResult.data;
 
-if(!confirm(
-"⚠️ تحذير!\n\n"+
+/* التحذير الأول */
+
+const confirmed=
+confirm(
+"⚠️ تحذير مهم!\n\n"+
 "هل أنت متأكد من حذف الطالب:\n\n"+
 student.student_name+
-"\n\nسيتم حذف بيانات الطالب نهائيًا."
-))return;
+"\n\n"+
+"سيتم حذف بيانات الطالب نهائيًا، ولا يمكن التراجع عن هذا الإجراء."
+);
+
+if(!confirmed){
+
+return;
+
+}
+
+/* طلب بيانات دخول المعلم */
+
+const email=
+prompt(
+"🔐 تأكيد هوية المعلم\n\n"+
+"اكتب البريد الإلكتروني المستخدم في دخول صفحة المعلم:"
+);
+
+if(!email){
+
+alert("❌ تم إلغاء عملية الحذف.");
+
+return;
+
+}
+
+const password=
+prompt(
+"🔐 تأكيد هوية المعلم\n\n"+
+"اكتب كلمة المرور المستخدمة في دخول صفحة المعلم:"
+);
+
+if(!password){
+
+alert("❌ تم إلغاء عملية الحذف.");
+
+return;
+
+}
+
+/* التحقق من Supabase Auth */
+
+try{
+
+const loginResult=
+await db.auth.signInWithPassword({
+
+email:email.trim(),
+
+password:password
+
+});
+
+if(loginResult.error){
+
+alert(
+"❌ بيانات الدخول غير صحيحة.\n\n"+
+"لم يتم حذف الطالب."
+);
+
+return;
+
+}
+
+/* تنفيذ الحذف بعد نجاح التحقق */
 
 const deleteResult=
 await db
@@ -2172,7 +2402,11 @@ return;
 
 }
 
-alert("✅ تم حذف الطالب بنجاح.");
+alert(
+"✅ تم حذف الطالب بنجاح."
+);
+
+/* تحديث قائمة البحث */
 
 if(
 document.getElementById("teacherSearchPage")
@@ -2183,8 +2417,28 @@ await searchTeacherByName();
 
 }
 
+/* تحديث قائمة الصف */
+
+if(
+document.getElementById("gradePage")
+.classList.contains("active")
+){
+
+await loadGradeStudents();
+
 }
 
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ حدث خطأ أثناء التحقق من بيانات المعلم."
+);
+
+}
+
+}
 
 /* ================================================= */
 /* GRADE */
