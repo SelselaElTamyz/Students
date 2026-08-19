@@ -4835,7 +4835,11 @@ await db
 .eq("student_code",studentCode)
 .order("attendance_date",{ascending:true});
 
-if(result.error)return "";
+if(result.error){
+
+return "";
+
+}
 
 const records=result.data||[];
 
@@ -4848,53 +4852,77 @@ return '<div class="card">'+
 
 }
 
-let present=0;
-let absent=0;
+const months={};
 
 records.forEach(function(record){
 
-if(record.status==="حاضر")present++;
+const date=String(record.attendance_date||"");
 
-if(record.status==="غائب")absent++;
+const monthKey=date.substring(0,7);
+
+if(!months[monthKey]){
+
+months[monthKey]={
+present:0,
+absent:0
+};
+
+}
+
+if(record.status==="حاضر"){
+
+months[monthKey].present++;
+
+}
+
+if(record.status==="غائب"){
+
+months[monthKey].absent++;
+
+}
 
 });
 
 let html=
 '<div class="card">'+
-'<h3>📋 الحضور والغياب</h3>'+
+'<h3>📋 الحضور والغياب</h3>';
+
+Object.keys(months)
+.sort()
+.reverse()
+.forEach(function(monthKey){
+
+const item=months[monthKey];
+
+const monthName=formatMonthKey(monthKey);
+
+html+=
+
+'<div class="month-card">'+
+
+'<div class="month-title">'+
+"🗓️ "+
+monthName+
+'</div>'+
 
 '<div class="count-box">'+
 
 '<div class="count-item present-box">'+
-"✅ الحضور<br>"+present+
+"✅ عدد أيام الحضور<br>"+
+'<strong style="font-size:20px">'+
+item.present+
+'</strong>'+
 '</div>'+
 
 '<div class="count-item absent-box">'+
-"❌ الغياب<br>"+absent+
+"❌ عدد أيام الغياب<br>"+
+'<strong style="font-size:20px">'+
+item.absent+
+'</strong>'+
 '</div>'+
 
-'</div>';
+'</div>'+
 
-records.forEach(function(record){
-
-html+=
-'<div class="attendance-card">'+
-'<p><strong>🗓️ التاريخ:</strong> '+
-escapeHtml(record.attendance_date)+
-'</p>'+
-'<p class="'+
-(
-record.status==="حاضر"?
-"present":
-"absent"
-)+
-'">'+
-(
-record.status==="حاضر"?
-"✅ حاضر":
-"❌ غائب"
-)+
-'</p>'+
 '</div>';
 
 });
