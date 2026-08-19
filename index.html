@@ -485,7 +485,7 @@ display:block!important
 <div class="brand">
 
 <div class="brand-title-main">
-⭐ سلسلة التميز 
+⭐ سلسلة التميز
 </div>
 
 <div class="brand-subtitle">
@@ -3479,48 +3479,474 @@ month.month_name;
 const status=
 payment?
 payment.status:
-"لم يدفع";
+async function openStudentReport(encodedCode){
 
-let text;
+if(!await isTeacherLoggedIn()){
 
-if(status==="دفع"){
+openTeacherLogin();
 
-text=
+return;
+
+}
+
+const code=
+decodeURIComponent(encodedCode);
+
+try{
+
+/* ================================ */
+/* بيانات الطالب */
+/* ================================ */
+
+const studentResult=
+await db
+.from("students")
+.select("*")
+.eq("student_code",code)
+.maybeSingle();
+
+if(studentResult.error||!studentResult.data){
+
+alert("❌ تعذر تحميل بيانات الطالب.");
+
+return;
+
+}
+
+const student=
+studentResult.data;
+
+const personTitle=
 student.gender==="أنثى"?
-"✅ دفعت":
-"✅ دفع";
+"الطالبة":
+"الطالب";
 
-}else{
 
-text=
-student.gender==="أنثى"?
-"❌ لم تدفع":
-"❌ لم يدفع";
+/* ================================ */
+/* الحضور والغياب */
+/* ================================ */
+
+const attendanceResult=
+await db
+.from("attendance")
+.select("attendance_date,status")
+.eq("student_code",code)
+.order("attendance_date",{ascending:true});
+
+const attendanceRecords=
+attendanceResult.data||[];
+
+const attendanceMonths={};
+
+attendanceRecords.forEach(function(record){
+
+const date=
+String(record.attendance_date||"");
+
+const monthKey=
+date.substring(0,7);
+
+if(!monthKey)return;
+
+if(!attendanceMonths[monthKey]){
+
+attendanceMonths[monthKey]={
+present:0,
+absent:0
+};
+
+}
+
+if(record.status==="حاضر"){
+
+attendanceMonths[monthKey].present++;
+
+}
+
+else if(record.status==="غائب"){
+
+attendanceMonths[monthKey].absent++;
+
+}
+
+});
+
+
+/* ================================ */
+/* المصاريف */
+/* ================================ */
+
+const settingsResult=
+await db
+.from("payment_month_settings")
+.select("month_name,enabled")
+.eq("enabled",true)
+.order("id",{ascending:true});
+
+const paymentMonths=
+settingsResult.data||[];
+
+const paymentsResult=
+await db
+.from("monthly_payments")
+.select("payment_month,status")
+.eq("student_code",code);
+
+const payments=
+paymentsResult.data||[];
+
+
+/* ================================ */
+/* بداية التقرير */
+/* ================================ */
+
+let html=
+
+'<div class="report-header">'+
+
+'<h3>📋 بيانات '+
+personTitle+
+'</h3>'+
+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>'+
+
+'<p><strong>النوع:</strong> '+
+escapeHtml(student.gender||"")+
+'</p>'+
+
+'<p><strong>الصف:</strong> '+
+escapeHtml(
+removeRepeatedGrade(student.grade||"")
+)+
+'</p>'+
+
+'<p><strong>الكود:</strong> '+
+escapeHtml(student.student_code)+
+'</p>'+
+
+'</div>';
+
+
+/* ================================ */
+/* التقييمات */
+/* ================================ */
+
+html+=
+
+'<div class="card">'+
+
+'<h3>📊 التقييمات</h3>'+
+
+'<div class="table-container">'+
+
+'<table class="report-table">'+
+
+'<tr>'+
+'<th>التقييم</th>'+
+'<th>الدرجة</th>'+
+'</tr>';
+
+for(let i=1;i<=15;i++){
+
+const value=
+student["evaluation_"+i];
+
+let display="لم يتم التقييم";
+
+if(value==="غاب"){
+
+display="غياب";
+
+}
+
+else if(
+value!==null &&
+value!==undefined &&
+value!==""
+){
+
+display=
+escapeHtml(value)+
+"/10";
 
 }
 
 html+=
 
 '<tr>'+
+'<td>التقييم '+i+'</td>'+
+'<td>'+display+'</td>'+
+'</tr>';
+
+}
+
+html+=
+
+'</table>'+
+'</div>'+
+'</div>';
+
+
+/* ================================ */
+/* الحضور والغياب */
+/* ================================ */
+
+html+=
+
+'<div class="card">'+
+
+'<h3>📋 الحضور والغياب</h3>';
+
+if(Object.keys(attendanceMonths).length===0){
+
+html+=
+'<p style="text-align:center">'+
+"لا يوجد سجل حضور أو غياب حتى الآن."+
+'</p>';
+
+}else{
+
+html+=
+
+'<div class="table-container">'+
+
+'<table class="report-table">'+
+
+'<tr>'+
+'<th>الشهر</th>'+
+'<th>أيام الحضور</th>'+
+'<th>أيام الغياب</th>'+
+'</tr>';
+
+Object.keys(attendanceMonths)
+.sort()
+.reverse()
+.forEach(function(monthKey){
+
+const item=
+attendanceMonths[monthKey];
+
+html+=
+
+'<tr>'+
+
 '<td>'+
-escapeHtml(month.month_name)+
+escapeHtml(
+formatMonthKey(monthKey)
+)+
 '</td>'+
-'<td>'+
-text+
+
+'<td class="present">'+
+item.present+
 '</td>'+
+
+'<td class="absent">'+
+item.absent+
+'</td>'+
+
 '</tr>';
 
 });
 
-html+='</table>';
+html+=
+
+'</table>'+
+'</div>';
 
 }
+
+html+=
+'</div>';
+
+
+/* ================================ */
+/* المصاريف */
+/* ================================ */
+
+html+=
+
+'<div class="card">'+
+
+'<h3>💳 مصاريف الشهر</h3>';
+
+if(!paymentMonths.length){
+
+html+=
+
+'<p style="text-align:center">'+
+"لا توجد شهور مصاريف مفعلة حاليًا."+
+'</p>';
+
+}else{
+
+html+=
+
+'<div class="table-container">'+
+
+'<table class="report-table">'+
+
+'<tr>'+
+'<th>الشهر</th>'+
+'<th>الحالة</th>'+
+'</tr>';
+
+paymentMonths.forEach(function(month){
+
+const payment=
+payments.find(function(item){
+
+return item.payment_month===
+month.month_name;
+
+});
+
+const status=
+payment?
+payment.status:
+"لم يدفع";
+
+const statusClass=
+status==="دفع"?
+"present":
+"absent";
+
+const icon=
+status==="دفع"?
+"✅":
+"❌";
+
+html+=
+
+'<tr>'+
+
+'<td>'+
+escapeHtml(month.month_name)+
+'</td>'+
+
+'<td class="'+
+statusClass+
+'">'+
+icon+
+" "+
+escapeHtml(status)+
+'</td>'+
+
+'</tr>';
+
+});
+
+html+=
+
+'</table>'+
+'</div>';
+
+}
+
+html+=
+'</div>';
+
+
+/* ================================ */
+/* ملخص سريع */
+/* ================================ */
+
+let totalPresent=0;
+
+let totalAbsent=0;
+
+Object.keys(attendanceMonths)
+.forEach(function(monthKey){
+
+totalPresent+=
+attendanceMonths[monthKey].present;
+
+totalAbsent+=
+attendanceMonths[monthKey].absent;
+
+});
+
+const paidCount=
+payments.filter(function(payment){
+
+return payment.status==="دفع";
+
+}).length;
+
+const unpaidCount=
+paymentMonths.filter(function(month){
+
+const payment=
+payments.find(function(item){
+
+return item.payment_month===
+month.month_name;
+
+});
+
+return !payment||
+payment.status!=="دفع";
+
+}).length;
+
+
+html+=
+
+'<div class="card">'+
+
+'<h3>📌 ملخص الطالب</h3>'+
+
+'<div class="count-box">'+
+
+'<div class="count-item present-box">'+
+"✅ إجمالي الحضور<br>"+
+totalPresent+
+'</div>'+
+
+'<div class="count-item absent-box">'+
+"❌ إجمالي الغياب<br>"+
+totalAbsent+
+'</div>'+
+
+'</div>'+
+
+'<div class="count-box">'+
+
+'<div class="count-item present-box">'+
+"💰 الشهور المدفوعة<br>"+
+paidCount+
+'</div>'+
+
+'<div class="count-item absent-box">'+
+"💳 الشهور غير المدفوعة<br>"+
+unpaidCount+
+'</div>'+
+
+'</div>'+
+
+'</div>';
+
+
+/* ================================ */
+/* عرض التقرير */
+/* ================================ */
 
 document.getElementById(
 "studentReportContent"
 ).innerHTML=html;
 
 showPage("studentReport");
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"❌ حدث خطأ أثناء تحميل تقرير الطالب."
+);
+
+}
 
 }
 
