@@ -9,22 +9,103 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef4ff,#f8fafc);color:#1e293b}
-.container{width:94%;max-width:650px;margin:25px auto;background:#fff;padding:22px;border-radius:22px;box-shadow:0 8px 28px rgba(15,23,42,.13);min-height:90vh}
-.page{display:none}.page.active{display:block}
-.brand{text-align:center;padding:8px 0 20px;border-bottom:1px solid #e5e7eb;margin-bottom:22px}
-.brand-title-main{font-size:46px;font-weight:900;color:#1565C0;line-height:1.1;margin:0;text-align:right;padding-right:45px}
-.brand-subtitle{font-size:14px;font-weight:900;color:#002B5C;text-align:center;margin:2px 0 5px}
-.teacher-name{font-size:29px;font-weight:900;color:#0F4C5C;text-align:center}
-.teacher-title{font-size:18px;font-weight:800;color:#047857;text-align:center}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#eef4ff,#f8fafc);
+color:#1e293b
+}
+
+.container{
+width:94%;
+max-width:650px;
+margin:25px auto;
+background:#fff;
+padding:22px;
+border-radius:22px;
+box-shadow:0 8px 28px rgba(15,23,42,.13);
+min-height:90vh
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.brand{
+text-align:center;
+padding:8px 0 20px;
+border-bottom:1px solid #e5e7eb;
+margin-bottom:22px
+}
+
+.brand-title-main{
+font-size:46px;
+font-weight:900;
+color:#1565C0;
+line-height:1.1;
+margin:0;
+text-align:right;
+padding-right:45px
+}
+
+.brand-subtitle{
+font-size:14px;
+font-weight:900;
+color:#002B5C;
+text-align:center;
+margin:2px 0 5px
+}
+
+.teacher-name{
+font-size:29px;
+font-weight:900;
+color:#0F4C5C;
+text-align:center
+}
+
+.teacher-title{
+font-size:18px;
+font-weight:800;
+color:#047857;
+text-align:center
+}
+
 h1,h2,h3{text-align:center}
 h2{color:#172554}
 h3{color:#334155}
+
 p{color:#64748b}
-input,select{width:100%;padding:14px;margin:7px 0;border:1px solid #cbd5e1;border-radius:11px;font-size:16px;background:#fff;outline:none}
-input:focus,select:focus{border-color:#1565C0;box-shadow:0 0 0 3px rgba(21,101,192,.1)}
-button{width:100%;padding:14px;margin:7px 0;border:none;border-radius:11px;color:white;font-size:17px;cursor:pointer;font-weight:bold}
+
+input,select{
+width:100%;
+padding:14px;
+margin:7px 0;
+border:1px solid #cbd5e1;
+border-radius:11px;
+font-size:16px;
+background:#fff;
+outline:none
+}
+
+input:focus,select:focus{
+border-color:#1565C0;
+box-shadow:0 0 0 3px rgba(21,101,192,.1)
+}
+
+button{
+width:100%;
+padding:14px;
+margin:7px 0;
+border:none;
+border-radius:11px;
+color:white;
+font-size:17px;
+cursor:pointer;
+font-weight:bold
+}
+
 button:hover{opacity:.93}
+
 .blue{background:#1565C0}
 .green{background:#2E7D32}
 .red{background:#C62828}
@@ -32,133 +113,431 @@ button:hover{opacity:.93}
 .orange{background:#C2410C}
 .purple{background:#6A1B9A}
 .dark{background:#374151}
-.message{text-align:center;font-weight:bold;margin:12px}
+
+.message{
+text-align:center;
+font-weight:bold;
+margin:12px
+}
+
 .success{color:#2E7D32}
 .error{color:#C62828}
-.card,.student-card,.search-result{background:#f8fafc;border:1px solid #e2e8f0;border-radius:15px;padding:16px;margin:12px 0}
-.evaluation{display:flex;gap:8px;align-items:center;margin:8px 0}
-.evaluation strong{width:110px;color:#334155}
-.evaluation select{flex:1;margin:0}
-hr{border:none;border-top:1px solid #e2e8f0;margin:22px 0}
-.home-icon{font-size:45px;text-align:center;margin:8px 0 12px}
-.subtitle{text-align:center;font-size:17px;margin-bottom:22px}
-.footer{text-align:center;margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;color:#475569;font-size:13px;line-height:1.8}
-.footer-name{font-weight:900;font-size:15px}
-.grade-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grade-buttons button{margin:0;min-height:60px}
-.student-actions,.search-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.student-actions button,.search-actions button{margin:0}
-.delete-button{grid-column:1/-1}
-.search-result-name{font-size:19px;font-weight:900;color:#172554}
-.grade-header,.report-header{background:#eff6ff;border:1px solid #bfdbfe;border-radius:15px;padding:15px;margin-bottom:15px;text-align:center}
-.grade-header h2{margin:0 0 8px}
-.report-header p{margin:7px}
-.report-table{width:100%;border-collapse:collapse;margin-top:12px}
-.report-table th,.report-table td{border:1px solid #cbd5e1;padding:9px 6px;text-align:center;font-size:14px}
-.report-table th{background:#e2e8f0;color:#172554;font-weight:900}
-.table-container{overflow-x:auto}
-.loading{text-align:center;padding:20px;font-weight:bold;color:#64748b}
 
-.payment-box{background:#fff7ed;border:1px solid #fed7aa;border-radius:15px;padding:16px;margin:18px 0}
-.payment-box h3{color:#9a3412;margin-top:0}
-.payment-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;margin:8px 0;padding:10px;background:#fff;border:1px solid #e5e7eb;border-radius:11px}
-.payment-row select{margin:0}
-.payment-month{font-weight:900;color:#334155}
-.payment-paid{color:#15803d;font-weight:900}
-.payment-unpaid{color:#c2410C;font-weight:900}
-.payment-info{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px;margin-top:10px}
-.payment-info.unpaid{background:#fff7ed;border-color:#fed7aa}
-
-.month-settings-box{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:15px;padding:16px;margin:18px 0}
-.month-settings-box h3{color:#5b21b6;margin-top:0}
-.month-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.month-check{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5e7eb;padding:11px;border-radius:10px;cursor:pointer}
-.month-check input{width:auto;margin:0}
-
-.attendance-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:15px;padding:16px;margin:18px 0}
-.attendance-box h3{color:#1d4ed8;margin-top:0}
-.attendance-status{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.attendance-status button{margin:0}
-.attendance-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;margin:8px 0;padding:10px;background:#fff;border:1px solid #e5e7eb;border-radius:11px}
-.present{color:#15803d;font-weight:900}
-.absent{color:#c62828;font-weight:900}
-.attendance-date{font-weight:900;color:#334155}
-.attendance-history{margin-top:12px}
-.attendance-history-title{font-weight:900;color:#1d4ed8;margin-bottom:8px;text-align:center}
-
-/* ملخص الحضور حسب الشهر */
-.attendance-summary{
+.card,
+.student-card,
+.search-result{
 background:#f8fafc;
-border:1px solid #bfdbfe;
-border-radius:14px;
-padding:12px;
-margin-top:12px;
+border:1px solid #e2e8f0;
+border-radius:15px;
+padding:16px;
+margin:12px 0
 }
 
-.attendance-summary-title{
-font-weight:900;
-color:#1d4ed8;
-text-align:center;
-margin-bottom:10px;
-}
-
-.attendance-month-row{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:6px;
+.evaluation{
+display:flex;
+gap:8px;
 align-items:center;
-margin:7px 0;
-padding:11px;
+margin:8px 0
+}
+
+.evaluation strong{
+width:110px;
+color:#334155
+}
+
+.evaluation select{
+flex:1;
+margin:0
+}
+
+hr{
+border:none;
+border-top:1px solid #e2e8f0;
+margin:22px 0
+}
+
+.home-icon{
+font-size:45px;
+text-align:center;
+margin:8px 0 12px
+}
+
+.subtitle{
+text-align:center;
+font-size:17px;
+margin-bottom:22px
+}
+
+.footer{
+text-align:center;
+margin-top:30px;
+padding-top:16px;
+border-top:1px solid #e5e7eb;
+color:#475569;
+font-size:13px;
+line-height:1.8
+}
+
+.footer-name{
+font-weight:900;
+font-size:15px
+}
+
+.grade-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.grade-buttons button{
+margin:0;
+min-height:60px
+}
+
+.student-actions,
+.search-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+
+.student-actions button,
+.search-actions button{
+margin:0
+}
+
+.delete-button{
+grid-column:1/-1;
+background:#b91c1c
+}
+
+.grade-header,
+.report-header{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+border-radius:15px;
+padding:15px;
+margin-bottom:15px;
+text-align:center
+}
+
+.grade-header h2{
+margin:0 0 8px
+}
+
+.report-header p{
+margin:7px
+}
+
+.report-table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px
+}
+
+.report-table th,
+.report-table td{
+border:1px solid #cbd5e1;
+padding:9px 6px;
+text-align:center;
+font-size:14px
+}
+
+.report-table th{
+background:#e2e8f0;
+color:#172554;
+font-weight:900
+}
+
+.table-container{
+overflow-x:auto
+}
+
+.loading{
+text-align:center;
+padding:20px;
+font-weight:bold;
+color:#64748b
+}
+
+.payment-box{
+background:#fff7ed;
+border:1px solid #fed7aa;
+border-radius:15px;
+padding:16px;
+margin:18px 0
+}
+
+.payment-box h3{
+color:#9a3412;
+margin-top:0
+}
+
+.payment-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+align-items:center;
+margin:8px 0;
+padding:10px;
 background:#fff;
 border:1px solid #e5e7eb;
-border-radius:10px;
+border-radius:11px
 }
 
-.attendance-month-name{
+.payment-row select{margin:0}
+
+.payment-month{
 font-weight:900;
-color:#334155;
+color:#334155
 }
 
-.attendance-month-present{
+.payment-paid{
 color:#15803d;
-font-weight:900;
-text-align:center;
+font-weight:900
 }
 
-.attendance-month-absent{
+.payment-unpaid{
+color:#c2410C;
+font-weight:900
+}
+
+.payment-info{
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+border-radius:12px;
+padding:12px;
+margin-top:10px
+}
+
+.payment-info.unpaid{
+background:#fff7ed;
+border-color:#fed7aa
+}
+
+.month-settings-box{
+background:#f5f3ff;
+border:1px solid #ddd6fe;
+border-radius:15px;
+padding:16px;
+margin:18px 0
+}
+
+.month-settings-box h3{
+color:#5b21b6;
+margin-top:0
+}
+
+.month-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+
+.month-check{
+display:flex;
+align-items:center;
+gap:8px;
+background:#fff;
+border:1px solid #e5e7eb;
+padding:11px;
+border-radius:10px;
+cursor:pointer
+}
+
+.month-check input{
+width:auto;
+margin:0
+}
+
+.attendance-box{
+background:#eff6ff;
+border:1px solid #bfdbfe;
+border-radius:15px;
+padding:16px;
+margin:18px 0
+}
+
+.attendance-box h3{
+color:#1d4ed8;
+margin-top:0
+}
+
+.attendance-status{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+
+.attendance-status button{margin:0}
+
+.attendance-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+align-items:center;
+margin:8px 0;
+padding:10px;
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:11px
+}
+
+.present{
+color:#15803d;
+font-weight:900
+}
+
+.absent{
 color:#c62828;
+font-weight:900
+}
+
+.attendance-date{
 font-weight:900;
+color:#334155
+}
+
+.attendance-history{
+margin-top:12px
+}
+
+.attendance-history-title{
+font-weight:900;
+color:#1d4ed8;
+margin-bottom:8px;
+text-align:center
+}
+
+.month-attendance-box{
+background:#f8fafc;
+border:1px solid #cbd5e1;
+border-radius:15px;
+padding:14px;
+margin:12px 0
+}
+
+.month-attendance-title{
+font-size:18px;
+font-weight:900;
+color:#172554;
 text-align:center;
+margin-bottom:12px
+}
+
+.attendance-summary{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:12px
+}
+
+.summary-present,
+.summary-absent{
+padding:11px;
+border-radius:10px;
+text-align:center;
+font-weight:900
+}
+
+.summary-present{
+background:#dcfce7;
+color:#15803d
+}
+
+.summary-absent{
+background:#fee2e2;
+color:#b91c1c
+}
+
+.warning-delete{
+background:#fff7ed;
+border:1px solid #fdba74;
+border-radius:12px;
+padding:12px;
+margin:10px 0;
+color:#9a3412;
+text-align:center;
+font-weight:bold
 }
 
 @media(max-width:480px){
-.container{width:96%;padding:17px;margin:12px auto}
-.brand-title-main{font-size:37px;padding-right:30px}
+
+.container{
+width:96%;
+padding:17px;
+margin:12px auto
+}
+
+.brand-title-main{
+font-size:37px;
+padding-right:30px
+}
+
 .teacher-name{font-size:26px}
 .teacher-title{font-size:17px}
-.grade-buttons,.student-actions,.search-actions{grid-template-columns:1fr}
-.delete-button{grid-column:auto}
-.evaluation strong{width:100px}
-.payment-row,.attendance-row{grid-template-columns:1fr}
-.month-grid{grid-template-columns:1fr}
-.attendance-month-row{grid-template-columns:1fr}
-.attendance-month-present,.attendance-month-absent{text-align:right}
+
+.grade-buttons,
+.student-actions,
+.search-actions{
+grid-template-columns:1fr
+}
+
+.delete-button{
+grid-column:auto
+}
+
+.evaluation strong{
+width:100px
+}
+
+.payment-row,
+.attendance-row{
+grid-template-columns:1fr
+}
+
+.month-grid{
+grid-template-columns:1fr
+}
+
+.attendance-summary{
+grid-template-columns:1fr
+}
+
 }
 
 @media print{
-button{display:none!important}
-.container{box-shadow:none;width:100%;max-width:none;margin:0}
-.page{display:none!important}
-.page.active{display:block!important}
+
+button{
+display:none!important
+}
+
+.container{
+box-shadow:none;
+width:100%;
+max-width:none;
+margin:0
+}
+
+.page{
+display:none!important
+}
+
+.page.active{
+display:block!important
+}
+
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
 <!-- HOME -->
 <div id="home" class="page active">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -167,20 +546,24 @@ button{display:none!important}
 </div>
 
 <div class="home-icon">📚</div>
+
 <p class="subtitle">نظام متابعة الطلاب</p>
 
 <button class="blue" onclick="openParentPage()">👨‍👩‍👧 صفحة ولى الأمر</button>
 <button class="green" onclick="openTeacherLogin()">👨‍🏫 صفحة المعلم</button>
 
-<footer class="footer">
+<div class="footer">
 <div>تصميم وبرمجة</div>
 <div class="footer-name">أ/ محمد القهوجى</div>
 <div>جميع الحقوق محفوظة © 2026</div>
-</footer>
 </div>
+
+</div>
+
 
 <!-- LOGIN -->
 <div id="teacherLogin" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -198,10 +581,19 @@ button{display:none!important}
 <div id="loginMessage" class="message"></div>
 
 <button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- TEACHER -->
 <div id="teacher" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -210,39 +602,62 @@ button{display:none!important}
 </div>
 
 <h2>👨‍🏫 صفحة المعلم</h2>
+
 <p style="text-align:center">اختر القسم المطلوب</p>
 
-<button class="blue" onclick="showPage('studentManagement')">➕ إضافة وتعديل بيانات الطلاب</button>
-<button class="orange" onclick="openTeacherSearchPage()">🔎 البحث عن طالب</button>
-<button class="purple" onclick="openPaymentSettings()">💰 إعداد شهور المصروفات</button>
+<button class="blue" onclick="showPage('studentManagement')">
+➕ إضافة وتعديل بيانات الطلاب
+</button>
+
+<button class="orange" onclick="openTeacherSearchPage()">
+🔎 البحث عن طالب
+</button>
+
+<button class="purple" onclick="openPaymentSettings()">
+💰 إعداد شهور المصروفات
+</button>
 
 <hr>
 
 <h3>📚 الصفوف الدراسية</h3>
 
 <div class="grade-buttons">
+
 <button class="blue" onclick="openGradePage('الصف الأول الابتدائى')">📘 الصف الأول الابتدائى</button>
 <button class="blue" onclick="openGradePage('الصف الثانى الابتدائى')">📘 الصف الثانى الابتدائى</button>
 <button class="blue" onclick="openGradePage('الصف الثالث الابتدائى')">📘 الصف الثالث الابتدائى</button>
 <button class="blue" onclick="openGradePage('الصف الرابع الابتدائى')">📘 الصف الرابع الابتدائى</button>
+
 <button class="green" onclick="openGradePage('الصف الخامس الابتدائى')">📗 الصف الخامس الابتدائى</button>
 <button class="orange" onclick="openGradePage('الصف السادس الابتدائى')">📙 الصف السادس الابتدائى</button>
+
 <button class="purple" onclick="openGradePage('الصف الأول الإعدادى')">📕 الصف الأول الإعدادى</button>
 <button class="purple" onclick="openGradePage('الصف الثانى الإعدادى')">📕 الصف الثانى الإعدادى</button>
 <button class="purple" onclick="openGradePage('الصف الثالث الإعدادى')">📕 الصف الثالث الإعدادى</button>
+
 <button class="dark" onclick="openGradePage('الصف الأول الثانوى')">📒 الصف الأول الثانوى</button>
 <button class="dark" onclick="openGradePage('الصف الثانى الثانوى')">📒 الصف الثانى الثانوى</button>
 <button class="dark" onclick="openGradePage('الصف الثالث الثانوى')">📒 الصف الثالث الثانوى</button>
+
 </div>
 
 <hr>
 
 <button class="red" onclick="logoutTeacher()">🚪 تسجيل الخروج</button>
 <button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- PAYMENT SETTINGS -->
 <div id="paymentSettings" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -253,7 +668,9 @@ button{display:none!important}
 <h2>💰 إعداد شهور المصروفات</h2>
 
 <div class="month-settings-box">
+
 <h3>حدد الشهور التي تريد تحصيل المصروفات فيها</h3>
+
 <p style="text-align:center">
 الشهور التي تختارها هنا فقط ستظهر للمعلم وولي الأمر.
 </p>
@@ -263,13 +680,23 @@ button{display:none!important}
 <button class="purple" onclick="savePaymentSettings()">💾 حفظ الشهور</button>
 
 <div id="monthSettingsMessage" class="message"></div>
+
 </div>
 
 <button class="gray" onclick="showPage('teacher')">↩️ العودة إلى صفحة المعلم</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- SEARCH -->
 <div id="teacherSearchPage" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -288,10 +715,19 @@ button{display:none!important}
 
 <button class="gray" onclick="showPage('teacher')">↩️ العودة إلى صفحة المعلم</button>
 <button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- STUDENT MANAGEMENT -->
 <div id="studentManagement" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -311,18 +747,22 @@ button{display:none!important}
 
 <select id="studentGrade">
 <option value="">اختر الصف الدراسى</option>
+
 <option>الصف الأول الابتدائى</option>
 <option>الصف الثانى الابتدائى</option>
 <option>الصف الثالث الابتدائى</option>
 <option>الصف الرابع الابتدائى</option>
 <option>الصف الخامس الابتدائى</option>
 <option>الصف السادس الابتدائى</option>
+
 <option>الصف الأول الإعدادى</option>
 <option>الصف الثانى الإعدادى</option>
 <option>الصف الثالث الإعدادى</option>
+
 <option>الصف الأول الثانوى</option>
 <option>الصف الثانى الثانوى</option>
 <option>الصف الثالث الثانوى</option>
+
 </select>
 
 <input id="studentCode" type="text" placeholder="كود الطالب">
@@ -335,8 +775,10 @@ button{display:none!important}
 
 <div id="evaluationInputs"></div>
 
+
 <!-- PAYMENT -->
 <div class="payment-box">
+
 <h3>💰 المصروفات الشهرية</h3>
 
 <p style="text-align:center">
@@ -345,10 +787,14 @@ button{display:none!important}
 
 <div id="paymentInputs"></div>
 
-<button class="orange" onclick="savePayments()">💾 حفظ المصروفات</button>
+<button class="orange" onclick="savePayments()">
+💾 حفظ المصروفات
+</button>
 
 <div id="paymentMessage" class="message"></div>
+
 </div>
+
 
 <!-- ATTENDANCE -->
 <div class="attendance-box">
@@ -362,31 +808,54 @@ button{display:none!important}
 <input id="studentAttendanceDate" type="date">
 
 <div class="attendance-status">
-<button class="green" onclick="saveStudentAttendance('حاضر')">✅ حاضر</button>
-<button class="red" onclick="saveStudentAttendance('غائب')">❌ غائب</button>
+
+<button class="green" onclick="saveStudentAttendance('حاضر')">
+✅ حاضر
+</button>
+
+<button class="red" onclick="saveStudentAttendance('غائب')">
+❌ غائب
+</button>
+
 </div>
 
 <div id="studentAttendanceMessage" class="message"></div>
 
-<!-- ملخص الحضور حسب الشهر -->
-<div id="studentAttendanceSummary"></div>
-
-<!-- السجل التفصيلي بالتاريخ -->
 <div id="studentAttendanceHistory"></div>
 
 </div>
 
-<button class="green" onclick="saveStudent()">💾 حفظ بيانات الطالب</button>
-<button class="orange" onclick="newStudent()">➕ طالب جديد</button>
+
+<button class="green" onclick="saveStudent()">
+💾 حفظ بيانات الطالب
+</button>
+
+<button class="orange" onclick="newStudent()">
+➕ طالب جديد
+</button>
 
 <div id="saveMessage" class="message"></div>
 
-<button class="gray" onclick="showPage('teacher')">↩️ العودة إلى صفحة المعلم</button>
-<button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="gray" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- GRADE -->
 <div id="gradePage" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -395,20 +864,41 @@ button{display:none!important}
 </div>
 
 <div class="grade-header">
+
 <h2 id="gradePageTitle">📚 الصف</h2>
-<p id="gradeStudentsCount">جارى تحميل الطلاب...</p>
+
+<p id="gradeStudentsCount">
+جارى تحميل الطلاب...
+</p>
+
 </div>
 
-<button class="purple" onclick="showAllStudentsReport()">📊 تقرير جميع الطلاب</button>
+<button class="purple" onclick="showAllStudentsReport()">
+📊 تقرير جميع الطلاب
+</button>
 
 <div id="gradeStudentsList"></div>
 
-<button class="gray" onclick="showPage('teacher')">↩️ العودة إلى صفحة المعلم</button>
-<button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+<button class="gray" onclick="showPage('teacher')">
+↩️ العودة إلى صفحة المعلم
+</button>
+
+<button class="gray" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- STUDENT REPORT -->
 <div id="studentReport" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -421,12 +911,27 @@ button{display:none!important}
 <div id="studentReportContent"></div>
 
 <button class="dark" onclick="window.print()">🖨️ طباعة التقرير</button>
-<button class="gray" onclick="showPage('gradePage')">↩️ العودة إلى الصف</button>
-<button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<button class="gray" onclick="showPage('gradePage')">
+↩️ العودة إلى الصف
+</button>
+
+<button class="gray" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- ALL REPORT -->
 <div id="allStudentsReport" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -439,12 +944,27 @@ button{display:none!important}
 <div id="allStudentsReportContent"></div>
 
 <button class="dark" onclick="window.print()">🖨️ طباعة التقرير</button>
-<button class="gray" onclick="showPage('gradePage')">↩️ العودة إلى الصف</button>
-<button class="gray" onclick="showPage('home')">🏠 الصفحة الرئيسية</button>
+
+<button class="gray" onclick="showPage('gradePage')">
+↩️ العودة إلى الصف
+</button>
+
+<button class="gray" onclick="showPage('home')">
+🏠 الصفحة الرئيسية
+</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
+
+</div>
+
 
 <!-- PARENT -->
 <div id="parent" class="page">
+
 <div class="brand">
 <div class="brand-title-main">⭐ سلسلة التميز</div>
 <div class="brand-subtitle">فى الرياضيات</div>
@@ -460,20 +980,34 @@ button{display:none!important}
 
 <input id="parentCode" type="text" placeholder="أدخل كود الطالب">
 
-<button class="blue" onclick="searchStudent()">🔎 استعلام</button>
+<button class="blue" onclick="searchStudent()">
+🔎 استعلام
+</button>
 
 <div id="parentMessage" class="message"></div>
+
 <div id="parentResult"></div>
 
-<button class="gray" onclick="goHomeFromParent()">🏠 الصفحة الرئيسية</button>
+<button class="gray" onclick="goHomeFromParent()">
+🏠 الصفحة الرئيسية
+</button>
+
+<div class="footer">
+<div>تصميم وبرمجة</div>
+<div class="footer-name">أ/ محمد القهوجى</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </div>
 
 </div>
+
+</div>
+
 
 <script>
 
 const SUPABASE_URL="https://jdpppofgbthxagbpldrb.supabase.co";
-const SUPABASE_KEY="sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1Ff5";
+
+const SUPABASE_KEY="sb_publishable_rPIV8Vq1WHjy3WOE8tlyMQ_AJlT1F5";
 
 let db=null;
 let currentGrade="";
@@ -484,24 +1018,17 @@ const allPaymentMonths=[
 "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
 ];
 
-const monthNames={
-"01":"يناير",
-"02":"فبراير",
-"03":"مارس",
-"04":"أبريل",
-"05":"مايو",
-"06":"يونيو",
-"07":"يوليو",
-"08":"أغسطس",
-"09":"سبتمبر",
-"10":"أكتوبر",
-"11":"نوفمبر",
-"12":"ديسمبر"
-};
+const attendanceMonths=[
+"يناير","فبراير","مارس","أبريل","مايو","يونيو",
+"يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
+];
 
 function initSupabase(){
+
 try{
-if(!window.supabase||!window.supabase.createClient)return false;
+
+if(!window.supabase || !window.supabase.createClient)
+return false;
 
 db=window.supabase.createClient(
 SUPABASE_URL,
@@ -511,34 +1038,47 @@ SUPABASE_KEY
 return true;
 
 }catch(e){
+
 console.error(e);
 return false;
+
 }
 
 }
+
 
 function escapeHtml(v){
+
 return String(v==null?"":v)
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
+
 
 function removeRepeatedGrade(v){
+
 return String(v||"").replace(/^الصف\s+/,"");
+
 }
 
+
 function getTodayDate(){
+
 const d=new Date();
 
 return d.getFullYear()+"-"+
 String(d.getMonth()+1).padStart(2,"0")+"-"+
 String(d.getDate()).padStart(2,"0");
+
 }
 
+
 function showPage(id){
+
 document.querySelectorAll(".page")
 .forEach(p=>p.classList.remove("active"));
 
@@ -547,11 +1087,14 @@ const p=document.getElementById(id);
 if(p)p.classList.add("active");
 
 window.scrollTo(0,0);
+
 }
+
 
 async function isTeacherLoggedIn(){
 
-if(!db&&!initSupabase())return false;
+if(!db&&!initSupabase())
+return false;
 
 try{
 
@@ -567,6 +1110,7 @@ return false;
 
 }
 
+
 function openParentPage(){
 
 document.getElementById("parentCode").value="";
@@ -577,12 +1121,15 @@ showPage("parent");
 
 }
 
+
 function goHomeFromParent(){
 
 openParentPage();
+
 showPage("home");
 
 }
+
 
 async function openTeacherLogin(){
 
@@ -590,7 +1137,8 @@ if(!db)initSupabase();
 
 try{
 
-if(db)await db.auth.signOut();
+if(db)
+await db.auth.signOut();
 
 }catch(e){}
 
@@ -602,17 +1150,25 @@ showPage("teacherLogin");
 
 }
 
+
 async function loginTeacher(){
 
 if(!db)initSupabase();
 
-const email=document.getElementById("teacherEmail").value.trim();
-const password=document.getElementById("teacherPassword").value;
-const m=document.getElementById("loginMessage");
+const email=
+document.getElementById("teacherEmail").value.trim();
+
+const password=
+document.getElementById("teacherPassword").value;
+
+const m=
+document.getElementById("loginMessage");
 
 if(!email||!password){
 
-m.innerHTML="❌ اكتب البريد الإلكترونى وكلمة المرور.";
+m.innerHTML=
+"❌ اكتب البريد الإلكترونى وكلمة المرور.";
+
 m.className="message error";
 
 return;
@@ -629,7 +1185,9 @@ password
 
 if(r.error){
 
-m.innerHTML="❌ البريد الإلكترونى أو كلمة المرور غير صحيحة.";
+m.innerHTML=
+"❌ البريد الإلكترونى أو كلمة المرور غير صحيحة.";
+
 m.className="message error";
 
 return;
@@ -642,13 +1200,16 @@ showPage("teacher");
 
 }
 
+
 async function logoutTeacher(){
 
-if(db)
+if(db){
 
 try{
 await db.auth.signOut();
 }catch(e){}
+
+}
 
 newStudent();
 
@@ -656,13 +1217,15 @@ showPage("home");
 
 }
 
+
 /* =========================
    PAYMENT SETTINGS
 ========================= */
 
 async function loadPaymentSettings(){
 
-if(!db&&!initSupabase())return;
+if(!db&&!initSupabase())
+return;
 
 try{
 
@@ -673,10 +1236,8 @@ const r=await db
 
 if(r.error){
 
-console.error("load payment settings:",r.error);
-
+console.error(r.error);
 paymentMonths=[];
-
 return;
 
 }
@@ -694,20 +1255,23 @@ paymentMonths=[];
 
 }
 
+
 async function openPaymentSettings(){
 
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
 
 await loadPaymentSettings();
 
-const box=document.getElementById("monthSettingsList");
-const msg=document.getElementById("monthSettingsMessage");
+const box=
+document.getElementById("monthSettingsList");
+
+const msg=
+document.getElementById("monthSettingsMessage");
 
 box.innerHTML="";
 msg.innerHTML="";
@@ -739,23 +1303,26 @@ showPage("paymentSettings");
 
 }
 
+
 async function savePaymentSettings(){
 
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
 
-const msg=document.getElementById("monthSettingsMessage");
+const msg=
+document.getElementById("monthSettingsMessage");
 
-const checks=document.querySelectorAll(
+const checks=
+document.querySelectorAll(
 "#monthSettingsList input[type=checkbox]"
 );
 
-const selected=[...checks]
+const selected=
+[...checks]
 .filter(x=>x.checked)
 .map(x=>x.value);
 
@@ -782,13 +1349,9 @@ onConflict:"month_name"
 
 if(r.error){
 
-console.error(month,r.error);
-
 msg.innerHTML=
 "❌ حدث خطأ أثناء حفظ شهر "+
-escapeHtml(month)+
-"<br>"+
-escapeHtml(r.error.message);
+escapeHtml(month);
 
 msg.className="message error";
 
@@ -802,19 +1365,24 @@ await loadPaymentSettings();
 
 createPaymentInputs();
 
-msg.innerHTML="✅ تم حفظ شهور المصروفات بنجاح.";
+msg.innerHTML=
+"✅ تم حفظ شهور المصروفات بنجاح.";
+
 msg.className="message success";
 
 }catch(e){
 
 console.error(e);
 
-msg.innerHTML="❌ حدث خطأ أثناء حفظ الشهور.";
+msg.innerHTML=
+"❌ حدث خطأ أثناء حفظ الشهور.";
+
 msg.className="message error";
 
 }
 
 }
+
 
 /* =========================
    PAYMENT INPUTS
@@ -822,7 +1390,8 @@ msg.className="message error";
 
 function createPaymentInputs(){
 
-const box=document.getElementById("paymentInputs");
+const box=
+document.getElementById("paymentInputs");
 
 if(!box)return;
 
@@ -852,7 +1421,8 @@ name.textContent="💰 "+month;
 
 const select=document.createElement("select");
 
-select.id="payment_"+encodeURIComponent(month);
+select.id=
+"payment_"+encodeURIComponent(month);
 
 const a=document.createElement("option");
 
@@ -876,6 +1446,7 @@ box.appendChild(row);
 
 }
 
+
 function getPaymentElement(month){
 
 return document.getElementById(
@@ -883,6 +1454,7 @@ return document.getElementById(
 );
 
 }
+
 
 async function savePayments(silent=false){
 
@@ -894,15 +1466,19 @@ return;
 
 }
 
-const code=document.getElementById("studentCode").value.trim();
+const code=
+document.getElementById("studentCode").value.trim();
 
-const msg=document.getElementById("paymentMessage");
+const msg=
+document.getElementById("paymentMessage");
 
 if(!code){
 
 if(!silent){
 
-msg.innerHTML="❌ اكتب كود الطالب أولًا.";
+msg.innerHTML=
+"❌ اكتب كود الطالب أولًا.";
+
 msg.className="message error";
 
 }
@@ -915,7 +1491,9 @@ if(!paymentMonths.length){
 
 if(!silent){
 
-msg.innerHTML="❌ لا توجد شهور مفعّلة.";
+msg.innerHTML=
+"❌ لا توجد شهور مفعّلة.";
+
 msg.className="message error";
 
 }
@@ -947,15 +1525,11 @@ onConflict:"student_code,payment_month"
 
 if(r.error){
 
-console.error(r.error);
-
 if(!silent){
 
 msg.innerHTML=
 "❌ حدث خطأ أثناء حفظ مصروفات شهر "+
-escapeHtml(month)+
-"<br>"+
-escapeHtml(r.error.message);
+escapeHtml(month);
 
 msg.className="message error";
 
@@ -969,7 +1543,9 @@ return;
 
 if(!silent){
 
-msg.innerHTML="✅ تم حفظ المصروفات الشهرية بنجاح.";
+msg.innerHTML=
+"✅ تم حفظ المصروفات الشهرية بنجاح.";
+
 msg.className="message success";
 
 }
@@ -980,7 +1556,9 @@ console.error(e);
 
 if(!silent){
 
-msg.innerHTML="❌ حدث خطأ أثناء حفظ المصروفات.";
+msg.innerHTML=
+"❌ حدث خطأ أثناء حفظ المصروفات.";
+
 msg.className="message error";
 
 }
@@ -988,6 +1566,7 @@ msg.className="message error";
 }
 
 }
+
 
 async function loadStudentPayments(code){
 
@@ -1008,17 +1587,12 @@ const r=await db
 .select("payment_month,status")
 .eq("student_code",code);
 
-if(r.error){
-
-console.error(r.error);
-
-return;
-
-}
+if(r.error)return;
 
 (r.data||[]).forEach(x=>{
 
-if(!paymentMonths.includes(x.payment_month))return;
+if(!paymentMonths.includes(x.payment_month))
+return;
 
 const el=getPaymentElement(x.payment_month);
 
@@ -1035,13 +1609,15 @@ console.error(e);
 
 }
 
+
 /* =========================
    EVALUATIONS
 ========================= */
 
 function createEvaluations(){
 
-const box=document.getElementById("evaluationInputs");
+const box=
+document.getElementById("evaluationInputs");
 
 if(!box)return;
 
@@ -1100,6 +1676,7 @@ box.appendChild(row);
 
 }
 
+
 /* =========================
    STUDENT SAVE
 ========================= */
@@ -1109,16 +1686,24 @@ async function saveStudent(){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
 
-const name=document.getElementById("studentName").value.trim();
-const gender=document.getElementById("studentGender").value;
-const grade=document.getElementById("studentGrade").value;
-const code=document.getElementById("studentCode").value.trim();
-const msg=document.getElementById("saveMessage");
+const name=
+document.getElementById("studentName").value.trim();
+
+const gender=
+document.getElementById("studentGender").value;
+
+const grade=
+document.getElementById("studentGrade").value;
+
+const code=
+document.getElementById("studentCode").value.trim();
+
+const msg=
+document.getElementById("saveMessage");
 
 if(!name||!gender||!grade||!code){
 
@@ -1138,10 +1723,12 @@ gender:gender,
 grade:grade
 };
 
-for(let i=1;i<=15;i++)
+for(let i=1;i<=15;i++){
 
 row["evaluation_"+i]=
 document.getElementById("evaluation"+i).value||null;
+
+}
 
 try{
 
@@ -1164,18 +1751,20 @@ return;
 
 let r;
 
-if(find.data)
+if(find.data){
 
 r=await db
 .from("students")
 .update(row)
 .eq("id",find.data.id);
 
-else
+}else{
 
 r=await db
 .from("students")
 .insert([row]);
+
+}
 
 if(r.error){
 
@@ -1189,7 +1778,9 @@ return;
 
 }
 
-msg.innerHTML="✅ تم حفظ بيانات الطالب بنجاح.";
+msg.innerHTML=
+"✅ تم حفظ بيانات الطالب بنجاح.";
+
 msg.className="message success";
 
 await savePayments(true);
@@ -1200,12 +1791,15 @@ await loadStudentAttendanceHistory(code);
 
 console.error(e);
 
-msg.innerHTML="❌ حدث خطأ أثناء الحفظ.";
+msg.innerHTML=
+"❌ حدث خطأ أثناء الحفظ.";
+
 msg.className="message error";
 
 }
 
 }
+
 
 /* =========================
    EDIT STUDENT
@@ -1216,7 +1810,6 @@ async function editStudent(encodedCode){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
@@ -1251,10 +1844,12 @@ s.grade||"";
 document.getElementById("studentCode").value=
 s.student_code||"";
 
-for(let i=1;i<=15;i++)
+for(let i=1;i<=15;i++){
 
 document.getElementById("evaluation"+i).value=
 s["evaluation_"+i]||"";
+
+}
 
 await loadPaymentSettings();
 
@@ -1277,6 +1872,7 @@ showPage("studentManagement");
 
 }
 
+
 /* =========================
    NEW STUDENT
 ========================= */
@@ -1298,7 +1894,8 @@ if(e)e.value="";
 
 for(let i=1;i<=15;i++){
 
-const e=document.getElementById("evaluation"+i);
+const e=
+document.getElementById("evaluation"+i);
 
 if(e)e.value="";
 
@@ -1312,23 +1909,31 @@ if(e)e.value="لم يدفع";
 
 });
 
-document.getElementById("studentAttendanceDate").value=
-getTodayDate();
+document.getElementById(
+"studentAttendanceDate"
+).value=getTodayDate();
 
-document.getElementById("studentAttendanceHistory").innerHTML="";
+document.getElementById(
+"studentAttendanceHistory"
+).innerHTML="";
 
-document.getElementById("studentAttendanceSummary").innerHTML="";
+document.getElementById(
+"studentAttendanceMessage"
+).innerHTML="";
 
-document.getElementById("studentAttendanceMessage").innerHTML="";
+document.getElementById(
+"saveMessage"
+).innerHTML="";
 
-document.getElementById("saveMessage").innerHTML="";
-
-document.getElementById("paymentMessage").innerHTML="";
+document.getElementById(
+"paymentMessage"
+).innerHTML="";
 
 }
 
+
 /* =========================
-   ATTENDANCE - SAVE
+   ATTENDANCE SAVE
 ========================= */
 
 async function saveStudentAttendance(status){
@@ -1336,7 +1941,6 @@ async function saveStudentAttendance(status){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
@@ -1352,7 +1956,9 @@ document.getElementById("studentAttendanceMessage");
 
 if(!code){
 
-msg.innerHTML="❌ اكتب كود الطالب أولًا.";
+msg.innerHTML=
+"❌ اكتب كود الطالب أولًا.";
+
 msg.className="message error";
 
 return;
@@ -1361,7 +1967,9 @@ return;
 
 if(!date){
 
-msg.innerHTML="❌ اختر التاريخ.";
+msg.innerHTML=
+"❌ اختر التاريخ.";
+
 msg.className="message error";
 
 return;
@@ -1378,7 +1986,9 @@ const student=await db
 
 if(student.error||!student.data){
 
-msg.innerHTML="❌ كود الطالب غير موجود.";
+msg.innerHTML=
+"❌ كود الطالب غير موجود.";
+
 msg.className="message error";
 
 return;
@@ -1400,8 +2010,6 @@ onConflict:"student_code,attendance_date"
 
 if(r.error){
 
-console.error("attendance save:",r.error);
-
 msg.innerHTML=
 "❌ حدث خطأ أثناء حفظ الحضور:<br>"+
 escapeHtml(r.error.message);
@@ -1413,8 +2021,7 @@ return;
 }
 
 msg.innerHTML=
-"✅ تم تسجيل "+
-status+
+"✅ تم تسجيل "+status+
 " للطالب "+
 escapeHtml(student.data.student_name);
 
@@ -1435,132 +2042,139 @@ msg.className="message error";
 
 }
 
+
 /* =========================
-   ATTENDANCE - MONTH SUMMARY
+   ATTENDANCE BY MONTH
 ========================= */
 
-function getMonthYearFromDate(dateString){
+function getArabicMonthName(monthNumber){
 
-if(!dateString)return null;
-
-const parts=String(dateString).split("-");
-
-if(parts.length!==3)return null;
-
-const year=parts[0];
-const month=parts[1];
-
-return {
-year:year,
-month:month,
-key:year+"-"+month,
-name:(monthNames[month]||month)+" "+year
-};
+return attendanceMonths[monthNumber-1]||"";
 
 }
 
-function createAttendanceSummary(rows){
 
-const box=
-document.getElementById("studentAttendanceSummary");
+function groupAttendanceByMonth(rows){
 
-if(!box)return;
-
-if(!rows||!rows.length){
-
-box.innerHTML=
-'<div class="attendance-summary">'+
-'<div class="attendance-summary-title">'+
-'📊 ملخص الحضور والغياب حسب الشهر'+
-'</div>'+
-'<div class="payment-info">'+
-'لا يوجد سجل حضور وغياب حتى الآن.'+
-'</div>'+
-'</div>';
-
-return;
-
-}
-
-const summary={};
+const groups={};
 
 rows.forEach(row=>{
 
-const info=getMonthYearFromDate(row.attendance_date);
+const date=new Date(row.attendance_date+"T00:00:00");
 
-if(!info)return;
+const year=date.getFullYear();
 
-if(!summary[info.key]){
+const month=date.getMonth()+1;
 
-summary[info.key]={
-name:info.name,
-present:0,
-absent:0
+const key=year+"-"+String(month).padStart(2,"0");
+
+if(!groups[key]){
+
+groups[key]={
+year:year,
+month:month,
+rows:[]
 };
 
 }
 
-if(row.status==="حاضر")
-
-summary[info.key].present++;
-
-else if(row.status==="غائب")
-
-summary[info.key].absent++;
+groups[key].rows.push(row);
 
 });
 
-const months=Object.keys(summary).sort().reverse();
-
-let html=
-'<div class="attendance-summary">'+
-'<div class="attendance-summary-title">'+
-'📊 ملخص الحضور والغياب حسب الشهر'+
-'</div>';
-
-if(!months.length){
-
-html+=
-'<div class="payment-info">'+
-'لا توجد بيانات صالحة للحضور.'+
-'</div>';
-
-}else{
-
-months.forEach(key=>{
-
-const item=summary[key];
-
-html+=
-'<div class="attendance-month-row">'+
-
-'<div class="attendance-month-name">'+
-escapeHtml(item.name)+
-'</div>'+
-
-'<div class="attendance-month-present">'+
-'✅ حاضر '+item.present+
-'</div>'+
-
-'<div class="attendance-month-absent">'+
-'❌ غائب '+item.absent+
-'</div>'+
-
-'</div>';
-
-});
+return groups;
 
 }
+
+
+function createTeacherMonthlyAttendanceHTML(rows){
+
+if(!rows.length){
+
+return '<div class="payment-info">'+
+'لا يوجد سجل حضور وغياب لهذا الطالب حتى الآن.'+
+'</div>';
+
+}
+
+const groups=groupAttendanceByMonth(rows);
+
+const keys=Object.keys(groups).sort().reverse();
+
+let html=
+'<div class="attendance-history">'+
+'<div class="attendance-history-title">'+
+'📅 الحضور والغياب حسب الشهر'+
+'</div>';
+
+keys.forEach(key=>{
+
+const g=groups[key];
+
+let present=0;
+let absent=0;
+
+g.rows.forEach(r=>{
+
+if(r.status==="حاضر")
+present++;
+else if(r.status==="غائب")
+absent++;
+
+});
+
+html+=
+'<div class="month-attendance-box">'+
+
+'<div class="month-attendance-title">'+
+escapeHtml(getArabicMonthName(g.month))+
+" "+g.year+
+'</div>'+
+
+'<div class="attendance-summary">'+
+
+'<div class="summary-present">'+
+"✅ حاضر "+present+
+'</div>'+
+
+'<div class="summary-absent">'+
+"❌ غائب "+absent+
+'</div>'+
+
+'</div>'+
+
+'<div>';
+
+g.rows.sort((a,b)=>
+b.attendance_date.localeCompare(a.attendance_date)
+);
+
+g.rows.forEach(r=>{
+
+html+=
+'<div class="attendance-row">'+
+'<div class="attendance-date">'+
+escapeHtml(r.attendance_date)+
+'</div>'+
+'<div class="'+
+(r.status==="حاضر"?"present":"absent")+
+'">'+
+(r.status==="حاضر"?"✅ حاضر":"❌ غائب")+
+'</div>'+
+'</div>';
+
+});
+
+html+='</div></div>';
+
+});
 
 html+='</div>';
 
-box.innerHTML=html;
+return html;
 
 }
 
-/* =========================
-   ATTENDANCE - LOAD
-========================= */
 
 async function loadStudentAttendanceHistory(code){
 
@@ -1569,16 +2183,9 @@ document.getElementById("studentAttendanceHistory");
 
 if(!box)return;
 
-const summaryBox=
-document.getElementById("studentAttendanceSummary");
-
 if(!code){
 
 box.innerHTML="";
-
-if(summaryBox)
-summaryBox.innerHTML="";
-
 return;
 
 }
@@ -1586,20 +2193,12 @@ return;
 box.innerHTML=
 '<div class="loading">جارى تحميل سجل الحضور...</div>';
 
-if(summaryBox)
-
-summaryBox.innerHTML=
-'<div class="loading">جارى حساب ملخص الحضور...</div>';
-
 if(!db){
 
 box.innerHTML=
 '<div class="message error">'+
 '❌ قاعدة البيانات غير متصلة.'+
 '</div>';
-
-if(summaryBox)
-summaryBox.innerHTML="";
 
 return;
 
@@ -1615,73 +2214,18 @@ const r=await db
 
 if(r.error){
 
-console.error("attendance load:",r.error);
-
 box.innerHTML=
 '<div class="message error">'+
 '❌ تعذر تحميل سجل الحضور.<br>'+
 escapeHtml(r.error.message)+
 '</div>';
 
-if(summaryBox)
-summaryBox.innerHTML="";
-
 return;
 
 }
-
-const rows=r.data||[];
-
-/* إنشاء الملخص الشهري */
-createAttendanceSummary(rows);
-
-/* السجل التفصيلي */
-if(!rows.length){
 
 box.innerHTML=
-'<div class="attendance-history">'+
-'<div class="attendance-history-title">'+
-'📋 سجل الحضور بالتاريخ'+
-'</div>'+
-'<div class="payment-info">'+
-'لا يوجد سجل حضور وغياب لهذا الطالب حتى الآن.'+
-'</div>'+
-'</div>';
-
-return;
-
-}
-
-let html=
-'<div class="attendance-history">'+
-'<div class="attendance-history-title">'+
-'📋 سجل الحضور بالتاريخ'+
-'</div>';
-
-rows.forEach(row=>{
-
-const present=row.status==="حاضر";
-
-html+=
-'<div class="attendance-row">'+
-
-'<div class="attendance-date">'+
-escapeHtml(row.attendance_date)+
-'</div>'+
-
-'<div class="'+
-(present?"present":"absent")+
-'">'+
-(present?"✅ حاضر":"❌ غائب")+
-'</div>'+
-
-'</div>';
-
-});
-
-html+='</div>';
-
-box.innerHTML=html;
+createTeacherMonthlyAttendanceHTML(r.data||[]);
 
 }catch(e){
 
@@ -1692,12 +2236,175 @@ box.innerHTML=
 '❌ حدث خطأ أثناء تحميل سجل الحضور.'+
 '</div>';
 
-if(summaryBox)
-summaryBox.innerHTML="";
+}
+
+}
+
+
+/* =========================
+   DELETE STUDENT
+========================= */
+
+async function deleteStudent(encodedCode){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+return;
+
+}
+
+const code=decodeURIComponent(encodedCode);
+
+const find=await db
+.from("students")
+.select("student_name,student_code")
+.eq("student_code",code)
+.maybeSingle();
+
+if(find.error||!find.data){
+
+alert("❌ الطالب غير موجود.");
+
+return;
+
+}
+
+const studentName=find.data.student_name;
+
+const warning=
+"⚠️ تحذير هام\n\n"+
+"سيتم حذف الطالب:\n"+
+studentName+
+"\n\n"+
+"وسيتم حذف بياناته والتقييمات والمصروفات وسجل الحضور.\n\n"+
+"هل تريد المتابعة؟";
+
+if(!confirm(warning))
+return;
+
+const password=prompt(
+"🔐 لتأكيد الحذف اكتب كلمة مرور صفحة دخول المعلم:"
+);
+
+if(password===null)
+return;
+
+if(!password.trim()){
+
+alert("❌ يجب إدخال كلمة المرور.");
+
+return;
+
+}
+
+try{
+
+const sessionResult=
+await db.auth.getSession();
+
+const session=sessionResult.data.session;
+
+if(!session||!session.user){
+
+alert("❌ انتهت جلسة المعلم. سجل الدخول مرة أخرى.");
+
+openTeacherLogin();
+
+return;
+
+}
+
+const email=session.user.email;
+
+const verify=
+await db.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(verify.error){
+
+alert(
+"❌ كلمة المرور غير صحيحة.\n\n"+
+"لم يتم حذف الطالب."
+);
+
+return;
+
+}
+
+const attendanceDelete=
+await db
+.from("attendance")
+.delete()
+.eq("student_code",code);
+
+if(attendanceDelete.error){
+
+alert(
+"❌ تعذر حذف سجل الحضور.\n"+
+attendanceDelete.error.message
+);
+
+return;
+
+}
+
+const paymentDelete=
+await db
+.from("monthly_payments")
+.delete()
+.eq("student_code",code);
+
+if(paymentDelete.error){
+
+alert(
+"❌ تعذر حذف بيانات المصروفات.\n"+
+paymentDelete.error.message
+);
+
+return;
+
+}
+
+const studentDelete=
+await db
+.from("students")
+.delete()
+.eq("student_code",code);
+
+if(studentDelete.error){
+
+alert(
+"❌ تعذر حذف بيانات الطالب.\n"+
+studentDelete.error.message
+);
+
+return;
+
+}
+
+alert(
+"✅ تم حذف الطالب "+
+studentName+
+" وجميع بياناته بنجاح."
+);
+
+await loadGradeStudents();
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"❌ حدث خطأ أثناء عملية الحذف."
+);
 
 }
 
 }
+
 
 /* =========================
    SEARCH
@@ -1708,31 +2415,39 @@ async function openTeacherSearchPage(){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
 
-document.getElementById("teacherSearchName").value="";
-document.getElementById("teacherSearchMessage").innerHTML="";
-document.getElementById("teacherSearchResults").innerHTML="";
+document.getElementById(
+"teacherSearchName"
+).value="";
+
+document.getElementById(
+"teacherSearchMessage"
+).innerHTML="";
+
+document.getElementById(
+"teacherSearchResults"
+).innerHTML="";
 
 showPage("teacherSearchPage");
 
 }
+
 
 async function searchTeacherByName(){
 
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
 
 const name=
-document.getElementById("teacherSearchName").value.trim();
+document.getElementById("teacherSearchName")
+.value.trim();
 
 const msg=
 document.getElementById("teacherSearchMessage");
@@ -1742,8 +2457,11 @@ document.getElementById("teacherSearchResults");
 
 if(!name){
 
-msg.innerHTML="❌ اكتب اسم الطالب للبحث.";
+msg.innerHTML=
+"❌ اكتب اسم الطالب للبحث.";
+
 msg.className="message error";
+
 box.innerHTML="";
 
 return;
@@ -1762,7 +2480,9 @@ const r=await db
 
 if(r.error){
 
-msg.innerHTML="❌ حدث خطأ أثناء البحث.";
+msg.innerHTML=
+"❌ حدث خطأ أثناء البحث.";
+
 msg.className="message error";
 
 return;
@@ -1771,7 +2491,9 @@ return;
 
 if(!(r.data||[]).length){
 
-msg.innerHTML="❌ لا يوجد طالب بهذا الاسم.";
+msg.innerHTML=
+"❌ لا يوجد طالب بهذا الاسم.";
+
 msg.className="message error";
 
 return;
@@ -1795,6 +2517,7 @@ const gender=
 s.gender==="أنثى"?"👧 ":"👦 ";
 
 d.innerHTML=
+
 '<div class="search-result-name">'+
 gender+
 escapeHtml(s.student_name)+
@@ -1818,6 +2541,10 @@ encodeURIComponent(s.student_code)+
 encodeURIComponent(s.student_code)+
 '\')">📄 تقرير</button>'+
 
+'<button class="red delete-button" onclick="deleteStudent(\''+
+encodeURIComponent(s.student_code)+
+'\')">🗑️ حذف الطالب</button>'+
+
 '</div>';
 
 box.appendChild(d);
@@ -1825,6 +2552,7 @@ box.appendChild(d);
 });
 
 }
+
 
 /* =========================
    GRADE
@@ -1835,17 +2563,19 @@ async function openGradePage(grade){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
 
 currentGrade=grade;
 
-document.getElementById("gradePageTitle").textContent=
-"📚 "+grade;
+document.getElementById(
+"gradePageTitle"
+).textContent="📚 "+grade;
 
-document.getElementById("gradeStudentsCount").textContent=
+document.getElementById(
+"gradeStudentsCount"
+).textContent=
 "جارى تحميل الطلاب...";
 
 showPage("gradePage");
@@ -1853,6 +2583,7 @@ showPage("gradePage");
 await loadGradeStudents();
 
 }
+
 
 async function loadGradeStudents(){
 
@@ -1909,6 +2640,7 @@ const d=document.createElement("div");
 d.className="student-card";
 
 d.innerHTML=
+
 '<h3>'+
 (s.gender==="أنثى"?"👧 طالبة":"👦 طالب")+
 '</h3>'+
@@ -1935,6 +2667,10 @@ encodeURIComponent(s.student_code)+
 encodeURIComponent(s.student_code)+
 '\')">✏️ تعديل</button>'+
 
+'<button class="red delete-button" onclick="deleteStudent(\''+
+encodeURIComponent(s.student_code)+
+'\')">🗑️ حذف الطالب</button>'+
+
 '</div>';
 
 list.appendChild(d);
@@ -1942,6 +2678,7 @@ list.appendChild(d);
 });
 
 }
+
 
 /* =========================
    STUDENT REPORT
@@ -1952,7 +2689,6 @@ async function openStudentReport(encodedCode){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
@@ -1978,6 +2714,7 @@ const s=r.data;
 await loadPaymentSettings();
 
 let html=
+
 '<div class="report-header">'+
 
 '<h3>📋 بيانات '+
@@ -2010,14 +2747,10 @@ let v=s["evaluation_"+i];
 let display="لم يتم التقييم";
 
 if(v==="غاب")
-
 display="غياب";
 
 else if(v!==null&&v!==undefined&&v!=="")
-
-display=
-escapeHtml(v)+
-"/10";
+display=escapeHtml(v)+"/10";
 
 html+=
 '<tr><td>التقييم '+
@@ -2029,6 +2762,9 @@ display+
 }
 
 html+='</table>';
+
+
+/* PAYMENT */
 
 const payments=await db
 .from("monthly_payments")
@@ -2042,7 +2778,9 @@ map[x.payment_month]=x.status;
 });
 
 html+=
-'<h3 style="margin-top:25px">💰 المصروفات الشهرية</h3>'+
+'<h3 style="margin-top:25px">'+
+'💰 المصروفات الشهرية'+
+'</h3>'+
 
 '<table class="report-table">'+
 '<tr><th>الشهر</th><th>الحالة</th></tr>';
@@ -2055,18 +2793,22 @@ html+=
 '<tr><td>'+
 escapeHtml(m)+
 '</td><td>'+
-
-(paid?
-'<span class="payment-paid">✅ دفع</span>':
-'<span class="payment-unpaid">⚠️ لم يدفع</span>')+
-
+(
+paid
+?
+'<span class="payment-paid">✅ دفع</span>'
+:
+'<span class="payment-unpaid">⚠️ لم يدفع</span>'
+)+
 '</td></tr>';
 
 });
 
 html+='</table>';
 
-/* الحضور للمعلم فقط */
+
+/* ATTENDANCE */
+
 const att=await db
 .from("attendance")
 .select("attendance_date,status")
@@ -2074,121 +2816,22 @@ const att=await db
 .order("attendance_date",{ascending:false});
 
 html+=
-'<h3 style="margin-top:25px">📅 الحضور والغياب حسب الشهر</h3>';
+'<h3 style="margin-top:25px">'+
+'📅 الحضور والغياب'+
+'</h3>';
 
-if(att.error){
+html+=createTeacherMonthlyAttendanceHTML(
+att.data||[]
+);
 
-html+=
-'<div class="payment-info unpaid">'+
-'❌ تعذر تحميل سجل الحضور.'+
-'</div>';
-
-}else{
-
-const attendanceRows=att.data||[];
-
-if(!attendanceRows.length){
-
-html+=
-'<div class="payment-info">'+
-'لا يوجد سجل حضور حتى الآن.'+
-'</div>';
-
-}else{
-
-const summary={};
-
-attendanceRows.forEach(row=>{
-
-const info=
-getMonthYearFromDate(row.attendance_date);
-
-if(!info)return;
-
-if(!summary[info.key]){
-
-summary[info.key]={
-name:info.name,
-present:0,
-absent:0
-};
-
-}
-
-if(row.status==="حاضر")
-summary[info.key].present++;
-
-else if(row.status==="غائب")
-summary[info.key].absent++;
-
-});
-
-const months=
-Object.keys(summary).sort().reverse();
-
-html+=
-'<table class="report-table">'+
-'<tr>'+
-'<th>الشهر</th>'+
-'<th>حاضر</th>'+
-'<th>غائب</th>'+
-'</tr>';
-
-months.forEach(key=>{
-
-const item=summary[key];
-
-html+=
-'<tr>'+
-'<td>'+
-escapeHtml(item.name)+
-'</td>'+
-'<td class="present">✅ '+
-item.present+
-'</td>'+
-'<td class="absent">❌ '+
-item.absent+
-'</td>'+
-'</tr>';
-
-});
-
-html+='</table>';
-
-html+=
-'<h3 style="margin-top:20px">📋 سجل الحضور بالتاريخ</h3>';
-
-html+=
-'<table class="report-table">'+
-'<tr><th>التاريخ</th><th>الحالة</th></tr>';
-
-attendanceRows.forEach(x=>{
-
-html+=
-'<tr>'+
-'<td>'+
-escapeHtml(x.attendance_date)+
-'</td>'+
-'<td class="'+
-(x.status==="حاضر"?"present":"absent")+
-'">'+
-(x.status==="حاضر"?"✅ حاضر":"❌ غائب")+
-'</td>'+
-'</tr>';
-
-});
-
-html+='</table>';
-
-}
-
-}
-
-document.getElementById("studentReportContent").innerHTML=html;
+document.getElementById(
+"studentReportContent"
+).innerHTML=html;
 
 showPage("studentReport");
 
 }
+
 
 /* =========================
    ALL REPORT
@@ -2199,7 +2842,6 @@ async function showAllStudentsReport(){
 if(!await isTeacherLoggedIn()){
 
 openTeacherLogin();
-
 return;
 
 }
@@ -2221,6 +2863,7 @@ return;
 const students=r.data||[];
 
 let html=
+
 '<div class="report-header">'+
 '<h3>📊 تقرير '+
 escapeHtml(removeRepeatedGrade(currentGrade))+
@@ -2273,7 +2916,8 @@ n+
 
 }
 
-if(!ev)ev="لا توجد تقييمات";
+if(!ev)
+ev="لا توجد تقييمات";
 
 html+=
 '<tr>'+
@@ -2305,26 +2949,29 @@ html+='</table></div>';
 
 }
 
-document.getElementById("allStudentsReportContent").innerHTML=
-html;
+document.getElementById(
+"allStudentsReportContent"
+).innerHTML=html;
 
 showPage("allStudentsReport");
 
 }
 
+
 /* =========================
    PARENT SEARCH
-   بدون الحضور والغياب
 ========================= */
 
 async function searchStudent(){
 
-if(!db&&!initSupabase())return;
+if(!db&&!initSupabase())
+return;
 
 await loadPaymentSettings();
 
 const code=
-document.getElementById("parentCode").value.trim();
+document.getElementById("parentCode")
+.value.trim();
 
 const msg=
 document.getElementById("parentMessage");
@@ -2334,8 +2981,11 @@ document.getElementById("parentResult");
 
 if(!code){
 
-msg.innerHTML="❌ اكتب كود الطالب.";
+msg.innerHTML=
+"❌ اكتب كود الطالب.";
+
 msg.className="message error";
+
 box.innerHTML="";
 
 return;
@@ -2356,7 +3006,9 @@ const r=await db
 
 if(r.error){
 
-msg.innerHTML="❌ حدث خطأ أثناء الاستعلام.";
+msg.innerHTML=
+"❌ حدث خطأ أثناء الاستعلام.";
+
 msg.className="message error";
 
 return;
@@ -2365,7 +3017,9 @@ return;
 
 if(!r.data){
 
-msg.innerHTML="❌ كود الطالب غير موجود.";
+msg.innerHTML=
+"❌ كود الطالب غير موجود.";
+
 msg.className="message error";
 
 return;
@@ -2377,6 +3031,7 @@ const s=r.data;
 msg.innerHTML="";
 
 let html=
+
 '<div class="card">'+
 
 '<h3>📋 بيانات '+
@@ -2413,26 +3068,31 @@ html+=
 '<p><strong>التقييم '+
 i+
 ': </strong>'+
-(v==="غاب"?
-"غياب":
-escapeHtml(v)+"/10")+
+(v==="غاب"?"غياب":escapeHtml(v)+"/10")+
 '</p>';
 
 }
 
 }
 
-if(!has)
+if(!has){
 
 html+=
 '<p>لا توجد تقييمات مسجلة حتى الآن.</p>';
+
+}
+
+
+/* PAYMENT */
 
 const payments=await db
 .from("monthly_payments")
 .select("payment_month,status")
 .eq("student_code",code);
 
-html+='<hr><h3>💰 المصروفات الشهرية</h3>';
+html+=
+'<hr>'+
+'<h3>💰 المصروفات الشهرية</h3>';
 
 if(payments.error){
 
@@ -2469,9 +3129,13 @@ html+=
 escapeHtml(m)+
 '</strong> — '+
 
-(paid?
-'<span class="payment-paid">✅ تم الدفع</span>':
-'<span class="payment-unpaid">⚠️ لم يدفع</span>')+
+(
+paid
+?
+'<span class="payment-paid">✅ تم الدفع</span>'
+:
+'<span class="payment-unpaid">⚠️ لم يدفع</span>'
+)+
 
 '</div>';
 
@@ -2479,25 +3143,225 @@ escapeHtml(m)+
 
 }
 
-/*
-  تم حذف قسم الحضور والغياب من هنا نهائيًا.
-  ولي الأمر لن يرى أي بيانات للحضور.
-*/
+
+/* PARENT ATTENDANCE */
+
+const att=await db
+.from("attendance")
+.select("attendance_date,status")
+.eq("student_code",code)
+.order("attendance_date",{ascending:false});
+
+html+=
+'<hr>'+
+'<h3>📅 الحضور والغياب</h3>';
+
+if(att.error){
+
+html+=
+'<div class="payment-info unpaid">'+
+'❌ تعذر تحميل بيانات الحضور حاليًا.'+
+'</div>';
+
+}else if(!(att.data||[]).length){
+
+html+=
+'<div class="payment-info">'+
+'لا يوجد سجل حضور وغياب حتى الآن.'+
+'</div>';
+
+}else{
+
+html+=
+'<p style="text-align:center">'+
+'اختر الشهر لعرض الحضور والغياب'+
+'</p>';
+
+html+=
+'<select id="parentAttendanceMonth" '+
+'onchange="filterParentAttendance()">'+
+
+'<option value="">اختر الشهر</option>';
+
+const years=[...new Set(
+(att.data||[]).map(x=>
+new Date(x.attendance_date+"T00:00:00").getFullYear()
+)
+)].sort((a,b)=>b-a);
+
+years.forEach(year=>{
+
+attendanceMonths.forEach((month,index)=>{
+
+const monthNumber=index+1;
+
+const hasRows=(att.data||[]).some(x=>{
+
+const d=new Date(
+x.attendance_date+"T00:00:00"
+);
+
+return d.getFullYear()===year &&
+d.getMonth()+1===monthNumber;
+
+});
+
+if(hasRows){
+
+html+=
+'<option value="'+
+year+"-"+String(monthNumber).padStart(2,"0")+
+'">'+
+month+
+" "+
+year+
+'</option>';
+
+}
+
+});
+
+});
+
+html+='</select>';
+
+html+=
+'<div id="parentAttendanceResult">'+
+'<div class="payment-info">'+
+'اختر الشهر لعرض سجل الحضور والغياب.'+
+'</div>'+
+'</div>';
+
+window.parentAttendanceData=att.data||[];
+
+}
 
 html+='</div>';
 
 box.innerHTML=html;
 
-}catch(e){
+}
 
-console.error(e);
 
-msg.innerHTML="❌ حدث خطأ أثناء الاتصال.";
-msg.className="message error";
+/* =========================
+   PARENT ATTENDANCE FILTER
+========================= */
+
+function filterParentAttendance(){
+
+const select=
+document.getElementById("parentAttendanceMonth");
+
+const box=
+document.getElementById("parentAttendanceResult");
+
+if(!select||!box)return;
+
+const value=select.value;
+
+if(!value){
+
+box.innerHTML=
+'<div class="payment-info">'+
+'اختر الشهر لعرض سجل الحضور والغياب.'+
+'</div>';
+
+return;
 
 }
 
+const parts=value.split("-");
+
+const year=Number(parts[0]);
+
+const month=Number(parts[1]);
+
+const rows=(window.parentAttendanceData||[])
+.filter(x=>{
+
+const d=new Date(
+x.attendance_date+"T00:00:00"
+);
+
+return d.getFullYear()===year &&
+d.getMonth()+1===month;
+
+})
+.sort((a,b)=>
+b.attendance_date.localeCompare(a.attendance_date)
+);
+
+if(!rows.length){
+
+box.innerHTML=
+'<div class="payment-info">'+
+'لا يوجد حضور أو غياب مسجل في هذا الشهر.'+
+'</div>';
+
+return;
+
 }
+
+let present=0;
+let absent=0;
+
+rows.forEach(x=>{
+
+if(x.status==="حاضر")
+present++;
+
+else if(x.status==="غائب")
+absent++;
+
+});
+
+let html=
+
+'<div class="month-attendance-box">'+
+
+'<div class="month-attendance-title">'+
+escapeHtml(getArabicMonthName(month))+
+" "+
+year+
+'</div>'+
+
+'<div class="attendance-summary">'+
+
+'<div class="summary-present">'+
+"✅ حاضر "+present+
+'</div>'+
+
+'<div class="summary-absent">'+
+"❌ غائب "+absent+
+'</div>'+
+
+'</div>';
+
+rows.forEach(x=>{
+
+html+=
+'<div class="attendance-row">'+
+
+'<div class="attendance-date">'+
+escapeHtml(x.attendance_date)+
+'</div>'+
+
+'<div class="'+
+(x.status==="حاضر"?"present":"absent")+
+'">'+
+(x.status==="حاضر"?"✅ حاضر":"❌ غائب")+
+'</div>'+
+
+'</div>';
+
+});
+
+html+='</div>';
+
+box.innerHTML=html;
+
+}
+
 
 /* =========================
    START
@@ -2516,7 +3380,9 @@ await loadPaymentSettings();
 createPaymentInputs();
 
 const date=
-document.getElementById("studentAttendanceDate");
+document.getElementById(
+"studentAttendanceDate"
+);
 
 if(date)
 date.value=getTodayDate();
