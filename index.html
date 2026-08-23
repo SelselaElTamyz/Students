@@ -646,7 +646,7 @@ onclick="showPage('home')">
 </p>
 
 <button class="blue"
-onclick="showPage('studentManagement')">
+onclick="openStudentManagementPage()">
 ➕ إضافة وتعديل بيانات الطلاب
 </button>
 
@@ -857,6 +857,18 @@ onclick="showPage('home')">
 </div>
 
 <h2>➕ إضافة وتعديل بيانات الطلاب</h2>
+
+<div class="card">
+<h3>✏️ اختيار طالب للتعديل</h3>
+
+<select id="editStudentSelect" onchange="loadSelectedStudentForEdit()">
+<option value="">اختر الطالب الذي تريد تعديله</option>
+</select>
+
+<p style="text-align:center;margin-bottom:0">
+اختر اسم الطالب وسيتم تحميل بياناته وتقييماته تلقائيًا.
+</p>
+</div>
 
 <input
 id="studentName"
@@ -2111,6 +2123,14 @@ message.className="message error";
 
 function newStudent(){
 
+const editSelect=document.getElementById("editStudentSelect");
+
+if(editSelect){
+
+editSelect.value="";
+
+}
+
 [
 "studentName",
 "studentGender",
@@ -2141,6 +2161,114 @@ if(msg){
 msg.innerHTML="";
 
 msg.className="message";
+
+}
+
+}
+
+
+/* ================================================= */
+/* STUDENT MANAGEMENT / SELECT STUDENT FOR EDIT */
+/* ================================================= */
+
+async function openStudentManagementPage(){
+
+if(!await isTeacherLoggedIn()){
+
+openTeacherLogin();
+
+return;
+
+}
+
+newStudent();
+
+showPage("studentManagement");
+
+await loadStudentsForEdit();
+
+}
+
+
+async function loadStudentsForEdit(){
+
+const select=document.getElementById("editStudentSelect");
+
+if(!select)return;
+
+select.innerHTML='<option value="">جارى تحميل الطلاب...</option>';
+
+try{
+
+const result=await db
+.from("students")
+.select("student_code,student_name,gender,grade")
+.order("student_name",{ascending:true});
+
+if(result.error){
+
+select.innerHTML='<option value="">تعذر تحميل الطلاب</option>';
+
+return;
+
+}
+
+const students=result.data||[];
+
+select.innerHTML=
+'<option value="">اختر الطالب الذي تريد تعديله</option>';
+
+students.forEach(function(student){
+
+const option=document.createElement("option");
+
+option.value=student.student_code;
+
+option.textContent=
+(student.gender==="أنثى"?"👧 ":"👦 ")+
+student.student_name+
+" — "+
+removeRepeatedGrade(student.grade);
+
+select.appendChild(option);
+
+});
+
+}catch(error){
+
+console.error(error);
+
+select.innerHTML=
+'<option value="">حدث خطأ أثناء تحميل الطلاب</option>';
+
+}
+
+}
+
+
+async function loadSelectedStudentForEdit(){
+
+const select=document.getElementById("editStudentSelect");
+
+if(!select)return;
+
+const code=select.value;
+
+if(!code){
+
+newStudent();
+
+return;
+
+}
+
+await editStudent(encodeURIComponent(code));
+
+const currentSelect=document.getElementById("editStudentSelect");
+
+if(currentSelect){
+
+currentSelect.value=code;
 
 }
 
