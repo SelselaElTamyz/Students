@@ -3913,9 +3913,8 @@ return;
 const students=result.data||[];
 
 let html=
-
 '<div class="report-header">'+
-'<h3>📊 تقرير '+
+'<h3>📊 تقرير جميع الطلاب - '+
 escapeHtml(removeRepeatedGrade(currentGrade))+
 '</h3>'+
 '<p><strong>عدد الطلاب:</strong> '+
@@ -3940,21 +3939,21 @@ return;
 
 }
 
-
-/* جلب الحضور والمصاريف */
+/* ================================ */
+/* جلب كل بيانات الحضور والمصاريف */
+/* ================================ */
 
 const codes=
 students.map(function(student){
-
 return student.student_code;
-
 });
 
 const attendanceResult=
 await db
 .from("attendance")
 .select("*")
-.in("student_code",codes);
+.in("student_code",codes)
+.order("attendance_date",{ascending:true});
 
 const paymentResult=
 await db
@@ -3976,65 +3975,191 @@ paymentResult.data||[];
 const months=
 settingsResult.data||[];
 
-
-html+=
-
-'<div class="table-container">'+
-
-'<table class="report-table">'+
-
-'<tr>'+
-'<th>م</th>'+
-'<th>اسم الطالب</th>'+
-'<th>النوع</th>'+
-'<th>الحضور</th>'+
-'<th>الغياب</th>'+
-'<th>المصاريف</th>'+
-'</tr>';
-
+/* ================================ */
+/* تقرير مستقل وكامل لكل طالب */
+/* ================================ */
 
 students.forEach(function(student,index){
 
+html+=
+'<div class="card" style="page-break-inside:avoid;margin-top:25px">'+
+
+'<div class="report-header">'+
+'<h3>👤 الطالب رقم '+(index+1)+'</h3>'+
+'<p><strong>الاسم:</strong> '+
+escapeHtml(student.student_name)+
+'</p>'+
+'<p><strong>النوع:</strong> '+
+escapeHtml(student.gender||"")+
+'</p>'+
+'<p><strong>الصف:</strong> '+
+escapeHtml(student.grade||"")+
+'</p>'+
+'<p><strong>كود الطالب:</strong> '+
+escapeHtml(student.student_code||"")+
+'</p>'+
+'</div>';
+
+/* ================================ */
+/* جميع بيانات الطالب الموجودة في جدول students */
+/* ================================ */
+
+html+=
+'<h3>📋 جميع بيانات الطالب</h3>'+
+'<div class="table-container">'+
+'<table class="report-table">'+
+'<tr><th>البيان</th><th>القيمة</th></tr>';
+
+Object.keys(student).forEach(function(key){
+
+if(
+key==="id" ||
+key==="student_name" ||
+key==="gender" ||
+key==="grade" ||
+key==="student_code" ||
+key.startsWith("evaluation_")
+){
+return;
+}
+
+let value=student[key];
+
+if(value===null||value===undefined||value===""){
+value="غير مسجل";
+}
+
+html+=
+'<tr>'+
+'<td>'+escapeHtml(key)+'</td>'+
+'<td>'+escapeHtml(String(value))+'</td>'+
+'</tr>';
+
+});
+
+html+='</table></div>';
+
+/* ================================ */
+/* التقييمات 1 إلى 15 */
+/* ================================ */
+
+html+=
+'<h3>📊 التقييمات من 1 إلى 15</h3>'+
+'<div class="table-container">'+
+'<table class="report-table">'+
+'<tr><th>التقييم</th><th>الدرجة</th></tr>';
+
+for(let i=1;i<=15;i++){
+
+const value=student["evaluation_"+i];
+
+let display="لم يتم التقييم";
+
+if(value==="غاب"){
+display="غياب";
+}else if(
+value!==null &&
+value!==undefined &&
+value!==""
+){
+display=escapeHtml(String(value))+"/10";
+}
+
+html+=
+'<tr>'+
+'<td>التقييم '+i+'</td>'+
+'<td>'+display+'</td>'+
+'</tr>';
+
+}
+
+html+='</table></div>';
+
+/* ================================ */
+/* الحضور والغياب بالتفصيل */
+/* ================================ */
+
 const studentAttendance=
 attendance.filter(function(item){
-
-return item.student_code===
-student.student_code;
-
+return item.student_code===student.student_code;
 });
 
 const present=
 studentAttendance.filter(function(item){
-
 return item.status==="حاضر";
-
 }).length;
 
 const absent=
 studentAttendance.filter(function(item){
-
 return item.status==="غائب";
-
 }).length;
 
-const studentPayments=
-payments.filter(function(item){
+html+=
+'<h3>📋 الحضور والغياب بالتفصيل</h3>'+
+'<div class="table-container">'+
+'<table class="report-table">'+
+'<tr>'+
+'<th>م</th>'+
+'<th>التاريخ</th>'+
+'<th>الحالة</th>'+
+'</tr>';
 
-return item.student_code===
-student.student_code;
+if(!studentAttendance.length){
+
+html+=
+'<tr><td colspan="3">لا يوجد سجل حضور أو غياب</td></tr>';
+
+}else{
+
+studentAttendance.forEach(function(record,attendanceIndex){
+
+html+=
+'<tr>'+
+'<td>'+(attendanceIndex+1)+'</td>'+
+'<td>'+escapeHtml(record.attendance_date||"")+'</td>'+
+'<td class="'+
+(record.status==="حاضر"?"present":"absent")+
+'">'+
+escapeHtml(record.status||"")+
+'</td>'+
+'</tr>';
 
 });
 
-let paymentHtml="";
+}
+
+html+=
+'</table></div>'+
+'<div class="count-box">'+
+'<div class="count-item present-box">✅ إجمالي الحضور<br>'+present+'</div>'+
+'<div class="count-item absent-box">❌ إجمالي الغياب<br>'+absent+'</div>'+
+'</div>';
+
+/* ================================ */
+/* المصاريف بالتفصيل */
+/* ================================ */
+
+const studentPayments=
+payments.filter(function(item){
+return item.student_code===student.student_code;
+});
+
+html+=
+'<h3>💰 المصاريف الشهرية بالتفصيل</h3>'+
+'<div class="table-container">'+
+'<table class="report-table">'+
+'<tr>'+
+'<th>الشهر</th>'+
+'<th>الحالة</th>'+
+'</tr>';
+
+if(months.length){
 
 months.forEach(function(month){
 
 const payment=
 studentPayments.find(function(item){
-
-return item.payment_month===
-month.month_name;
-
+return item.payment_month===month.month_name;
 });
 
 const status=
@@ -4044,61 +4169,65 @@ payment.status:
 
 const text=
 status==="دفع"?
-(
-student.gender==="أنثى"?
-"دفعت":
-"دفع"
-):
-(
-student.gender==="أنثى"?
-"لم تدفع":
-"لم يدفع"
-);
-
-paymentHtml+=
-escapeHtml(month.month_name)+
-": "+
-text+
-"<br>";
-
-});
-
-if(!paymentHtml)
-paymentHtml="لا توجد شهور";
+(student.gender==="أنثى"?"دفعت":"دفع"):
+(student.gender==="أنثى"?"لم تدفع":"لم يدفع");
 
 html+=
-
 '<tr>'+
-
-'<td>'+
-(index+1)+
+'<td>'+escapeHtml(month.month_name||"")+'</td>'+
+'<td class="'+
+(status==="دفع"?"present":"absent")+
+'">'+
+(status==="دفع"?"✅ ":"❌ ")+
+escapeHtml(text)+
 '</td>'+
-
-'<td>'+
-escapeHtml(student.student_name)+
-'</td>'+
-
-'<td>'+
-escapeHtml(student.gender||"")+
-'</td>'+
-
-'<td class="present">'+
-present+
-'</td>'+
-
-'<td class="absent">'+
-absent+
-'</td>'+
-
-'<td style="text-align:right">'+
-paymentHtml+
-'</td>'+
-
 '</tr>';
 
 });
 
+}else{
+
+html+=
+'<tr><td colspan="2">لا توجد شهور مصاريف مفعلة</td></tr>';
+
+}
+
 html+='</table></div>';
+
+/* ================================ */
+/* ملخص الطالب */
+/* ================================ */
+
+const paidCount=
+studentPayments.filter(function(payment){
+return payment.status==="دفع";
+}).length;
+
+const unpaidCount=
+months.filter(function(month){
+
+const payment=
+studentPayments.find(function(item){
+return item.payment_month===month.month_name;
+});
+
+return !payment||payment.status!=="دفع";
+
+}).length;
+
+html+=
+'<h3>📌 ملخص الطالب</h3>'+
+'<div class="count-box">'+
+'<div class="count-item present-box">✅ إجمالي الحضور<br>'+present+'</div>'+
+'<div class="count-item absent-box">❌ إجمالي الغياب<br>'+absent+'</div>'+
+'</div>'+
+'<div class="count-box">'+
+'<div class="count-item present-box">💰 الشهور المدفوعة<br>'+paidCount+'</div>'+
+'<div class="count-item absent-box">💳 الشهور غير المدفوعة<br>'+unpaidCount+'</div>'+
+'</div>'+
+'</div>';
+
+});
 
 document.getElementById(
 "allStudentsReportContent"
@@ -4107,7 +4236,6 @@ document.getElementById(
 showPage("allStudentsReport");
 
 }
-
 
 /* ================================================= */
 /* ATTENDANCE */
