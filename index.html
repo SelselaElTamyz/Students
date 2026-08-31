@@ -5140,44 +5140,87 @@ item.number +
 '<span class="score">' +
 escapeHtml(score) +
 ' / 10</span>' +
-'</div>' +
+  }
+const score = Number(item.value);
+const percentage = Math.max(0, Math.min(100, score * 10));
 
-'<div class="parent-evaluation-bar">' +
-'<div class="parent-evaluation-fill" style="width:' +
-percentage +
-'%"></div>' +
-'</div>' +
+let levelClass = "";
 
-'<div class="parent-evaluation-note">' +
-note +
-'</div>' +
+if (score < 5) {
+    levelClass = " very-low";
+} else if (score < 6) {
+    levelClass = " low";
+}
 
-'</div>';
+let note = "";
+
+if (score >= 9) {
+    note = "أداء مميز";
+} else if (score >= 7.5) {
+    note = "أداء جيد جدًا";
+} else if (score >= 6) {
+    note = "أداء جيد";
+} else if (score >= 5) {
+    note = "يحتاج إلى مراجعة";
+} else {
+    note = "يحتاج إلى مراجعة ومتابعة";
+}
+
+html +=
+    '<div class="parent-evaluation-item' +
+    levelClass +
+    '">' +
+
+    '<div class="parent-evaluation-title">' +
+    "📝 التقييم " +
+    item.number +
+    '</div>' +
+
+    '<div class="parent-evaluation-score">' +
+    '<span>الدرجة</span>' +
+    '<span class="score">' +
+    escapeHtml(String(score)) +
+    ' / 10</span>' +
+    '</div>' +
+
+    '<div class="parent-evaluation-bar">' +
+    '<div class="parent-evaluation-fill" style="width:' +
+    percentage +
+    '%"></div>' +
+    '</div>' +
+
+    '<div class="parent-evaluation-note">' +
+    note +
+    '</div>' +
+
+    '</div>';
 
 });
 
 html +=
-'</div>' +
+    '</div>' +
 
-'<div class="parent-evaluation-legend">' +
-'<span>🔵 9 - 10: أداء مميز</span>' +
-'<span>🟢 7.5 - أقل من 9: أداء جيد جدًا</span>' +
-'<span>🟡 6 - أقل من 7.5: أداء جيد</span>' +
-'<span>🟠 5 - أقل من 6: يحتاج إلى مراجعة</span>' +
-'<span>🔴 أقل من 5: يحتاج إلى مراجعة ومتابعة</span>' +
-'</div>';
+    '<div class="parent-evaluation-legend">' +
+    '<span>🔵 9 - 10: أداء مميز</span>' +
+    '<span>🟢 7.5 - أقل من 9: أداء جيد جدًا</span>' +
+    '<span>🟡 6 - أقل من 7.5: أداء جيد</span>' +
+    '<span>🟠 5 - أقل من 6: يحتاج إلى مراجعة</span>' +
+    '<span>🔴 أقل من 5: يحتاج إلى مراجعة ومتابعة</span>' +
+    '</div>';
 
 } else {
 
-html +=
-'<div class="card">' +
-'<p style="text-align:center;margin:4px 0">' +
-"لا توجد تقييمات مسجلة حتى الآن." +
-'</p>' +
-'<p class="parent-evaluation-note">' +
-"سيظهر التقييم هنا عند تسجيله من صفحة المعلم." +
-'</p>' +
-'</div>';
+    html +=
+        '<div class="card">' +
+        '<p style="text-align:center;margin:4px 0">' +
+        "لا توجد تقييمات مسجلة حتى الآن." +
+        '</p>' +
+
+        '<p class="parent-evaluation-note">' +
+        "سيظهر التقييم هنا عند تسجيله من صفحة المعلم." +
+        '</p>' +
+
+        '</div>';
 
 }
 
@@ -5187,16 +5230,14 @@ resultBox.innerHTML = html;
 
 } catch(e) {
 
-console.error(e);
+    console.error(e);
 
-message.innerHTML =
-"❌ حدث خطأ أثناء الاتصال.";
+    message.innerHTML =
+        "❌ حدث خطأ أثناء الاتصال.";
 
-message.className = "message error";
+    message.className = "message error";
 
 }
-
-
 
 /* ================================================= */
 /* PARENT ATTENDANCE */
