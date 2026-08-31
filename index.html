@@ -410,6 +410,153 @@ font-weight:900;
 font-size:17px
 }
 
+/* ================================================= */
+/* PARENT EVALUATIONS - PROFESSIONAL VIEW */
+/* ================================================= */
+
+.parent-evaluations{
+background:#ffffff;
+border:1px solid #e2e8f0;
+border-radius:18px;
+padding:16px;
+margin:12px 0;
+box-shadow:0 4px 14px rgba(15,23,42,.06)
+}
+
+.parent-evaluations-header{
+text-align:center;
+background:linear-gradient(135deg,#eff6ff,#f8fafc);
+border:1px solid #dbeafe;
+border-radius:14px;
+padding:14px;
+margin-bottom:14px
+}
+
+.parent-evaluations-header h3{
+margin:0 0 7px;
+color:#172554
+}
+
+.parent-evaluations-header p{
+margin:0;
+font-size:14px
+}
+
+.evaluation-summary{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin:12px 0 16px
+}
+
+.evaluation-summary-box{
+border-radius:12px;
+padding:12px;
+text-align:center;
+font-weight:bold;
+background:#f8fafc;
+border:1px solid #e2e8f0
+}
+
+.evaluation-summary-box strong{
+display:block;
+font-size:22px;
+color:#172554;
+margin-top:3px
+}
+
+.parent-evaluation-list{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.parent-evaluation-item{
+border:1px solid #e2e8f0;
+border-radius:13px;
+padding:12px;
+background:#fff
+}
+
+.parent-evaluation-title{
+font-weight:900;
+color:#334155;
+margin-bottom:8px
+}
+
+.parent-evaluation-score{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:900;
+margin-bottom:7px
+}
+
+.parent-evaluation-score .score{
+font-size:18px;
+color:#172554
+}
+
+.parent-evaluation-bar{
+height:9px;
+background:#e2e8f0;
+border-radius:99px;
+overflow:hidden
+}
+
+.parent-evaluation-fill{
+height:100%;
+border-radius:99px;
+background:#16a34a
+}
+
+.parent-evaluation-item.low .parent-evaluation-fill{
+background:#f59e0b
+}
+
+.parent-evaluation-item.very-low .parent-evaluation-fill{
+background:#ef4444
+}
+
+.parent-evaluation-item.absent{
+background:#fff7ed;
+border-color:#fed7aa
+}
+
+.parent-evaluation-item.pending{
+background:#f8fafc
+}
+
+.parent-evaluation-note{
+font-size:13px;
+color:#64748b;
+margin-top:7px;
+text-align:center
+}
+
+.parent-evaluation-legend{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+margin-top:14px;
+font-size:12px;
+color:#64748b
+}
+
+.parent-evaluation-legend span{
+padding:5px 8px;
+border-radius:8px;
+background:#f8fafc;
+border:1px solid #e2e8f0
+}
+
+@media(max-width:480px){
+.parent-evaluation-list{
+grid-template-columns:1fr
+}
+}
+
 @media(max-width:480px){
 
 .container{
@@ -4790,38 +4937,202 @@ html+=await buildParentAttendanceHTML(student.student_code);
 
 html+=await buildParentPaymentsHTML(student.student_code);
 
-html+=
-'<div class="card">'+
-'<h3>📊 التقييمات</h3>';
+/* ================================================= */
+/* التقييمات - عرض مبسط وواضح لولي الأمر */
+/* ================================================= */
 
-let has=false;
+let evaluations=[];
+let absentCount=0;
 
 for(let i=1;i<=15;i++){
 
-const value=
-student["evaluation_"+i];
+const value=student["evaluation_"+i];
 
 if(value!==null&&value!==undefined&&value!==""){
 
-has=true;
+if(value==="غاب"){
+
+evaluations.push({
+number:i,
+type:"absent",
+value:value
+});
+
+absentCount++;
+
+}else{
+
+const score=parseFloat(value);
+
+if(!Number.isNaN(score)){
+
+evaluations.push({
+number:i,
+type:"score",
+value:score
+});
+
+}
+
+}
+
+}
+
+}
+
+const scoredEvaluations=
+evaluations.filter(function(item){
+return item.type==="score";
+});
+
+const totalScore=
+scoredEvaluations.reduce(function(sum,item){
+return sum+item.value;
+},0);
+
+const average=
+scoredEvaluations.length?
+(totalScore/scoredEvaluations.length):
+0;
 
 html+=
-'<p><strong>التقييم '+i+': </strong>'+
+'<div class="parent-evaluations">'+
+
+'<div class="parent-evaluations-header">'+
+'<h3>📊 متابعة التقييمات</h3>'+
+'<p>عرض مبسط لدرجات الطالب في التقييمات المسجلة</p>'+
+'</div>';
+
+if(evaluations.length){
+
+html+=
+'<div class="evaluation-summary">'+
+
+'<div class="evaluation-summary-box">'+
+'📈 متوسط الدرجات'+
+'<strong>'+
 (
-value==="غاب"?
-"غياب":
-escapeHtml(value)+"/10"
+scoredEvaluations.length?
+average.toFixed(2)+"/10":
+"—"
 )+
-'</p>';
+'</strong>'+
+'</div>'+
 
-}
+'<div class="evaluation-summary-box">'+
+'📝 التقييمات المسجلة'+
+'<strong>'+
+evaluations.length+
+'/15'+
+'</strong>'+
+'</div>'+
 
-}
+'</div>'+
 
-if(!has){
+'<div class="parent-evaluation-list">';
+
+evaluations.forEach(function(item){
+
+if(item.type==="absent"){
 
 html+=
-'<p>لا توجد تقييمات مسجلة حتى الآن.</p>';
+'<div class="parent-evaluation-item absent">'+
+
+'<div class="parent-evaluation-title">'+
+"📝 التقييم "+
+item.number+
+'</div>'+
+
+'<div class="parent-evaluation-score">'+
+'<span>الحالة</span>'+
+'<span class="score">❌ غائب</span>'+
+'</div>'+
+
+'<div class="parent-evaluation-note">'+
+"لم يتم احتساب درجة لهذا التقييم"+
+'</div>'+
+
+'</div>';
+
+return;
+
+}
+
+const score=item.value;
+const percentage=Math.max(0,Math.min(100,score*10));
+
+let levelClass="";
+
+if(score<5){
+levelClass=" very-low";
+}else if(score<7){
+levelClass=" low";
+}
+
+let note="";
+
+if(score>=9){
+note="أداء مميز";
+}else if(score>=7){
+note="أداء جيد";
+}else if(score>=5){
+note="يحتاج إلى مزيد من المراجعة";
+}else{
+note="يحتاج إلى متابعة ومراجعة";
+}
+
+html+=
+'<div class="parent-evaluation-item'+
+levelClass+
+'">'+
+
+'<div class="parent-evaluation-title">'+
+"📝 التقييم "+
+item.number+
+'</div>'+
+
+'<div class="parent-evaluation-score">'+
+'<span>الدرجة</span>'+
+'<span class="score">'+
+escapeHtml(score)+
+' / 10</span>'+
+'</div>'+
+
+'<div class="parent-evaluation-bar">'+
+'<div class="parent-evaluation-fill" style="width:'+
+percentage+
+'%"></div>'+
+'</div>'+
+
+'<div class="parent-evaluation-note">'+
+note+
+'</div>'+
+
+'</div>';
+
+});
+
+html+=
+'</div>'+
+
+'<div class="parent-evaluation-legend">'+
+'<span>🟢 9 - 10: أداء مميز</span>'+
+'<span>🔵 7 - 8.75: أداء جيد</span>'+
+'<span>🟠 5 - 6.75: يحتاج مراجعة</span>'+
+'<span>🔴 أقل من 5: يحتاج متابعة</span>'+
+'</div>';
+
+}else{
+
+html+=
+'<div class="card">'+
+'<p style="text-align:center;margin:4px 0">'+
+"لا توجد تقييمات مسجلة حتى الآن."+
+'</p>'+
+'<p class="parent-evaluation-note">'+
+"سيظهر التقييم هنا عند تسجيله من صفحة المعلم."+
+'</p>'+
+'</div>';
 
 }
 
