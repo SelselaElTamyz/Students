@@ -4941,6 +4941,8 @@ html+=await buildParentPaymentsHTML(student.student_code);
 /* التقييمات - عرض مبسط وواضح لولي الأمر */
 /* ================================================= */
 
+try {
+
 let evaluations=[];
 let absentCount=0;
 
@@ -5114,7 +5116,6 @@ message.innerHTML=
 message.className="message error";
 
 }
-
 /* ================================================= */
 /* PARENT ATTENDANCE */
 /* ================================================= */
