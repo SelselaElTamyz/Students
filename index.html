@@ -5230,20 +5230,22 @@ await db
 .from("students")
 .select("*")
 .eq("student_code",code)
-.maybeSingle();
+.limit(1);
 
-if(result.error||!result.data){
-
-message.innerHTML=
-"❌ كود الطالب غير موجود.";
-
+if(result.error){
+console.error("Student search error:",result.error);
+message.innerHTML="❌ تعذر البحث عن الطالب. حاول مرة أخرى.";
 message.className="message error";
-
 return;
-
 }
 
-const student=result.data;
+const student=(result.data||[])[0];
+
+if(!student){
+message.innerHTML="❌ كود الطالب غير موجود.";
+message.className="message error";
+return;
+}
 
 message.innerHTML="";
 
@@ -5272,9 +5274,17 @@ escapeHtml(student.student_code)+
 
 '</div>';
 
+try{
 html+=await buildParentAttendanceHTML(student.student_code);
+}catch(attendanceError){
+console.error("Parent attendance error:",attendanceError);
+}
 
+try{
 html+=await buildParentPaymentsHTML(student.student_code);
+}catch(paymentError){
+console.error("Parent payments error:",paymentError);
+}
 
 html+=
 '<div class="card">'+
