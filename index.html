@@ -5488,17 +5488,14 @@ const videoValue=student.video_url||"";
 if(!videoValue)return "";
 let videoUrl="";
 if(videoValue.startsWith("student-videos/")){
-const response=await fetch(SUPABASE_URL+"/functions/v1/get-student-video",{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"apikey":SUPABASE_KEY
-},
-body:JSON.stringify({student_code:String(student.student_code||"").trim()})
+if(!db || !db.functions){
+return '<div class="student-video-card"><h3>🎥 فيديو الطالب</h3><p class="video-protection-note">⚠️ تعذر الاتصال بخدمة الفيديو حاليًا.</p></div>';
+}
+const {data,error}=await db.functions.invoke("get-student-video",{
+body:{student_code:String(student.student_code||"").trim()}
 });
-const data=await response.json().catch(()=>({}));
-if(!response.ok||!data?.success||!data?.video_url){
-console.error(data);
+if(error||!data?.success||!data?.video_url){
+console.error("get-student-video error:",error||data);
 return '<div class="student-video-card"><h3>🎥 فيديو الطالب</h3><p class="video-protection-note">⚠️ تعذر تجهيز رابط المشاهدة حاليًا.</p></div>';}
 videoUrl=data.video_url;
 }else{
