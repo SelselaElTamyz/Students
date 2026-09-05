@@ -626,6 +626,16 @@ display:block!important
 
 }
 
+
+/* STUDENT VIDEO */
+.student-video-card{background:#f8fafc;border:1px solid #dbeafe;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 4px 14px rgba(15,23,42,.06)}
+.student-video-wrapper{position:relative;background:#000;border-radius:14px;overflow:hidden}
+.student-video{display:block;width:100%;max-height:520px;background:#000}
+.video-watermark{position:absolute;z-index:3;top:12%;right:6%;padding:7px 10px;border-radius:8px;background:rgba(0,0,0,.38);color:#fff;font-size:13px;font-weight:900;pointer-events:none;user-select:none;text-shadow:0 1px 3px #000;transition:top 1.2s ease,right 1.2s ease,left 1.2s ease,bottom 1.2s ease}
+.video-protection-note{text-align:center;font-size:12px;color:#64748b;margin:9px 0 0}
+.video-error{text-align:center;color:#b91c1c;font-weight:800;padding:12px}
+@media print{.student-video-card{display:none!important}}
+
 </style>
 
 </head>
@@ -1098,6 +1108,12 @@ placeholder="اسم الطالب / الطالبة">
 id="studentCode"
 type="text"
 placeholder="كود الطالب">
+
+<div class="card" style="margin-top:12px">
+<h3>🎥 فيديو الطالب</h3>
+<p style="text-align:center;font-size:13px">ضع رابط الفيديو الخاص بهذا الطالب. لن يظهر الفيديو إلا بعد إدخال كود الطالب من صفحة ولي الأمر.</p>
+<input id="studentVideoUrl" type="url" placeholder="رابط فيديو الطالب (اختياري)" autocomplete="off">
+</div>
 
 <h3>📊 التقييمات من 1 إلى 15</h3>
 
@@ -2158,6 +2174,9 @@ document.getElementById("evaluation"+i).value||null;
 
 }
 
+const videoInput=document.getElementById("studentVideoUrl");
+if(videoInput){row.video_url=videoInput.value.trim()||null;}
+
 try{
 
 const findResult=
@@ -2246,7 +2265,8 @@ editSelect.value="";
 "studentName",
 "studentGender",
 "studentGrade",
-"studentCode"
+"studentCode",
+"studentVideoUrl"
 ].forEach(function(id){
 
 const el=document.getElementById(id);
@@ -2431,6 +2451,9 @@ student.grade||"";
 
 document.getElementById("studentCode").value=
 student.student_code||"";
+
+const videoInput=document.getElementById("studentVideoUrl");
+if(videoInput){videoInput.value=student.video_url||"";}
 
 for(let i=1;i<=15;i++){
 
@@ -5104,6 +5127,8 @@ html+=
 
 html+='</div>';
 
+html+=await buildStudentVideoHTML(student);
+
 resultBox.innerHTML=html;
 
 }catch(e){
@@ -5331,6 +5356,52 @@ return html;
 
 }
 
+
+/* ================================================= */
+/* STUDENT VIDEO */
+/* ================================================= */
+
+function startVideoWatermark(wmId){
+try{
+const wm=document.getElementById(wmId);
+if(!wm)return;
+const positions=[
+{top:"8%",right:"5%",left:"auto",bottom:"auto"},
+{top:"8%",right:"auto",left:"5%",bottom:"auto"},
+{top:"auto",right:"5%",left:"auto",bottom:"10%"},
+{top:"auto",right:"auto",left:"5%",bottom:"10%"},
+{top:"42%",right:"auto",left:"42%",bottom:"auto"}
+];
+let i=0;
+setInterval(function(){
+i=(i+1)%positions.length;
+wm.style.top=positions[i].top;
+wm.style.right=positions[i].right;
+wm.style.left=positions[i].left;
+wm.style.bottom=positions[i].bottom;
+},7000);
+}catch(e){console.error(e);}
+}
+
+async function buildStudentVideoHTML(student){
+try{
+const videoUrl=student.video_url||"";
+if(!videoUrl)return "";
+const safeUrl=escapeHtml(videoUrl);
+const safeName=escapeHtml(student.student_name||"");
+const safeCode=escapeHtml(student.student_code||"");
+const wmId="videoWatermark_"+String(student.student_code||"").replace(/[^a-zA-Z0-9_-]/g,"_");
+return '<div class="student-video-card">'+
+'<h3>🎥 فيديو الطالب</h3>'+
+'<div class="student-video-wrapper">'+
+'<video class="student-video" src="'+safeUrl+'" controls controlsList="nodownload noplaybackrate" disablePictureInPicture playsinline preload="metadata" oncontextmenu="return false"></video>'+
+'<div class="video-watermark" id="'+wmId+'">'+safeName+' — '+safeCode+'</div>'+
+'</div>'+
+'<p class="video-protection-note">🔒 هذا الفيديو مخصص لهذا الطالب فقط. لا يمكن للموقع ضمان منع تصوير الشاشة بنسبة 100%.</p>'+
+'</div>';
+startVideoWatermark(wmId);
+}catch(e){console.error(e);return "";}
+}
 
 /* ================================================= */
 /* HELPERS */
