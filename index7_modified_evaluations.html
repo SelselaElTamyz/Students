@@ -4940,7 +4940,6 @@ html+=await buildParentPaymentsHTML(student.student_code);
 /* ================================================= */
 /* التقييمات - عرض مبسط وواضح لولي الأمر */
 /* ================================================= */
-
 let evaluations=[];
 let absentCount=0;
 
@@ -4980,55 +4979,17 @@ value:score
 
 }
 
-const scoredEvaluations=
-evaluations.filter(function(item){
-return item.type==="score";
-});
-
-const totalScore=
-scoredEvaluations.reduce(function(sum,item){
-return sum+item.value;
-},0);
-
-const average=
-scoredEvaluations.length?
-(totalScore/scoredEvaluations.length):
-0;
-
 html+=
 '<div class="parent-evaluations">'+
 
 '<div class="parent-evaluations-header">'+
 '<h3>📊 متابعة التقييمات</h3>'+
-'<p>عرض مبسط لدرجات الطالب في التقييمات المسجلة</p>'+
+'<p>عرض مبسط لدرجات التقييمات المسجلة</p>'+
 '</div>';
 
 if(evaluations.length){
 
 html+=
-'<div class="evaluation-summary">'+
-
-'<div class="evaluation-summary-box">'+
-'📈 متوسط الدرجات'+
-'<strong>'+
-(
-scoredEvaluations.length?
-average.toFixed(2)+"/10":
-"—"
-)+
-'</strong>'+
-'</div>'+
-
-'<div class="evaluation-summary-box">'+
-'📝 التقييمات المسجلة'+
-'<strong>'+
-evaluations.length+
-'/15'+
-'</strong>'+
-'</div>'+
-
-'</div>'+
-
 '<div class="parent-evaluation-list">';
 
 evaluations.forEach(function(item){
@@ -5065,7 +5026,7 @@ let levelClass="";
 
 if(score<5){
 levelClass=" very-low";
-}else if(score<7){
+}else if(score<6){
 levelClass=" low";
 }
 
@@ -5073,12 +5034,14 @@ let note="";
 
 if(score>=9){
 note="أداء مميز";
-}else if(score>=7){
+}else if(score>=7.5){
+note="أداء جيد جدًا";
+}else if(score>=6){
 note="أداء جيد";
 }else if(score>=5){
-note="يحتاج إلى مزيد من المراجعة";
+note="يحتاج إلى مراجعة";
 }else{
-note="يحتاج إلى متابعة ومراجعة";
+note="يحتاج إلى مراجعة ومتابعة";
 }
 
 html+=
@@ -5094,7 +5057,7 @@ item.number+
 '<div class="parent-evaluation-score">'+
 '<span>الدرجة</span>'+
 '<span class="score">'+
-escapeHtml(score)+
+escapeHtml(String(score))+
 ' / 10</span>'+
 '</div>'+
 
@@ -5116,10 +5079,11 @@ html+=
 '</div>'+
 
 '<div class="parent-evaluation-legend">'+
-'<span>🟢 9 - 10: أداء مميز</span>'+
-'<span>🔵 7 - 8.75: أداء جيد</span>'+
-'<span>🟠 5 - 6.75: يحتاج مراجعة</span>'+
-'<span>🔴 أقل من 5: يحتاج متابعة</span>'+
+'<span>🔵 9 - 10: أداء مميز</span>'+
+'<span>🟢 7.5 - أقل من 9: أداء جيد جدًا</span>'+
+'<span>🟡 6 - أقل من 7.5: أداء جيد</span>'+
+'<span>🟠 5 - أقل من 6: يحتاج إلى مراجعة</span>'+
+'<span>🔴 أقل من 5: يحتاج إلى مراجعة ومتابعة</span>'+
 '</div>';
 
 }else{
@@ -5129,9 +5093,11 @@ html+=
 '<p style="text-align:center;margin:4px 0">'+
 "لا توجد تقييمات مسجلة حتى الآن."+
 '</p>'+
+
 '<p class="parent-evaluation-note">'+
 "سيظهر التقييم هنا عند تسجيله من صفحة المعلم."+
 '</p>'+
+
 '</div>';
 
 }
@@ -5152,8 +5118,6 @@ message.className="message error";
 }
 
 }
-
-
 /* ================================================= */
 /* PARENT ATTENDANCE */
 /* ================================================= */
