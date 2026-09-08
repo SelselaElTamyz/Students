@@ -122,6 +122,12 @@ background:#fff;
 outline:none
 }
 
+input[type="file"]{
+padding:11px;
+background:#f8fafc;
+cursor:pointer
+}
+
 input:focus,
 select:focus{
 border-color:#1565C0;
@@ -626,6 +632,24 @@ display:block!important
 
 }
 
+
+/* STUDENT VIDEO */
+.student-video-card{background:#f8fafc;border:1px solid #dbeafe;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 4px 14px rgba(15,23,42,.06)}
+@keyframes videoWatermarkMove{
+0%{top:8%;right:5%;left:auto;bottom:auto}
+25%{top:8%;right:auto;left:5%;bottom:auto}
+50%{top:auto;right:5%;left:auto;bottom:10%}
+75%{top:auto;right:auto;left:5%;bottom:10%}
+100%{top:42%;right:auto;left:42%;bottom:auto}
+}
+
+.student-video-wrapper{position:relative;background:#000;border-radius:14px;overflow:hidden}
+.student-video{display:block;width:100%;max-height:520px;background:#000}
+.video-watermark{animation:videoWatermarkMove 35s linear infinite;position:absolute;z-index:3;top:12%;right:6%;padding:7px 10px;border-radius:8px;background:rgba(0,0,0,.38);color:#fff;font-size:13px;font-weight:900;pointer-events:none;user-select:none;text-shadow:0 1px 3px #000;transition:top 1.2s ease,right 1.2s ease,left 1.2s ease,bottom 1.2s ease}
+.video-protection-note{text-align:center;font-size:12px;color:#64748b;margin:9px 0 0}
+.video-error{text-align:center;color:#b91c1c;font-weight:800;padding:12px}
+@media print{.student-video-card{display:none!important}}
+
 </style>
 
 </head>
@@ -1098,6 +1122,17 @@ placeholder="اسم الطالب / الطالبة">
 id="studentCode"
 type="text"
 placeholder="كود الطالب">
+
+<div class="card" style="margin-top:12px">
+<h3>🎥 فيديو الطالب</h3>
+<p style="text-align:center;font-size:13px">اختر فيديو من جهازك وسيتم رفعه تلقائيًا إلى Supabase وحفظه مع الطالب.</p>
+<input id="studentVideoFile" type="file" accept="video/*">
+<button type="button" class="green" onclick="uploadStudentVideo()" style="margin-top:8px">⬆️ رفع الفيديو</button>
+<div id="videoUploadStatus" class="message" style="margin:6px 0"></div>
+<p id="currentVideoText" style="text-align:center;font-size:12px;margin:6px 0"></p>
+<input id="studentVideoUrl" type="hidden">
+<button type="button" class="red" onclick="deleteStudentVideo()">🗑️ حذف فيديو الطالب</button>
+</div>
 
 <h3>📊 التقييمات من 1 إلى 15</h3>
 
@@ -2158,7 +2193,66 @@ document.getElementById("evaluation"+i).value||null;
 
 }
 
+const videoInput=document.getElementById("studentVideoUrl");
+const videoFileInput=document.getElementById("studentVideoFile");
+const videoStatus=document.getElementById("videoUploadStatus");
+
+row.video_url=videoInput ? (videoInput.value.trim()||null) : null;
+
 try{
+
+/* رفع فيديو جديد إلى Supabase Storage إذا اختاره المعلم */
+if(videoFileInput && videoFileInput.files && videoFileInput.files[0]){
+
+const file=videoFileInput.files[0];
+
+if(!file.type.startsWith("video/")){
+message.innerHTML="❌ اختر ملف فيديو صحيحًا.";
+message.className="message error";
+return;
+}
+
+if(file.size > 100 * 1024 * 1024){
+message.innerHTML="❌ حجم الفيديو أكبر من 100 ميجابايت.";
+message.className="message error";
+return;
+}
+
+if(videoStatus){
+videoStatus.innerHTML="⏳ جارٍ رفع الفيديو...";
+videoStatus.className="message";
+}
+
+const extension=(file.name.split(".").pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"")||"mp4";
+const safeCode=code.replace(/[^a-zA-Z0-9_-]/g,"_");
+const filePath=safeCode+"/"+Date.now()+"."+extension;
+
+const uploadResult=await db.storage
+.from("student-videos")
+.upload(filePath,file,{
+contentType:file.type,
+upsert:false
+});
+
+if(uploadResult.error){
+console.error(uploadResult.error);
+message.innerHTML="❌ فشل رفع الفيديو: "+escapeHtml(uploadResult.error.message);
+message.className="message error";
+if(videoStatus)videoStatus.innerHTML="";
+return;
+}
+
+row.video_url="student-videos/"+filePath;
+
+if(videoInput)videoInput.value=row.video_url;
+if(videoStatus){
+videoStatus.innerHTML="✅ تم رفع الفيديو بنجاح.";
+videoStatus.className="message success";
+}
+
+}
+
+
 
 const findResult=
 await db
@@ -2246,7 +2340,8 @@ editSelect.value="";
 "studentName",
 "studentGender",
 "studentGrade",
-"studentCode"
+"studentCode",
+"studentVideoUrl"
 ].forEach(function(id){
 
 const el=document.getElementById(id);
@@ -2254,6 +2349,15 @@ const el=document.getElementById(id);
 if(el)el.value="";
 
 });
+
+const videoFileInput=document.getElementById("studentVideoFile");
+if(videoFileInput)videoFileInput.value="";
+
+const videoStatus=document.getElementById("videoUploadStatus");
+if(videoStatus){videoStatus.innerHTML="";videoStatus.className="message";}
+
+const currentVideoText=document.getElementById("currentVideoText");
+if(currentVideoText)currentVideoText.innerHTML="";
 
 for(let i=1;i<=15;i++){
 
@@ -2432,6 +2536,22 @@ student.grade||"";
 document.getElementById("studentCode").value=
 student.student_code||"";
 
+const videoInput=document.getElementById("studentVideoUrl");
+if(videoInput){videoInput.value=student.video_url||"";}
+
+const videoFileInput=document.getElementById("studentVideoFile");
+if(videoFileInput)videoFileInput.value="";
+
+const currentVideoText=document.getElementById("currentVideoText");
+if(currentVideoText){
+currentVideoText.innerHTML=student.video_url
+?"🎥 يوجد فيديو محفوظ لهذا الطالب. اختر فيديو جديدًا لاستبداله."
+:"لا يوجد فيديو محفوظ لهذا الطالب حتى الآن.";
+}
+
+const videoStatus=document.getElementById("videoUploadStatus");
+if(videoStatus){videoStatus.innerHTML="";videoStatus.className="message";}
+
 for(let i=1;i<=15;i++){
 
 document.getElementById("evaluation"+i).value=
@@ -2449,6 +2569,31 @@ showPage("studentManagement");
 
 }
 
+
+/* ================================================= */
+/* DELETE STUDENT VIDEO - TEACHER ONLY */
+/* ================================================= */
+async function deleteStudentVideo(){
+if(!await isTeacherLoggedIn()){openTeacherLogin();return;}
+const code=document.getElementById("studentCode")?.value.trim();
+const videoInput=document.getElementById("studentVideoUrl");
+const videoValue=videoInput?.value.trim()||"";
+if(!code||!videoValue){alert("لا يوجد فيديو محفوظ لهذا الطالب.");return;}
+if(!confirm("⚠️ هل أنت متأكد من حذف فيديو الطالب نهائيًا؟"))return;
+try{
+if(videoValue.startsWith("student-videos/")){
+const path=videoValue.substring("student-videos/".length);
+const result=await db.storage.from("student-videos").remove([path]);
+if(result.error){alert("❌ تعذر حذف الفيديو: "+result.error.message);return;}
+}
+const result=await db.from("students").update({video_url:null}).eq("student_code",code);
+if(result.error){alert("❌ تعذر تحديث بيانات الطالب.");return;}
+videoInput.value="";
+const cv=document.getElementById("currentVideoText");
+if(cv)cv.innerHTML="✅ تم حذف الفيديو.";
+alert("✅ تم حذف فيديو الطالب نهائيًا.");
+}catch(e){console.error(e);alert("❌ حدث خطأ أثناء حذف الفيديو.");}
+}
 
 /* ================================================= */
 /* DELETE STUDENT */
@@ -3067,6 +3212,76 @@ record.id+
 box.innerHTML=html;
 
 }
+/* ================================================= */
+/* UPLOAD STUDENT VIDEO */
+/* ================================================= */
+async function uploadStudentVideo(){
+
+if(!await isTeacherLoggedIn()){
+  openTeacherLogin();
+  return;
+}
+
+const code=(document.getElementById("studentCode")?.value||"").trim();
+const fileInput=document.getElementById("studentVideoFile");
+const status=document.getElementById("videoUploadStatus");
+const hidden=document.getElementById("studentVideoUrl");
+const current=document.getElementById("currentVideoText");
+
+if(!code){
+  if(status){status.innerHTML="❌ اكتب كود الطالب أولًا.";status.className="message error";}
+  return;
+}
+
+if(!fileInput || !fileInput.files || !fileInput.files[0]){
+  if(status){status.innerHTML="❌ اختر فيديو أولًا.";status.className="message error";}
+  return;
+}
+
+const file=fileInput.files[0];
+if(!file.type.startsWith("video/")){
+  if(status){status.innerHTML="❌ اختر ملف فيديو صحيحًا.";status.className="message error";}
+  return;
+}
+if(file.size>100*1024*1024){
+  if(status){status.innerHTML="❌ حجم الفيديو أكبر من 100 ميجابايت.";status.className="message error";}
+  return;
+}
+
+try{
+  if(status){status.innerHTML="⏳ جارٍ رفع الفيديو...";status.className="message";}
+
+  const extension=(file.name.split(".").pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"")||"mp4";
+  const safeCode=code.replace(/[^a-zA-Z0-9_-]/g,"_");
+  const filePath=safeCode+"/"+Date.now()+"."+extension;
+
+  const uploadResult=await db.storage.from("student-videos").upload(filePath,file,{
+    contentType:file.type,
+    upsert:false
+  });
+
+  if(uploadResult.error) throw uploadResult.error;
+
+  const storedPath="student-videos/"+filePath;
+  const updateResult=await db.from("students").update({video_url:storedPath}).eq("student_code",code);
+
+  if(updateResult.error){
+    await db.storage.from("student-videos").remove([filePath]);
+    throw updateResult.error;
+  }
+
+  if(hidden) hidden.value=storedPath;
+  if(current) current.innerHTML="🎥 تم حفظ الفيديو مع الطالب.";
+  if(status){status.innerHTML="✅ تم رفع الفيديو وحفظه بنجاح.";status.className="message success";}
+  fileInput.value="";
+
+}catch(e){
+  console.error(e);
+  if(status){status.innerHTML="❌ فشل رفع الفيديو: "+escapeHtml(e.message||"خطأ غير معروف");status.className="message error";}
+}
+}
+
+
 /* ================================================= */
 /* SAVE STUDENT */
 /* ================================================= */
@@ -5104,6 +5319,8 @@ html+=
 
 html+='</div>';
 
+html+=await buildStudentVideoHTML(student);
+
 resultBox.innerHTML=html;
 
 }catch(e){
@@ -5331,6 +5548,39 @@ return html;
 
 }
 
+
+/* ================================================= */
+/* STUDENT VIDEO */
+/* ================================================= */
+
+async function buildStudentVideoHTML(student){
+try{
+const videoValue=student.video_url||"";
+if(!videoValue)return "";
+let videoUrl="";
+if(videoValue.startsWith("student-videos/")){
+if(!db || !db.functions){
+return '<div class="student-video-card"><h3>🎥 فيديو الطالب</h3><p class="video-protection-note">⚠️ تعذر الاتصال بخدمة الفيديو حاليًا.</p></div>';
+}
+const {data,error}=await db.functions.invoke("get-student-video",{
+body:{student_code:String(student.student_code||"").trim()}
+});
+if(error||!data?.success||!data?.video_url){
+console.error("get-student-video error:",error||data);
+return '<div class="student-video-card"><h3>🎥 فيديو الطالب</h3><p class="video-protection-note">⚠️ تعذر تجهيز رابط المشاهدة حاليًا.</p></div>';}
+videoUrl=data.video_url;
+}else{
+videoUrl=videoValue;
+}
+const safeUrl=escapeHtml(videoUrl);
+const safeName=escapeHtml(student.student_name||"");
+const safeCode=escapeHtml(student.student_code||"");
+return '<div class="student-video-card">'+
+'<h3>🎥 فيديو الطالب</h3>'+
+'<div class="student-video-wrapper">'+
+'<video class="student-video" src="'+safeUrl+'" controls controlsList="nodownload noplaybackrate" disablePictureInPicture playsinline preload="metadata" oncontextmenu="return false"></video>'+'<div class="video-watermark">'+safeName+' — '+safeCode+'</div>'+'</div>'+'<p class="video-protection-note">🔒 الفيديو مخصص لهذا الطالب. رابط المشاهدة مؤقت، ولا يظهر رابط الملف الأصلي لولي الأمر. لا يمكن منع تصوير الشاشة بنسبة 100% من المتصفح.</p>'+'</div>';
+}catch(e){console.error(e);return "";}
+}
 
 /* ================================================= */
 /* HELPERS */
