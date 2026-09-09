@@ -1123,6 +1123,22 @@ id="studentCode"
 type="text"
 placeholder="كود الطالب">
 
+<select id="studentStartMonth">
+<option value="">اختر شهر البداية</option>
+<option value="يناير">يناير</option>
+<option value="فبراير">فبراير</option>
+<option value="مارس">مارس</option>
+<option value="أبريل">أبريل</option>
+<option value="مايو">مايو</option>
+<option value="يونيو">يونيو</option>
+<option value="يوليو">يوليو</option>
+<option value="أغسطس">أغسطس</option>
+<option value="سبتمبر">سبتمبر</option>
+<option value="أكتوبر">أكتوبر</option>
+<option value="نوفمبر">نوفمبر</option>
+<option value="ديسمبر">ديسمبر</option>
+</select>
+
 <div class="card" style="margin-top:12px">
 <h3>🎥 فيديو الطالب</h3>
 <p style="text-align:center;font-size:13px">اختر فيديو من جهازك وسيتم رفعه تلقائيًا إلى Supabase وحفظه مع الطالب.</p>
@@ -2163,10 +2179,10 @@ document.getElementById("studentCode").value.trim();
 const message=
 document.getElementById("saveMessage");
 
-if(!name||!gender||!grade||!code){
+if(!name||!gender||!grade||!code||!document.getElementById("studentStartMonth").value){
 
 message.innerHTML=
-"❌ اكتب اسم الطالب واختر النوع والصف والكود.";
+"❌ اكتب اسم الطالب واختر النوع والصف والكود وشهر البداية.";
 
 message.className="message error";
 
@@ -2341,6 +2357,7 @@ editSelect.value="";
 "studentGender",
 "studentGrade",
 "studentCode",
+"studentStartMonth",
 "studentVideoUrl"
 ].forEach(function(id){
 
@@ -2535,6 +2552,9 @@ student.grade||"";
 
 document.getElementById("studentCode").value=
 student.student_code||"";
+
+document.getElementById("studentStartMonth").value=
+student.student_start_month||"";
 
 const videoInput=document.getElementById("studentVideoUrl");
 if(videoInput){videoInput.value=student.video_url||"";}
@@ -3311,10 +3331,10 @@ document.getElementById("studentCode").value.trim();
 const message=
 document.getElementById("saveMessage");
 
-if(!name||!gender||!grade||!code){
+if(!name||!gender||!grade||!code||!document.getElementById("studentStartMonth").value){
 
 message.innerHTML=
-"❌ اكتب اسم الطالب واختر النوع والصف والكود.";
+"❌ اكتب اسم الطالب واختر النوع والصف والكود وشهر البداية.";
 
 message.className="message error";
 
@@ -3418,7 +3438,8 @@ function newStudent(){
 "studentName",
 "studentGender",
 "studentGrade",
-"studentCode"
+"studentCode",
+"studentStartMonth"
 ].forEach(function(id){
 
 const el=document.getElementById(id);
@@ -3495,6 +3516,9 @@ student.grade||"";
 
 document.getElementById("studentCode").value=
 student.student_code||"";
+
+document.getElementById("studentStartMonth").value=
+student.student_start_month||"";
 
 for(let i=1;i<=15;i++){
 
@@ -5449,7 +5473,7 @@ async function buildParentPaymentsHTML(studentCode){
 const studentResult=
 await db
 .from("students")
-.select("gender")
+.select("gender,student_start_month")
 .eq("student_code",studentCode)
 .maybeSingle();
 
@@ -5457,6 +5481,11 @@ const gender=
 studentResult.data?
 studentResult.data.gender:
 "ذكر";
+
+const startMonth=
+studentResult.data?
+studentResult.data.student_start_month:
+"";
 
 const settingsResult=
 await db
@@ -5467,7 +5496,18 @@ await db
 
 if(settingsResult.error)return "";
 
-const months=settingsResult.data||[];
+let months=settingsResult.data||[];
+
+/* شهر البداية يحدد أول شهر يظهر لولي الأمر فقط،
+   مع الحفاظ على الشهور المحددة وترتيبها كما هو. */
+if(startMonth){
+const startIndex=months.findIndex(function(month){
+return month.month_name===startMonth;
+});
+if(startIndex>=0){
+months=months.slice(startIndex);
+}
+}
 
 if(!months.length)return "";
 
@@ -5513,14 +5553,11 @@ gender==="أنثى"?
 );
 
 html+=
-
 '<div class="month-card">'+
-
 '<div class="month-title">'+
 "🗓️ "+
 escapeHtml(month.month_name)+
 '</div>'+
-
 '<p class="'+
 (
 status==="دفع"?
@@ -5528,7 +5565,6 @@ status==="دفع"?
 "absent"
 )+
 '" style="text-align:center;font-size:17px">'+
-
 (
 status==="دفع"?
 "✅":
@@ -5537,15 +5573,12 @@ status==="دفع"?
 " "+
 display+
 '</p>'+
-
 '</div>';
-
 });
 
 html+='</div>';
 
 return html;
-
 }
 
 
