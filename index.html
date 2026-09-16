@@ -1678,6 +1678,9 @@ let editingAttendanceId=null;
 
 let paymentMonths=[];
 
+/* كود الطالب الأصلي أثناء التعديل */
+let editingStudentCode="";
+
 
 /* ================================================= */
 /* INIT */
@@ -2345,6 +2348,8 @@ message.className="message error";
 /* ================================================= */
 
 function newStudent(){
+
+editingStudentCode="";
 
 const editSelect=document.getElementById("editStudentSelect");
 
@@ -3436,6 +3441,8 @@ message.className="message error";
 /* ================================================= */
 
 function newStudent(){
+
+editingStudentCode="";
 
 [
 "studentName",
@@ -5692,6 +5699,314 @@ parts[0];
 
 }
 
+
+
+/* ================================================= */
+/* FINAL STUDENT EDIT/SAVE FIX */
+/* ================================================= */
+
+/*
+  تم توحيد وضع التعديل والحفظ هنا لأن الملف كان يحتوي على
+  تعريفات مكررة لـ saveStudent و editStudent.
+  عند التعديل نبحث باستخدام كود الطالب الأصلي حتى لو تم تغيير الكود.
+*/
+
+async function editStudent(encodedCode){
+
+  if(!await isTeacherLoggedIn()){
+    openTeacherLogin();
+    return;
+  }
+
+  const code=decodeURIComponent(encodedCode);
+
+  try{
+
+    const result=await db
+      .from("students")
+      .select("*")
+      .eq("student_code",code)
+      .maybeSingle();
+
+    if(result.error||!result.data){
+      alert("❌ تعذر تحميل بيانات الطالب.");
+      return;
+    }
+
+    const student=result.data;
+
+    /* حفظ الكود الأصلي لاستخدامه عند الحفظ */
+    editingStudentCode=student.student_code||"";
+
+    document.getElementById("studentName").value=student.student_name||"";
+    document.getElementById("studentGender").value=student.gender||"";
+    document.getElementById("studentGrade").value=student.grade||"";
+    document.getElementById("studentCode").value=student.student_code||"";
+    document.getElementById("studentStartMonth").value=student.student_start_month||"";
+
+    const videoInput=document.getElementById("studentVideoUrl");
+    if(videoInput) videoInput.value=student.video_url||"";
+
+    const videoFileInput=document.getElementById("studentVideoFile");
+    if(videoFileInput) videoFileInput.value="";
+
+    const currentVideoText=document.getElementById("currentVideoText");
+    if(currentVideoText){
+      currentVideoText.innerHTML=student.video_url
+        ?"🎥 يوجد فيديو محفوظ لهذا الطالب. اختر فيديو جديدًا لاستبداله."
+        :"لا يوجد فيديو محفوظ لهذا الطالب حتى الآن.";
+    }
+
+    const videoStatus=document.getElementById("videoUploadStatus");
+    if(videoStatus){
+      videoStatus.innerHTML="";
+      videoStatus.className="message";
+    }
+
+    for(let i=1;i<=15;i++){
+      const el=document.getElementById("evaluation"+i);
+      if(el) el.value=student["evaluation_"+i] ?? "";
+    }
+
+    const saveMessage=document.getElementById("saveMessage");
+    saveMessage.innerHTML="✏️ تم تحميل بيانات الطالب. عدّل ما تريد ثم اضغط حفظ.";
+    saveMessage.className="message success";
+
+    showPage("studentManagement");
+
+  }catch(e){
+    console.error(e);
+    const msg=document.getElementById("saveMessage");
+    if(msg){
+      msg.innerHTML="❌ حدث خطأ أثناء تحميل بيانات الطالب.";
+      msg.className="message error";
+    }
+  }
+}
+
+
+async function saveStudent(){
+
+  if(!await isTeacherLoggedIn()){
+    openTeacherLogin();
+    return;
+  }
+
+  const name=document.getElementById("studentName").value.trim();
+  const gender=document.getElementById("studentGender").value;
+  const grade=document.getElementById("studentGrade").value;
+  const code=document.getElementById("studentCode").value.trim();
+  const startMonth=document.getElementById("studentStartMonth").value.trim();
+  const message=document.getElementById("saveMessage");
+
+  const originalCode=(editingStudentCode||"").trim();
+
+  /* بيانات الطالب الموجودة عند التعديل */
+  let existingStudent=null;
+
+  try{
+
+    if(originalCode){
+
+      const existingResult=await db
+        .from("students")
+        .select("*")
+        .eq("student_code",originalCode)
+        .maybeSingle();
+
+      if(existingResult.error){
+        message.innerHTML="❌ حدث خطأ أثناء تحميل بيانات الطالب.";
+        message.className="message error";
+        return;
+      }
+
+      existingStudent=existingResult.data;
+
+      if(!existingStudent){
+        message.innerHTML="❌ تعذر العثور على بيانات الطالب الأصلية.";
+        message.className="message error";
+        return;
+      }
+    }
+
+    /*
+      في حالة التعديل إذا كان شهر البداية غير موجود في الحقل،
+      نحتفظ بالشهر المحفوظ سابقًا بدل إظهار رسالة الحقول الناقصة.
+    */
+    const finalStartMonth=
+      startMonth ||
+      (existingStudent && existingStudent.student_start_month) ||
+      "";
+
+    /* التحقق من الحقول الأساسية */
+    if(!name||!gender||!grade||!code||!finalStartMonth){
+
+      message.innerHTML=
+        "❌ اكتب اسم الطالب واختر النوع والصف والكود وشهر البداية.";
+
+      message.className="message error";
+      return;
+    }
+
+    let row={
+      student_code:code,
+      student_name:name,
+      gender:gender,
+      grade:grade,
+      student_start_month:finalStartMonth
+    };
+
+    /* التقييمات */
+    for(let i=1;i<=15;i++){
+
+      const el=document.getElementById("evaluation"+i);
+
+      row["evaluation_"+i]=
+        el && el.value!=="" ? el.value : null;
+    }
+
+    /* الاحتفاظ بالفيديو الحالي */
+    const videoInput=document.getElementById("studentVideoUrl");
+    const videoFileInput=document.getElementById("studentVideoFile");
+    const videoStatus=document.getElementById("videoUploadStatus");
+
+    if(videoInput){
+      row.video_url=videoInput.value.trim()||null;
+    }
+
+    /* رفع فيديو جديد إن تم اختياره */
+    if(videoFileInput &&
+       videoFileInput.files &&
+       videoFileInput.files[0]){
+
+      const file=videoFileInput.files[0];
+
+      if(!file.type.startsWith("video/")){
+        message.innerHTML="❌ اختر ملف فيديو صحيحًا.";
+        message.className="message error";
+        return;
+      }
+
+      if(file.size>100*1024*1024){
+        message.innerHTML="❌ حجم الفيديو أكبر من 100 ميجابايت.";
+        message.className="message error";
+        return;
+      }
+
+      if(videoStatus){
+        videoStatus.innerHTML="⏳ جارٍ رفع الفيديو...";
+        videoStatus.className="message";
+      }
+
+      const extension=
+        (file.name.split(".").pop()||"mp4")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g,"")||"mp4";
+
+      const safeCode=
+        code.replace(/[^a-zA-Z0-9_-]/g,"_");
+
+      const filePath=
+        safeCode+"/"+Date.now()+"."+extension;
+
+      const uploadResult=await db.storage
+        .from("student-videos")
+        .upload(filePath,file,{
+          contentType:file.type,
+          upsert:false
+        });
+
+      if(uploadResult.error){
+        console.error(uploadResult.error);
+        message.innerHTML=
+          "❌ فشل رفع الفيديو: "+
+          escapeHtml(uploadResult.error.message);
+
+        message.className="message error";
+
+        if(videoStatus) videoStatus.innerHTML="";
+
+        return;
+      }
+
+      row.video_url="student-videos/"+filePath;
+
+      if(videoInput) videoInput.value=row.video_url;
+
+      if(videoStatus){
+        videoStatus.innerHTML="✅ تم رفع الفيديو بنجاح.";
+        videoStatus.className="message success";
+      }
+    }
+
+    let result;
+
+    if(originalCode){
+
+      /* تعديل الطالب باستخدام الكود الأصلي */
+      result=await db
+        .from("students")
+        .update(row)
+        .eq("student_code",originalCode);
+
+    }else{
+
+      /* طالب جديد */
+      const findResult=await db
+        .from("students")
+        .select("id")
+        .eq("student_code",code)
+        .maybeSingle();
+
+      if(findResult.error){
+        message.innerHTML="❌ حدث خطأ أثناء البحث عن الطالب.";
+        message.className="message error";
+        return;
+      }
+
+      if(findResult.data){
+
+        result=await db
+          .from("students")
+          .update(row)
+          .eq("id",findResult.data.id);
+
+      }else{
+
+        result=await db
+          .from("students")
+          .insert([row]);
+      }
+    }
+
+    if(result.error){
+
+      message.innerHTML=
+        "❌ حدث خطأ: "+escapeHtml(result.error.message);
+
+      message.className="message error";
+      return;
+    }
+
+    /* بعد الحفظ يصبح الكود الحالي هو كود التعديل */
+    editingStudentCode=code;
+
+    message.innerHTML="✅ تم حفظ بيانات الطالب بنجاح.";
+    message.className="message success";
+
+    if(videoFileInput) videoFileInput.value="";
+
+  }catch(e){
+
+    console.error(e);
+
+    message.innerHTML=
+      "❌ حدث خطأ أثناء الحفظ: "+
+      escapeHtml(e.message||"خطأ غير معروف");
+
+    message.className="message error";
+  }
+}
 
 /* ================================================= */
 /* START */
